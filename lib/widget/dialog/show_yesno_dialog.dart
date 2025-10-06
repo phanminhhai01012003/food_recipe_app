@@ -38,11 +38,22 @@ class ShowYesnoDialog {
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))
             ),
             onPressed: onAcceptTap,
-            child: Text("Có")
+            child: Text("Có",
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w700
+              ),
+            )
           ),
           TextButton(
             onPressed: onCancelTap, 
-            child: Text("Không", style: TextStyle(color: AppColors.black))
+            child: Text("Không", 
+              style: TextStyle(
+                color: AppColors.black,
+                fontSize: 14,
+                fontWeight: FontWeight.w700
+              )
+            )
           )
         ],
       )
