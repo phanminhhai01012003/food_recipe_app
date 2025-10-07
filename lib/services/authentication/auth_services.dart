@@ -40,7 +40,7 @@ class AuthServices extends AuthRepo{
   }
 
   @override
-  Future<void> logOut(BuildContext context) async{
+  Future<void> logOutFromAccount(BuildContext context) async{
     // TODO: implement logOut
     try {
       await _auth.signOut();
@@ -128,6 +128,36 @@ class AuthServices extends AuthRepo{
       await _auth.currentUser!.delete();
     } catch (e) {
       Message.showScaffoldMessage(context, "Đã xảy ra lỗi trong quá trình thực hiện", AppColors.red);
+      Logger.log(e);
+      rethrow;
+    }
+  }
+  
+  @override
+  Future<void> logOutFromFacebook(BuildContext context) async{
+    // TODO: implement logOutFromFacebook
+    try {
+      await Future.wait([
+        _auth.signOut(),
+        FacebookAuth.instance.logOut()
+      ]);
+    } catch (e) {
+      Message.showScaffoldMessage(context, "Lỗi khi thoát khỏi phiên đăng nhập", AppColors.red);
+      Logger.log(e);
+      rethrow;
+    }
+  }
+  
+  @override
+  Future<void> logOutFromGoogle(BuildContext context) async{
+    // TODO: implement logOutFromGoogle
+    try {
+      await Future.wait([
+        GoogleSignIn().signOut(),
+        _auth.signOut()
+      ]);
+    } catch (e) {
+      Message.showScaffoldMessage(context, "Lỗi khi thoát khỏi phiên đăng nhập", AppColors.red);
       Logger.log(e);
       rethrow;
     }

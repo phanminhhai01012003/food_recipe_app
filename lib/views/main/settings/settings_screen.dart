@@ -4,12 +4,9 @@ import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/data/enum.dart';
 import 'package:food_recipe_app/model/user_model.dart';
-import 'package:food_recipe_app/services/authentication/auth_services.dart';
 import 'package:food_recipe_app/services/firestore/user/user_services.dart';
 import 'package:food_recipe_app/views/main/settings/selection.dart';
 import 'package:food_recipe_app/views/main/settings/user_widget.dart';
-import 'package:food_recipe_app/widget/other/message.dart';
-import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -20,18 +17,7 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   final userServices = UserServices();
-  final authServices = AuthServices();
   final _currentUser = FirebaseAuth.instance.currentUser;
-  void onLogOut() async{
-    await authServices.logOut(context).then((_){
-      Message.showScaffoldMessage(context, "Đã đăng xuất khỏi hệ thống", AppColors.green);
-      Navigator.pushAndRemoveUntil(
-        context, 
-        checkDeviceRoute(loginPage), 
-        (route) => false
-      );
-    });
-  }
   void onChooseMode(ModeSelection mode){
     switch(mode){
       case ModeSelection.about:
@@ -136,31 +122,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 )
               ],
             ),
-            SizedBox(height: 20),
-            SizedBox(
-              height: 50,
-              width: MediaQuery.of(context).size.width * 0.75,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.red,
-                  foregroundColor: AppColors.white,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))
-                ),
-                onPressed: () => ShowYesnoDialog.checkDeviceDialog(
-                  context, 
-                  title: "Đăng xuất", 
-                  content: "Bạn có chắc chắn muốn đăng xuất khỏi hệ thống không?", 
-                  onAcceptTap: () => onLogOut(), 
-                  onCancelTap: () => Navigator.pop(context)
-                ),
-                child: Text("Đăng xuất",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w900
-                  ),
-                ),
-              ),
-            )
           ],
         ),
       ),
