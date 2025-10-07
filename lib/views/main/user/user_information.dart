@@ -4,6 +4,9 @@ import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/user_model.dart';
+import 'package:food_recipe_app/services/authentication/auth_services.dart';
+import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
+import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:full_screen_image/full_screen_image.dart';
 
 class UserInformation extends StatefulWidget {
@@ -15,6 +18,37 @@ class UserInformation extends StatefulWidget {
 }
 
 class _UserInformationState extends State<UserInformation> {
+  final authServices = AuthServices();
+  void onLogOut() async{
+    if (widget.user.loginMethod == "Google") {
+      await authServices.logOutFromGoogle(context).then((_){
+        Message.showScaffoldMessage(context, "Đã đăng xuất khỏi hệ thống", AppColors.green);
+        Navigator.pushAndRemoveUntil(
+          context, 
+          checkDeviceRoute(loginPage), 
+          (route) => false
+        );
+      });
+    } else if (widget.user.loginMethod == "Facebook") {
+      await authServices.logOutFromFacebook(context).then((_){
+        Message.showScaffoldMessage(context, "Đã đăng xuất khỏi hệ thống", AppColors.green);
+        Navigator.pushAndRemoveUntil(
+          context, 
+          checkDeviceRoute(loginPage), 
+          (route) => false
+        );
+      });
+    } else {
+      await authServices.logOutFromAccount(context).then((_){
+        Message.showScaffoldMessage(context, "Đã đăng xuất khỏi hệ thống", AppColors.green);
+        Navigator.pushAndRemoveUntil(
+          context, 
+          checkDeviceRoute(loginPage), 
+          (route) => false
+        );
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,6 +125,63 @@ class _UserInformationState extends State<UserInformation> {
                     ),
                   ],
                 )
+              ),
+            ),
+            SizedBox(height: 10),
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.red,
+                  foregroundColor: AppColors.white,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33))
+                ),
+                onPressed: () => Navigator.push(context, checkDeviceRoute(deleteUser)), 
+                child: Row(
+                  children: [
+                    Icon(Icons.delete_forever, size: 20),
+                    SizedBox(width: 5),
+                    Text(
+                      "Xóa tài khoản",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w800
+                      ),
+                    ),
+                  ],
+                )
+              ),
+            ),
+            SizedBox(height: 10),
+            SizedBox(
+              height: 50,
+              width: MediaQuery.of(context).size.width * 0.75,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.purple,
+                  foregroundColor: AppColors.white,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33))
+                ),
+                onPressed: () => ShowYesnoDialog.checkDeviceDialog(
+                  context, 
+                  title: "Đăng xuất", 
+                  content: "Bạn có chắc chắn muốn đăng xuất khỏi hệ thống không?", 
+                  onAcceptTap: () => onLogOut(), 
+                  onCancelTap: () => Navigator.pop(context)
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.logout, size: 20),
+                    SizedBox(width: 5),
+                    Text("Đăng xuất",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w900
+                      ),
+                    ),
+                  ],
+                ),
               ),
             )
           ],
