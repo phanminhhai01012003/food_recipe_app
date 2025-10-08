@@ -20,15 +20,15 @@ class HistoryState extends ChangeNotifier{
   void toggle(RecentViewModel data) async{
     if (_viewProducts.contains(data)){
       _viewProducts.remove(data);
-      await removeSaveData(data.viewId);
+      await removeRecentView(data.viewId);
     } else {
       _viewProducts.add(data);
-      await addSaveData(data);
+      await addRecentView(data);
     }
     notifyListeners();
   }
 
-  Future<void> addSaveData(RecentViewModel view) async{
+  Future<void> addRecentView(RecentViewModel view) async{
     try {
       await historyCollection.doc(view.viewId).set(view.toMap());
     } catch (e) {
@@ -38,7 +38,7 @@ class HistoryState extends ChangeNotifier{
     }
   }
 
-  Future<void> removeSaveData(String id) async {
+  Future<void> removeRecentView(String id) async {
     try {
       await historyCollection.doc(id).delete();
     } catch (e) {

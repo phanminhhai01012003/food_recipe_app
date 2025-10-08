@@ -77,7 +77,12 @@ class _FoodDisplayGridState extends State<FoodDisplayGrid> {
                   fit: BoxFit.cover,
                   width: double.infinity,
                   height: 100,
-                  progressIndicatorBuilder: (context, url, imageProgress) => CircularProgressIndicator(value: imageProgress.progress),
+                  progressIndicatorBuilder: (context, url, imageProgress) => Center(
+                    child: CircularProgressIndicator(
+                      value: imageProgress.progress,
+                      color: AppColors.yellow,
+                    )
+                  ),
                   fadeInCurve: Curves.linear,
                   fadeInDuration: Duration(seconds: 2),
                   errorWidget: (context, url, error) => Image.asset(foodDesignImage),

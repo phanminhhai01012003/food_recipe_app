@@ -12,7 +12,7 @@ import 'package:food_recipe_app/provider/history_state.dart';
 import 'package:food_recipe_app/provider/save_state.dart';
 import 'package:food_recipe_app/services/firestore/food_recipe/food_services.dart';
 import 'package:food_recipe_app/services/firestore/user/user_services.dart';
-import 'package:food_recipe_app/views/main/cookbook/cookbook_widget.dart';
+import 'package:food_recipe_app/views/main/cookbook/widget/cookbook_widget.dart';
 import 'package:food_recipe_app/views/main/settings/user_widget.dart';
 import 'package:food_recipe_app/widget/food_display_widget/food_display_grid.dart';
 import 'package:provider/provider.dart';

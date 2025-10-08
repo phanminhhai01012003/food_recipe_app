@@ -138,7 +138,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
                   }
                 ),
                 Radio<String>(
-                  value: "Sử dụng từ ngữ với mục đích xúc phạm danh dự của người khác", 
+                  value: "Sử dụng từ ngữ thô tục, xúc phạm danh dự của người khác", 
                   groupValue: selectedOption, 
                   onChanged: (value){
                     setState(() {
@@ -147,7 +147,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
                   }
                 ),
                 Radio<String>(
-                  value: "Thông tin không đúng sự thật", 
+                  value: "Nội dung đăng tải giả mạo, không đúng sự thật", 
                   groupValue: selectedOption, 
                   onChanged: (value){
                     setState(() {

@@ -77,7 +77,12 @@ class _FoodDisplayListState extends State<FoodDisplayList> {
                   height: 50,
                   fit: BoxFit.cover,
                   imageUrl: widget.food.image,
-                  progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator(value: progress.progress)),
+                  progressIndicatorBuilder: (context, url, progress) => Center(
+                    child: CircularProgressIndicator(
+                      value: progress.progress,
+                      color: AppColors.yellow,
+                    )
+                  ),
                   fadeInCurve: Curves.linear,
                   fadeInDuration: Duration(seconds: 2),
                   errorWidget: (context, url, error) => Image.asset(foodDesignImage),
