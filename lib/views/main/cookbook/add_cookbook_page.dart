@@ -2,14 +2,21 @@ import 'dart:collection';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/routes.dart';
+import 'package:food_recipe_app/model/cookbook_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
+import 'package:food_recipe_app/provider/cookbook_state.dart';
 import 'package:food_recipe_app/services/firestore/food_recipe/food_services.dart';
+import 'package:food_recipe_app/services/image/image_service.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_image_picker.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
+import 'package:food_recipe_app/widget/other/message.dart';
+import 'package:loader_overlay/loader_overlay.dart';
+import 'package:provider/provider.dart';
 
 class AddCookbookPage extends StatefulWidget {
   const AddCookbookPage({super.key});
@@ -19,8 +26,10 @@ class AddCookbookPage extends StatefulWidget {
 }
 
 class _AddCookbookPageState extends State<AddCookbookPage> {
+  final currentUser = FirebaseAuth.instance.currentUser!;
   File? image;
   String? imageURL;
+  final imageServices = ImageService();
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   final foodServices = FoodServices();
@@ -48,6 +57,28 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
     _titleController.dispose();
     _descriptionController.dispose();
   } 
+  void add() async{
+    context.loaderOverlay.show();
+    if (_titleController.text.isEmpty){
+      Message.showToast("Tên nhật ký là bắt buộc");
+      context.loaderOverlay.hide();
+      return;
+    }
+    imageURL = await imageServices.uploadImage(context, image!);
+    CookbookModel cookbook = CookbookModel(
+      cookbookId: DateTime.now().millisecondsSinceEpoch.toString(), 
+      cookbookImage: imageURL!, 
+      cookbookName: _titleController.text, 
+      description: _descriptionController.text, 
+      userId: currentUser.uid, 
+      createdAt: DateTime.now(), 
+      foodsList: choices.toList()
+    );
+    context.read<CookbookState>().createCookbook(cookbook);
+    if (!mounted) return;
+    Message.showScaffoldMessage(context, "Thêm thành công", AppColors.green);
+    Navigator.pop(context);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,6 +111,19 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
           ),
           icon: Icon(Icons.arrow_back, size: 20)
         ),
+        actions: [
+          Visibility(
+            visible: choices.isNotEmpty,
+            child: IconButton(
+              onPressed: () {
+                choices.forEach((food){
+                  onMultiSelect(food);
+                });
+              }, 
+              icon: Icon(Icons.select_all, size: 20)
+            ),
+          )
+        ],
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
@@ -127,7 +171,7 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
             ),
             SizedBox(height: 20),
             Text(
-              "Tên cuốn sách của bạn",
+              "Tên nhật ký",
               style: TextStyle(
                 color: AppColors.black,
                 fontSize: 16,
@@ -152,7 +196,7 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(color: AppColors.black)
                 ),
-                hintText: "Nhập tên cuốn sách",
+                hintText: "Nhập tên nhật ký",
                 hintStyle: TextStyle(
                   color: AppColors.black,
                   fontSize: 14,
@@ -184,7 +228,7 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(color: AppColors.black)
                 ),
-                hintText: "Mô tả về cuốn sách đó",
+                hintText: "Mô tả về nhật ký đó",
                 hintStyle: TextStyle(
                   color: AppColors.black,
                   fontSize: 14,

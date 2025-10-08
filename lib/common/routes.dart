@@ -11,7 +11,9 @@ import 'package:food_recipe_app/views/auth/register.dart';
 import 'package:food_recipe_app/views/main/add_edit_food/search_page.dart';
 import 'package:food_recipe_app/views/main/categories/food_list_with_tag.dart';
 import 'package:food_recipe_app/views/main/cookbook/add_cookbook_page.dart';
+import 'package:food_recipe_app/views/main/cookbook/cookbook_detail.dart';
 import 'package:food_recipe_app/views/main/cookbook/cookbook_screen.dart';
+import 'package:food_recipe_app/views/main/cookbook/cookbook_selection.dart';
 import 'package:food_recipe_app/views/main/cookbook/edit_cookbook_page.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/comment_page.dart';
 import 'package:food_recipe_app/views/main/food_storage/my_food.dart';
@@ -77,6 +79,8 @@ Widget listofFoodByTag(String categories) => FoodListWithTag(categories: categor
 Widget get storageMode => StorageModeSelect();
 Widget get deleteUser => DeleteUserScreen();
 Widget get cookbookPage => CookbookScreen();
+Widget cookbookSelection(FoodModel food) => CookbookSelection(food: food);
+Widget cookbookDetail(CookbookModel cookbook) => CookbookDetail(cookbook: cookbook);
 Widget get appoverview => AppOverview();
 Widget get contactpage => Contact();
 Widget get reportPage => MyReportPage();

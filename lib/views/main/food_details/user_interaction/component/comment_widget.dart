@@ -78,7 +78,12 @@ class _CommentWidgetState extends State<CommentWidget> {
                     onTap: () => Navigator.push(context, checkDeviceRoute(personalScreen(widget.comment.userId))),
                     child: CachedNetworkImage(
                       imageUrl: widget.comment.avatar,
-                      progressIndicatorBuilder: (context, url, progress) => CircularProgressIndicator(value: progress.progress),
+                      progressIndicatorBuilder: (context, url, progress) => Center(
+                        child: CircularProgressIndicator(
+                          value: progress.progress,
+                          color: AppColors.yellow,
+                        )
+                      ),
                       fit: BoxFit.cover,
                       width: 33,
                       height: 33,

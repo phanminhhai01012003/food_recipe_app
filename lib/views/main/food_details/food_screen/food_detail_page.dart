@@ -11,6 +11,7 @@ import 'package:food_recipe_app/model/save_food_model.dart';
 import 'package:food_recipe_app/provider/save_state.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/like_list_modal.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_report_modal.dart';
+import 'package:full_screen_image/full_screen_image.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -82,15 +83,18 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
           children: [
             Stack(
               children: [
-                Hero(
-                  tag: widget.food.image,
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.5,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(widget.food.image),
-                        fit: BoxFit.cover
-                      )
+                FullScreenWidget(
+                  disposeLevel: DisposeLevel.Medium,
+                  child: Hero(
+                    tag: widget.food.image,
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.5,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(widget.food.image),
+                          fit: BoxFit.cover
+                        )
+                      ),
                     ),
                   ),
                 ),
@@ -196,7 +200,12 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                             fit: BoxFit.cover,
                             width: 30,
                             height: 30,
-                            progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator(value: progress.progress)),
+                            progressIndicatorBuilder: (context, url, progress) => Center(
+                              child: CircularProgressIndicator(
+                                value: progress.progress,
+                                color: AppColors.yellow,
+                              )
+                            ),
                             errorWidget: (context, url, error) => Image.asset(userDefaultImage),
                           )
                         ),
@@ -283,14 +292,20 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Icon(Icons.check, size: 20, color: Colors.green),
-                            SizedBox(width: 10),
+                            Text(
+                              "${index + 1}. ",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.black
+                              ),
+                            ),
                             Expanded(
                               child: Text(
                                 widget.food.ingredients[index],
                                 style: TextStyle(
                                   fontSize: 14,
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.normal,
                                   color: Colors.black
                                 ),
                               ),
@@ -321,10 +336,10 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Bước ${index + 1}. ",
+                              "Bước ${index + 1}: ",
                               style: TextStyle(
                                 fontSize: 14,
-                                fontWeight: FontWeight.w700,
+                                fontWeight: FontWeight.normal,
                                 color: Colors.black
                               ),
                             ),
@@ -333,7 +348,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                                 widget.food.steps[index],
                                 style: TextStyle(
                                   fontSize: 14,
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.normal,
                                   color: Colors.black
                                 ),
                               ),
@@ -429,7 +444,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                         shape: StadiumBorder()
                       ),
                       onPressed: () {
-                        
+                        Navigator.push(context, checkDeviceRoute(cookbookSelection(widget.food)));
                       }, 
                       child: Row(
                         children: [
@@ -439,7 +454,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                           ),
                           SizedBox(width: 5),
                           Text(
-                            "Thêm vào nhật ký",
+                            "Nhật ký",
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w700

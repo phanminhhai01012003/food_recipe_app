@@ -34,7 +34,12 @@ class _CookbookDetailState extends State<CookbookDetail> {
                     borderRadius: BorderRadius.circular(12),
                     child: CachedNetworkImage(
                       imageUrl: widget.cookbook.cookbookImage,
-                      progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator(value: progress.progress, color: AppColors.yellow)),
+                      progressIndicatorBuilder: (context, url, progress) => Center(
+                        child: CircularProgressIndicator(
+                          value: progress.progress, 
+                          color: AppColors.yellow
+                        )
+                      ),
                       width: 50,
                       height: 50,
                       errorWidget: (context, url, error) => Image.asset(foodDesignImage),

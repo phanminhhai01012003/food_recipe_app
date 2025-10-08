@@ -3,7 +3,7 @@ import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/cookbook_model.dart';
 import 'package:food_recipe_app/provider/cookbook_state.dart';
-import 'package:food_recipe_app/views/main/cookbook/cookbook_widget.dart';
+import 'package:food_recipe_app/views/main/cookbook/widget/cookbook_widget.dart';
 import 'package:provider/provider.dart';
 
 class CookbookScreen extends StatefulWidget {

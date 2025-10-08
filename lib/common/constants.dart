@@ -38,7 +38,7 @@ List<String> sliderImage = [
 
 //cloudinary
 String cloudName = "dyfzthrdv";
-String folder = "/avatar";
+String folder = "/foodrecipe";
 String apiKey = "949323413611473";
 String apiSecret = "DzxVBsgnO_0va_sYz0sdsVGjG5E";
 
