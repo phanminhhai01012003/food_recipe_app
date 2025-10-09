@@ -2,10 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/model/cookbook_model.dart';
+import 'package:food_recipe_app/model/food_model.dart';
 
 class CookbookList extends StatefulWidget {
   final CookbookModel cookbook;
-  const CookbookList({super.key, required this.cookbook});
+  final FoodModel food;
+  const CookbookList({super.key, required this.cookbook, required this.food});
 
   @override
   State<CookbookList> createState() => _CookbookListState();
@@ -19,7 +21,7 @@ class _CookbookListState extends State<CookbookList> {
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: widget.cookbook.foodsList.contains(widget.food) ? AppColors.green : AppColors.white,
           borderRadius: BorderRadius.circular(12)
         ),
         child: Row(
@@ -34,6 +36,15 @@ class _CookbookListState extends State<CookbookList> {
                     color: AppColors.yellow,
                   )
                 ),
+              ),
+            ),
+            SizedBox(width: 10),
+            Text(
+              widget.cookbook.cookbookName,
+              style: TextStyle(
+                color: widget.cookbook.foodsList.contains(widget.food) ? AppColors.white : AppColors.black,
+                fontSize: 16,
+                fontWeight: FontWeight.bold
               ),
             )
           ],
