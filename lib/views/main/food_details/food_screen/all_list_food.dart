@@ -29,6 +29,13 @@ class _AllListFoodState extends State<AllListFood> {
           ),
         ),
         centerTitle: true,
+        leading: Padding(
+          padding: EdgeInsets.all(8),
+          child: IconButton(
+            onPressed: () => Navigator.pop(context), 
+            icon: Icon(Icons.arrow_back, size: 20)
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: StreamBuilder(

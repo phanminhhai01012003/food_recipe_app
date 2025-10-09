@@ -22,6 +22,17 @@ class _CookbookDetailState extends State<CookbookDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
+      appBar: AppBar(
+        backgroundColor: AppColors.white,
+        foregroundColor: AppColors.black,
+        leading: Padding(
+          padding: EdgeInsets.all(8),
+          child: IconButton(
+            onPressed: () => Navigator.pop(context), 
+            icon: Icon(Icons.arrow_back, size: 20)
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),

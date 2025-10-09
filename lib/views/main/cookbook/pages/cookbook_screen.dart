@@ -20,6 +20,13 @@ class _CookbookScreenState extends State<CookbookScreen> {
       backgroundColor: AppColors.white,
       appBar: AppBar(
         centerTitle: true,
+        leading: Padding(
+          padding: EdgeInsets.all(8),
+          child: IconButton(
+            onPressed: () => Navigator.pop(context), 
+            icon: Icon(Icons.arrow_back, size: 20)
+          ),
+        ),
         backgroundColor: AppColors.green,
         foregroundColor: AppColors.white,
         title: Text(
