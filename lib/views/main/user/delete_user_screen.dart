@@ -2,9 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
+import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/logger.dart';
+import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/services/authentication/auth_services.dart';
 import 'package:food_recipe_app/services/firestore/user/user_services.dart';
+import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
@@ -21,6 +24,14 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
   final userServices = UserServices();
   final authServices = AuthServices();
   final currentUser = FirebaseAuth.instance.currentUser!;
+  void onDeleteAccount() async{
+    context.loaderOverlay.show();
+    await authServices.deleteAccount(context);
+    await userServices.deleteUser(context, currentUser.uid);
+    context.loaderOverlay.hide();
+    Message.showScaffoldMessage(context, "Tài khoản cũ của bạn đã xóa. Hãy tạo tài khoản mới để tiếp tục sử dụng", AppColors.green);
+    Navigator.pushAndRemoveUntil(context, checkDeviceRoute(loginPage), (route) => false);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,57 +58,24 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
               ),
             ),
             SizedBox(height: 20),
-            Radio<String>(
-              value: "Tôi không muốn sử dụng ứng dụng này nữa", 
-              groupValue: selectedOption, 
-              onChanged: (value){
-                setState(() {
-                  selectedOption = value;
-                });
-              }
-            ),
-            Radio<String>(
-              value: "Tài khoản có dấu hiệu bị rò rỉ dữ liệu", 
-              groupValue: selectedOption, 
-              onChanged: (value){
-                setState(() {
-                  selectedOption = value;
-                });
-              }
-            ),
-            Radio<String>(
-              value: "Tôi muốn bỏ tài khoản này và tạo tài khoản khác", 
-              groupValue: selectedOption, 
-              onChanged: (value){
-                setState(() {
-                  selectedOption = value;
-                });
-              }
-            ),
-            Radio<String>(
-              value: "Khác (vui lòng ghi rõ bên dưới)", 
-              groupValue: selectedOption, 
-              onChanged: (value){
-                setState(() {
-                  selectedOption = value;
-                });
-              }
+            ListView(
+              children: List.generate(deleteUserList.length, (i) => radio(deleteUserList[i])),
             ),
             SizedBox(height: 5),
             TextField(
               maxLength: 500,
               controller: _otherReport,
-              enabled: selectedOption == 'Khác',
+              enabled: selectedOption == "Khác (vui lòng ghi rõ bên dưới)",
               decoration: InputDecoration(
                 hintText: "Nhập nội dung",
                 hintStyle: TextStyle(
-                  color: selectedOption == 'Khác' ? AppColors.black : AppColors.grey,
+                  color: selectedOption == "Khác (vui lòng ghi rõ bên dưới)" ? AppColors.black : AppColors.grey,
                   fontSize: 14,
                   fontWeight: FontWeight.normal
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: selectedOption == 'Khác' ? AppColors.black : AppColors.grey)
+                  borderSide: BorderSide(color: selectedOption == "Khác (vui lòng ghi rõ bên dưới)" ? AppColors.black : AppColors.grey)
                 ),
                 counterText: ""
               ),
@@ -112,7 +90,15 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
                   backgroundColor: AppColors.red,
                   foregroundColor: AppColors.white
                 ),
-                onPressed: (){}, 
+                onPressed: (){
+                  ShowYesnoDialog.checkDeviceDialog(
+                    context, 
+                    title: "Xác nhận xóa", 
+                    content: "Bạn có cảm thấy ổn khi xóa tài khoản chứ? Mọi dữ liệu sẽ mất hoàn toàn nếu bạn thực hiện", 
+                    onAcceptTap: onDeleteAccount, 
+                    onCancelTap: () => Navigator.pop(context)
+                  );
+                }, 
                 child: Text(
                   "Xóa tài khoản",
                   style: TextStyle(
@@ -166,5 +152,16 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
       Logger.log(e);
       rethrow;
     }
+  }
+  Widget radio(String title){
+    return Radio<String>(
+      value: title, 
+      groupValue: selectedOption, 
+      onChanged: (value) {
+        setState(() {
+          selectedOption = value;
+        });
+      }
+    );
   }
 }

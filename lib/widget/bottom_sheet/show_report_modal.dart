@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
+import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/model/report_model.dart';
 import 'package:food_recipe_app/services/firestore/report/report_services.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
@@ -119,66 +120,31 @@ class _ShowReportModalState extends State<ShowReportModal> {
                   ),
                 ),
                 SizedBox(height: 10),
-                Radio<String>(
-                  value: "Món ăn kém chất lượng hoặc không đảm bảo vệ sinh an toàn thực phẩm" , 
-                  groupValue: selectedOption, 
-                  onChanged: (value){
-                    setState(() {
-                      selectedOption = value;
-                    });
-                  }
-                ),
-                Radio<String>(
-                  value: "Hình ảnh chứa nội dung nhạy cảm, không phù hợp (quảng cáo trá hình, khiêu dâm, kích động bạo lực, ...)", 
-                  groupValue: selectedOption, 
-                  onChanged: (value){
-                    setState(() {
-                      selectedOption = value;
-                    });
-                  }
-                ),
-                Radio<String>(
-                  value: "Sử dụng từ ngữ thô tục, xúc phạm danh dự của người khác", 
-                  groupValue: selectedOption, 
-                  onChanged: (value){
-                    setState(() {
-                      selectedOption = value;
-                    });
-                  }
-                ),
-                Radio<String>(
-                  value: "Nội dung đăng tải giả mạo, không đúng sự thật", 
-                  groupValue: selectedOption, 
-                  onChanged: (value){
-                    setState(() {
-                      selectedOption = value;
-                    });
-                  }
-                ),
-                Radio<String>(
-                  value: "Khác (vui lòng ghi rõ bên dưới)", 
-                  groupValue: selectedOption, 
-                  onChanged: (value){
-                    setState(() {
-                      selectedOption = value;
-                    });
-                  }
+                ListView(
+                  children: List.generate(
+                    reportFoodList.length, 
+                    (i) => radio(
+                      widget.title.contains("Món") 
+                        ? reportFoodList[i] 
+                        : reportCommentList[i] 
+                    )
+                  ),
                 ),
                 SizedBox(height: 5),
                 TextField(
                   maxLength: 500,
                   controller: _otherReport,
-                  enabled: selectedOption == 'Khác',
+                  enabled: selectedOption == "Khác (vui lòng ghi rõ bên dưới)",
                   decoration: InputDecoration(
                     hintText: "Nhập nội dung",
                     hintStyle: TextStyle(
-                      color: selectedOption == 'Khác' ? AppColors.black : AppColors.grey,
+                      color: selectedOption == "Khác (vui lòng ghi rõ bên dưới)" ? AppColors.black : AppColors.grey,
                       fontSize: 14,
                       fontWeight: FontWeight.normal
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: selectedOption == 'Khác' ? AppColors.black : AppColors.grey)
+                      borderSide: BorderSide(color: selectedOption == "Khác (vui lòng ghi rõ bên dưới)" ? AppColors.black : AppColors.grey)
                     ),
                     counterText: ""
                   ),
@@ -209,38 +175,38 @@ class _ShowReportModalState extends State<ShowReportModal> {
                 SizedBox(height: 20),
                 Row(
                   children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.red,
-                      foregroundColor: AppColors.white,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))
+                    Expanded(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.red,
+                          foregroundColor: AppColors.white,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))
+                        ),
+                        onPressed: () => Navigator.pop(context), 
+                        child: Text(
+                          "Hủy",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700
+                          ),
+                        )
+                      ),
                     ),
-                    onPressed: () => Navigator.pop(context), 
-                    child: Text(
-                      "Hủy",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700
-                      ),
-                    )
-                  ),
-                ),
-                SizedBox(width: 12),
-                  Expanded(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        // ignore: deprecated_member_use
-                        backgroundColor: agree ? AppColors.green : AppColors.green.withOpacity(0.5),
-                        foregroundColor: AppColors.white,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))
-                      ),
-                      onPressed: onReport, 
-                      child: Text(
-                        "Xác nhận",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700
+                    SizedBox(width: 12),
+                    Expanded(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          // ignore: deprecated_member_use
+                          backgroundColor: agree ? AppColors.green : AppColors.green.withOpacity(0.5),
+                          foregroundColor: AppColors.white,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))
+                        ),
+                        onPressed: onReport, 
+                        child: Text(
+                          "Xác nhận",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700
                           ),
                         )
                       ),
@@ -252,6 +218,17 @@ class _ShowReportModalState extends State<ShowReportModal> {
           )
         ],
       ),
+    );
+  }
+  Widget radio(String title){
+    return Radio<String>(
+      value: title, 
+      groupValue: selectedOption, 
+      onChanged: (value) {
+        setState(() {
+          selectedOption = value;
+        });
+      }
     );
   }
 }

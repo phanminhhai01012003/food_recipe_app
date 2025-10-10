@@ -9,7 +9,7 @@ import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/model/save_food_model.dart';
 import 'package:food_recipe_app/provider/save_state.dart';
-import 'package:food_recipe_app/views/main/food_details/user_interaction/like_list_modal.dart';
+import 'package:food_recipe_app/views/main/food_details/user_interaction/resources/like_list_modal.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_report_modal.dart';
 import 'package:full_screen_image/full_screen_image.dart';
 import 'package:intl/intl.dart';

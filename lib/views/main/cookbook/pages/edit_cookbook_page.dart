@@ -66,7 +66,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
       createdAt: widget.cookbook.createdAt, 
       foodsList: choices.toList()
     );
-    context.read<CookbookState>().createCookbook(cookbook);
+    context.read<CookbookState>().updateCookbook(cookbook);
     if (!mounted) return;
     Message.showScaffoldMessage(context, "Cập nhật thành công", AppColors.green);
     Navigator.pop(context);
@@ -78,7 +78,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
     imageURL = widget.cookbook.cookbookImage;
     _titleController.text = widget.cookbook.cookbookName;
     _descriptionController.text = widget.cookbook.description;
-    choices = HashSet.from(widget.cookbook.foodsList);
+    choices = HashSet<FoodModel>.from(widget.cookbook.foodsList);
   }
   @override
   Widget build(BuildContext context) {
@@ -217,8 +217,8 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
             TextField(
               controller: _descriptionController,
               maxLength: 1000,
-              maxLines: 5,
-              minLines: 5,
+              maxLines: 3,
+              minLines: 3,
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
