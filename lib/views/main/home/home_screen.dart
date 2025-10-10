@@ -164,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       TextButton(
-                        onPressed: () => Navigator.push(context, checkDeviceRoute(listofFoodView)), 
+                        onPressed: () => Navigator.push(context, checkDeviceRoute(listofFoodByDate(true))), 
                         child: Text(
                           "Xem tất cả",
                           style: TextStyle(
@@ -177,7 +177,35 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   SizedBox(height: 10),
-                  FoodRecipeDisplay(stream: _foodServices.getFoodByDate(context)),
+                  FoodRecipeDisplay(stream: _foodServices.getFoodByDate(context, true)),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Sớm nhất",
+                        style: TextStyle(
+                          color: AppColors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () => Navigator.push(context, checkDeviceRoute(listofFoodByDate(false))), 
+                        child: Text(
+                          "Xem tất cả",
+                          style: TextStyle(
+                            color: AppColors.blue,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500
+                          ),
+                        )
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  FoodRecipeDisplay(stream: _foodServices.getFoodByDate(context, false)),
+                  SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

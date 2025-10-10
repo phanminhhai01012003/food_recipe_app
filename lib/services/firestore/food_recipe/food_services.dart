@@ -64,11 +64,11 @@ class FoodServices extends FoodRepo{
   }
 
   @override
-  Stream<List<FoodModel>> getFoodByDate(BuildContext context) {
+  Stream<List<FoodModel>> getFoodByDate(BuildContext context, bool isDescending) {
     // TODO: implement getFoodByDate
     try {
       return foodCollection
-        .orderBy("createdAt", descending: true)
+        .orderBy("createdAt", descending: isDescending)
         .snapshots()
         .map((snapshot) => snapshot.docs.map((doc) => FoodModel.fromMap(doc.data())).toList());
     } catch (e) {

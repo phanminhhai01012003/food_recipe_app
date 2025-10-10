@@ -8,5 +8,5 @@ abstract class FoodRepo {
   Stream<List<FoodModel>> getFood(BuildContext context);
   Stream<List<FoodModel>> getFoodByUser(BuildContext context, String id);
   Stream<List<FoodModel>> getFoodByTag(BuildContext context, String selectedTag);
-  Stream<List<FoodModel>> getFoodByDate(BuildContext context);
+  Stream<List<FoodModel>> getFoodByDate(BuildContext context, bool isDescending);
 }
