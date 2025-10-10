@@ -15,7 +15,7 @@ import 'package:food_recipe_app/views/main/cookbook/pages/cookbook_detail.dart';
 import 'package:food_recipe_app/views/main/cookbook/pages/cookbook_screen.dart';
 import 'package:food_recipe_app/views/main/cookbook/pages/cookbook_selection.dart';
 import 'package:food_recipe_app/views/main/cookbook/pages/edit_cookbook_page.dart';
-import 'package:food_recipe_app/views/main/food_details/user_interaction/comment_page.dart';
+import 'package:food_recipe_app/views/main/food_details/user_interaction/resources/comment_page.dart';
 import 'package:food_recipe_app/views/main/food_storage/my_food.dart';
 import 'package:food_recipe_app/views/main/food_storage/recent_view.dart';
 import 'package:food_recipe_app/views/main/food_storage/save_food.dart';
