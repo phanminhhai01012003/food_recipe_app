@@ -50,6 +50,9 @@ class _AllFoodByDateState extends State<AllFoodByDate> {
               List<FoodModel> foodList = snapshot.data!;
               return GridView.builder(
                 shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                hitTestBehavior: HitTestBehavior.translucent,
+                clipBehavior: Clip.hardEdge,
                 physics: ClampingScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,

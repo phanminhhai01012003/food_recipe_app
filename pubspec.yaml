@@ -52,6 +52,7 @@ dependencies:
   loader_overlay: ^5.0.0
   shimmer: ^3.0.0
   image_picker: ^1.2.0
+  comment_box: ^0.0.18
   provider: ^6.1.5
   share_plus: ^10.1.0
   numberpicker: ^2.1.2

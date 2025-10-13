@@ -61,6 +61,8 @@ class _MyFoodState extends State<MyFood> {
             List<FoodModel> foodData = snapshot.data!;
             return ListView.builder(
               shrinkWrap: true,
+              hitTestBehavior: HitTestBehavior.translucent,
+              clipBehavior: Clip.hardEdge,
               physics: ClampingScrollPhysics(),
               itemCount: foodData.length,
               itemBuilder: (context, index) => SliderWidget(

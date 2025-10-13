@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
@@ -19,6 +20,7 @@ class EditUser extends StatefulWidget {
 }
 
 class _EditUserState extends State<EditUser> {
+  final currentUser = FirebaseAuth.instance.currentUser!;
   final userServices = UserServices();
   final imageServices = ImageService();
   File? image;
@@ -50,6 +52,10 @@ class _EditUserState extends State<EditUser> {
         description: descriptionController.text, 
         phone: phoneController.text.isEmpty ? "Không xác định" : phoneController.text, 
         loginMethod: widget.user.loginMethod
+      );
+      await currentUser.updateProfile(
+        displayName: nameController.text,
+        photoURL: imageUrl
       );
       await userServices.updateUser(context, user).then((_){
         context.loaderOverlay.hide();

@@ -13,7 +13,11 @@ class AuthServices extends AuthRepo{
   final _auth = FirebaseAuth.instance;
 
   @override
-  Future<void> changePassword(BuildContext context, {email, oldPassword, newPassword}) async{
+  Future<void> changePassword(BuildContext context, {
+    required String email, 
+    required String oldPassword, 
+    required String newPassword
+  }) async{
     // TODO: implement changePassword
     try {
       User? user = _auth.currentUser;
@@ -52,7 +56,11 @@ class AuthServices extends AuthRepo{
   }
 
   @override
-  Future<User?> loginWithAccount(BuildContext context, String email, String password) async{
+  Future<User?> loginWithAccount(
+    BuildContext context, 
+    String email, 
+    String password
+  ) async{
     // TODO: implement loginWithAccount
     try {
       UserCredential credential = await _auth.signInWithEmailAndPassword(email: email, password: password);
@@ -107,7 +115,13 @@ class AuthServices extends AuthRepo{
   }
 
   @override
-  Future<User?> registerWithAccount(BuildContext context, String avatar, String name, String email, String password) async{
+  Future<User?> registerWithAccount(
+    BuildContext context, 
+    String avatar, 
+    String name, 
+    String email, 
+    String password
+  ) async{
     // TODO: implement registerWithAccount
     try {
       UserCredential credential = await _auth.createUserWithEmailAndPassword(email: email, password: password);

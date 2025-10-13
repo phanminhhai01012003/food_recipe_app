@@ -83,6 +83,8 @@ class _CookbookSelectionState extends State<CookbookSelection> {
                 }
                 return ListView.builder(
                   scrollDirection: Axis.horizontal,
+                  hitTestBehavior: HitTestBehavior.translucent,
+                  clipBehavior: Clip.hardEdge,
                   shrinkWrap: true,
                   physics: ClampingScrollPhysics(),
                   itemCount: value.length,

@@ -20,7 +20,7 @@ class _ChangePasswordState extends State<ChangePassword> {
   final newpasswordController = TextEditingController();
   final confirmController = TextEditingController();
   final _auth = AuthServices();
-  final _currentUser = FirebaseAuth.instance.currentUser;
+  final _currentUser = FirebaseAuth.instance.currentUser!;
   void handle() async{
     context.loaderOverlay.show();
     if (formKey.currentState!.validate()){
@@ -31,7 +31,7 @@ class _ChangePasswordState extends State<ChangePassword> {
       }
       formKey.currentState!.save();
       await _auth.changePassword(context,
-        email: _currentUser!.email!,
+        email: _currentUser.email!,
         oldPassword: oldPasswordController.text,
         newPassword: newpasswordController.text
       ).then((_){

@@ -25,6 +25,8 @@ class _CategoriesGridListState extends State<CategoriesGridList> {
         } else {
           List<CategoryModel> grids = snapshot.data!;
           return GridView.builder(
+            hitTestBehavior: HitTestBehavior.translucent,
+            clipBehavior: Clip.hardEdge,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 4,
               childAspectRatio: 0.3
