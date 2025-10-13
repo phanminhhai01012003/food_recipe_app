@@ -36,6 +36,7 @@ dependencies:
   cached_network_image: ^3.4.1
   shared_preferences: ^2.5.3
   connectivity_plus: ^6.1.5
+  timezone: ^0.10.0
   cupertino_icons: ^1.0.8
   fluttertoast: ^8.2.12
   full_screen_image: ^2.0.0

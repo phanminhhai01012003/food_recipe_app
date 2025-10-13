@@ -5,6 +5,9 @@ import 'package:food_recipe_app/common/logger.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/notification_model.dart';
 import 'package:food_recipe_app/services/notification/notification_data.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest_all.dart' as tz;
 
 class NotificationService {
   static final firebaseMessaging = FirebaseMessaging.instance;
@@ -17,8 +20,8 @@ class NotificationService {
   );
   static final notifyData = NotificationData();
   static const androidNotificationDetails = AndroidNotificationDetails(
-    "123456789", 
-    "Notification channels",
+    "123456789abcdef", 
+    "Food Recipe notification channels",
     channelDescription: "Food Recipe App Notifications",
     importance: Importance.max,
     playSound: true,
@@ -35,11 +38,13 @@ class NotificationService {
     iOS: iosNotificationDetails
   );
   static Future<void> initNotifications() async{
+    tz.initializeTimeZones();
     await firebaseMessaging.requestPermission(
       provisional: true,
       announcement: true
     );
-    final fcmToken = firebaseMessaging.getToken();
+    final fcmToken = await firebaseMessaging.getToken();
+    saveToken(fcmToken!);
     Logger.log("Token: $fcmToken");
     await initPushNotifications();
   }
@@ -83,5 +88,24 @@ class NotificationService {
       notificationDetails,
       payload: payload
     );
+  }
+  static void scheduleNotification({
+    required String title,
+    required String body,
+    required DateTime time
+  }) {
+    flutterLocalNotificationsPlugin.zonedSchedule(
+      time.millisecondsSinceEpoch, 
+      title, 
+      body, 
+      tz.TZDateTime.from(DateTime.now().add(Duration(seconds: 5)), tz.local), 
+      notificationDetails, 
+      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime, 
+      androidScheduleMode: AndroidScheduleMode.exact
+    );
+  }
+  static void saveToken(String token) async{
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString("token", token);
   }
 }

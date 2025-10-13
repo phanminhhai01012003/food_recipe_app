@@ -34,8 +34,7 @@ class _CookbookSelectionState extends State<CookbookSelection> {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
-        backgroundColor: AppColors.green,
-        foregroundColor: AppColors.white,
+        backgroundColor: AppColors.white,
         leading: Padding(
           padding: EdgeInsets.all(8),
           child: IconButton(
