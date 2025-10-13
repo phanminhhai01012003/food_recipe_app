@@ -165,7 +165,7 @@ class _OnboardState extends State<Onboard> with TickerProviderStateMixin{
                       textColor: AppColors.black
                     ),
                   ),
-                  ...List.generate(3, (idx) => _buildDot(idx)),
+                  ListView(children: List.generate(3, (idx) => _buildDot(idx))),
                   _navigatorButton(
                     pageChanged: nextPage, 
                     buttonColor: AppColors.green, 

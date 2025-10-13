@@ -10,6 +10,6 @@ abstract class AuthRepo {
   Future<void> logOutFromGoogle(BuildContext context);
   Future<void> logOutFromFacebook(BuildContext context);
   Future<void> forgotPassword(BuildContext context, String email);
-  Future<void> changePassword(BuildContext context, {email, oldPassword, newPassword});
+  Future<void> changePassword(BuildContext context, {required String email, required String oldPassword, required String newPassword});
   Future<void> deleteAccount(BuildContext context);
 }
