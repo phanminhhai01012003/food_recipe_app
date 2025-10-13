@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 IconButton(
-                  onPressed: (){}, 
+                  onPressed: () => Navigator.push(context, checkDeviceRoute(notification)), 
                   icon: Icon(
                     Icons.notifications,
                     size: 20,

@@ -299,6 +299,26 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
                   );
                 }
               }
+            ),
+            SizedBox(height: 20),
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.green,
+                  foregroundColor: AppColors.white,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33))
+                ),
+                onPressed: add, 
+                child: Text(
+                  "Cập nhật",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700
+                  ),
+                )
+              ),
             )
           ],
         ),

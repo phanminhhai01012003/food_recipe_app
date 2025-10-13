@@ -74,7 +74,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                   ],
                 ),
                 IconButton(
-                  onPressed: (){}, 
+                  onPressed: () => Navigator.push(context, checkDeviceRoute(notification)), 
                   icon: Icon(
                     Icons.notifications,
                     size: 20,
