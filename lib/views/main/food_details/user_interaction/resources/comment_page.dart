@@ -21,11 +21,12 @@ class CommentPage extends StatefulWidget {
 }
 
 class _CommentPageState extends State<CommentPage> {
+  final commentServices = CommentServices();
   final _currentUser = FirebaseAuth.instance.currentUser!;
   final _commentController = TextEditingController();
   bool get checkComment => _commentController.text.isEmpty;
   final notificationData = NotificationData();
-  void onAddComment(CommentServices commentServices) async{
+  void onAddComment() async{
     CommentModel comment = CommentModel(
       commentId: generateRandomString(20),
       userId: _currentUser.uid,
@@ -36,7 +37,7 @@ class _CommentPageState extends State<CommentPage> {
       replies: [],
       createdAt: DateTime.now()
     );
-    await commentServices.addComment(context, comment).then((_) async{
+    await commentServices.addComment(context, comment, widget.food.foodId).then((_) async{
       Message.showScaffoldMessage(context, "Đã gửi bình luận", AppColors.green);
       pushCommentNotifications();
     });
@@ -55,13 +56,24 @@ class _CommentPageState extends State<CommentPage> {
   }
   @override
   Widget build(BuildContext context) {
-    final commentServices = CommentServices(foodId: widget.food.foodId);
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
+        leading: Padding(
+          padding: EdgeInsets.all(8),
+          child: IconButton(
+            onPressed: () => Navigator.pop(context), 
+            icon: Icon(Icons.arrow_back, size: 25)
+          ),
+        ),
         backgroundColor: AppColors.green,
         foregroundColor: AppColors.white,
-        title: Text("Bình luận"),
+        title: Text("Bình luận",
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w800
+          ),
+        ),
         centerTitle: true,
       ),
       body: CommentBox(
@@ -71,7 +83,7 @@ class _CommentPageState extends State<CommentPage> {
         withBorder: true,
         sendButtonMethod: () {
           if (formKey.currentState!.validate()){
-            onAddComment(commentServices);
+            onAddComment();
             _commentController.clear();
             FocusScope.of(context).unfocus();
           }
@@ -85,7 +97,7 @@ class _CommentPageState extends State<CommentPage> {
           color: AppColors.white
         ),
         child: StreamBuilder(
-          stream: commentServices.getComment(context), 
+          stream: commentServices.getComment(context, widget.food.foodId), 
           builder: (context, snapshot){
             if (!snapshot.hasData || snapshot.hasError){
               return Center(

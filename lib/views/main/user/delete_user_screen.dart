@@ -65,17 +65,17 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
             TextField(
               maxLength: 500,
               controller: _otherReport,
-              enabled: selectedOption == "Khác (vui lòng ghi rõ bên dưới)",
+              enabled: selectedOption == deleteUserList.last,
               decoration: InputDecoration(
                 hintText: "Nhập nội dung",
                 hintStyle: TextStyle(
-                  color: selectedOption == "Khác (vui lòng ghi rõ bên dưới)" ? AppColors.black : AppColors.grey,
+                  color: selectedOption == deleteUserList.last ? AppColors.black : AppColors.grey,
                   fontSize: 14,
                   fontWeight: FontWeight.normal
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: selectedOption == "Khác (vui lòng ghi rõ bên dưới)" ? AppColors.black : AppColors.grey)
+                  borderSide: BorderSide(color: selectedOption == deleteUserList.last ? AppColors.black : AppColors.grey)
                 ),
                 counterText: ""
               ),
@@ -145,7 +145,7 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
         .doc(currentUser.uid)
         .collection("delete_acc_request")
         .add({
-          'reason': selectedOption == 'Khác' ? _otherReport.text : selectedOption
+          'reason': selectedOption == deleteUserList.last ? _otherReport.text : selectedOption
         });
     } catch (e) {
       Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);

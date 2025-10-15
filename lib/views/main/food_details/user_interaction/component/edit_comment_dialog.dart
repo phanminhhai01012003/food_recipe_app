@@ -8,9 +8,9 @@ import 'package:food_recipe_app/services/firestore/comment/comment_services.dart
 import 'package:food_recipe_app/widget/other/message.dart';
 
 class EditCommentDialog {
+  static final commentServices = CommentServices();
   static void showMaterialEdit(BuildContext context, CommentModel comment, String id){
     final commentController = TextEditingController(text: comment.content);
-    final commentServices = CommentServices(foodId: id);
     showDialog(
       context: context, 
       builder: (context) => AlertDialog(
@@ -56,9 +56,9 @@ class EditCommentDialog {
             onPressed: () async{
               await onUpdateComment(
                 context, 
-                services: commentServices, 
                 content: commentController.text, 
-                comment: comment
+                comment: comment,
+                id: id
               );
             },
             child: Text("Gửi")
@@ -74,7 +74,6 @@ class EditCommentDialog {
 
   static void showCupertinoEdit(BuildContext context, CommentModel comment, String id) {
     final commentController = TextEditingController(text: comment.content);
-    final commentServices = CommentServices(foodId: id);
     showDialog(
       context: context, 
       builder: (context) => CupertinoAlertDialog(
@@ -112,10 +111,10 @@ class EditCommentDialog {
           CupertinoDialogAction(
             onPressed: () async{
               await onUpdateComment(
-                context, 
-                services: commentServices, 
+                context,  
                 content: commentController.text, 
-                comment: comment
+                comment: comment,
+                id: id
               );
             },
             child: Text("Gửi", style: TextStyle(color: AppColors.blue)),
@@ -135,12 +134,12 @@ class EditCommentDialog {
   
   static Future<void> onUpdateComment(
     BuildContext context, {
-      required CommentServices services, 
       required String content, 
-      required CommentModel comment
+      required CommentModel comment,
+      required String id
     }) async{
     if (content.isEmpty) return;
-    await services.updateComment(context, comment).then((_){
+    await commentServices.updateComment(context, comment, id).then((_){
       Message.showToast("Đã cập nhật");
       Navigator.pop(context);
     });

@@ -10,8 +10,9 @@ import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 
 class CommentSelection {
-  static void onDelete(BuildContext context, CommentServices services, String id) async{
-    await services.deleteComment(context, id).then((_){
+  static final commentServices = CommentServices();
+  static void onDelete(BuildContext context, String commentId, String foodId) async{
+    await commentServices.deleteComment(context, commentId, foodId).then((_){
       Message.showToast("Đã xóa bình luận");
       Navigator.pop(context);
     }); 
@@ -20,7 +21,6 @@ class CommentSelection {
     });  
   }
   static void showSelectionWithCurrentUser(BuildContext context, CommentModel comment, String foodId){
-    final commentServices = CommentServices(foodId: foodId);
     showDialog(
       context: context, 
       builder: (context) => Dialog(
@@ -44,7 +44,7 @@ class CommentSelection {
                       context, 
                       title: "Xóa bình luận", 
                       content: "Bạn có chắc chắn muốn xóa không?", 
-                      onAcceptTap: () => onDelete(context, commentServices, comment.commentId),
+                      onAcceptTap: () => onDelete(context, comment.commentId, foodId),
                       onCancelTap: () => Navigator.pop(context)
                     );
                   }, 

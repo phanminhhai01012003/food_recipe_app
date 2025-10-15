@@ -62,6 +62,7 @@ class _ChangePasswordState extends State<ChangePassword> {
         child: Form(
           key: formKey,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
                     Text("Mật khẩu hiện tại",
                       style: TextStyle(

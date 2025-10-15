@@ -56,7 +56,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
       context.loaderOverlay.hide();
       return;
     }
-    imageURL = await _imageServices.uploadImage(context, image!);
+    imageURL = await _imageServices.uploadImage(context, image!, foodFolder);
     FoodModel food = FoodModel(
       foodId: widget.food.foodId, 
       image: imageURL!, 

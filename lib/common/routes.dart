@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/model/comment_model.dart';
 import 'package:food_recipe_app/model/cookbook_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/model/user_model.dart';
@@ -17,6 +18,7 @@ import 'package:food_recipe_app/views/main/cookbook/pages/cookbook_selection.dar
 import 'package:food_recipe_app/views/main/cookbook/pages/edit_cookbook_page.dart';
 import 'package:food_recipe_app/views/main/food_details/food_screen/all_food_by_date.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/resources/comment_page.dart';
+import 'package:food_recipe_app/views/main/food_details/user_interaction/resources/reply_comment_page.dart';
 import 'package:food_recipe_app/views/main/food_storage/my_food.dart';
 import 'package:food_recipe_app/views/main/food_storage/recent_view.dart';
 import 'package:food_recipe_app/views/main/food_storage/save_food.dart';
@@ -89,3 +91,4 @@ Widget get reportPage => MyReportPage();
 Widget get addCookbook => AddCookbookPage();
 Widget editCookbook(CookbookModel cookbook) => EditCookbookPage(cookbook: cookbook);
 Widget get notification => NotificationScreen();
+Widget replyPage(CommentModel comment, String id) => ReplyCommentPage(comment: comment, id: id);

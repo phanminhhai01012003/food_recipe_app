@@ -61,7 +61,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
     // TODO: implement initState
     super.initState();
     if (widget.reports != null) {
-      if (selectedOption == "Khác") {
+      if (selectedOption == "Khác (vui lòng ghi rõ bên dưới)") {
         _otherReport.text = widget.reports!.reason;
       }
       selectedOption = widget.reports!.reason;

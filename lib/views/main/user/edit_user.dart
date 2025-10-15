@@ -43,7 +43,7 @@ class _EditUserState extends State<EditUser> {
     context.loaderOverlay.show();
     if (formKey.currentState!.validate()){
       formKey.currentState!.save();
-      imageUrl = await imageServices.uploadImage(context, image!);
+      imageUrl = await imageServices.uploadImage(context, image!, avatarFolder);
       UserModel user = UserModel(
         userId: widget.user.userId, 
         userName: nameController.text, 

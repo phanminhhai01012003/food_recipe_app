@@ -43,7 +43,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
       context.loaderOverlay.hide();
       return;
     }
-    imageURL = await _imageServices.uploadImage(context, image!);
+    imageURL = await _imageServices.uploadImage(context, image!, foodFolder);
     FoodModel food = FoodModel(
       foodId: generateRandomString(20), 
       image: imageURL!, 

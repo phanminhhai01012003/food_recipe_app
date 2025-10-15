@@ -56,7 +56,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
       context.loaderOverlay.hide();
       return;
     }
-    imageURL = await imageServices.uploadImage(context, image!);
+    imageURL = await imageServices.uploadImage(context, image!, cookbookFolder);
     CookbookModel cookbook = CookbookModel(
       cookbookId: widget.cookbook.cookbookId, 
       cookbookImage: imageURL!, 

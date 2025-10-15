@@ -109,12 +109,12 @@ class _OnboardState extends State<Onboard> with TickerProviderStateMixin{
           gradient: getGradientColors
         ),
         child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: EdgeInsets.all(20),
-                child: Align(
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Align(
                   alignment: Alignment.topRight,
                   child: TextButton(
                     onPressed: navigateToNewPage, 
@@ -126,55 +126,63 @@ class _OnboardState extends State<Onboard> with TickerProviderStateMixin{
                     )
                   ),
                 ),
-              ),
-              Expanded(
-                child: PageView(
-                  controller: _pageController,
-                  onPageChanged: onPageChanged,
-                  children: [
-                    _buildPage(
-                      image: foodDesignImage, 
-                      title: "PMH Food Recipe", 
-                      desc: "Hãy bắt đầu trải nghiệm chế biến các món ăn cho riêng bạn", 
-                      isFirst: true
-                    ),
-                    _buildPage(
-                      image: foodImage, 
-                      title: "Những ý tưởng mới", 
-                      desc: "Khám phá những ý tưởng mới về món ăn và truyền cảm hứng cho tất cả mọi người", 
-                      isFirst: false
-                    ),
-                    _buildPage(
-                      image: cookingImage, 
-                      title: "Gia đình là số 1", 
-                      desc: "Những món ăn ngon miệng sẽ đem lại hạnh phúc cho cả gia đình bạn", 
-                      isFirst: false
-                    )
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Visibility(
-                    visible: _currentPage > 0,
-                    child: _navigatorButton(
-                      pageChanged: prevPage, 
-                      buttonColor: AppColors.white, 
-                      text: "Trước", 
-                      textColor: AppColors.black
-                    ),
+                Expanded(
+                  child: PageView(
+                    controller: _pageController,
+                    onPageChanged: onPageChanged,
+                    children: [
+                      _buildPage(
+                        image: foodDesignImage, 
+                        title: "PMH Food Recipe", 
+                        desc: "Hãy bắt đầu trải nghiệm chế biến các món ăn cho riêng bạn", 
+                        isFirst: true
+                      ),
+                      _buildPage(
+                        image: foodImage, 
+                        title: "Những ý tưởng mới", 
+                        desc: "Khám phá những ý tưởng mới về món ăn và truyền cảm hứng cho tất cả mọi người", 
+                        isFirst: false
+                      ),
+                      _buildPage(
+                        image: cookingImage, 
+                        title: "Gia đình là số 1", 
+                        desc: "Những món ăn ngon miệng sẽ đem lại hạnh phúc cho cả gia đình bạn", 
+                        isFirst: false
+                      )
+                    ],
                   ),
-                  ListView(children: List.generate(3, (idx) => _buildDot(idx))),
-                  _navigatorButton(
-                    pageChanged: nextPage, 
-                    buttonColor: AppColors.green, 
-                    text: _currentPage == 2 ? "Bắt đầu" : "Tiếp theo", 
-                    textColor: AppColors.white
-                  )
-                ],
-              )
-            ],
+                ),
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(3, (idx) => _buildDot(idx))
+                    ),
+                    SizedBox(height: 5),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Visibility(
+                          visible: _currentPage > 0,
+                          child: _navigatorButton(
+                            pageChanged: prevPage, 
+                            buttonColor: AppColors.white, 
+                            text: "Trước", 
+                            textColor: AppColors.black
+                          ),
+                        ),
+                        _navigatorButton(
+                          pageChanged: nextPage, 
+                          buttonColor: AppColors.green, 
+                          text: _currentPage == 2 ? "Bắt đầu" : "Tiếp theo", 
+                          textColor: AppColors.white
+                        )
+                      ],
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       )
@@ -211,6 +219,16 @@ class _OnboardState extends State<Onboard> with TickerProviderStateMixin{
         decoration: BoxDecoration(
           color: buttonColor,
           borderRadius: BorderRadius.circular(12)
+        ),
+        child: Center(
+          child: Text(
+            text,
+            style: TextStyle(
+              color: textColor,
+              fontSize: 12,
+              fontWeight: FontWeight.w500
+            )
+          ),
         ),
       ),
     );
