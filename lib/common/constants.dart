@@ -57,11 +57,10 @@ List<String> deleteUserList = [
   "Khác (vui lòng ghi rõ bên dưới)"
 ];
 
-//cloudinary
-String cloudName = "dyfzthrdv";
-String folder = "/foodrecipe";
-String apiKey = "949323413611473";
-String apiSecret = "DzxVBsgnO_0va_sYz0sdsVGjG5E";
+//storage
+String foodFolder = "food_recipe";
+String avatarFolder = "user_avatar";
+String cookbookFolder = "cookbook";
 
 //document
 String docPath = "assets/document";

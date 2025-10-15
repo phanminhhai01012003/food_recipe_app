@@ -64,7 +64,7 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
       context.loaderOverlay.hide();
       return;
     }
-    imageURL = await imageServices.uploadImage(context, image!);
+    imageServices.uploadImage(context, image!, cookbookFolder, imageURL!);
     CookbookModel cookbook = CookbookModel(
       cookbookId: DateTime.now().millisecondsSinceEpoch.toString(), 
       cookbookImage: imageURL!, 

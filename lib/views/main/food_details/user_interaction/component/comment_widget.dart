@@ -153,9 +153,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                       ),
                       TextSpan(
                         text: "Trả lời",
-                        recognizer: TapGestureRecognizer()..onTap = () {
-                          
-                        }
+                        recognizer: TapGestureRecognizer()..onTap = () => Navigator.push(context, checkDeviceRoute(replyPage(widget.comment, widget.id)))
                       )
                     ]
                   )

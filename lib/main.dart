@@ -1,11 +1,8 @@
-import 'package:cloudinary_flutter/cloudinary_context.dart';
-import 'package:cloudinary_url_gen/cloudinary.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/app_themes.dart';
-import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/firebase/firebase_options.dart';
 import 'package:food_recipe_app/provider/cookbook_state.dart';
@@ -23,8 +20,6 @@ void main() async{
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp
   ]);
-  // ignore: deprecated_member_use
-  CloudinaryContext.cloudinary = Cloudinary.fromCloudName(cloudName: cloudName);
   runApp(const MyApp());
 }
 
