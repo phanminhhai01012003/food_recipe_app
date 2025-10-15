@@ -222,6 +222,8 @@ class _StorageViewState extends State<StorageView> {
                 return ListView.builder(
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
+                  hitTestBehavior: HitTestBehavior.translucent,
+                  clipBehavior: Clip.hardEdge,
                   physics: ClampingScrollPhysics(),
                   itemCount: value.length / 2 as int,
                   itemBuilder: (context, index) => CookbookWidget(book: value[index])

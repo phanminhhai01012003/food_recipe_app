@@ -90,6 +90,7 @@ class _CookbookDetailState extends State<CookbookDetail> {
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                 physics: ClampingScrollPhysics(),
+                hitTestBehavior: HitTestBehavior.translucent,
                 clipBehavior: Clip.hardEdge,
                 itemCount: widget.cookbook.foodsList.length,
                 itemBuilder: (context, index) => FoodDisplayList(food: widget.cookbook.foodsList[index]),

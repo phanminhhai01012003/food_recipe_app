@@ -27,6 +27,8 @@ class _FoodRecipeDisplayState extends State<FoodRecipeDisplay> {
             scrollDirection: Axis.horizontal,
             shrinkWrap: true,
             physics: ClampingScrollPhysics(),
+            hitTestBehavior: HitTestBehavior.translucent,
+            clipBehavior: Clip.hardEdge,
             itemCount: foods.length / 2 as int,
             itemBuilder: (context, index) => FoodDisplayGrid(food: foods[index]),
           );

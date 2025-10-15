@@ -46,6 +46,10 @@ class LikeListModal extends StatelessWidget {
               var likes = snapshot.data!;
               return ListView.builder(
                 shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                physics: ClampingScrollPhysics(),
+                hitTestBehavior: HitTestBehavior.translucent,
+                clipBehavior: Clip.hardEdge,
                 itemCount: likes.length,
                 itemBuilder: (context, index) => InkWell(
                   onTap: () => checkDeviceRoute(likes[index]['id']),

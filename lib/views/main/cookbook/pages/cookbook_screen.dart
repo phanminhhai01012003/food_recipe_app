@@ -64,7 +64,9 @@ class _CookbookScreenState extends State<CookbookScreen> {
             );
           }
           return ListView.builder(
-            scrollDirection: Axis.horizontal,
+            scrollDirection: Axis.vertical,
+            hitTestBehavior: HitTestBehavior.translucent,
+            clipBehavior: Clip.hardEdge,
             shrinkWrap: true,
             physics: ClampingScrollPhysics(),
             itemCount: value.length,

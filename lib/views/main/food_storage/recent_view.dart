@@ -60,6 +60,8 @@ class _RecentViewState extends State<RecentView> {
           }
           return ListView.builder(
             shrinkWrap: true,
+            hitTestBehavior: HitTestBehavior.translucent,
+            clipBehavior: Clip.hardEdge,
             scrollDirection: Axis.vertical,
             physics: ClampingScrollPhysics(),
             itemCount: value.length,

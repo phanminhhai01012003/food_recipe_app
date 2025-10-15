@@ -22,12 +22,14 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget renderImageWidget(String type, String fromUserAvatar){
     switch(type) {
       case "Thích bài viết":
+      case "Thích bình luận":
         return NotificationImageWidget(
           icon: Icons.thumb_up_rounded, 
           fromUserAvatar: fromUserAvatar, 
           color: AppColors.blue
         );
       case "Bình luận bài viết":
+      case "Trả lời bình luận":
         return NotificationImageWidget(
           icon: Icons.comment_sharp, 
           fromUserAvatar: fromUserAvatar, 
@@ -152,7 +154,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
           SizedBox(height: 20),
           FutureBuilder(
             future: _btnIndex == 0 
-              ? nData.getAllNotifications() 
+              ? nData.getSystemNotifications() 
               : nData.getReadNotifications(isRead), 
             builder: (context, snapshot){
               if (!snapshot.hasData || snapshot.hasError){

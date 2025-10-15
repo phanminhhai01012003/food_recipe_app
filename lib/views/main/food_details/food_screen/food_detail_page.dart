@@ -9,6 +9,7 @@ import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/model/save_food_model.dart';
 import 'package:food_recipe_app/provider/save_state.dart';
+import 'package:food_recipe_app/services/notification/notification_data.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/resources/like_list_modal.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_report_modal.dart';
 import 'package:full_screen_image/full_screen_image.dart';
@@ -33,6 +34,7 @@ class FoodDetailPage extends StatefulWidget {
 
 class _FoodDetailPageState extends State<FoodDetailPage> {
   final _currentUser = FirebaseAuth.instance.currentUser!;
+  final noficationData = NotificationData();
   final foodCollection = FirebaseFirestore.instance.collection("food_recipe");
   bool isLikedPost = false;
   @override
@@ -53,6 +55,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
           "username": _currentUser.displayName
         }])
       });
+      pushLikesNotifications();
     } else {
       foodCollection.doc(widget.id).update({
         "likes": FieldValue.arrayRemove([{
@@ -67,6 +70,18 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
     final doc = await foodCollection.doc(widget.id).get();
     List<Map<String, dynamic>> likes = List<Map<String, dynamic>>.from(doc['likes']);
     return likes;
+  }
+  void pushLikesNotifications(){
+    noficationData.pushInteractNotifications(
+      id: DateTime.now().millisecondsSinceEpoch.toString(), 
+      title: "${_currentUser.displayName} đã thích bài viết của bạn", 
+      body: "Nhấn để xem", 
+      from: _currentUser.displayName!, 
+      to: widget.food.userName, 
+      type: "Thích bài viết", 
+      isRead: false, 
+      createdAt: DateTime.now()
+    );
   }
   @override
   Widget build(BuildContext context) {

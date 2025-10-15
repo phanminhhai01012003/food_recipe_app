@@ -61,6 +61,8 @@ class _SaveFoodState extends State<SaveFood> {
           return ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.vertical,
+            hitTestBehavior: HitTestBehavior.translucent,
+            clipBehavior: Clip.hardEdge,
             physics: ClampingScrollPhysics(),
             itemCount: value.length,
             itemBuilder: (context, index) => SliderWidget(

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
+import 'package:food_recipe_app/common/convert.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/model/recent_view_model.dart';
@@ -21,17 +22,16 @@ class _FoodDisplayGridState extends State<FoodDisplayGrid> {
   final currentUser = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
-    final recentView = context.read<HistoryState>(); 
     return InkWell(
       onTap: () {
         RecentViewModel recents = RecentViewModel(
-          viewId: DateTime.now().millisecondsSinceEpoch.toString(),
+          viewId: generateRandomString(15),
           userId: currentUser.uid, 
           isViewed: true, 
           viewedAt: DateTime.now(), 
           foods: widget.food
         );
-        recentView.toggle(recents);
+        context.read<HistoryState>().toggle(recents);
         Navigator.push(
           context,
           checkDeviceRoute(

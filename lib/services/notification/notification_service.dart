@@ -13,7 +13,11 @@ class NotificationService {
   static final firebaseMessaging = FirebaseMessaging.instance;
   static final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
   static const androidInitSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
-  static const iosInitSettings = DarwinInitializationSettings();
+  static const iosInitSettings = DarwinInitializationSettings(
+    requestAlertPermission: true,
+    requestBadgePermission: true,
+    requestSoundPermission: true
+  );
   static const initialSettings = InitializationSettings(
     android: androidInitSettings,
     iOS: iosInitSettings

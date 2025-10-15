@@ -43,7 +43,10 @@ class _FoodListWithTagState extends State<FoodListWithTag> {
               List<FoodModel> foodList = snapshot.data!;
               return GridView.builder(
                 shrinkWrap: true,
+                scrollDirection: Axis.vertical,
                 physics: ClampingScrollPhysics(),
+                hitTestBehavior: HitTestBehavior.translucent,
+                clipBehavior: Clip.hardEdge,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   childAspectRatio: 0.8
