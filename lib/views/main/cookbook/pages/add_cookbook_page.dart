@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
+import 'package:food_recipe_app/common/convert.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/cookbook_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
@@ -66,7 +67,7 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
     }
     imageURL = await imageServices.uploadImage(context, image!, cookbookFolder);
     CookbookModel cookbook = CookbookModel(
-      cookbookId: DateTime.now().millisecondsSinceEpoch.toString(), 
+      cookbookId: generateRandomString(17), 
       cookbookImage: imageURL!, 
       cookbookName: _titleController.text, 
       description: _descriptionController.text, 

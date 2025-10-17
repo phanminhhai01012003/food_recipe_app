@@ -97,6 +97,7 @@ class _RegisterState extends State<Register> {
                   key: formKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Text("Tên đầy đủ",
                         style: TextStyle(
@@ -408,8 +409,8 @@ class _RegisterState extends State<Register> {
                         ),
                       ),
                       SizedBox(height: 20),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 30),
+                      Align(
+                        alignment: Alignment.center,
                         child: Row(
                           children: [
                             Text("Bạn đã có tài khoản? ",

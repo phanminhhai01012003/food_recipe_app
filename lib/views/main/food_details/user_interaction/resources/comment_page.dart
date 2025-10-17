@@ -28,7 +28,7 @@ class _CommentPageState extends State<CommentPage> {
   final notificationData = NotificationData();
   void onAddComment() async{
     CommentModel comment = CommentModel(
-      commentId: generateRandomString(20),
+      commentId: generateRandomString(18),
       userId: _currentUser.uid,
       avatar: _currentUser.photoURL!, 
       userName: _currentUser.displayName!, 
@@ -39,7 +39,7 @@ class _CommentPageState extends State<CommentPage> {
     );
     await commentServices.addComment(context, comment, widget.food.foodId).then((_) async{
       Message.showScaffoldMessage(context, "Đã gửi bình luận", AppColors.green);
-      pushCommentNotifications();
+      // pushCommentNotifications();
     });
   }
   void pushCommentNotifications(){

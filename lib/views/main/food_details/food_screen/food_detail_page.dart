@@ -55,7 +55,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
           "username": _currentUser.displayName
         }])
       });
-      pushLikesNotifications();
+      // pushLikesNotifications();
     } else {
       foodCollection.doc(widget.id).update({
         "likes": FieldValue.arrayRemove([{
@@ -86,7 +86,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
   @override
   Widget build(BuildContext context) {
     SaveFoodModel save = SaveFoodModel(
-      saveId: generateRandomString(15), 
+      saveId: generateRandomString(19), 
       userId: _currentUser.uid, 
       isSaved: true, 
       foods: widget.food

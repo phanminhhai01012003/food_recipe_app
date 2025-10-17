@@ -24,6 +24,18 @@ class _ReplyCommentPageState extends State<ReplyCommentPage> {
   final _commentController = TextEditingController();
   bool get checkComment => _commentController.text.isEmpty;
   final notificationData = NotificationData();
+  void pushReplyNotifications(){
+    notificationData.pushInteractNotifications(
+      id: DateTime.now().millisecondsSinceEpoch.toString(), 
+      title: "${_currentUser.displayName} đã trả lời bình luận của bạn", 
+      body: "Nhấn để xem", 
+      from: _currentUser.displayName!, 
+      to: widget.comment.userName, 
+      type: "Trả lời bình luận", 
+      isRead: false, 
+      createdAt: DateTime.now()
+    );
+  }
   void onAddReply(){
     CommentModel comment = CommentModel(
       commentId: widget.comment.commentId, 

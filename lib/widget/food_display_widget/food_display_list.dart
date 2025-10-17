@@ -25,7 +25,7 @@ class _FoodDisplayListState extends State<FoodDisplayList> {
     return InkWell(
       onTap: () {
         RecentViewModel recents = RecentViewModel(
-          viewId: generateRandomString(15),
+          viewId: generateRandomString(16),
           userId: currentUser.uid, 
           isViewed: true, 
           viewedAt: DateTime.now(), 

@@ -7,6 +7,7 @@ import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/comment_model.dart';
+import 'package:food_recipe_app/services/notification/notification_data.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/component/comment_selection.dart';
 import 'package:intl/intl.dart';
 
@@ -22,6 +23,19 @@ class CommentWidget extends StatefulWidget {
 class _CommentWidgetState extends State<CommentWidget> {
   final _currentUser = FirebaseAuth.instance.currentUser!;
   bool isLikedComment = false;
+  final notificationData = NotificationData();
+  void pushLikeCommentNotification() async{
+    notificationData.pushInteractNotifications(
+      id: DateTime.now().millisecondsSinceEpoch.toString(), 
+      title: "${_currentUser.displayName} đã thích bình luận của bạn", 
+      body: "Nhấn để xem", 
+      from: _currentUser.displayName!, 
+      to: widget.comment.userName, 
+      type: "Thích bình luận", 
+      isRead: false, 
+      createdAt: DateTime.now()
+    );
+  }
   void toggleComment({
     required bool isLikedComment, 
     required CollectionReference<Map<String, dynamic>> collection, 
