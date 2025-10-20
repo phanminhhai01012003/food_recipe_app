@@ -49,7 +49,7 @@ class _ChangeThemeScreenState extends State<ChangeThemeScreen> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12)
                               ),
-                              child: Row(
+                              child: Stack(
                                 children: [
                                   Positioned(
                                     top: 5,
