@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/logger.dart';
 import 'package:food_recipe_app/services/authentication/auth_repo.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
@@ -10,8 +11,6 @@ import '../../common/app_colors.dart';
 
 class AuthServices extends AuthRepo{
 
-  final _auth = FirebaseAuth.instance;
-
   @override
   Future<void> changePassword(BuildContext context, {
     required String email, 
@@ -20,7 +19,7 @@ class AuthServices extends AuthRepo{
   }) async{
     // TODO: implement changePassword
     try {
-      User? user = _auth.currentUser;
+      User? user = auth.currentUser;
       AuthCredential credential = EmailAuthProvider.credential(email: email, password: oldPassword);
       await user?.reauthenticateWithCredential(credential);
       await user?.updatePassword(newPassword);
@@ -35,7 +34,7 @@ class AuthServices extends AuthRepo{
   Future<void> forgotPassword(BuildContext context, String email) async{
     // TODO: implement forgotPassword
     try{
-      await _auth.sendPasswordResetEmail(email: email);
+      await auth.sendPasswordResetEmail(email: email);
     } catch(e){
       Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
       Logger.log(e);
@@ -47,7 +46,7 @@ class AuthServices extends AuthRepo{
   Future<void> logOutFromAccount(BuildContext context) async{
     // TODO: implement logOut
     try {
-      await _auth.signOut();
+      await auth.signOut();
     } catch (e) {
       Message.showScaffoldMessage(context, "Lỗi khi thoát khỏi phiên đăng nhập", AppColors.red);
       Logger.log(e);
@@ -63,7 +62,7 @@ class AuthServices extends AuthRepo{
   ) async{
     // TODO: implement loginWithAccount
     try {
-      UserCredential credential = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      UserCredential credential = await auth.signInWithEmailAndPassword(email: email, password: password);
       User? user = credential.user;
       return user;
     } catch (e) {
@@ -82,7 +81,7 @@ class AuthServices extends AuthRepo{
       );
       if (result.status == LoginStatus.success) {
         final credential = FacebookAuthProvider.credential(result.accessToken!.tokenString);
-        return await _auth.signInWithCredential(credential);
+        return await auth.signInWithCredential(credential);
       } else {
         throw FirebaseAuthException(
           code: result.status.toString(),
@@ -106,7 +105,7 @@ class AuthServices extends AuthRepo{
         idToken: googleAuth?.idToken,
         accessToken: googleAuth?.accessToken
       );
-      return await _auth.signInWithCredential(credential);
+      return await auth.signInWithCredential(credential);
     } catch (e) {
       Message.showScaffoldMessage(context, "Lỗi đăng nhập Google", AppColors.red);
       Logger.log(e);
@@ -124,7 +123,7 @@ class AuthServices extends AuthRepo{
   ) async{
     // TODO: implement registerWithAccount
     try {
-      UserCredential credential = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      UserCredential credential = await auth.createUserWithEmailAndPassword(email: email, password: password);
       User? user = credential.user;
       user?.updateProfile(displayName: name, photoURL: avatar);
       return user;
@@ -139,7 +138,7 @@ class AuthServices extends AuthRepo{
   Future<void> deleteAccount(BuildContext context) async{
     // TODO: implement deleteUser
     try {
-      await _auth.currentUser!.delete();
+      await auth.currentUser!.delete();
     } catch (e) {
       Message.showScaffoldMessage(context, "Đã xảy ra lỗi trong quá trình thực hiện", AppColors.red);
       Logger.log(e);
@@ -152,7 +151,7 @@ class AuthServices extends AuthRepo{
     // TODO: implement logOutFromFacebook
     try {
       await Future.wait([
-        _auth.signOut(),
+        auth.signOut(),
         FacebookAuth.instance.logOut()
       ]);
     } catch (e) {
@@ -168,7 +167,7 @@ class AuthServices extends AuthRepo{
     try {
       await Future.wait([
         GoogleSignIn().signOut(),
-        _auth.signOut()
+        auth.signOut()
       ]);
     } catch (e) {
       Message.showScaffoldMessage(context, "Lỗi khi thoát khỏi phiên đăng nhập", AppColors.red);

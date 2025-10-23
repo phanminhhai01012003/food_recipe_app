@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
@@ -19,7 +18,6 @@ class CategoriesPage extends StatefulWidget {
 }
 
 class _CategoriesPageState extends State<CategoriesPage> {
-  final currentUser = FirebaseAuth.instance.currentUser;
   String selectCategory = "Tất cả";
   final _tagServices = TagServices();
   final _foodServices = FoodServices();
@@ -40,7 +38,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(50),
                       child: CachedNetworkImage(
-                        imageUrl: currentUser!.photoURL!,
+                        imageUrl: currentUser.photoURL!,
                         progressIndicatorBuilder: (context, url, progress) => CircularProgressIndicator(value: progress.progress),
                         errorWidget: (context, url, error) => Image.asset(userDefaultImage),
                         fit: BoxFit.cover,
@@ -53,7 +51,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Xin chào! ${currentUser!.displayName}",
+                          "Xin chào! ${currentUser.displayName}",
                           style: TextStyle(
                             color: AppColors.white,
                             fontSize: 14,

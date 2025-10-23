@@ -1,11 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comment_box/comment/comment.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/model/comment_model.dart';
-import 'package:food_recipe_app/services/firestore/comment/comment_services.dart';
 import 'package:food_recipe_app/services/notification/notification_data.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/component/comment_widget.dart';
 
@@ -19,17 +17,15 @@ class ReplyCommentPage extends StatefulWidget {
 }
 
 class _ReplyCommentPageState extends State<ReplyCommentPage> {
-  final commentServices = CommentServices();
-  final _currentUser = FirebaseAuth.instance.currentUser!;
   final _commentController = TextEditingController();
   bool get checkComment => _commentController.text.isEmpty;
   final notificationData = NotificationData();
   void pushReplyNotifications(){
     notificationData.pushInteractNotifications(
       id: DateTime.now().millisecondsSinceEpoch.toString(), 
-      title: "${_currentUser.displayName} đã trả lời bình luận của bạn", 
+      title: "${currentUser.displayName} đã trả lời bình luận của bạn", 
       body: "Nhấn để xem", 
-      from: _currentUser.displayName!, 
+      from: currentUser.displayName!, 
       to: widget.comment.userName, 
       type: "Trả lời bình luận", 
       isRead: false, 
@@ -39,9 +35,9 @@ class _ReplyCommentPageState extends State<ReplyCommentPage> {
   void onAddReply(){
     CommentModel comment = CommentModel(
       commentId: widget.comment.commentId, 
-      userId: _currentUser.uid, 
-      avatar: _currentUser.photoURL!, 
-      userName: _currentUser.displayName!, 
+      userId: currentUser.uid, 
+      avatar: currentUser.photoURL!, 
+      userName: currentUser.displayName!, 
       content: _commentController.text, 
       likesList: [], 
       replies: [], 
@@ -77,7 +73,7 @@ class _ReplyCommentPageState extends State<ReplyCommentPage> {
           children: [
             commentComponent(widget.comment),
             CommentBox(
-              userImage: CommentBox.commentImageParser(imageURLorPath: _currentUser.displayName),
+              userImage: CommentBox.commentImageParser(imageURLorPath: currentUser.displayName),
               labelText: "Viết bình luận",
               errorText: "Không được để trống bình luận",
               withBorder: true,

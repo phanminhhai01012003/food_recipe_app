@@ -1,10 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
+import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/data/enum.dart';
 import 'package:food_recipe_app/model/user_model.dart';
-import 'package:food_recipe_app/services/firestore/user/user_services.dart';
 import 'package:food_recipe_app/views/main/settings/selection.dart';
 import 'package:food_recipe_app/views/main/settings/user_widget.dart';
 
@@ -16,8 +15,6 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  final userServices = UserServices();
-  final _currentUser = FirebaseAuth.instance.currentUser;
   void onChooseMode(ModeSelection mode){
     switch(mode){
       case ModeSelection.about:
@@ -70,7 +67,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             FutureBuilder(
-              future: userServices.getUserById(context, _currentUser!.uid), 
+              future: userServices.getUserById(context, currentUser.uid), 
               builder: (context, snapshot) {
                 if (!snapshot.hasData || snapshot.hasError) {
                   return Icon(Icons.error, size: 100, color: AppColors.red);

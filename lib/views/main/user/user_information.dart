@@ -4,7 +4,6 @@ import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/user_model.dart';
-import 'package:food_recipe_app/services/authentication/auth_services.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:full_screen_image/full_screen_image.dart';
@@ -18,7 +17,6 @@ class UserInformation extends StatefulWidget {
 }
 
 class _UserInformationState extends State<UserInformation> {
-  final authServices = AuthServices();
   void onLogOut() async{
     if (widget.user.loginMethod == "Google") {
       await authServices.logOutFromGoogle(context).then((_){

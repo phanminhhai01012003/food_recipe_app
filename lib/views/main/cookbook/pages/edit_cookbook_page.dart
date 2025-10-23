@@ -9,8 +9,6 @@ import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/cookbook_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/provider/cookbook_state.dart';
-import 'package:food_recipe_app/services/firestore/food_recipe/food_services.dart';
-import 'package:food_recipe_app/services/image/image_service.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_image_picker.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
@@ -30,8 +28,6 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
   String? imageURL;
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
-  final imageServices = ImageService();
-  final foodServices = FoodServices();
   HashSet<FoodModel> choices = HashSet();
   bool canMultiSelected = false;
   void onMultiSelect(FoodModel food){

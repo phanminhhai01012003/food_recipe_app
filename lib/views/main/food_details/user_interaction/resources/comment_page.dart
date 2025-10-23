@@ -1,12 +1,10 @@
 import 'package:comment_box/comment/comment.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/convert.dart';
 import 'package:food_recipe_app/model/comment_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
-import 'package:food_recipe_app/services/firestore/comment/comment_services.dart';
 import 'package:food_recipe_app/services/notification/notification_data.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/component/comment_widget.dart';
 import 'package:food_recipe_app/widget/other/load_data.dart';
@@ -21,17 +19,15 @@ class CommentPage extends StatefulWidget {
 }
 
 class _CommentPageState extends State<CommentPage> {
-  final commentServices = CommentServices();
-  final _currentUser = FirebaseAuth.instance.currentUser!;
   final _commentController = TextEditingController();
   bool get checkComment => _commentController.text.isEmpty;
   final notificationData = NotificationData();
   void onAddComment() async{
     CommentModel comment = CommentModel(
       commentId: generateRandomString(18),
-      userId: _currentUser.uid,
-      avatar: _currentUser.photoURL!, 
-      userName: _currentUser.displayName!, 
+      userId: currentUser.uid,
+      avatar: currentUser.photoURL!, 
+      userName: currentUser.displayName!, 
       content: _commentController.text,
       likesList: [],
       replies: [],
@@ -44,13 +40,13 @@ class _CommentPageState extends State<CommentPage> {
   }
   void pushCommentNotifications(){
     notificationData.pushInteractNotifications(
-      id: DateTime.now().millisecondsSinceEpoch.toString(), 
-      title: "${_currentUser.displayName} đã thích bài viết của bạn", 
-      body: "Nhấn để xem", 
-      from: _currentUser.displayName!, 
-      to: widget.food.userName, 
-      type: "Bình luận bài viết", 
-      isRead: false, 
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      title: "${currentUser.displayName} đã thích bài viết của bạn",
+      body: "Nhấn để xem",
+      from: currentUser.displayName!,
+      to: widget.food.userName,
+      type: "Bình luận bài viết",
+      isRead: false,
       createdAt: DateTime.now()
     );
   }
@@ -77,7 +73,7 @@ class _CommentPageState extends State<CommentPage> {
         centerTitle: true,
       ),
       body: CommentBox(
-        userImage: CommentBox.commentImageParser(imageURLorPath: _currentUser.displayName),
+        userImage: CommentBox.commentImageParser(imageURLorPath: currentUser.photoURL!),
         labelText: "Viết bình luận",
         errorText: "Không được để trống bình luận",
         withBorder: true,

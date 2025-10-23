@@ -1,19 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
+import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/logger.dart';
 import 'package:food_recipe_app/model/comment_model.dart';
 import 'package:food_recipe_app/services/firestore/comment/comment_repo.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 
 class CommentServices extends CommentRepo{
-
-  CollectionReference<Map<String, dynamic>> commentCollection(String foodId){
-    return FirebaseFirestore.instance
-      .collection("food_recipe")
-      .doc(foodId)
-      .collection("comment");
-  }
 
   @override
   Future<void> addComment(BuildContext context, CommentModel comment, String foodId) async{

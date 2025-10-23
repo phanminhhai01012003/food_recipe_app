@@ -4,8 +4,6 @@ import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/model/user_model.dart';
-import 'package:food_recipe_app/services/firestore/food_recipe/food_services.dart';
-import 'package:food_recipe_app/services/firestore/user/user_services.dart';
 import 'package:food_recipe_app/widget/food_display_widget/food_display_grid.dart';
 
 class PersonalScreen extends StatefulWidget {
@@ -17,8 +15,6 @@ class PersonalScreen extends StatefulWidget {
 }
 
 class _PersonalScreenState extends State<PersonalScreen> {
-  final userServices = UserServices();
-  final foodServices = FoodServices();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

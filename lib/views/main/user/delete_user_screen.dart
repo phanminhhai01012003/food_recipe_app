@@ -1,12 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/logger.dart';
 import 'package:food_recipe_app/common/routes.dart';
-import 'package:food_recipe_app/services/authentication/auth_services.dart';
-import 'package:food_recipe_app/services/firestore/user/user_services.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -21,9 +17,6 @@ class DeleteUserScreen extends StatefulWidget {
 class _DeleteUserScreenState extends State<DeleteUserScreen> {
   String? selectedOption;
   final _otherReport = TextEditingController();
-  final userServices = UserServices();
-  final authServices = AuthServices();
-  final currentUser = FirebaseAuth.instance.currentUser!;
   void onDeleteAccount() async{
     context.loaderOverlay.show();
     await authServices.deleteAccount(context);
@@ -140,8 +133,7 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
   }
   void sendRequest() async{
     try {
-      await FirebaseFirestore.instance
-        .collection("users")
+      await userCollection
         .doc(currentUser.uid)
         .collection("delete_acc_request")
         .add({

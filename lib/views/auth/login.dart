@@ -3,8 +3,6 @@ import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/user_model.dart';
-import 'package:food_recipe_app/services/authentication/auth_services.dart';
-import 'package:food_recipe_app/services/firestore/user/user_services.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
@@ -16,8 +14,6 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final _authServices = AuthServices();
-  final _userDB = UserServices();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool isObscured = true;
@@ -25,7 +21,7 @@ class _LoginState extends State<Login> {
     context.loaderOverlay.hide();
     if (formKey.currentState!.validate()){
       formKey.currentState!.save();
-      await _authServices.loginWithAccount(context, emailController.text, passwordController.text).then((value) {
+      await authServices.loginWithAccount(context, emailController.text, passwordController.text).then((value) {
         if (value != null){
           context.loaderOverlay.hide();
           Message.showScaffoldMessage(context, "Đăng nhập thành công", AppColors.green);
@@ -40,7 +36,7 @@ class _LoginState extends State<Login> {
   }
   void handleWithGoogle() async{
     context.loaderOverlay.show();
-    await _authServices.loginWithGoogle(context).then((value) async{
+    await authServices.loginWithGoogle(context).then((value) async{
       if (value != null){
         UserModel user = UserModel(
           userId: value.user!.uid, 
@@ -51,7 +47,7 @@ class _LoginState extends State<Login> {
           phone: "",
           loginMethod: "Google"
         );
-        await _userDB.addUserWithThirdParty(context, user);
+        await userServices.addUserWithThirdParty(context, user);
         context.loaderOverlay.hide();
         Message.showScaffoldMessage(context, "", AppColors.green);
         Navigator.pushAndRemoveUntil(
@@ -64,7 +60,7 @@ class _LoginState extends State<Login> {
   }
   void handleWithFacebook() async{
     context.loaderOverlay.show();
-    await _authServices.loginWithFacebook(context).then((value) async{
+    await authServices.loginWithFacebook(context).then((value) async{
       if (value != null){
         UserModel user = UserModel(
           userId: value.user!.uid, 
@@ -75,7 +71,7 @@ class _LoginState extends State<Login> {
           phone: "",
           loginMethod: "Facebook"
         );
-        await _userDB.addUserWithThirdParty(context, user);
+        await userServices.addUserWithThirdParty(context, user);
         context.loaderOverlay.hide();
         Message.showScaffoldMessage(context, "", AppColors.green);
         Navigator.pushAndRemoveUntil(

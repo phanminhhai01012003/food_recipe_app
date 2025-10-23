@@ -6,8 +6,6 @@ import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/extension.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/food_model.dart';
-import 'package:food_recipe_app/services/firestore/food_recipe/food_services.dart';
-import 'package:food_recipe_app/services/image/image_service.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_time_picker.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_image_picker.dart';
@@ -23,8 +21,6 @@ class EditFoodScreen extends StatefulWidget {
 }
 
 class _EditFoodScreenState extends State<EditFoodScreen> {
-  final _foodServices = FoodServices();
-  final _imageServices = ImageService();
   File? image;
   String? imageURL;
   String? selectCategory;
@@ -56,7 +52,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
       context.loaderOverlay.hide();
       return;
     }
-    imageURL = await _imageServices.uploadImage(context, image!, foodFolder);
+    imageURL = await imageServices.uploadImage(context, image!, foodFolder);
     FoodModel food = FoodModel(
       foodId: widget.food.foodId, 
       image: imageURL!, 
@@ -73,7 +69,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
       createdAt: widget.food.createdAt, 
       likes: widget.food.likes
     );
-    await _foodServices.updateFood(context, food);
+    await foodServices.updateFood(context, food);
     if(!mounted) return;
     context.loaderOverlay.hide();
     Message.showScaffoldMessage(context, "Cập nhật thành công", AppColors.green);

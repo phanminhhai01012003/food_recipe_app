@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/model/notification_model.dart';
-import 'package:food_recipe_app/services/notification/notification_data.dart';
 import 'package:food_recipe_app/views/main/notification/notification_image_widget.dart';
 import 'package:food_recipe_app/views/main/notification/notification_list.dart';
 import 'package:food_recipe_app/widget/other/load_data.dart';
@@ -18,7 +17,6 @@ class NotificationScreen extends StatefulWidget {
 class _NotificationScreenState extends State<NotificationScreen> {
   int _btnIndex = 0;
   bool get isRead => _btnIndex == 1;
-  final nData = NotificationData();
   Widget renderImageWidget(String type, String fromUserAvatar){
     switch(type) {
       case "Thích bài viết":
@@ -154,8 +152,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
           SizedBox(height: 20),
           FutureBuilder(
             future: _btnIndex == 0 
-              ? nData.getSystemNotifications() 
-              : nData.getReadNotifications(isRead), 
+              ? notificationData.getSystemNotifications() 
+              : notificationData.getReadNotifications(isRead), 
             builder: (context, snapshot){
               if (!snapshot.hasData || snapshot.hasError){
                 return SizedBox.shrink();

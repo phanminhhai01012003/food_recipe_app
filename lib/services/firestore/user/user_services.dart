@@ -1,14 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
+import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/logger.dart';
 import 'package:food_recipe_app/model/user_model.dart';
 import 'package:food_recipe_app/services/firestore/user/user_repo.dart';
 import '../../../widget/other/message.dart';
 
 class UserServices extends UserRepo{
-
-  final userCollection = FirebaseFirestore.instance.collection("users");
 
   @override
   Future<void> addUserWithAccount(BuildContext context, UserModel user) async{
