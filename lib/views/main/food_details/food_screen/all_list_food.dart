@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
+import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/model/food_model.dart';
-import 'package:food_recipe_app/services/firestore/food_recipe/food_services.dart';
 import 'package:food_recipe_app/widget/food_display_widget/food_display_grid.dart';
 import 'package:food_recipe_app/widget/other/load_data.dart';
 
@@ -13,7 +13,6 @@ class AllListFood extends StatefulWidget {
 }
 
 class _AllListFoodState extends State<AllListFood> {
-  final _foodServices = FoodServices();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +38,7 @@ class _AllListFoodState extends State<AllListFood> {
       ),
       body: SingleChildScrollView(
         child: StreamBuilder(
-          stream: _foodServices.getFood(context), 
+          stream: foodServices.getFood(context), 
           builder: (context, snapshot) {
             if (!snapshot.hasData || snapshot.hasError){
               return const SizedBox();

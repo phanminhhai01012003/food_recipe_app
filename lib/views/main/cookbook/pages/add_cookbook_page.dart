@@ -2,7 +2,6 @@ import 'dart:collection';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
@@ -27,7 +26,6 @@ class AddCookbookPage extends StatefulWidget {
 }
 
 class _AddCookbookPageState extends State<AddCookbookPage> {
-  final currentUser = FirebaseAuth.instance.currentUser!;
   File? image;
   String? imageURL;
   final imageServices = ImageService();

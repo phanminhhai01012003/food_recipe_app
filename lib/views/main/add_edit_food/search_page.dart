@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
-import 'package:food_recipe_app/services/firestore/food_recipe/food_services.dart';
+import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/widget/food_display_widget/food_display_list.dart';
 import 'package:food_recipe_app/widget/other/load_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,7 +14,6 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   List<String> recentSearches = [];
-  final _foodServices = FoodServices();
   final _searchController = TextEditingController();
   String? searchQuery;
   Future<void> saveSearchTerm(String term) async{
@@ -135,7 +134,7 @@ class _SearchPageState extends State<SearchPage> {
                 }
               }
             ) : StreamBuilder(
-              stream: _foodServices.getFood(context),
+              stream: foodServices.getFood(context),
               builder: (context, snapshot){
                 if (!snapshot.hasData || snapshot.hasError) {
                   return const SizedBox();

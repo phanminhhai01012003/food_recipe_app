@@ -1,14 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
+import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/logger.dart';
 import 'package:food_recipe_app/model/report_model.dart';
 import 'package:food_recipe_app/services/firestore/report/report_repo.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 
 class ReportServices extends ReportRepo{
-
-  final reportCollection = FirebaseFirestore.instance.collection("report");
 
   @override
   Future<void> addReport(BuildContext context, ReportModel report) async{

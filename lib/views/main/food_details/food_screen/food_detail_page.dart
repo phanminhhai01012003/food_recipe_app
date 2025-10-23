@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
@@ -9,7 +8,6 @@ import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/model/save_food_model.dart';
 import 'package:food_recipe_app/provider/save_state.dart';
-import 'package:food_recipe_app/services/notification/notification_data.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/resources/like_list_modal.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_report_modal.dart';
 import 'package:full_screen_image/full_screen_image.dart';
@@ -33,15 +31,12 @@ class FoodDetailPage extends StatefulWidget {
 }
 
 class _FoodDetailPageState extends State<FoodDetailPage> {
-  final _currentUser = FirebaseAuth.instance.currentUser!;
-  final noficationData = NotificationData();
-  final foodCollection = FirebaseFirestore.instance.collection("food_recipe");
   bool isLikedPost = false;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    isLikedPost = widget.likedList.any((likes) => likes['id'] == _currentUser.uid);
+    isLikedPost = widget.likedList.any((likes) => likes['id'] == currentUser.uid);
   }
   void toggleLikePost(){
     setState(() {
@@ -50,18 +45,18 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
     if (isLikedPost) {
       foodCollection.doc(widget.id).update({
         "likes": FieldValue.arrayUnion([{
-          "id": _currentUser.uid,
-          "avatar": _currentUser.photoURL,
-          "username": _currentUser.displayName
+          "id": currentUser.uid,
+          "avatar": currentUser.photoURL,
+          "username": currentUser.displayName
         }])
       });
       // pushLikesNotifications();
     } else {
       foodCollection.doc(widget.id).update({
         "likes": FieldValue.arrayRemove([{
-          "id": _currentUser.uid,
-          "avatar": _currentUser.photoURL,
-          "username": _currentUser.displayName
+          "id": currentUser.uid,
+          "avatar": currentUser.photoURL,
+          "username": currentUser.displayName
         }])
       });
     }
@@ -72,11 +67,11 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
     return likes;
   }
   void pushLikesNotifications(){
-    noficationData.pushInteractNotifications(
+    notificationData.pushInteractNotifications(
       id: DateTime.now().millisecondsSinceEpoch.toString(), 
-      title: "${_currentUser.displayName} đã thích bài viết của bạn", 
+      title: "${currentUser.displayName} đã thích bài viết của bạn", 
       body: "Nhấn để xem", 
-      from: _currentUser.displayName!, 
+      from: currentUser.displayName!, 
       to: widget.food.userName, 
       type: "Thích bài viết", 
       isRead: false, 
@@ -87,7 +82,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
   Widget build(BuildContext context) {
     SaveFoodModel save = SaveFoodModel(
       saveId: generateRandomString(19), 
-      userId: _currentUser.uid, 
+      userId: currentUser.uid, 
       isSaved: true, 
       foods: widget.food
     );

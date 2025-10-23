@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/model/cookbook_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
@@ -10,9 +10,6 @@ import '../common/logger.dart';
 class CookbookState extends ChangeNotifier{
   List<CookbookModel> _bookProducts = [];
   List<CookbookModel> get bookProducts => _bookProducts;
-
-  final bookCollection = FirebaseFirestore.instance.collection("cookbook");
-  final currentUser = FirebaseAuth.instance.currentUser;
 
   CookbookState(){
     initData();
@@ -85,7 +82,7 @@ class CookbookState extends ChangeNotifier{
 
   Future<void> initData() async{
     try {
-      final snapshot = await bookCollection.where("userId", isEqualTo: currentUser!.uid).get();
+      final snapshot = await bookCollection.where("userId", isEqualTo: currentUser.uid).get();
       _bookProducts = snapshot.docs.map((doc) => CookbookModel.fromMap(doc.data())).toList();
       notifyListeners();
     } catch (e) {

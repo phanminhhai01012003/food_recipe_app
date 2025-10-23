@@ -1,7 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
+import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/services/firestore/food_recipe/food_services.dart';
@@ -19,7 +19,6 @@ class MyFood extends StatefulWidget {
 
 class _MyFoodState extends State<MyFood> {
   final foodServices = FoodServices();
-  final currentUser = FirebaseAuth.instance.currentUser;
   void onDelete(String id) async{
     await foodServices.deleteFood(context, id).then((_){
       Message.showScaffoldMessage(context, "Đã xóa", AppColors.green);
@@ -43,7 +42,7 @@ class _MyFoodState extends State<MyFood> {
         foregroundColor: AppColors.white,
       ),
       body: StreamBuilder(
-        stream: foodServices.getFoodByUser(context, currentUser!.uid), 
+        stream: foodServices.getFoodByUser(context, currentUser.uid), 
         builder: (context, snapshot){
           if (!snapshot.hasData || snapshot.hasError) {
             return Center(

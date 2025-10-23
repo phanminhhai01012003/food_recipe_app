@@ -1,12 +1,9 @@
 import 'dart:io';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/model/user_model.dart';
-import 'package:food_recipe_app/services/firestore/user/user_services.dart';
-import 'package:food_recipe_app/services/image/image_service.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_image_picker.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -20,9 +17,6 @@ class EditUser extends StatefulWidget {
 }
 
 class _EditUserState extends State<EditUser> {
-  final currentUser = FirebaseAuth.instance.currentUser!;
-  final userServices = UserServices();
-  final imageServices = ImageService();
   File? image;
   String? imageUrl;
   final nameController = TextEditingController();

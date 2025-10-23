@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
@@ -8,8 +7,6 @@ import 'package:food_recipe_app/common/convert.dart';
 import 'package:food_recipe_app/common/extension.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/food_model.dart';
-import 'package:food_recipe_app/services/firestore/food_recipe/food_services.dart';
-import 'package:food_recipe_app/services/image/image_service.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_time_picker.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_image_picker.dart';
@@ -24,9 +21,6 @@ class AddFoodScreen extends StatefulWidget {
 }
 
 class _AddFoodScreenState extends State<AddFoodScreen> {
-  final _currentUser = FirebaseAuth.instance.currentUser!;
-  final _foodServices = FoodServices();
-  final _imageServices = ImageService();
   File? image;
   String? imageURL;
   String? selectCategory;
@@ -43,15 +37,15 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
       context.loaderOverlay.hide();
       return;
     }
-    imageURL = await _imageServices.uploadImage(context, image!, foodFolder);
+    imageURL = await imageServices.uploadImage(context, image!, foodFolder);
     FoodModel food = FoodModel(
       foodId: generateRandomString(20), 
       image: imageURL!, 
       title: titleController.text, 
       description: descriptionController.text, 
-      userId: _currentUser.uid, 
-      userName: _currentUser.displayName!, 
-      avatar: _currentUser.photoURL!, 
+      userId: currentUser.uid, 
+      userName: currentUser.displayName!, 
+      avatar: currentUser.photoURL!, 
       tag: selectCategory!, 
       diet: int.parse(dietController.text), 
       duration: _duration.ddhhmmss, 
@@ -60,7 +54,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
       createdAt: DateTime.now(), 
       likes: [],
     );
-    await _foodServices.addFood(context, food);
+    await foodServices.addFood(context, food);
     if (!mounted) return;
     context.loaderOverlay.hide();
     Message.showScaffoldMessage(context, "Đã tải thành công", AppColors.green);

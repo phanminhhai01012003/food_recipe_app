@@ -1,13 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/comment_model.dart';
-import 'package:food_recipe_app/services/notification/notification_data.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/component/comment_selection.dart';
 import 'package:intl/intl.dart';
 
@@ -21,15 +19,13 @@ class CommentWidget extends StatefulWidget {
 }
 
 class _CommentWidgetState extends State<CommentWidget> {
-  final _currentUser = FirebaseAuth.instance.currentUser!;
   bool isLikedComment = false;
-  final notificationData = NotificationData();
   void pushLikeCommentNotification() async{
     notificationData.pushInteractNotifications(
       id: DateTime.now().millisecondsSinceEpoch.toString(), 
-      title: "${_currentUser.displayName} đã thích bình luận của bạn", 
+      title: "${currentUser.displayName} đã thích bình luận của bạn", 
       body: "Nhấn để xem", 
-      from: _currentUser.displayName!, 
+      from: currentUser.displayName!, 
       to: widget.comment.userName, 
       type: "Thích bình luận", 
       isRead: false, 
@@ -44,17 +40,17 @@ class _CommentWidgetState extends State<CommentWidget> {
     if (isLikedComment) {
       collection.doc(id).update({
         "likes": FieldValue.arrayUnion([{
-          "id": _currentUser.uid,
-          "avatar": _currentUser.photoURL,
-          "username": _currentUser.displayName
+          "id": currentUser.uid,
+          "avatar": currentUser.photoURL,
+          "username": currentUser.displayName
         }]),
       });
     } else {
       collection.doc(id).update({
         "likes": FieldValue.arrayRemove([{
-          "id": _currentUser.uid,
-          "avatar": _currentUser.photoURL,
-          "username": _currentUser.displayName
+          "id": currentUser.uid,
+          "avatar": currentUser.photoURL,
+          "username": currentUser.displayName
         }]),
       });
     }
@@ -63,18 +59,14 @@ class _CommentWidgetState extends State<CommentWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    isLikedComment = widget.comment.likesList.any((likes) => likes['id'] == _currentUser.uid);
+    isLikedComment = widget.comment.likesList.any((likes) => likes['id'] == currentUser.uid);
   }
   @override
   Widget build(BuildContext context) {
-    final commentCollection = FirebaseFirestore.instance
-      .collection("food_recipe")
-      .doc(widget.id)
-      .collection("comment");
     return Card(
       surfaceTintColor: AppColors.white,
       child: GestureDetector(
-        onLongPress: () => widget.comment.userId == _currentUser.uid 
+        onLongPress: () => widget.comment.userId == currentUser.uid 
           ? CommentSelection.showSelectionWithCurrentUser(context, widget.comment, widget.id)
           : CommentSelection.showGeneralSelection(context, widget.comment),
         child: Container(
@@ -155,7 +147,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                           });
                           toggleComment(
                             isLikedComment: isLikedComment, 
-                            collection: commentCollection, 
+                            collection: commentCollection(widget.id), 
                             id: widget.comment.commentId
                           );
                         },

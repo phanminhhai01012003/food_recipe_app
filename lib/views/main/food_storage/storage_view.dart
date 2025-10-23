@@ -1,6 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
+import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/cookbook_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
@@ -10,8 +10,6 @@ import 'package:food_recipe_app/model/user_model.dart';
 import 'package:food_recipe_app/provider/cookbook_state.dart';
 import 'package:food_recipe_app/provider/history_state.dart';
 import 'package:food_recipe_app/provider/save_state.dart';
-import 'package:food_recipe_app/services/firestore/food_recipe/food_services.dart';
-import 'package:food_recipe_app/services/firestore/user/user_services.dart';
 import 'package:food_recipe_app/views/main/cookbook/widget/cookbook_widget.dart';
 import 'package:food_recipe_app/views/main/settings/user_widget.dart';
 import 'package:food_recipe_app/widget/food_display_widget/food_display_grid.dart';
@@ -25,9 +23,6 @@ class StorageView extends StatefulWidget {
 }
 
 class _StorageViewState extends State<StorageView> {
-  final userServices = UserServices();
-  final foodServices = FoodServices();
-  final _currentUser = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +33,7 @@ class _StorageViewState extends State<StorageView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             FutureBuilder(
-              future: userServices.getUserById(context, _currentUser!.uid), 
+              future: userServices.getUserById(context, currentUser.uid), 
               builder: (context, snapshot) {
                 if (!snapshot.hasData || snapshot.hasError) {
                   return SizedBox();
@@ -84,7 +79,7 @@ class _StorageViewState extends State<StorageView> {
             ),
             SizedBox(height: 10),
             StreamBuilder(
-              stream: foodServices.getFoodByUser(context, _currentUser.uid), 
+              stream: foodServices.getFoodByUser(context, currentUser.uid), 
               builder: (context, snapshot) {
                 if (!snapshot.hasData || snapshot.hasError) {
                   return SizedBox();

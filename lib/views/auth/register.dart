@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/user_model.dart';
-import 'package:food_recipe_app/services/authentication/auth_services.dart';
-import 'package:food_recipe_app/services/firestore/user/user_services.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import '../../common/app_colors.dart';
@@ -16,8 +14,6 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  final _authServices = AuthServices();
-  final _userDB = UserServices();
   bool isObscured1 = true, isObscured2 = true;
   final nameController = TextEditingController();
   final emailController = TextEditingController();
@@ -33,7 +29,7 @@ class _RegisterState extends State<Register> {
         return;
       }
       formKey.currentState!.save();
-      await _authServices.registerWithAccount(context, 
+      await authServices.registerWithAccount(context, 
         userDefaultImage, 
         nameController.text, 
         emailController.text, 
@@ -48,7 +44,7 @@ class _RegisterState extends State<Register> {
             phone: phoneController.text.isEmpty ? "Không xác định" : phoneController.text,
             loginMethod: "Email and Password"
           );
-          await _userDB.addUserWithAccount(context, user);
+          await userServices.addUserWithAccount(context, user);
           context.loaderOverlay.hide();
           Message.showScaffoldMessage(context, "Tạo tài khoản thành công", AppColors.green);
           Navigator.pushAndRemoveUntil(

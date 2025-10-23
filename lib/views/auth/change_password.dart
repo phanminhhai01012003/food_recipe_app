@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/services/authentication/auth_services.dart';
@@ -20,7 +19,6 @@ class _ChangePasswordState extends State<ChangePassword> {
   final newpasswordController = TextEditingController();
   final confirmController = TextEditingController();
   final _auth = AuthServices();
-  final _currentUser = FirebaseAuth.instance.currentUser!;
   void handle() async{
     context.loaderOverlay.show();
     if (formKey.currentState!.validate()){
@@ -31,7 +29,7 @@ class _ChangePasswordState extends State<ChangePassword> {
       }
       formKey.currentState!.save();
       await _auth.changePassword(context,
-        email: _currentUser.email!,
+        email: currentUser.email!,
         oldPassword: oldPasswordController.text,
         newPassword: newpasswordController.text
       ).then((_){

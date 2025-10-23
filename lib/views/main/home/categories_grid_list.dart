@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
+import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/category_model.dart';
-import 'package:food_recipe_app/views/main/categories/tag_services.dart';
 
 class CategoriesGridList extends StatefulWidget {
   const CategoriesGridList({super.key});
@@ -12,11 +12,10 @@ class CategoriesGridList extends StatefulWidget {
 }
 
 class _CategoriesGridListState extends State<CategoriesGridList> {
-  final _tagServices = TagServices();
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: _tagServices.getTags(context), 
+      stream: tagServices.getTags(context), 
       builder: (context, snapshot) {
         if (!snapshot.hasData || snapshot.hasError) {
           return Center(child: Icon(Icons.error, size: 100, color: AppColors.red));

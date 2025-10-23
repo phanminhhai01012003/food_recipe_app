@@ -1,6 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/model/recent_view_model.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 
@@ -9,9 +8,6 @@ import '../common/logger.dart';
 class HistoryState extends ChangeNotifier{
   List<RecentViewModel> _viewProducts = [];
   List<RecentViewModel> get viewProducts => _viewProducts;
-
-  final historyCollection = FirebaseFirestore.instance.collection("history");
-  final _currentUser = FirebaseAuth.instance.currentUser;
 
   HistoryState(){
     initData();
@@ -50,7 +46,7 @@ class HistoryState extends ChangeNotifier{
 
   Future<void> initData() async{
     try {
-      final snapshot = await historyCollection.where("userId", isEqualTo: _currentUser!.uid).get();
+      final snapshot = await historyCollection.where("userId", isEqualTo: currentUser.uid).get();
       _viewProducts = snapshot.docs.map((e) => RecentViewModel.fromMap(e.data())).toList();
       notifyListeners();
     } catch (e) {

@@ -1,6 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/model/save_food_model.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 
@@ -9,9 +8,6 @@ import '../common/logger.dart';
 class SaveState extends ChangeNotifier{
   List<SaveFoodModel> _foodProducts = [];
   List<SaveFoodModel> get foodProducts => _foodProducts;
-
-  final saveCollection = FirebaseFirestore.instance.collection("saved");
-  final _currentUser = FirebaseAuth.instance.currentUser;
 
   SaveState(){
     initData();
@@ -52,7 +48,7 @@ class SaveState extends ChangeNotifier{
 
   Future<void> initData() async{
     try {
-      final snapshot = await saveCollection.where("userId", isEqualTo: _currentUser!.uid).get();
+      final snapshot = await saveCollection.where("userId", isEqualTo: currentUser.uid).get();
       _foodProducts = snapshot.docs.map((e) => SaveFoodModel.fromMap(e.data())).toList();
       notifyListeners();
     } catch (e) {

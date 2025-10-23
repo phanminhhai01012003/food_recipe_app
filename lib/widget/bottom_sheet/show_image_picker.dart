@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
-import 'package:food_recipe_app/services/image/image_service.dart';
+import 'package:food_recipe_app/common/constants.dart';
 
 Future<void> showImagePickerModal(BuildContext context, File image) async{
   return await showModalBottomSheet(
@@ -19,7 +19,6 @@ class ShowImagePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final imageService = ImageService();
     return Container(
       padding: EdgeInsets.only(bottom: 15, left: 20, right: 20),
       decoration: BoxDecoration(
@@ -46,7 +45,7 @@ class ShowImagePicker extends StatelessWidget {
               foregroundColor: AppColors.white
             ),
             onPressed: () async{
-              await imageService.pickImage(context, true, image);
+              await imageServices.pickImage(context, true, image);
             },
             child: Text("Chụp ảnh",
               style: TextStyle(
@@ -63,7 +62,7 @@ class ShowImagePicker extends StatelessWidget {
               foregroundColor: AppColors.white
             ),
             onPressed: () async{
-              await imageService.pickImage(context, false, image);
+              await imageServices.pickImage(context, false, image);
             },
             child: Text("Chọn ảnh",
               style: TextStyle(

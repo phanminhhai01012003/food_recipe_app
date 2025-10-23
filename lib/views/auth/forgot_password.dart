@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
-import 'package:food_recipe_app/services/authentication/auth_services.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -13,9 +12,8 @@ class ForgotPassword extends StatefulWidget {
 
 class _ForgotPasswordState extends State<ForgotPassword> {
   final emailController = TextEditingController();
-  final _auth = AuthServices();
   void handle() async{
-    await _auth.forgotPassword(context, emailController.text);
+    await authServices.forgotPassword(context, emailController.text);
     emailController.clear();
     Message.showScaffoldMessage(context, "Đã gửi yêu cầu, vui lòng kiểm tra email", AppColors.green);
     Navigator.pop(context);

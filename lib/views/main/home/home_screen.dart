@@ -1,10 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/routes.dart';
-import 'package:food_recipe_app/services/firestore/food_recipe/food_services.dart';
 import 'package:food_recipe_app/views/main/home/animation_slider.dart';
 import 'package:food_recipe_app/views/main/home/categories_grid_list.dart';
 import 'package:food_recipe_app/views/main/home/food_recipe_display.dart';
@@ -18,8 +16,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final currentUser = FirebaseAuth.instance.currentUser;
-  final _foodServices = FoodServices();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(50),
                       child: CachedNetworkImage(
-                        imageUrl: currentUser!.photoURL!,
+                        imageUrl: currentUser.photoURL!,
                         progressIndicatorBuilder: (context, url, progress) => CircularProgressIndicator(value: progress.progress),
                         errorWidget: (context, url, error) => Image.asset(userDefaultImage),
                         fit: BoxFit.cover,
@@ -50,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Xin chào! ${currentUser!.displayName}",
+                          "Xin chào! ${currentUser.displayName}",
                           style: TextStyle(
                             color: AppColors.white,
                             fontSize: 14,
@@ -177,7 +173,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   SizedBox(height: 10),
-                  FoodRecipeDisplay(stream: _foodServices.getFoodByDate(context, true)),
+                  FoodRecipeDisplay(stream: foodServices.getFoodByDate(context, true)),
                   SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -204,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   SizedBox(height: 10),
-                  FoodRecipeDisplay(stream: _foodServices.getFoodByDate(context, false)),
+                  FoodRecipeDisplay(stream: foodServices.getFoodByDate(context, false)),
                   SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -231,7 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   SizedBox(height: 10),
-                  FoodRecipeDisplay(stream: _foodServices.getFood(context)),
+                  FoodRecipeDisplay(stream: foodServices.getFood(context)),
                   SizedBox(height: 20),
                   Text(
                     "Các thể loại phổ biến",

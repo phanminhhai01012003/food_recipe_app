@@ -1,12 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/logger.dart';
 import 'package:food_recipe_app/model/notification_model.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 
 class NotificationData {
-  final notificationCollection = FirebaseFirestore.instance.collection("notification");
-  final currentUser = FirebaseAuth.instance.currentUser!;
+  
   Future<void> pushNotification(NotificationModel model) async{
     try {
       await notificationCollection.doc(model.id).set(model.toAllUserMap());
