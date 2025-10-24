@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
-import 'package:food_recipe_app/services/authentication/auth_services.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
@@ -18,7 +17,6 @@ class _ChangePasswordState extends State<ChangePassword> {
   final oldPasswordController = TextEditingController();
   final newpasswordController = TextEditingController();
   final confirmController = TextEditingController();
-  final _auth = AuthServices();
   void handle() async{
     context.loaderOverlay.show();
     if (formKey.currentState!.validate()){
@@ -28,7 +26,7 @@ class _ChangePasswordState extends State<ChangePassword> {
         return;
       }
       formKey.currentState!.save();
-      await _auth.changePassword(context,
+      await authServices.changePassword(context,
         email: currentUser.email!,
         oldPassword: oldPasswordController.text,
         newPassword: newpasswordController.text

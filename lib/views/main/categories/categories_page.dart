@@ -5,8 +5,6 @@ import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/category_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
-import 'package:food_recipe_app/services/firestore/food_recipe/food_services.dart';
-import 'package:food_recipe_app/views/main/categories/tag_services.dart';
 import 'package:food_recipe_app/widget/food_display_widget/food_display_grid.dart';
 import 'package:intl/intl.dart';
 
@@ -19,8 +17,6 @@ class CategoriesPage extends StatefulWidget {
 
 class _CategoriesPageState extends State<CategoriesPage> {
   String selectCategory = "Tất cả";
-  final _tagServices = TagServices();
-  final _foodServices = FoodServices();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,7 +125,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
             child: Column(
               children: [
                 StreamBuilder(
-                  stream: _tagServices.getTags(context), 
+                  stream: tagServices.getTags(context), 
                   builder: (context, snapshot) {
                     if (!snapshot.hasData || snapshot.hasError) {
                       return SizedBox.shrink();
@@ -182,8 +178,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
                 Expanded(
                   child: StreamBuilder(
                     stream: selectCategory == "Tất cả" 
-                      ? _foodServices.getFood(context) 
-                      : _foodServices.getFoodByTag(context, selectCategory), 
+                      ? foodServices.getFood(context) 
+                      : foodServices.getFoodByTag(context, selectCategory), 
                     builder: (context, snapshot) {
                       if (!snapshot.hasData || snapshot.hasError) {
                         return SizedBox.shrink();
