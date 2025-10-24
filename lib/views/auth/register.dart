@@ -63,6 +63,7 @@ class _RegisterState extends State<Register> {
       backgroundColor: AppColors.green,
       body: SafeArea(
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text("Tạo tài khoản mới",
               style: TextStyle(
@@ -93,7 +94,6 @@ class _RegisterState extends State<Register> {
                   key: formKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Text("Tên đầy đủ",
                         style: TextStyle(
