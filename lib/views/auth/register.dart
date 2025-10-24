@@ -76,6 +76,7 @@ class _RegisterState extends State<Register> {
             Container(
               width: double.infinity,
               padding: EdgeInsets.all(16),
+              constraints: BoxConstraints(maxHeight: 700),
               decoration: BoxDecoration(
                 color: AppColors.white,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
