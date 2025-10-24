@@ -1,6 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
+import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/model/report_model.dart';
 import 'package:food_recipe_app/services/firestore/report/report_services.dart';
 import 'package:food_recipe_app/widget/other/load_data.dart';
@@ -15,7 +15,6 @@ class MyReportPage extends StatefulWidget {
 class _MyReportPageState extends State<MyReportPage> {
   int statusIndex = 0;
   final report = ReportServices();
-  final currentUser = FirebaseAuth.instance.currentUser!;
   String renderStatus(int status){
     switch (status) {
       case 0:

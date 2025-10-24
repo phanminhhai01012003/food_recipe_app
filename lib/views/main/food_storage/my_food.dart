@@ -4,7 +4,6 @@ import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/food_model.dart';
-import 'package:food_recipe_app/services/firestore/food_recipe/food_services.dart';
 import 'package:food_recipe_app/widget/other/load_data.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
@@ -18,7 +17,6 @@ class MyFood extends StatefulWidget {
 }
 
 class _MyFoodState extends State<MyFood> {
-  final foodServices = FoodServices();
   void onDelete(String id) async{
     await foodServices.deleteFood(context, id).then((_){
       Message.showScaffoldMessage(context, "Đã xóa", AppColors.green);

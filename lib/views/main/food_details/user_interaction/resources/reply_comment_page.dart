@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/model/comment_model.dart';
-import 'package:food_recipe_app/services/notification/notification_data.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/component/comment_widget.dart';
 
 class ReplyCommentPage extends StatefulWidget {
@@ -19,7 +18,6 @@ class ReplyCommentPage extends StatefulWidget {
 class _ReplyCommentPageState extends State<ReplyCommentPage> {
   final _commentController = TextEditingController();
   bool get checkComment => _commentController.text.isEmpty;
-  final notificationData = NotificationData();
   void pushReplyNotifications(){
     notificationData.pushInteractNotifications(
       id: DateTime.now().millisecondsSinceEpoch.toString(), 
