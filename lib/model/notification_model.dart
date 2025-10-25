@@ -19,16 +19,18 @@ class NotificationModel {
     required this.createdAt,
     this.readAt
   });
-  NotificationModel.fromMap(Map<String, dynamic> data) {
-    id = data['id'] ?? "";
-    title = data['title'] ?? "";
-    body = data['body'] ?? "";
-    type = data['type'] ?? "";
-    from = data['from'] ?? "";
-    to = data['to'] ?? "";
-    isRead = data['isRead'] ?? false;
-    createdAt = DateTime.tryParse(data['created_at'] ?? "") ?? DateTime.now();
-    readAt = DateTime.tryParse(data['readAt'] ?? "") ?? DateTime.now();
+  factory NotificationModel.fromMap(Map<String, dynamic> data) {
+    return NotificationModel(
+      id: data['id'] ?? "",
+      title: data['title'] ?? "",
+      body: data['body'] ?? "",
+      type: data['type'] ?? "",
+      from: data['from'] ?? "",
+      to: data['to'] ?? "",
+      isRead: data['isRead'] ?? false,
+      createdAt: DateTime.tryParse(data['created_at'] ?? "") ?? DateTime.now(),
+      readAt: DateTime.tryParse(data['read_at'] ?? "") ?? DateTime.now(),
+    );
   }
   Map<String, dynamic> toAllUserMap() => {
     'id': id,

@@ -13,12 +13,14 @@ class RecentViewModel {
     required this.viewedAt,
     required this.foods
   });
-  RecentViewModel.fromMap(Map<String, dynamic> data) {
-    viewId = data['viewId'] ?? "";
-    userId = data['userId'] ?? "";
-    isViewed = data['isSaved'] ?? false;
-    viewedAt = DateTime.tryParse(data['viewedAt'] ?? "") ?? DateTime.now();
-    foods = FoodModel.fromMap(data['foods'] ?? {});
+  factory RecentViewModel.fromMap(Map<String, dynamic> data) {
+    return RecentViewModel(
+      viewId: data['viewId'] ?? "",
+      userId: data['userId'] ?? "",
+      isViewed: data['isSaved'] ?? false,
+      viewedAt: DateTime.tryParse(data['viewedAt'] ?? "") ?? DateTime.now(),
+      foods: FoodModel.fromMap(data['foods'] ?? {}),
+    );
   }
   Map<String, dynamic> toMap() {
     return {

@@ -11,11 +11,13 @@ class SaveFoodModel {
     required this.isSaved,
     required this.foods
   });
-  SaveFoodModel.fromMap(Map<String, dynamic> data) {
-    saveId = data['saveId'] ?? "";
-    userId = data['userId'] ?? "";
-    isSaved = data['isSaved'] ?? false;
-    foods = FoodModel.fromMap(data['foods'] ?? {});
+  factory SaveFoodModel.fromMap(Map<String, dynamic> data) {
+    return SaveFoodModel(
+      saveId: data['saveId'] ?? "",
+      userId: data['userId'] ?? "",
+      isSaved: data['isSaved'] ?? false,
+      foods: FoodModel.fromMap(data['foods'] ?? {}),
+    );
   }
   Map<String, dynamic> toMap() {
     return {

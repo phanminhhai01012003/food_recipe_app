@@ -15,14 +15,16 @@ class UserModel {
     required this.phone,
     required this.loginMethod
   });
-  UserModel.fromMap(Map<String, dynamic> data){
-    userId = data['userId'] ?? "";
-    userName = data['username'] ?? "";
-    avatar = data['avatar'] ?? "";
-    description = data['description'] ?? "";
-    email = data['email'] ?? "";
-    phone = data['phone'] ?? "";
-    loginMethod = data['loginMethod'] ?? "";
+  factory UserModel.fromMap(Map<String, dynamic> data){
+    return UserModel(
+      userId: data['userId'] ?? "",
+      userName: data['username'] ?? "",
+      avatar: data['avatar'] ?? "",
+      description: data['description'] ?? "",
+      email: data['email'] ?? "",
+      phone: data['phone'] ?? "",
+      loginMethod: data['loginMethod'] ?? "",
+    );
   }
   Map<String, dynamic> toMap() => {
     "userId": userId,

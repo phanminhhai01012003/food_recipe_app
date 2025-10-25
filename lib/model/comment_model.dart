@@ -17,17 +17,19 @@ class CommentModel {
     required this.replies,
     required this.createdAt
   });
-  CommentModel.fromMap(Map<String, dynamic> data) {
-    commentId = data['commentId'] ?? "";
-    userId = data['userId'] ?? "";
-    avatar = data['avatar'] ?? "";
-    userName = data['userName'] ?? "";
-    content = data['content'] ?? "";
-    likesList = List<Map<String, dynamic>>.from(data['likes'] ?? []);
-    replies = (data['replies'] as List<dynamic>?)
+  factory CommentModel.fromMap(Map<String, dynamic> data) {
+    return CommentModel(
+      commentId: data['commentId'] ?? "",
+      userId: data['userId'] ?? "",
+      avatar: data['avatar'] ?? "",
+      userName: data['userName'] ?? "",
+      content: data['content'] ?? "",
+      likesList: List<Map<String, dynamic>>.from(data['likes'] ?? []),
+      replies: (data['replies'] as List<dynamic>?)
         ?.map((e) => CommentModel.fromMap(e as Map<String, dynamic>))
-        .toList() ?? [];
-    createdAt = DateTime.tryParse(data['createdAt'] ?? "") ?? DateTime.now();
+        .toList() ?? [],
+      createdAt: DateTime.tryParse(data['createdAt'] ?? "") ?? DateTime.now(),
+    );
   }
   Map<String, dynamic> toMap() {
     return {

@@ -17,16 +17,18 @@ class CookbookModel {
     required this.createdAt,
     required this.foodsList
   });
-  CookbookModel.fromMap(Map<String, dynamic> data){
-    cookbookId = data['cookbookId'] ?? "";
-    cookbookImage = data['cookbookImage'] ?? "";
-    cookbookName = data['cookbookName'] ?? "";
-    description = data['description'] ?? "";
-    userId = data['userId'] ?? "";
-    createdAt = DateTime.tryParse(data['createdAt'] ?? "") ?? DateTime.now();
-    foodsList = (data['foodsList'] as List<dynamic>?)
-      ?.map((e) => FoodModel.fromMap(e as Map<String, dynamic>))
-      .toList() ?? [];
+  factory CookbookModel.fromMap(Map<String, dynamic> data){
+    return CookbookModel(
+      cookbookId: data['cookbookId'] ?? "",
+      cookbookImage: data['cookbookImage'] ?? "",
+      cookbookName: data['cookbookName'] ?? "",
+      description: data['description'] ?? "",
+      userId: data['userId'] ?? "",
+      createdAt: DateTime.tryParse(data['createdAt'] ?? "") ?? DateTime.now(),
+      foodsList: (data['foodsList'] as List<dynamic>?)
+        ?.map((e) => FoodModel.fromMap(e as Map<String, dynamic>))
+        .toList() ?? [],
+    );
   }
   Map<String, dynamic> toMap(){
     return {
