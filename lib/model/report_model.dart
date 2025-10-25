@@ -15,14 +15,16 @@ class ReportModel {
     required this.createdAt,
     required this.status
   });
-  ReportModel.fromMap(Map<String, dynamic> data){
-    reportId = data['reportId'] ?? "";
-    target = data['target'] ?? "";
-    author = data['author'] ?? "";
-    reporter = data['reporter'] ?? "";
-    reason = data['reason'] ?? "";
-    createdAt = DateTime.tryParse(data['createdAt'] ?? "") ?? DateTime.now();
-    status = data['status'] ?? 0;
+  factory ReportModel.fromMap(Map<String, dynamic> data){
+    return ReportModel(
+      reportId: data['reportId'] ?? "",
+      target: data['target'] ?? "",
+      author: data['author'] ?? "",
+      reporter: data['reporter'] ?? "",
+      reason: data['reason'] ?? "",
+      createdAt: DateTime.tryParse(data['createdAt'] ?? "") ?? DateTime.now(),
+      status: data['status'] ?? 0,
+    );
   }
   Map<String, dynamic> toMap() => {
     "reportId": reportId,

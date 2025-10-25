@@ -29,21 +29,23 @@ class FoodModel {
     required this.createdAt,
     required this.likes
   });
-  FoodModel.fromMap(Map<String, dynamic> data){
-    foodId = data['foodId'] ?? "";
-    title = data['title'] ?? "";
-    image = data['image'] ?? "";
-    description = data['description'] ?? "";
-    userId = data['userId'] ?? "";
-    userName = data['username'] ?? "";
-    avatar = data['avatar'] ?? "";
-    tag = data['tag'] ?? "";
-    diet = data['diet'] ?? 0;
-    duration = data['duration'] ?? "";
-    ingredients = List<String>.from(data['ingredients'] ?? []);
-    steps = List<String>.from(data['steps'] ?? []);
-    createdAt = DateTime.tryParse(data['createdAt'] ?? "") ?? DateTime.now();
-    likes = List<Map<String, dynamic>>.from(data['likes'] ?? []);
+  factory FoodModel.fromMap(Map<String, dynamic> data){
+    return FoodModel(
+      foodId: data['foodId'] ?? "",
+      image: data['image'] ?? "",
+      title: data['title'] ?? "",
+      description: data['description'] ?? "",
+      userId: data['userId'] ?? "",
+      userName: data['username'] ?? "",
+      avatar: data['avatar'] ?? "",
+      tag: data['tag'] ?? "",
+      diet: data['diet'] ?? 0,
+      duration: data['duration'] ?? "",
+      ingredients: List<String>.from(data['ingredients'] ?? []),
+      steps: List<String>.from(data['steps'] ?? []),
+      createdAt: DateTime.tryParse(data['createdAt'] ?? "") ?? DateTime.now(),
+      likes: List<Map<String, dynamic>>.from(data['likes'] ?? []),
+    );
   }
   Map<String, dynamic> toMap() {
     return {
