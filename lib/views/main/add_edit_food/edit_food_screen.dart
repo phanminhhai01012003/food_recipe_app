@@ -96,7 +96,10 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                 onCancelTap: () => Navigator.pop(context)
               );
             }, 
-            icon: Icon(Icons.arrow_back, size: 20)
+            icon: Icon(
+              Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios, 
+              size: 20
+            )
           ),
         ),
         actions: [

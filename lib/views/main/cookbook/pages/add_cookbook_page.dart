@@ -89,22 +89,28 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
         ),
         backgroundColor: AppColors.green,
         foregroundColor: AppColors.white,
-        leading: canMultiSelected ? IconButton(
-          onPressed: (){
-            choices.clear();
-            canMultiSelected = false;
-            setState(() {});
-          }, 
-          icon: Icon(Icons.close, size: 20)
-        ) : IconButton(
-          onPressed: () => ShowYesnoDialog.checkDeviceDialog(
-            context, 
-            title: "Loại bỏ thay đổi", 
-            content: "Bạn có chắc chắn muốn bỏ thay đổi không? Mọi thay đổi sẽ không được lưu", 
-            onAcceptTap: () => Navigator.pushReplacement(context, checkDeviceRoute(cookbookPage)), 
-            onCancelTap: () => Navigator.pop(context)
+        leading: Padding(
+          padding: EdgeInsets.all(8),
+          child: canMultiSelected ? IconButton(
+            onPressed: (){
+              choices.clear();
+              canMultiSelected = false;
+              setState(() {});
+            }, 
+            icon: Icon(Icons.close, size: 20)
+          ) : IconButton(
+            onPressed: () => ShowYesnoDialog.checkDeviceDialog(
+              context, 
+              title: "Loại bỏ thay đổi", 
+              content: "Bạn có chắc chắn muốn bỏ thay đổi không? Mọi thay đổi sẽ không được lưu", 
+              onAcceptTap: () => Navigator.pushReplacement(context, checkDeviceRoute(cookbookPage)), 
+              onCancelTap: () => Navigator.pop(context)
+            ),
+            icon: Icon(
+              Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios, 
+              size: 20
+            )
           ),
-          icon: Icon(Icons.arrow_back, size: 20)
         ),
         actions: [
           Visibility(

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
@@ -29,6 +31,16 @@ class _FoodListWithTagState extends State<FoodListWithTag> {
           ),
         ),
         centerTitle: true,
+        leading: Padding(
+          padding: EdgeInsets.all(8),
+          child: IconButton(
+            onPressed: () => Navigator.pop(context), 
+            icon: Icon(
+              Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
+              size: 20,
+            )
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: StreamBuilder(

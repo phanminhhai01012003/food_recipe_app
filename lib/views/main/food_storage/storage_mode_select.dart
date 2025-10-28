@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/routes.dart';
@@ -54,6 +56,16 @@ class _StorageModeSelectState extends State<StorageModeSelect> {
         backgroundColor: AppColors.green,
         foregroundColor: AppColors.white,
         centerTitle: true,
+        leading: Padding(
+          padding: EdgeInsets.all(8),
+          child: IconButton(
+            onPressed: () => Navigator.pop(context), 
+            icon: Icon(
+              Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
+              size: 20,
+            )
+          ),
+        ),
         title: Text("Lưu trữ",
           style: TextStyle(
             fontSize: 16,
