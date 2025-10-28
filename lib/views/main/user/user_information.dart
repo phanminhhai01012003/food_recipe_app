@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
@@ -54,6 +56,16 @@ class _UserInformationState extends State<UserInformation> {
       appBar: AppBar(
         backgroundColor: AppColors.green,
         foregroundColor: AppColors.white,
+        leading: Padding(
+          padding: EdgeInsets.all(8),
+          child: IconButton(
+            onPressed: () => Navigator.pop(context), 
+            icon: Icon(
+              Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
+              size: 20,
+            )
+          ),
+        ),
         title: Text(
           "Thông tin cá nhân",
           style: TextStyle(

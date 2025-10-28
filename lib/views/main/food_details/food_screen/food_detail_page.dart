@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -126,7 +128,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                         child: IconButton(
                           onPressed: () => Navigator.pop(context), 
                           icon: Icon(
-                            Icons.arrow_back_ios,
+                            Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
                             size: 20,
                             color: AppColors.white,
                           )

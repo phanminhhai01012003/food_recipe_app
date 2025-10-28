@@ -71,6 +71,16 @@ class _EditUserState extends State<EditUser> {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
+        leading: Padding(
+          padding: EdgeInsets.all(8),
+          child: IconButton(
+            onPressed: () => Navigator.pop(context), 
+            icon: Icon(
+              Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
+              size: 20,
+            )
+          ),
+        ),
         backgroundColor: AppColors.green,
         foregroundColor: AppColors.white,
         title: Text("Chỉnh sửa thông tin cá nhân",

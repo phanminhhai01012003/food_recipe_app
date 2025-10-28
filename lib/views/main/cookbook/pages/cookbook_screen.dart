@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/routes.dart';
@@ -24,7 +26,10 @@ class _CookbookScreenState extends State<CookbookScreen> {
           padding: EdgeInsets.all(8),
           child: IconButton(
             onPressed: () => Navigator.pop(context), 
-            icon: Icon(Icons.arrow_back, size: 20)
+            icon: Icon(
+              Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios, 
+              size: 20
+            )
           ),
         ),
         backgroundColor: AppColors.green,

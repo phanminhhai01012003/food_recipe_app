@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:comment_box/comment/comment.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
@@ -57,7 +59,10 @@ class _CommentPageState extends State<CommentPage> {
           padding: EdgeInsets.all(8),
           child: IconButton(
             onPressed: () => Navigator.pop(context), 
-            icon: Icon(Icons.arrow_back, size: 25)
+            icon: Icon(
+              Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios, 
+              size: 25
+            )
           ),
         ),
         backgroundColor: AppColors.green,

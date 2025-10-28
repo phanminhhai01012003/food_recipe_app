@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/provider/theme_state.dart';
@@ -17,6 +19,16 @@ class _ChangeThemeScreenState extends State<ChangeThemeScreen> {
       builder: (context, value, child) {
         return Scaffold(
           appBar: AppBar(
+            leading: Padding(
+              padding: EdgeInsets.all(8),
+              child: IconButton(
+                onPressed: () => Navigator.pop(context), 
+                  icon: Icon(
+                    Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
+                    size: 20,
+                  )
+                ),
+            ),
             backgroundColor: AppColors.green,
             foregroundColor: AppColors.white,
             title: Text("Chế độ giao diện",
