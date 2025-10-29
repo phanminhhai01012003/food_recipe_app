@@ -57,10 +57,19 @@ class _ShowReportModalState extends State<ShowReportModal> {
     // TODO: implement initState
     super.initState();
     if (widget.reports != null) {
-      if (selectedOption == "Khác (vui lòng ghi rõ bên dưới)") {
-        _otherReport.text = widget.reports!.reason;
+      if (widget.title.contains("Món")) {
+        if (selectedOption == reportFoodList.last) {
+          _otherReport.text = widget.reports!.reason;
+        } else {
+          selectedOption = widget.reports!.reason;
+        }
+      } else {
+        if (selectedOption == reportCommentList.last) {
+          _otherReport.text = widget.reports!.reason;
+        } else {
+          selectedOption = widget.reports!.reason;
+        }
       }
-      selectedOption = widget.reports!.reason;
     }
   }
   @override
@@ -130,17 +139,25 @@ class _ShowReportModalState extends State<ShowReportModal> {
                 TextField(
                   maxLength: 500,
                   controller: _otherReport,
-                  enabled: selectedOption == "Khác (vui lòng ghi rõ bên dưới)",
+                  enabled: widget.title.contains("Món") 
+                    ? selectedOption == reportFoodList.last 
+                    : selectedOption == reportCommentList.last,
                   decoration: InputDecoration(
                     hintText: "Nhập nội dung",
                     hintStyle: TextStyle(
-                      color: selectedOption == "Khác (vui lòng ghi rõ bên dưới)" ? AppColors.black : AppColors.grey,
+                      color: selectedOption == reportFoodList.last || selectedOption == reportCommentList.last 
+                        ? AppColors.black 
+                        : AppColors.grey,
                       fontSize: 14,
                       fontWeight: FontWeight.normal
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: selectedOption == "Khác (vui lòng ghi rõ bên dưới)" ? AppColors.black : AppColors.grey)
+                      borderSide: BorderSide(
+                        color: selectedOption == reportFoodList.last || selectedOption == reportCommentList.last
+                          ? AppColors.black 
+                          : AppColors.grey
+                      )
                     ),
                     counterText: ""
                   ),

@@ -47,16 +47,16 @@ List<String> sliderImage = [
 ];
 List<String> reportFoodList = [
   "Món ăn kém chất lượng hoặc không đảm bảo vệ sinh an toàn thực phẩm",
-  "Hình ảnh chứa nội dung nhạy cảm, không phù hợp (quảng cáo trá hình, khiêu dâm, kích động bạo lực, ...)",
+  "Hình ảnh chứa nội dung nhạy cảm, đồi trụy (quảng cáo trá hình, khiêu dâm, kích động bạo lực, ...)",
   "Sử dụng một số từ ngữ thô tục, xúc phạm danh dự của người khác",
   "Nội dung đăng tải giả mạo, không đúng sự thật",
   "Khác (vui lòng ghi rõ bên dưới)"
 ];
 List<String> reportCommentList = [
-  "Sử dụng một số từ ngữ thô tục, nhạy cảm, không phù hợp",
+  "Sử dụng một số từ ngữ thô tục, tiêu cực, không phù hợp",
   "Xúc phạm danh dự, gây ảnh hưởng đến tâm lý của người khác",
-  "Quảng cáo, bán hàng trái phép",
-  "Chứa thông tin bảo mật (số điện thoại, căn cước, bảo hiểm, ...)",
+  "Quảng cáo trá hình, bán hàng trái phép",
+  "Lộ thông tin bảo mật (số điện thoại, định danh cá nhân, ...)",
   "Khác (vui lòng ghi rõ bên dưới)"
 ];
 List<String> deleteUserList = [
@@ -91,8 +91,13 @@ final notificationCollection = FirebaseFirestore.instance.collection("notificati
 final saveCollection = FirebaseFirestore.instance.collection("saved");
 final historyCollection = FirebaseFirestore.instance.collection("history");
 final bookCollection = FirebaseFirestore.instance.collection("cookbook");
-  final reportCollection = FirebaseFirestore.instance.collection("report");
+final reportCollection = FirebaseFirestore.instance.collection("report");
 final tagCollection = FirebaseFirestore.instance.collection("categories");
+CollectionReference<Map<String, dynamic>> delAccReqCollection(String userId) {
+  return userCollection
+    .doc(userId)
+    .collection("delete_acc_request");
+} 
 
 //class defined
 final authServices = AuthServices();

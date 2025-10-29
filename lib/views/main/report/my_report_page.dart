@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/model/report_model.dart';
-import 'package:food_recipe_app/services/firestore/report/report_services.dart';
+import 'package:food_recipe_app/views/main/report/report_selection.dart';
 import 'package:food_recipe_app/widget/other/load_data.dart';
 
 class MyReportPage extends StatefulWidget {
@@ -16,7 +16,6 @@ class MyReportPage extends StatefulWidget {
 
 class _MyReportPageState extends State<MyReportPage> {
   int statusIndex = 0;
-  final report = ReportServices();
   String renderStatus(int status){
     switch (status) {
       case 0:
@@ -152,7 +151,7 @@ class _MyReportPageState extends State<MyReportPage> {
             ),
             SizedBox(height: 20),
             StreamBuilder(
-              stream: report.getReportList(context, currentUser.displayName!, statusIndex), 
+              stream: reportServices.getReportList(context, currentUser.displayName!, statusIndex), 
               builder: (context, snapshot){
                 if (!snapshot.hasData || snapshot.hasError) {
                   return SizedBox();
@@ -168,7 +167,9 @@ class _MyReportPageState extends State<MyReportPage> {
                     scrollDirection: Axis.vertical,
                     physics: ClampingScrollPhysics(),
                     itemBuilder: (context, index) => GestureDetector(
-                      onLongPress: () async{},
+                      onLongPress: () async{
+                        await showReportSelectionModal(context, reports[index]);
+                      },
                       child: Card(
                         surfaceTintColor: AppColors.white,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -201,7 +202,7 @@ class _MyReportPageState extends State<MyReportPage> {
                               TextSpan(
                                 children: [
                                   TextSpan(
-                                    text: "Trạng thái",
+                                    text: "Trạng thái: ",
                                     style: TextStyle(
                                       color: AppColors.black,
                                       fontSize: 12,

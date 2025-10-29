@@ -133,12 +133,9 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
   }
   void sendRequest() async{
     try {
-      await userCollection
-        .doc(currentUser.uid)
-        .collection("delete_acc_request")
-        .add({
-          'reason': selectedOption == deleteUserList.last ? _otherReport.text : selectedOption
-        });
+      await delAccReqCollection(currentUser.uid).add({
+        'reason': selectedOption == deleteUserList.last ? _otherReport.text : selectedOption
+      });
     } catch (e) {
       Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
       Logger.log(e);
