@@ -17,6 +17,7 @@ class ReplyCommentPage extends StatefulWidget {
 
 class _ReplyCommentPageState extends State<ReplyCommentPage> {
   final _commentController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   bool get checkComment => _commentController.text.isEmpty;
   void pushReplyNotifications(){
     notificationData.pushInteractNotifications(

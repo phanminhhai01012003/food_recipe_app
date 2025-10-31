@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
@@ -47,114 +49,130 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-        child: Column(
-          children: [
-            TextFormField(
-              controller: _searchController,
-              cursorColor: AppColors.blue,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(33),
-                  borderSide: BorderSide(color: AppColors.black)
+      appBar: AppBar(
+        backgroundColor: AppColors.white,
+        foregroundColor: AppColors.black,
+        leading: Padding(
+          padding: EdgeInsets.all(8),
+          child: IconButton(
+            onPressed: () => Navigator.pop(context), 
+            icon: Icon(
+              Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios, 
+              size: 20
+            )
+          ),
+        ),
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+          child: Column(
+            children: [
+              TextFormField(
+                controller: _searchController,
+                cursorColor: AppColors.blue,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(33),
+                    borderSide: BorderSide(color: AppColors.black)
+                  ),
+                  prefixIcon: Container(
+                    alignment: Alignment.center,
+                    width: 20,
+                    height: 20,
+                    child: Icon(Icons.search, color: AppColors.grey),
+                  ),
+                  hintText: "Tìm kiếm",
+                  hintStyle: TextStyle(
+                    color: AppColors.grey,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400
+                  ),
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      _searchController.clear();
+                      searchQuery = "";
+                    }, 
+                    icon: Icon(Icons.clear, size: 20, color: AppColors.grey)
+                  )
                 ),
-                prefixIcon: Container(
-                  alignment: Alignment.center,
-                  width: 20,
-                  height: 20,
-                  child: Icon(Icons.search, color: AppColors.grey),
-                ),
-                hintText: "Tìm kiếm",
-                hintStyle: TextStyle(
-                  color: AppColors.grey,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400
-                ),
-                suffixIcon: IconButton(
-                  onPressed: () {
-                    _searchController.clear();
-                    searchQuery = "";
-                  }, 
-                  icon: Icon(Icons.clear, size: 20, color: AppColors.grey)
-                )
+                onSaved: (newValue) {
+                  setState(() {
+                    saveSearchTerm(newValue!);
+                  });
+                },
+                onChanged: (value) {
+                  setState(() {
+                    searchQuery = value;
+                  });
+                }
               ),
-              onSaved: (newValue) {
-                setState(() {
-                  saveSearchTerm(newValue!);
-                });
-              },
-              onChanged: (value) {
-                setState(() {
-                  searchQuery = value;
-                });
-              }
-            ),
-            SizedBox(height: 50),
-            _searchController.text.isEmpty ? FutureBuilder(
-              future: loadRecentSearch(), 
-              builder: (context, snapshot){
-                if (!snapshot.hasData || snapshot.hasError) {
-                  return const SizedBox();
-                } else if (snapshot.connectionState == ConnectionState.waiting){ 
-                  return LoadData(isList: true);
-                }else{
-                  return ListView.builder(
-                    itemCount: snapshot.data!.length,
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index){
-                      return ListTile(
-                        onTap: () {
-                          _searchController.text = recentSearches[index];
-                          setState(() {
-                            searchQuery = recentSearches[index];
-                          });
-                        },
-                        leading: Icon(Icons.history, size: 20, color: AppColors.grey),
-                        title: Text(recentSearches[index],
-                          style: TextStyle(
-                            color: AppColors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600
-                          ),
-                        ),
-                        trailing: IconButton(
-                          onPressed: () {
-                            removeSearchTerm(recentSearches[index]);
+              SizedBox(height: 50),
+              _searchController.text.isEmpty ? FutureBuilder(
+                future: loadRecentSearch(), 
+                builder: (context, snapshot){
+                  if (!snapshot.hasData || snapshot.hasError) {
+                    return const SizedBox();
+                  } else if (snapshot.connectionState == ConnectionState.waiting){ 
+                    return LoadData(isList: true);
+                  }else{
+                    return ListView.builder(
+                      itemCount: snapshot.data!.length,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index){
+                        return ListTile(
+                          onTap: () {
+                            _searchController.text = recentSearches[index];
                             setState(() {
-                              recentSearches.removeAt(index);
+                              searchQuery = recentSearches[index];
                             });
                           },
-                          icon: Icon(Icons.close, size: 20, color: AppColors.grey),
-                        ),
-                      );
-                    },
-                  );
+                          leading: Icon(Icons.history, size: 20, color: AppColors.grey),
+                          title: Text(recentSearches[index],
+                            style: TextStyle(
+                              color: AppColors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600
+                            ),
+                          ),
+                          trailing: IconButton(
+                            onPressed: () {
+                              removeSearchTerm(recentSearches[index]);
+                              setState(() {
+                                recentSearches.removeAt(index);
+                              });
+                            },
+                            icon: Icon(Icons.close, size: 20, color: AppColors.grey),
+                          ),
+                        );
+                      },
+                    );
+                  }
                 }
-              }
-            ) : StreamBuilder(
-              stream: foodServices.getFood(context),
-              builder: (context, snapshot){
-                if (!snapshot.hasData || snapshot.hasError) {
-                  return const SizedBox();
-                } else if (snapshot.connectionState == ConnectionState.waiting) { 
-                  return Center(child: CircularProgressIndicator(color: AppColors.yellow));
-                } else {
-                  var filterDoc = snapshot.data!.where((e){
-                    return e.title.toLowerCase().contains(searchQuery!);
-                  }).toList();
-                  return ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemCount: filterDoc.length,
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) => FoodDisplayList(food: filterDoc[index])
-                  );
-                }
-              },
-            ),
-          ],
+              ) : StreamBuilder(
+                stream: foodServices.getFood(context),
+                builder: (context, snapshot){
+                  if (!snapshot.hasData || snapshot.hasError) {
+                    return const SizedBox();
+                  } else if (snapshot.connectionState == ConnectionState.waiting) { 
+                    return Center(child: CircularProgressIndicator(color: AppColors.yellow));
+                  } else {
+                    var filterDoc = snapshot.data!.where((e){
+                      return e.title.toLowerCase().contains(searchQuery!);
+                    }).toList();
+                    return ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: filterDoc.length,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) => FoodDisplayList(food: filterDoc[index])
+                    );
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

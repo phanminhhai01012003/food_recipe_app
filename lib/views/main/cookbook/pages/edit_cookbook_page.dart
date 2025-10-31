@@ -5,7 +5,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
-import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/cookbook_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/provider/cookbook_state.dart';
@@ -55,7 +54,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
     imageURL = await imageServices.uploadImage(context, image!, cookbookFolder);
     CookbookModel cookbook = CookbookModel(
       cookbookId: widget.cookbook.cookbookId, 
-      cookbookImage: imageURL!, 
+      cookbookImage: image == null && imageURL!.isEmpty ? foodDesignImage : imageURL!, 
       cookbookName: _titleController.text, 
       description: _descriptionController.text, 
       userId: widget.cookbook.userId, 
@@ -105,7 +104,12 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
               context, 
               title: "Loại bỏ thay đổi", 
               content: "Bạn có chắc chắn muốn bỏ thay đổi không? Mọi thay đổi sẽ không được lưu", 
-              onAcceptTap: () => Navigator.pushReplacement(context, checkDeviceRoute(cookbookPage)), 
+              onAcceptTap: () async{
+                Navigator.pop(context);
+                await Future.delayed(Duration(seconds: 1), (){
+                  Navigator.pop(context);
+                });
+              }, 
               onCancelTap: () => Navigator.pop(context)
             ),
             icon: Icon(

@@ -203,6 +203,14 @@ class _ShowTimePickerState extends State<ShowTimePicker> {
                         });
                       }
                     ),
+                    Text(
+                      "s",
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: AppColors.black,
+                        fontWeight: FontWeight.w600
+                      ),
+                    ),
                   ],
                 )
               ],

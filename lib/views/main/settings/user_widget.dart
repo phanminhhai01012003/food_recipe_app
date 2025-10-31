@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
-import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/model/user_model.dart';
 
 class UserWidget extends StatefulWidget {
@@ -38,12 +37,19 @@ class _UserWidgetState extends State<UserWidget> {
               child: CachedNetworkImage(
                 imageUrl: widget.user.avatar,
                 fit: BoxFit.cover,
-                errorWidget: (context, url, error) => Image.asset(userDefaultImage),
+                errorWidget: (context, url, error) => Center(
+                  child: Icon(
+                    Icons.error,
+                    size: 20,
+                    color: AppColors.grey,
+                  ),
+                ),
               ),
             ),
             SizedBox(width: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   widget.user.userName,

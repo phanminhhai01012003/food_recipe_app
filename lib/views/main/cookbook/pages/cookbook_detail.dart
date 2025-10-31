@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
-import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/cookbook_model.dart';
 import 'package:food_recipe_app/provider/cookbook_state.dart';
@@ -59,7 +58,13 @@ class _CookbookDetailState extends State<CookbookDetail> {
                       ),
                       width: 50,
                       height: 50,
-                      errorWidget: (context, url, error) => Image.asset(foodDesignImage),
+                      errorWidget: (context, url, error) => Center(
+                        child: Icon(
+                          Icons.error,
+                          size: 20,
+                          color: AppColors.grey,
+                        ),
+                      ),
                     ),
                   ),
                   SizedBox(width: 8),

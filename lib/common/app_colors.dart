@@ -8,7 +8,7 @@ class AppColors {
   static Color white = Colors.white;
   static Color black = Colors.black;
   static Color blue = Colors.blue.shade700;
-  static Color grey = Colors.grey.shade200;
+  static Color grey = Colors.grey;
   static Color yellow = Color(0xFFF2F25D);
   static Color purple = Color(0xFFBA68C8);
   static final gradient1 = LinearGradient(

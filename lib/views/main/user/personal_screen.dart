@@ -103,7 +103,13 @@ class _PersonalScreenState extends State<PersonalScreen> {
           progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator(value: progress.progress, color: AppColors.yellow)),
           width: 50,
           height: 50,
-          errorWidget: (context, url, error) => Image.asset(userDefaultImage),
+          errorWidget: (context, url, error) => Center(
+            child: Icon(
+              Icons.error,
+              size: 20,
+              color: AppColors.grey,
+            ),
+          ),
           fit: BoxFit.cover,
         ),
       ),

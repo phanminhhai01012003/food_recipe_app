@@ -35,7 +35,6 @@ class _AnimationSliderState extends State<AnimationSlider> {
             initialPage: 0,
             height: 200,
             autoPlay: true,
-            reverse: true,
             autoPlayAnimationDuration: Duration(seconds: 1),
             enlargeCenterPage: true,
           ),

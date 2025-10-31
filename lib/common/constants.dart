@@ -21,7 +21,6 @@ String userDefaultImage = "$imagePath/user.png";
 
 //key
 final navigatorKey = GlobalKey<NavigatorState>();
-final formKey = GlobalKey<FormState>();
 
 //lists
 List<String> categoryList = [

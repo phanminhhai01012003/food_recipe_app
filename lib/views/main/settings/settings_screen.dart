@@ -19,14 +19,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
     switch(mode){
       case ModeSelection.about:
         Navigator.push(context, checkDeviceRoute(about));
+        break;
       case ModeSelection.storage:
-        Navigator.push(context, checkDeviceRoute(foodStorageView));
+        Navigator.push(context, checkDeviceRoute(storageMode));
+        break;
       case ModeSelection.report:
         Navigator.push(context, checkDeviceRoute(reportPage));
+        break;
       case ModeSelection.changePassword:
         Navigator.push(context, checkDeviceRoute(changePasswordPage));
+        break;
       case ModeSelection.theme:
         Navigator.push(context, checkDeviceRoute(changeThemeScreen));
+        break;
     }
   }
   IconData getIcon(ModeSelection mode){
@@ -62,7 +67,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       backgroundColor: AppColors.white,
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 20),
+        padding: EdgeInsets.only(top: 30, left: 12, right: 12, bottom: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -87,6 +92,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               }
             ),
             SizedBox(height: 30),
+            Divider(height: 1, thickness: 1, color: AppColors.grey,),
             ListView(
               shrinkWrap: true,
               physics: ClampingScrollPhysics(),

@@ -17,12 +17,16 @@ class _StorageModeSelectState extends State<StorageModeSelect> {
     switch(storage) {
       case StorageMode.myFood:
         Navigator.push(context, checkDeviceRoute(myFoodScreen));
+        break;
       case StorageMode.saveFood:
         Navigator.push(context, checkDeviceRoute(saveFoodScreen));
+        break;
       case StorageMode.recentView:
         Navigator.push(context, checkDeviceRoute(recentScreen));
+        break;
       case StorageMode.cookbook:
         Navigator.push(context, checkDeviceRoute(cookbookPage));
+        break;
     }
   }
   Color getColor(StorageMode storage) {
@@ -73,8 +77,10 @@ class _StorageModeSelectState extends State<StorageModeSelect> {
           ),
         ),
       ),
-      body: Center(
+      body: Padding(
+        padding: EdgeInsets.all(12),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             modeButton(
               color: getColor(StorageMode.myFood), 

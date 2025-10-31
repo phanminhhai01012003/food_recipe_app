@@ -91,9 +91,26 @@ class CommentServices extends CommentRepo{
   Future<void> updateReplyComment(BuildContext context, CommentModel comment, String foodId) async{
     // TODO: implement updateReplyComment
     try {
-      await commentCollection(foodId).doc(comment.commentId).update({
-        'replies': [comment.updateMap()]
-      });
+      final document = await commentCollection(foodId).doc(comment.commentId).get();
+      if (document.exists) {
+        final data = document.data();
+        if (data != null && data.containsKey(comment)){
+          List<dynamic> currentReplies = List.from(data['replies'] ?? []);
+          int index = -1;
+          for(int i = 0; i < currentReplies.length; i++) {
+            if (currentReplies[i] is Map) {
+              index = i;
+              break;
+            }
+          }
+          if (index != -1){
+            Map<String, dynamic> item = Map.from(currentReplies[index]);
+            item.addAll(comment.updateMap());
+            currentReplies[index] = item;
+            await commentCollection(foodId).doc(comment.commentId).update({'replies': currentReplies});
+          }
+        }
+      }
     } catch (e) {
       Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
       Logger.log(e);

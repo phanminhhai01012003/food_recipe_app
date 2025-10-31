@@ -12,6 +12,7 @@ class ForgotPassword extends StatefulWidget {
 
 class _ForgotPasswordState extends State<ForgotPassword> {
   final emailController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   void handle() async{
     await authServices.forgotPassword(context, emailController.text);
     emailController.clear();

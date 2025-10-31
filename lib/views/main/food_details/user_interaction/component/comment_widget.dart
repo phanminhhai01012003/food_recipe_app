@@ -93,7 +93,13 @@ class _CommentWidgetState extends State<CommentWidget> {
                       fit: BoxFit.cover,
                       width: 33,
                       height: 33,
-                      errorWidget: (context, url, error) => Image.asset(userDefaultImage),
+                      errorWidget: (context, url, error) => Center(
+                        child: Icon(
+                          Icons.error,
+                          size: 20,
+                          color: AppColors.grey,
+                        ),
+                      ),
                     ),
                   ),
                   SizedBox(width: 10),
