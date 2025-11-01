@@ -20,6 +20,7 @@ class CommentPage extends StatefulWidget {
 }
 
 class _CommentPageState extends State<CommentPage> {
+  final formKey = GlobalKey<FormState>();
   final _commentController = TextEditingController();
   bool get checkComment => _commentController.text.isEmpty;
   void onAddComment() async{

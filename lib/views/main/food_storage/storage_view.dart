@@ -27,205 +27,221 @@ class _StorageViewState extends State<StorageView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            FutureBuilder(
-              future: userServices.getUserById(context, currentUser.uid), 
-              builder: (context, snapshot) {
-                if (!snapshot.hasData || snapshot.hasError) {
-                  return SizedBox();
-                } else if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
-                } else {
-                  List<UserModel> users = snapshot.data!;
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: users.length,
-                    itemBuilder: (context, index) => UserWidget(
-                      user: users[index], 
-                      onTap: () => Navigator.push(context, checkDeviceRoute(userInform(users[index])))
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            children: [
+              FutureBuilder(
+                future: userServices.getUserById(context, currentUser.uid), 
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData || snapshot.hasError) {
+                    return SizedBox();
+                  } else if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  } else {
+                    List<UserModel> users = snapshot.data!;
+                    return SizedBox(
+                      height: 200,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: users.length,
+                        itemBuilder: (context, index) => UserWidget(
+                          user: users[index], 
+                          onTap: () => Navigator.push(context, checkDeviceRoute(userInform(users[index])))
+                        )
+                      ),
+                    );
+                  }
+                },
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Món ăn của bạn",
+                    style: TextStyle(
+                      color: AppColors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.push(context, checkDeviceRoute(myFoodScreen)), 
+                    child: Text(
+                      "Xem tất cả",
+                      style: TextStyle(
+                        color: AppColors.blue,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500
+                      ),
                     )
+                  )
+                ],
+              ),
+              SizedBox(height: 10),
+              StreamBuilder(
+                stream: foodServices.getFoodByUser(context, currentUser.uid), 
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData || snapshot.hasError) {
+                    return SizedBox();
+                  } else if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  } else {
+                    List<FoodModel> data = snapshot.data!;
+                    return SizedBox(
+                      height: 200,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        physics: ClampingScrollPhysics(),
+                        itemCount: (data.length / 2).toInt(),
+                        itemBuilder: (context, index) => FoodDisplayGrid(food: data[index])
+                      ),
+                    );
+                  }
+                }
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Món ăn đã lưu",
+                    style: TextStyle(
+                      color: AppColors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.push(context, checkDeviceRoute(saveFoodScreen)), 
+                    child: Text(
+                      "Xem tất cả",
+                      style: TextStyle(
+                        color: AppColors.blue,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500
+                      ),
+                    )
+                  )
+                ],
+              ),
+              SizedBox(height: 10),
+              Selector<SaveState, List<SaveFoodModel>>(
+                selector: (context, state) => state.foodProducts,
+                shouldRebuild: (previous, next) => true,
+                builder: (context, value, child) {
+                  if (value.isEmpty) {
+                    return SizedBox.shrink();
+                  }
+                  return SizedBox(
+                    height: 200,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      physics: ClampingScrollPhysics(),
+                      itemCount: (value.length / 2).toInt(),
+                      itemBuilder: (context, index) => FoodDisplayGrid(food: value[index].foods)
+                    ),
                   );
-                }
-              },
-            ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Món ăn của bạn",
-                  style: TextStyle(
-                    color: AppColors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold
-                  ),
-                ),
-                TextButton(
-                  onPressed: () => Navigator.push(context, checkDeviceRoute(myFoodScreen)), 
-                  child: Text(
-                    "Xem tất cả",
+                },
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Đã xem gần đây",
                     style: TextStyle(
-                      color: AppColors.blue,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500
+                      color: AppColors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold
                     ),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.push(context, checkDeviceRoute(recentScreen)), 
+                    child: Text(
+                      "Xem tất cả",
+                      style: TextStyle(
+                        color: AppColors.blue,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500
+                      ),
+                    )
                   )
-                )
-              ],
-            ),
-            SizedBox(height: 10),
-            StreamBuilder(
-              stream: foodServices.getFoodByUser(context, currentUser.uid), 
-              builder: (context, snapshot) {
-                if (!snapshot.hasData || snapshot.hasError) {
-                  return SizedBox();
-                } else if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
-                } else {
-                  List<FoodModel> data = snapshot.data!;
-                  return ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    physics: ClampingScrollPhysics(),
-                    itemCount: data.length / 2 as int,
-                    itemBuilder: (context, index) => FoodDisplayGrid(food: data[index])
+                ],
+              ),
+              SizedBox(height: 10),
+              Selector<HistoryState, List<RecentViewModel>>(
+                selector: (context, state) => state.viewProducts,
+                shouldRebuild: (previous, next) => true,
+                builder: (context, value, child) {
+                  if (value.isEmpty) {
+                    return SizedBox.shrink();
+                  }
+                  return SizedBox(
+                    height: 200,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      physics: ClampingScrollPhysics(),
+                      itemCount: (value.length / 2).toInt(),
+                      itemBuilder: (context, index) => FoodDisplayGrid(food: value[index].foods)
+                    ),
                   );
-                }
-              }
-            ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Món ăn đã lưu",
-                  style: TextStyle(
-                    color: AppColors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold
-                  ),
-                ),
-                TextButton(
-                  onPressed: () => Navigator.push(context, checkDeviceRoute(saveFoodScreen)), 
-                  child: Text(
-                    "Xem tất cả",
+                },
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Sổ tay nấu ăn",
                     style: TextStyle(
-                      color: AppColors.blue,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500
+                      color: AppColors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold
                     ),
-                  )
-                )
-              ],
-            ),
-            SizedBox(height: 10),
-            Selector<SaveState, List<SaveFoodModel>>(
-              selector: (context, state) => state.foodProducts,
-              shouldRebuild: (previous, next) => true,
-              builder: (context, value, child) {
-                if (value.isEmpty) {
-                  return SizedBox.shrink();
-                }
-                return ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  physics: ClampingScrollPhysics(),
-                  itemCount: value.length / 2 as int,
-                  itemBuilder: (context, index) => FoodDisplayGrid(food: value[index].foods)
-                );
-              },
-            ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Đã xem gần đây",
-                  style: TextStyle(
-                    color: AppColors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold
                   ),
-                ),
-                TextButton(
-                  onPressed: () => Navigator.push(context, checkDeviceRoute(recentScreen)), 
-                  child: Text(
-                    "Xem tất cả",
-                    style: TextStyle(
-                      color: AppColors.blue,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500
-                    ),
+                  TextButton(
+                    onPressed: () => Navigator.push(context, checkDeviceRoute(recentScreen)), 
+                    child: Text(
+                      "Xem tất cả",
+                      style: TextStyle(
+                        color: AppColors.blue,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500
+                      ),
+                    )
                   )
-                )
-              ],
-            ),
-            SizedBox(height: 10),
-            Selector<HistoryState, List<RecentViewModel>>(
-              selector: (context, state) => state.viewProducts,
-              shouldRebuild: (previous, next) => true,
-              builder: (context, value, child) {
-                if (value.isEmpty) {
-                  return SizedBox.shrink();
-                }
-                return ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  physics: ClampingScrollPhysics(),
-                  itemCount: value.length / 2 as int,
-                  itemBuilder: (context, index) => FoodDisplayGrid(food: value[index].foods)
-                );
-              },
-            ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Sổ tay nấu ăn",
-                  style: TextStyle(
-                    color: AppColors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold
-                  ),
-                ),
-                TextButton(
-                  onPressed: () => Navigator.push(context, checkDeviceRoute(recentScreen)), 
-                  child: Text(
-                    "Xem tất cả",
-                    style: TextStyle(
-                      color: AppColors.blue,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500
+                ],
+              ),
+              SizedBox(height: 10),
+              Selector<CookbookState, List<CookbookModel>>(
+                selector: (context, state) => state.bookProducts,
+                shouldRebuild: (previous, next) => true,
+                builder: (context, value, child) {
+                  if (value.isEmpty) {
+                    return SizedBox.shrink();
+                  }
+                  return SizedBox(
+                    height: 200,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      hitTestBehavior: HitTestBehavior.translucent,
+                      clipBehavior: Clip.hardEdge,
+                      physics: ClampingScrollPhysics(),
+                      itemCount: (value.length / 2).toInt(),
+                      itemBuilder: (context, index) => CookbookWidget(book: value[index])
                     ),
-                  )
-                )
-              ],
-            ),
-            SizedBox(height: 10),
-            Selector<CookbookState, List<CookbookModel>>(
-              selector: (context, state) => state.bookProducts,
-              shouldRebuild: (previous, next) => true,
-              builder: (context, value, child) {
-                if (value.isEmpty) {
-                  return SizedBox.shrink();
-                }
-                return ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  hitTestBehavior: HitTestBehavior.translucent,
-                  clipBehavior: Clip.hardEdge,
-                  physics: ClampingScrollPhysics(),
-                  itemCount: value.length / 2 as int,
-                  itemBuilder: (context, index) => CookbookWidget(book: value[index])
-                );
-              },
-            ),
-          ],
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

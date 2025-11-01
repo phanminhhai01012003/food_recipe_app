@@ -17,6 +17,7 @@ class _ChangePasswordState extends State<ChangePassword> {
   final oldPasswordController = TextEditingController();
   final newpasswordController = TextEditingController();
   final confirmController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   void handle() async{
     context.loaderOverlay.show();
     if (formKey.currentState!.validate()){

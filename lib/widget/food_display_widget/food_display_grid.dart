@@ -85,7 +85,13 @@ class _FoodDisplayGridState extends State<FoodDisplayGrid> {
                   ),
                   fadeInCurve: Curves.linear,
                   fadeInDuration: Duration(seconds: 2),
-                  errorWidget: (context, url, error) => Image.asset(foodDesignImage),
+                  errorWidget: (context, url, error) => Center(
+                    child: Icon(
+                      Icons.error,
+                      size: 20,
+                      color: AppColors.grey,
+                    ),
+                  ),
                 ),
               ),
             ),

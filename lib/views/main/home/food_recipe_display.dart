@@ -23,14 +23,17 @@ class _FoodRecipeDisplayState extends State<FoodRecipeDisplay> {
           return LoadData(isList: false);
         } else {
           List<FoodModel> foods = snapshot.data!;
-          return ListView.builder(
-            scrollDirection: Axis.horizontal,
-            shrinkWrap: true,
-            physics: ClampingScrollPhysics(),
-            hitTestBehavior: HitTestBehavior.translucent,
-            clipBehavior: Clip.hardEdge,
-            itemCount: foods.length / 2 as int,
-            itemBuilder: (context, index) => FoodDisplayGrid(food: foods[index]),
+          return SizedBox(
+            height: 200,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              physics: ClampingScrollPhysics(),
+              hitTestBehavior: HitTestBehavior.translucent,
+              clipBehavior: Clip.hardEdge,
+              itemCount: (foods.length / 2).toInt(),
+              itemBuilder: (context, index) => FoodDisplayGrid(food: foods[index]),
+            ),
           );
         }
       }

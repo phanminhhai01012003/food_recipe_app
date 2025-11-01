@@ -111,7 +111,7 @@ class _UserInformationState extends State<UserInformation> {
             Divider(color: AppColors.grey, thickness: 1, height: 1),
             SizedBox(height: 15),
             component("Email", widget.user.email),
-            SizedBox(height: 30),
+            SizedBox(height: 50),
             SizedBox(
               width: double.infinity,
               height: 50,
@@ -123,6 +123,7 @@ class _UserInformationState extends State<UserInformation> {
                 ),
                 onPressed: () => Navigator.push(context, checkDeviceRoute(editUserPage(widget.user))), 
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.person_2, size: 20),
                     SizedBox(width: 5),
@@ -149,6 +150,7 @@ class _UserInformationState extends State<UserInformation> {
                 ),
                 onPressed: () => Navigator.push(context, checkDeviceRoute(deleteUser)), 
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.delete_forever, size: 20),
                     SizedBox(width: 5),
@@ -166,7 +168,7 @@ class _UserInformationState extends State<UserInformation> {
             SizedBox(height: 10),
             SizedBox(
               height: 50,
-              width: MediaQuery.of(context).size.width * 0.75,
+              width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.purple,
@@ -181,6 +183,7 @@ class _UserInformationState extends State<UserInformation> {
                   onCancelTap: () => Navigator.pop(context)
                 ),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.logout, size: 20),
                     SizedBox(width: 5),
@@ -213,7 +216,7 @@ class _UserInformationState extends State<UserInformation> {
           ),
         ),
         SizedBox(
-          width: 100,
+          width: 260,
           child: Expanded(
             child: Text(
               info,

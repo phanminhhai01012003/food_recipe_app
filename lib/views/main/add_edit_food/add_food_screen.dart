@@ -5,7 +5,6 @@ import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/convert.dart';
 import 'package:food_recipe_app/common/extension.dart';
-import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_time_picker.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
@@ -27,7 +26,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   final dietController = TextEditingController();
-  late String _duration = Duration.zero.toString();
+  String _duration = Duration.zero.toString();
   List<TextEditingController> ingredientController = [TextEditingController()];
   List<TextEditingController> stepController = [TextEditingController()];
   void onAddFood() async{
@@ -40,7 +39,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
     imageURL = await imageServices.uploadImage(context, image!, foodFolder);
     FoodModel food = FoodModel(
       foodId: generateRandomString(20), 
-      image: imageURL!, 
+      image: image == null && imageURL!.isEmpty ? foodDesignImage : imageURL!, 
       title: titleController.text, 
       description: descriptionController.text, 
       userId: currentUser.uid, 
@@ -86,7 +85,12 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 context, 
                 title: "Loại bỏ thay đổi", 
                 content: "Bạn có chắc chắn muốn bỏ thay đổi không? Mọi thay đổi sẽ không được lưu", 
-                onAcceptTap: () => Navigator.pushReplacement(context, checkDeviceRoute(myFoodScreen)), 
+                onAcceptTap: () async{
+                  Navigator.pop(context);
+                  await Future.delayed(Duration(seconds: 1),(){
+                    Navigator.pop(context);
+                  });
+                }, 
                 onCancelTap: () => Navigator.pop(context)
               );
             }, 
@@ -230,25 +234,31 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
               ),
             ),
             SizedBox(height: 5),
-            DropdownButton(
-              underline: SizedBox(),
-              isExpanded: true,
-              hint: Text("Chọn"),
-              items: categoryList.map((String item){
-                return DropdownMenuItem(
-                  value: item,
-                  child: Text(item),
-                );
-              }).toList(),
-              onChanged: (value){
-                setState(() {
-                  selectCategory = value;
-                });
-              },
-              value: selectCategory,
-              icon: Icon(Icons.keyboard_arrow_down),
-              iconSize: 20,
-              style: TextStyle(color: Colors.black),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: AppColors.black)
+              ),
+              child: DropdownButton(
+                underline: SizedBox(),
+                isExpanded: true,
+                hint: Text("Chọn"),
+                items: categoryList.map((String item){
+                  return DropdownMenuItem(
+                    value: item,
+                    child: Text(item),
+                  );
+                }).toList(),
+                onChanged: (value){
+                  setState(() {
+                    selectCategory = value;
+                  });
+                },
+                value: selectCategory,
+                icon: Icon(Icons.keyboard_arrow_down),
+                iconSize: 20,
+                style: TextStyle(color: Colors.black),
+              ),
             ),
             SizedBox(height: 20),
             Row(
@@ -264,8 +274,8 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 Row(
                   children: [
                     SizedBox(
-                      height: 30,
-                      width: 50,
+                      height: 33,
+                      width: 70,
                       child: TextField(
                         controller: dietController,
                         keyboardType: TextInputType.numberWithOptions(decimal: false),
@@ -278,12 +288,6 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(color: AppColors.black)
                           ),
-                          hintText: "Số lượng",
-                          hintStyle: TextStyle(
-                            color: AppColors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w800
-                          )
                         ),
                         style: TextStyle(
                           color: AppColors.black,
@@ -292,6 +296,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                         ),
                       ),
                     ),
+                    SizedBox(width: 5),
                     Text("người",
                       style: TextStyle(
                         color: AppColors.black,
@@ -324,8 +329,8 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     }
                   },
                   child: Container(
-                    width: 100,
-                    height: 30,
+                    width: 120,
+                    height: 33,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       color: AppColors.white,
@@ -353,7 +358,8 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
               ),
             ),
             SizedBox(height: 10),
-            ListView.builder(
+            ListView.separated(
+              separatorBuilder: (context, index) => SizedBox(height: 5),
               itemCount: ingredientController.length,
               shrinkWrap: true,
               itemBuilder: (context, index){
@@ -379,12 +385,17 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(color: AppColors.black)
                     ),
-                    prefixIcon: Text(
-                      "${index + 1}",
-                      style: TextStyle(
-                        color: AppColors.black,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 14
+                    prefixIcon: Container(
+                      alignment: Alignment.center,
+                      width: 20,
+                      height: 20,
+                      child: Text(
+                        "${index + 1}",
+                        style: TextStyle(
+                          color: AppColors.black,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 14
+                        ),
                       ),
                     ),
                     suffixIcon: Visibility(
@@ -408,7 +419,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             Center(
               child: SizedBox(
                 width: 150,
-                height: 30,
+                height: 50,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.green,
@@ -435,7 +446,8 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
               ),
             ),
             SizedBox(height: 10),
-            ListView.builder(
+            ListView.separated(
+              separatorBuilder: (context, index) => SizedBox(height: 5),
               itemCount: stepController.length,
               shrinkWrap: true,
               itemBuilder: (context, index){
@@ -461,12 +473,17 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(color: AppColors.black)
                     ),
-                    prefixIcon: Text(
-                      "${index + 1}",
-                      style: TextStyle(
-                        color: AppColors.black,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 14
+                    prefixIcon: Container(
+                      width: 20,
+                      height: 20,
+                      alignment: Alignment.center,
+                      child: Text(
+                        "${index + 1}",
+                        style: TextStyle(
+                          color: AppColors.black,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 14
+                        ),
                       ),
                     ),
                     suffixIcon: Visibility(
@@ -490,7 +507,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             Center(
               child: SizedBox(
                 width: 150,
-                height: 30,
+                height: 50,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.green,

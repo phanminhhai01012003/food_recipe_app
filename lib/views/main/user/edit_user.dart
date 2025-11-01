@@ -17,6 +17,7 @@ class EditUser extends StatefulWidget {
 }
 
 class _EditUserState extends State<EditUser> {
+  final formKey = GlobalKey<FormState>();
   File? image;
   String? imageUrl;
   final nameController = TextEditingController();

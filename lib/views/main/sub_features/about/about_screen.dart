@@ -54,7 +54,7 @@ class _AboutScreenState extends State<AboutScreen> {
                   },
                   child: Container(
                     height: 50,
-                    width: MediaQuery.of(context).size.width / 2,
+                    width: MediaQuery.of(context).size.width / 3,
                     decoration: BoxDecoration(
                       color: selectedIndex == 0 ? AppColors.green : AppColors.white,
                       borderRadius: BorderRadius.circular(33),
@@ -78,7 +78,8 @@ class _AboutScreenState extends State<AboutScreen> {
                     });
                   },
                   child: Container(
-                    alignment: Alignment.center,
+                    height: 50,
+                    width: MediaQuery.of(context).size.width / 3,
                     decoration: BoxDecoration(
                       color: selectedIndex == 1 ? AppColors.green : AppColors.white,
                       borderRadius: BorderRadius.circular(33),

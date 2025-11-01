@@ -46,7 +46,7 @@ class _MainPageState extends State<MainPage> {
         selectedItemColor: AppColors.green,
         selectedFontSize: 16,
         selectedLabelStyle: TextStyle(fontWeight: FontWeight.w700),
-        unselectedItemColor: AppColors.grey,
+        unselectedItemColor: AppColors.black,
         unselectedFontSize: 16,
         unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w500),
         onTap: (value) {

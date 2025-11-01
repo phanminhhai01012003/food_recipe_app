@@ -36,6 +36,16 @@ class _CookbookListState extends State<CookbookList> {
                     color: AppColors.yellow,
                   )
                 ),
+                fit: BoxFit.cover,
+                width: 50,
+                height: 50,
+                errorWidget: (context, url, error) => Center(
+                  child: Icon(
+                    Icons.error,
+                    size: 20,
+                    color: AppColors.grey,
+                  ),
+                ),
               ),
             ),
             SizedBox(width: 10),

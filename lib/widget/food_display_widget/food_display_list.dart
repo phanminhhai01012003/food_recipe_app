@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
-import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/convert.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/food_model.dart';
@@ -85,7 +84,13 @@ class _FoodDisplayListState extends State<FoodDisplayList> {
                   ),
                   fadeInCurve: Curves.linear,
                   fadeInDuration: Duration(seconds: 2),
-                  errorWidget: (context, url, error) => Image.asset(foodDesignImage),
+                  errorWidget: (context, url, error) => Center(
+                    child: Icon(
+                      Icons.error, 
+                      size: 20,
+                      color: AppColors.grey,
+                    ),
+                  ),
                 ),
               ),
             ),
