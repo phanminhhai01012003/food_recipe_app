@@ -69,6 +69,7 @@ class _MyFoodState extends State<MyFood> {
           } else {
             List<FoodModel> foodData = snapshot.data!;
             return ListView.builder(
+              padding: EdgeInsets.all(12),
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               hitTestBehavior: HitTestBehavior.translucent,

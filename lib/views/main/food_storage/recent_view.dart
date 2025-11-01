@@ -71,6 +71,7 @@ class _RecentViewState extends State<RecentView> {
             );
           }
           return ListView.builder(
+            padding: EdgeInsets.all(12),
             shrinkWrap: true,
             hitTestBehavior: HitTestBehavior.translucent,
             clipBehavior: Clip.hardEdge,

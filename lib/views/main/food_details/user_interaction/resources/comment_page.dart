@@ -25,7 +25,7 @@ class _CommentPageState extends State<CommentPage> {
   bool get checkComment => _commentController.text.isEmpty;
   void onAddComment() async{
     CommentModel comment = CommentModel(
-      commentId: generateRandomString(18),
+      commentId: generateRandomString(23),
       userId: currentUser.uid,
       avatar: currentUser.photoURL!, 
       userName: currentUser.displayName!, 

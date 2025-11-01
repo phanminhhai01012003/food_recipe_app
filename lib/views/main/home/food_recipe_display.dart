@@ -26,6 +26,7 @@ class _FoodRecipeDisplayState extends State<FoodRecipeDisplay> {
           return SizedBox(
             height: 200,
             child: ListView.builder(
+              padding: EdgeInsets.all(12),
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
               physics: ClampingScrollPhysics(),

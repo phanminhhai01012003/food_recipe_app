@@ -103,7 +103,6 @@ flutter:
     - assets/images/fb.png
     - assets/images/food.png
     - assets/images/cooking.png
-    - assets/images/user.png
     - assets/document/document.pdf
 
   # An image asset can refer to one or more resolution-specific "variants", see

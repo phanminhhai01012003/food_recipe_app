@@ -60,7 +60,7 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
     }
     imageURL = await imageServices.uploadImage(context, image!, cookbookFolder);
     CookbookModel cookbook = CookbookModel(
-      cookbookId: generateRandomString(17), 
+      cookbookId: generateRandomString(22), 
       cookbookImage: imageURL!, 
       cookbookName: _titleController.text, 
       description: _descriptionController.text, 

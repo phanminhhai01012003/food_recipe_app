@@ -26,7 +26,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   final dietController = TextEditingController();
-  late String _duration = Duration.zero.toString();
+  String _duration = Duration.zero.toString();
   List<TextEditingController> ingredientController = [TextEditingController()];
   List<TextEditingController> stepController = [TextEditingController()];
   @override
@@ -75,6 +75,16 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
     Navigator.pop(context);
   }
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    titleController.dispose();
+    descriptionController.dispose();
+    dietController.dispose();
+    ingredientController.forEach((controller) => controller.dispose());
+    stepController.forEach((controller) => controller.dispose());
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
@@ -109,7 +119,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
         actions: [
           IconButton(
             onPressed: onUpdateFood, 
-            icon: Icon(Icons.check_circle, size: 30, color: AppColors.white)
+            icon: Icon(Icons.check_circle, size: 30)
           )
         ],
       ),
@@ -238,6 +248,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
             ),
             SizedBox(height: 5),
             Container(
+              padding: EdgeInsets.symmetric(horizontal: 12),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: AppColors.black)
@@ -366,7 +377,8 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
               ),
             ),
             SizedBox(height: 10),
-            ListView.builder(
+            ListView.separated(
+              separatorBuilder: (context, index) => SizedBox(height: 5),
               itemCount: ingredientController.length,
               shrinkWrap: true,
               itemBuilder: (context, index){
@@ -410,7 +422,11 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                             ingredientController.removeAt(index);
                           });
                         }, 
-                        icon: Icon(Icons.delete, size: 30, color: AppColors.red)
+                        icon: Icon(
+                          Icons.delete, 
+                          size: 30, 
+                          color: AppColors.red
+                        )
                       )
                     ),
                   ),
@@ -448,7 +464,8 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
               ),
             ),
             SizedBox(height: 10),
-            ListView.builder(
+            ListView.separated(
+              separatorBuilder: (context, index) => SizedBox(height: 5),
               itemCount: stepController.length,
               shrinkWrap: true,
               itemBuilder: (context, index){
@@ -492,7 +509,11 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                             stepController.removeAt(index);
                           });
                         }, 
-                        icon: Icon(Icons.delete, size: 30, color: AppColors.red)
+                        icon: Icon(
+                          Icons.delete, 
+                          size: 30, 
+                          color: AppColors.red
+                        )
                       )
                     ),
                   ),

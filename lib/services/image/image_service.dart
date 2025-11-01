@@ -26,10 +26,10 @@ class ImageService extends ImageRepo{
   }
 
   @override
-  Future<String?> uploadImage(BuildContext context, File? image, String folder) async{
+  Future<String> uploadImage(BuildContext context, File? image, String folder) async{
     // TODO: implement uploadImage
     try {
-      if (image == null) return null;
+      if (image == null) return "";
       String fileName = image.path.split("/").last;
       Reference ref = FirebaseStorage.instance.ref().child("$folder/$fileName");
       UploadTask uploadTask = ref.putFile(image);

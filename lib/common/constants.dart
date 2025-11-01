@@ -17,7 +17,7 @@ String ggImage = "$imagePath/gg.png";
 String fbImage = "$imagePath/fb.png";
 String foodImage = "$imagePath/food.png";
 String cookingImage = "$imagePath/cooking.png";
-String userDefaultImage = "$imagePath/user.png";
+String userDefaultImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ71Tc9Tk2q1eJUUlX1bXhWrc0-g8O9xnAplw&s";
 
 //key
 final navigatorKey = GlobalKey<NavigatorState>();

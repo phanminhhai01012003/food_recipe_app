@@ -105,139 +105,143 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             SizedBox(height: 20),
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.white,
-                    offset: Offset(5, 5),
-                    blurRadius: 5,
-                    spreadRadius: 5,
-                    blurStyle: BlurStyle.solid
-                  )
-                ]
-              ),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Column(
-                  children: [
-                    Text(
-                      "Hôm nay có gì mới",                      
-                      style: TextStyle(
-                        color: AppColors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.white,
+                      offset: Offset(5, 5),
+                      blurRadius: 5,
+                      spreadRadius: 5,
+                      blurStyle: BlurStyle.solid
+                    )
+                  ]
+                ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Text(
+                        "Hôm nay có gì mới",                      
+                        style: TextStyle(
+                          color: AppColors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 5),
-                    Text(
-                      "Hãy cùng nhau khám phá những món ăn mà bạn yêu thích "
-                      "và học cách chế biến chúng",
-                      style: TextStyle(
-                        color: AppColors.black,
-                        fontSize: 12,
-                        fontWeight: FontWeight.normal
+                      SizedBox(height: 5),
+                      Text(
+                        "Hãy cùng nhau khám phá những món ăn mà bạn yêu thích "
+                        "và học cách chế biến chúng",
+                        style: TextStyle(
+                          color: AppColors.black,
+                          fontSize: 12,
+                          fontWeight: FontWeight.normal
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 20),
-                    AnimationSlider(),
-                    SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Gần đây nhất",
+                      SizedBox(height: 20),
+                      AnimationSlider(),
+                      SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Gần đây nhất",
+                            style: TextStyle(
+                              color: AppColors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () => Navigator.push(context, checkDeviceRoute(listofFoodByDate(true))), 
+                            child: Text(
+                              "Xem tất cả",
+                              style: TextStyle(
+                                color: AppColors.blue,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500
+                              ),
+                            )
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      FoodRecipeDisplay(stream: foodServices.getFoodByDate(context, true)),
+                      SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Sớm nhất",
+                            style: TextStyle(
+                              color: AppColors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () => Navigator.push(context, checkDeviceRoute(listofFoodByDate(false))), 
+                            child: Text(
+                              "Xem tất cả",
+                              style: TextStyle(
+                                color: AppColors.blue,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500
+                              ),
+                            )
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      FoodRecipeDisplay(stream: foodServices.getFoodByDate(context, false)),
+                      SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Dành cho bạn",
+                            style: TextStyle(
+                              color: AppColors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () => Navigator.push(context, checkDeviceRoute(listofFoodView)), 
+                            child: Text(
+                              "Xem tất cả",
+                              style: TextStyle(
+                                color: AppColors.blue,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500
+                              ),
+                            )
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      FoodRecipeDisplay(stream: foodServices.getFood(context)),
+                      SizedBox(height: 20),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Các thể loại phổ biến",
                           style: TextStyle(
                             color: AppColors.black,
                             fontSize: 14,
                             fontWeight: FontWeight.w700
                           ),
                         ),
-                        TextButton(
-                          onPressed: () => Navigator.push(context, checkDeviceRoute(listofFoodByDate(true))), 
-                          child: Text(
-                            "Xem tất cả",
-                            style: TextStyle(
-                              color: AppColors.blue,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500
-                            ),
-                          )
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    FoodRecipeDisplay(stream: foodServices.getFoodByDate(context, true)),
-                    SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Sớm nhất",
-                          style: TextStyle(
-                            color: AppColors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () => Navigator.push(context, checkDeviceRoute(listofFoodByDate(false))), 
-                          child: Text(
-                            "Xem tất cả",
-                            style: TextStyle(
-                              color: AppColors.blue,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500
-                            ),
-                          )
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    FoodRecipeDisplay(stream: foodServices.getFoodByDate(context, false)),
-                    SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Dành cho bạn",
-                          style: TextStyle(
-                            color: AppColors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () => Navigator.push(context, checkDeviceRoute(listofFoodView)), 
-                          child: Text(
-                            "Xem tất cả",
-                            style: TextStyle(
-                              color: AppColors.blue,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500
-                            ),
-                          )
-                        )
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    FoodRecipeDisplay(stream: foodServices.getFood(context)),
-                    SizedBox(height: 20),
-                    Text(
-                      "Các thể loại phổ biến",
-                      style: TextStyle(
-                        color: AppColors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700
                       ),
-                    ),
-                    SizedBox(height: 10),
-                    CategoriesGridList()
-                  ],
+                      SizedBox(height: 10),
+                      CategoriesGridList()
+                    ],
+                  ),
                 ),
               ),
             ),

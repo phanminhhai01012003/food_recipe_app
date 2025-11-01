@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
+import 'package:food_recipe_app/common/convert.dart';
 import 'package:food_recipe_app/model/report_model.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -34,7 +35,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
     if (!agree) return;
     context.loaderOverlay.show();
     ReportModel report = ReportModel(
-      reportId: DateTime.now().millisecondsSinceEpoch.toString(), 
+      reportId: generateRandomString(20), 
       target: widget.title,
       author: widget.author,
       reporter: currentUser.displayName!,

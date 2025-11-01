@@ -89,7 +89,13 @@ class _UserInformationState extends State<UserInformation> {
                   width: 100,
                   height: 100,
                   fit: BoxFit.cover,
-                  errorWidget: (context, url, error) => Image.asset(userDefaultImage),
+                  errorWidget: (context, url, error) => Center(
+                    child: Icon(
+                      Icons.error,
+                      size: 30,
+                      color: AppColors.grey,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -216,7 +222,7 @@ class _UserInformationState extends State<UserInformation> {
           ),
         ),
         SizedBox(
-          width: 260,
+          width: 200,
           child: Expanded(
             child: Text(
               info,

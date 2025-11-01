@@ -24,7 +24,7 @@ class Selection extends StatelessWidget {
           fontWeight: FontWeight.normal
         ),
       ),
-      subtitle: Icon(Icons.chevron_right, size: 20, color: AppColors.grey),
+      trailing: Icon(Icons.chevron_right, size: 20, color: AppColors.grey),
     );
   }
 }

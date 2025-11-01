@@ -23,43 +23,47 @@ class _CategoriesGridListState extends State<CategoriesGridList> {
           return Center(child: CircularProgressIndicator(color: AppColors.yellow));
         } else {
           List<CategoryModel> grids = snapshot.data!;
-          return GridView.builder(
-            hitTestBehavior: HitTestBehavior.translucent,
-            clipBehavior: Clip.hardEdge,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4,
-              childAspectRatio: 0.3
+          return SizedBox(
+            height: 50,
+            child: GridView.builder(
+              padding: EdgeInsets.all(12),
+              hitTestBehavior: HitTestBehavior.translucent,
+              clipBehavior: Clip.hardEdge,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.7
+              ),
+              itemCount: grids.length, 
+              itemBuilder: (context, index) {
+                final tag = grids[index];
+                // if (tag.image == "" && tag.tag == "Tất cả") return const SizedBox();
+                return GestureDetector(
+                  onTap: () => Navigator.push(context, checkDeviceRoute(listofFoodByTag(tag.tag))),
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(tag.image),
+                        fit: BoxFit.cover,
+                        colorFilter: ColorFilter.mode(
+                          // ignore: deprecated_member_use
+                          AppColors.black.withOpacity(0.5), 
+                          BlendMode.dstATop
+                        )
+                      ),
+                    ),
+                    child: Text(
+                      tag.tag,
+                      style: TextStyle(
+                        color: AppColors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700
+                      ),
+                    ),
+                  ),
+                );
+              }
             ),
-            itemCount: grids.length, 
-            itemBuilder: (context, index) {
-              final tag = grids[index];
-              if (tag.image == "" && tag.tag == "Tất cả") return const SizedBox();
-              return GestureDetector(
-                onTap: () => Navigator.push(context, checkDeviceRoute(listofFoodByTag(tag.tag))),
-                child: Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(tag.image),
-                      fit: BoxFit.cover,
-                      colorFilter: ColorFilter.mode(
-                        // ignore: deprecated_member_use
-                        AppColors.black.withOpacity(0.5), 
-                        BlendMode.dstATop
-                      )
-                    ),
-                  ),
-                  child: Text(
-                    tag.tag,
-                    style: TextStyle(
-                      color: AppColors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700
-                    ),
-                  ),
-                ),
-              );
-            }
           );
         }
       },

@@ -21,7 +21,7 @@ class AddFoodScreen extends StatefulWidget {
 
 class _AddFoodScreenState extends State<AddFoodScreen> {
   File? image;
-  String? imageURL;
+  String imageURL = "";
   String? selectCategory;
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
@@ -38,8 +38,8 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
     }
     imageURL = await imageServices.uploadImage(context, image!, foodFolder);
     FoodModel food = FoodModel(
-      foodId: generateRandomString(20), 
-      image: image == null && imageURL!.isEmpty ? foodDesignImage : imageURL!, 
+      foodId: generateRandomString(25), 
+      image: image == null && imageURL.isEmpty ? foodDesignImage : imageURL, 
       title: titleController.text, 
       description: descriptionController.text, 
       userId: currentUser.uid, 
@@ -114,7 +114,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: image == null && imageURL!.isEmpty
+              child: image == null && imageURL.isEmpty
               ? InkWell(
                 onTap: () => showImagePickerModal(context, image!),
                 child: Container(
@@ -145,7 +145,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
               ) : InkWell(
                 onTap: () => showImagePickerModal(context, image!),
                 child: ClipRRect(
-                  child: Image.network(imageURL!,
+                  child: Image.network(imageURL,
                     height: 200,
                     width: double.infinity,
                     fit: BoxFit.cover,
@@ -235,6 +235,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             ),
             SizedBox(height: 5),
             Container(
+              padding: EdgeInsets.symmetric(horizontal: 12),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: AppColors.black)
@@ -408,7 +409,11 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                             ingredientController.removeAt(index);
                           });
                         }, 
-                        icon: Icon(Icons.delete, size: 30, color: AppColors.red)
+                        icon: Icon(
+                          Icons.delete, 
+                          size: 30, 
+                          color: AppColors.red
+                        )
                       )
                     ),
                   ),
@@ -496,7 +501,11 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                             stepController.removeAt(index);
                           });
                         }, 
-                        icon: Icon(Icons.delete, size: 30, color: AppColors.red)
+                        icon: Icon(
+                          Icons.delete, 
+                          size: 30, 
+                          color: AppColors.red
+                        )
                       )
                     ),
                   ),

@@ -44,6 +44,7 @@ class _StorageViewState extends State<StorageView> {
                     return SizedBox(
                       height: 200,
                       child: ListView.builder(
+                        padding: EdgeInsets.all(12),
                         shrinkWrap: true,
                         itemCount: users.length,
                         itemBuilder: (context, index) => UserWidget(
@@ -93,6 +94,7 @@ class _StorageViewState extends State<StorageView> {
                     return SizedBox(
                       height: 200,
                       child: ListView.builder(
+                        padding: EdgeInsets.all(12),
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
                         physics: ClampingScrollPhysics(),
@@ -139,6 +141,7 @@ class _StorageViewState extends State<StorageView> {
                   return SizedBox(
                     height: 200,
                     child: ListView.builder(
+                      padding: EdgeInsets.all(12),
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
                       physics: ClampingScrollPhysics(),
@@ -184,6 +187,7 @@ class _StorageViewState extends State<StorageView> {
                   return SizedBox(
                     height: 200,
                     child: ListView.builder(
+                      padding: EdgeInsets.all(12),
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
                       physics: ClampingScrollPhysics(),
@@ -229,6 +233,7 @@ class _StorageViewState extends State<StorageView> {
                   return SizedBox(
                     height: 200,
                     child: ListView.builder(
+                      padding: EdgeInsets.all(12),
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
                       hitTestBehavior: HitTestBehavior.translucent,

@@ -71,6 +71,7 @@ class _SaveFoodState extends State<SaveFood> {
             );
           }
           return ListView.builder(
+            padding: EdgeInsets.all(12),
             shrinkWrap: true,
             scrollDirection: Axis.vertical,
             hitTestBehavior: HitTestBehavior.translucent,

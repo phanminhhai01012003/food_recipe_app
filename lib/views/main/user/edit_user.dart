@@ -19,7 +19,7 @@ class EditUser extends StatefulWidget {
 class _EditUserState extends State<EditUser> {
   final formKey = GlobalKey<FormState>();
   File? image;
-  String? imageUrl;
+  String? imageURL;
   final nameController = TextEditingController();
   final descriptionController = TextEditingController();
   final phoneController = TextEditingController();
@@ -28,7 +28,7 @@ class _EditUserState extends State<EditUser> {
     // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_){
-      imageUrl = widget.user.avatar;
+      imageURL = widget.user.avatar;
       nameController.text = widget.user.userName;
       descriptionController.text = widget.user.description;
       phoneController.text = widget.user.phone;
@@ -38,11 +38,11 @@ class _EditUserState extends State<EditUser> {
     context.loaderOverlay.show();
     if (formKey.currentState!.validate()){
       formKey.currentState!.save();
-      imageUrl = await imageServices.uploadImage(context, image!, avatarFolder);
+      imageURL = await imageServices.uploadImage(context, image!, avatarFolder);
       UserModel user = UserModel(
         userId: widget.user.userId, 
         userName: nameController.text, 
-        avatar: imageUrl!, 
+        avatar: image == null && imageURL!.isEmpty ? widget.user.avatar : imageURL!, 
         email: widget.user.email, 
         description: descriptionController.text, 
         phone: phoneController.text.isEmpty ? "Không xác định" : phoneController.text, 
@@ -50,7 +50,7 @@ class _EditUserState extends State<EditUser> {
       );
       await currentUser.updateProfile(
         displayName: nameController.text,
-        photoURL: imageUrl
+        photoURL: imageURL
       );
       await userServices.updateUser(context, user).then((_){
         context.loaderOverlay.hide();
@@ -106,7 +106,7 @@ class _EditUserState extends State<EditUser> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
-                child: image == null && imageUrl!.isEmpty
+                child: image == null && imageURL!.isEmpty
               ? InkWell(
                 onTap: () => showImagePickerModal(context, image!),
                 child: Container(
@@ -137,7 +137,7 @@ class _EditUserState extends State<EditUser> {
               ) : InkWell(
                 onTap: () => showImagePickerModal(context, image!),
                 child: ClipRRect(
-                  child: Image.network(imageUrl!,
+                  child: Image.network(imageURL!,
                     height: 200,
                     width: double.infinity,
                     fit: BoxFit.cover,

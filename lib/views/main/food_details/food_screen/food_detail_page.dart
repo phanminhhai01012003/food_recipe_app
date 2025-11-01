@@ -83,7 +83,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
   @override
   Widget build(BuildContext context) {
     SaveFoodModel save = SaveFoodModel(
-      saveId: generateRandomString(19), 
+      saveId: generateRandomString(24), 
       userId: currentUser.uid, 
       isSaved: true, 
       foods: widget.food
@@ -202,7 +202,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                   ),
                   SizedBox(height: 20),
                   InkWell(
-                    onTap: () => Navigator.push(context, checkDeviceRoute(personalScreen(widget.food.foodId))),
+                    onTap: () => Navigator.push(context, checkDeviceRoute(personalScreen(widget.food.userId))),
                     child: Row(
                       children: [
                         ClipRRect(
@@ -218,7 +218,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                                 color: AppColors.yellow,
                               )
                             ),
-                            errorWidget: (context, url, error) => Image.asset(userDefaultImage),
+                            errorWidget: (context, url, error) => Icon(Icons.error, size: 20),
                           )
                         ),
                         SizedBox(width: 10),
