@@ -13,6 +13,7 @@ import 'package:food_recipe_app/views/main/categories/tag_services.dart';
 //images
 String imagePath = "assets/images";
 String foodDesignImage = "$imagePath/FoodDesign.png";
+String foodDefaultImage = "https://images.unsplash.com/photo-1556910096-6f5e72db6803?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 String ggImage = "$imagePath/gg.png";
 String fbImage = "$imagePath/fb.png";
 String foodImage = "$imagePath/food.png";

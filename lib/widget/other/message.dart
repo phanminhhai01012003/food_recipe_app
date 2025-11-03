@@ -6,12 +6,17 @@ class Message {
   static void showScaffoldMessage(BuildContext context, String title, Color color){
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(
-          title,
-          style: TextStyle(
-            color: AppColors.white,
-            fontSize: 14,
-            fontWeight: FontWeight.bold
+        clipBehavior: Clip.hardEdge,
+        hitTestBehavior: HitTestBehavior.translucent,
+        content: SizedBox(
+          height: 50,
+          child: Text(
+            title,
+            style: TextStyle(
+              color: AppColors.white,
+              fontSize: 14,
+              fontWeight: FontWeight.bold
+            ),
           ),
         ),
         padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),

@@ -13,6 +13,8 @@ class HistoryState extends ChangeNotifier{
     initData();
   }
 
+  bool isExist(RecentViewModel data) => _viewProducts.contains(data);
+
   void toggle(RecentViewModel data) async{
     if (_viewProducts.contains(data)){
       _viewProducts.remove(data);

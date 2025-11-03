@@ -23,35 +23,23 @@ class _CategoriesGridListState extends State<CategoriesGridList> {
           return Center(child: CircularProgressIndicator(color: AppColors.yellow));
         } else {
           List<CategoryModel> grids = snapshot.data!;
-          return SizedBox(
-            height: 50,
-            child: GridView.builder(
-              padding: EdgeInsets.all(12),
-              hitTestBehavior: HitTestBehavior.translucent,
-              clipBehavior: Clip.hardEdge,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.7
-              ),
-              itemCount: grids.length, 
-              itemBuilder: (context, index) {
-                final tag = grids[index];
-                // if (tag.image == "" && tag.tag == "Tất cả") return const SizedBox();
-                return GestureDetector(
-                  onTap: () => Navigator.push(context, checkDeviceRoute(listofFoodByTag(tag.tag))),
+          return Wrap(
+            spacing: 32,
+            runSpacing: 32,
+            children: grids.map((tag) {
+              if (tag.tag == "Tất cả") return SizedBox.shrink();
+              return GestureDetector(
+                onTap: () => Navigator.push(context, checkDeviceRoute(listofFoodByTag(tag.tag))),
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(tag.image),
+                      fit: BoxFit.cover,
+                    )
+                  ),
                   child: Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(tag.image),
-                        fit: BoxFit.cover,
-                        colorFilter: ColorFilter.mode(
-                          // ignore: deprecated_member_use
-                          AppColors.black.withOpacity(0.5), 
-                          BlendMode.dstATop
-                        )
-                      ),
-                    ),
+                    // ignore: deprecated_member_use
+                    color: AppColors.black.withOpacity(0.5),
                     child: Text(
                       tag.tag,
                       style: TextStyle(
@@ -61,9 +49,9 @@ class _CategoriesGridListState extends State<CategoriesGridList> {
                       ),
                     ),
                   ),
-                );
-              }
-            ),
+                ),
+              );
+            }).toList(),
           );
         }
       },

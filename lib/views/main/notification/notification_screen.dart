@@ -72,122 +72,125 @@ class _NotificationScreenState extends State<NotificationScreen> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              InkWell(
-                onTap: (){
-                  setState(() {
-                    _btnIndex = 0;
-                  });
-                },
-                child: Container(
-                  height: 50,
-                  width: MediaQuery.of(context).size.width * 0.25,
-                  decoration: BoxDecoration(
-                    color: _btnIndex == 0 ? AppColors.green : AppColors.white,
-                    borderRadius: BorderRadius.circular(18),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Tất cả",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: _btnIndex == 0 ? AppColors.white : AppColors.black,
+      body: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                InkWell(
+                  onTap: (){
+                    setState(() {
+                      _btnIndex = 0;
+                    });
+                  },
+                  child: Container(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width * 0.25,
+                    decoration: BoxDecoration(
+                      color: _btnIndex == 0 ? AppColors.green : AppColors.white,
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Tất cả",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: _btnIndex == 0 ? AppColors.white : AppColors.black,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              InkWell(
-                onTap: (){
-                  setState(() {
-                    _btnIndex = 1;
-                  });
-                },
-                child: Container(
-                  height: 50,
-                  width: MediaQuery.of(context).size.width * 0.25,
-                  decoration: BoxDecoration(
-                    color: _btnIndex == 1 ? AppColors.green : AppColors.white,
-                    borderRadius: BorderRadius.circular(18),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Đã đọc",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: _btnIndex == 1 ? AppColors.white : AppColors.black,
+                InkWell(
+                  onTap: (){
+                    setState(() {
+                      _btnIndex = 1;
+                    });
+                  },
+                  child: Container(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width * 0.25,
+                    decoration: BoxDecoration(
+                      color: _btnIndex == 1 ? AppColors.green : AppColors.white,
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Đã đọc",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: _btnIndex == 1 ? AppColors.white : AppColors.black,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              InkWell(
-                onTap: (){
-                  setState(() {
-                    _btnIndex = 2;
-                  });
-                },
-                child: Container(
-                  height: 50,
-                  width: MediaQuery.of(context).size.width * 0.25,
-                  decoration: BoxDecoration(
-                    color: _btnIndex == 2 ? AppColors.green : AppColors.white,
-                    borderRadius: BorderRadius.circular(18),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Chưa đọc",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: _btnIndex == 2 ? AppColors.white : AppColors.black,
+                InkWell(
+                  onTap: (){
+                    setState(() {
+                      _btnIndex = 2;
+                    });
+                  },
+                  child: Container(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width * 0.25,
+                    decoration: BoxDecoration(
+                      color: _btnIndex == 2 ? AppColors.green : AppColors.white,
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Chưa đọc",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: _btnIndex == 2 ? AppColors.white : AppColors.black,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          SizedBox(height: 20),
-          FutureBuilder(
-            future: _btnIndex == 0 
-              ? notificationData.getSystemNotifications() 
-              : notificationData.getReadNotifications(isRead), 
-            builder: (context, snapshot){
-              if (!snapshot.hasData || snapshot.hasError){
-                return SizedBox.shrink();
-              } else if (snapshot.connectionState == ConnectionState.waiting) {
-                return LoadData(isList: true);
-              } else {
-                List<NotificationModel> notifications = snapshot.data!;
-                return ListView.separated(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  itemCount: notifications.length,
-                  separatorBuilder: (context, index) => Divider(
-                    height: 1, 
-                    thickness: 1, 
-                    color: AppColors.grey
-                  ),
-                  itemBuilder: (context, index) => NotificationList(
-                    imageWidget: renderImageWidget(
-                      notifications[index].type, 
-                      notifications[index].from!
-                    ), 
-                    title: notifications[index].title, 
-                    date: DateFormat("dd/MM/yyyy").format(notifications[index].createdAt)
-                  ),
-                );
+              ],
+            ),
+            SizedBox(height: 20),
+            FutureBuilder(
+              future: _btnIndex == 0 
+                ? notificationData.getSystemNotifications() 
+                : notificationData.getReadNotifications(isRead), 
+              builder: (context, snapshot){
+                if (!snapshot.hasData || snapshot.hasError){
+                  return SizedBox.shrink();
+                } else if (snapshot.connectionState == ConnectionState.waiting) {
+                  return LoadData(isList: true);
+                } else {
+                  List<NotificationModel> notifications = snapshot.data!;
+                  return ListView.separated(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemCount: notifications.length,
+                    separatorBuilder: (context, index) => Divider(
+                      height: 1, 
+                      thickness: 1, 
+                      color: AppColors.grey
+                    ),
+                    itemBuilder: (context, index) => NotificationList(
+                      imageWidget: renderImageWidget(
+                        notifications[index].type, 
+                        notifications[index].from!
+                      ), 
+                      title: notifications[index].title, 
+                      date: DateFormat("dd/MM/yyyy").format(notifications[index].createdAt)
+                    ),
+                  );
+                }
               }
-            }
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

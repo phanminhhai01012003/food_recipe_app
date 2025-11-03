@@ -82,6 +82,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      constraints: BoxConstraints(maxHeight: 700),
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
@@ -105,7 +106,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
             ),
           ),
           SingleChildScrollView(
-            padding: EdgeInsets.all(12),
+            padding: EdgeInsets.all(8),
             child: Column(
               children: [
                 Text(
@@ -126,9 +127,11 @@ class _ShowReportModalState extends State<ShowReportModal> {
                   ),
                 ),
                 SizedBox(height: 10),
-                ListView(
+                Column(
                   children: List.generate(
-                    reportFoodList.length, 
+                    widget.title.contains("Món") 
+                      ? reportFoodList.length
+                      : reportCommentList.length, 
                     (i) => radio(
                       widget.title.contains("Món") 
                         ? reportFoodList[i] 
@@ -175,12 +178,11 @@ class _ShowReportModalState extends State<ShowReportModal> {
                         });
                       }
                     ),
-                    SizedBox(width: 5),
                     Text(
                       "Tôi đồng ý cam kết thông tin trên là đúng sự thật",
                       style: TextStyle(
                         color: AppColors.black,
-                        fontSize: 12,
+                        fontSize: 11,
                         fontWeight: FontWeight.w600
                       ),
                     ),
@@ -235,14 +237,30 @@ class _ShowReportModalState extends State<ShowReportModal> {
     );
   }
   Widget radio(String title){
-    return Radio<String>(
-      value: title, 
-      groupValue: selectedOption, 
-      onChanged: (value) {
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      leading: Radio<String>(
+        value: title,
+        groupValue: selectedOption,
+        onChanged: (value) {
+          setState(() {
+            selectedOption = value;
+          });
+        },
+      ),
+      title: Text(
+        title,
+        style: TextStyle(
+          color: AppColors.black,
+          fontSize: 12,
+          fontWeight: FontWeight.normal
+        ),
+      ),
+      onTap: () {
         setState(() {
-          selectedOption = value;
+          selectedOption = title;
         });
-      }
+      },
     );
   }
 }

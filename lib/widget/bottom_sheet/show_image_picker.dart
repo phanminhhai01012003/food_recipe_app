@@ -4,18 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
 
-Future<void> showImagePickerModal(BuildContext context, File image) async{
+Future<File?> showImagePickerModal(BuildContext context) async{
   return await showModalBottomSheet(
     context: context,
     // ignore: deprecated_member_use
     barrierColor: AppColors.black.withOpacity(0.5),
-    builder: (context) => ShowImagePicker(image: image)
+    builder: (context) => ShowImagePicker()
   );
 }
 
 class ShowImagePicker extends StatelessWidget {
-  final File image;
-  const ShowImagePicker({super.key, required this.image});
+  const ShowImagePicker({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +44,10 @@ class ShowImagePicker extends StatelessWidget {
               foregroundColor: AppColors.white
             ),
             onPressed: () async{
-              await imageServices.pickImage(context, true, image);
+              final imagePicked = await imageServices.pickImage(context, true);
+              if (imagePicked != null) {
+                Navigator.pop(context, imagePicked);
+              }
             },
             child: Text("Chụp ảnh",
               style: TextStyle(
@@ -62,7 +64,10 @@ class ShowImagePicker extends StatelessWidget {
               foregroundColor: AppColors.white
             ),
             onPressed: () async{
-              await imageServices.pickImage(context, false, image);
+              final imagePicked = await imageServices.pickImage(context, false);
+              if (imagePicked != null) {
+                Navigator.pop(context, imagePicked);
+              }
             },
             child: Text("Chọn ảnh",
               style: TextStyle(

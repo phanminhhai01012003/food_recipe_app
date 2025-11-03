@@ -10,14 +10,13 @@ import 'package:image_picker/image_picker.dart';
 
 class ImageService extends ImageRepo{
   @override
-  Future<void> pickImage(BuildContext context, bool isCamera, File? image) async{
+  Future<File?> pickImage(BuildContext context, bool isCamera) async{
     // TODO: implement pickImage
     try {
       final picker = ImagePicker();
       final imagePicker = await picker.pickImage(source: isCamera ? ImageSource.camera : ImageSource.gallery);
-      if (imagePicker != null) {
-        image = File(imagePicker.path);
-      } 
+      if (imagePicker == null) return null;
+      return File(imagePicker.path);
     } catch (e){
       Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
       Logger.log(e);

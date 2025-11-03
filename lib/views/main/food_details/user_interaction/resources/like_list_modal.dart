@@ -6,7 +6,7 @@ Future showLikesListModal(BuildContext context, Future<List<Map<String, dynamic>
   return await showModalBottomSheet(
     context: context,
     backgroundColor: AppColors.white,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
     // ignore: deprecated_member_use
     barrierColor: Colors.black.withOpacity(0.75),
     builder: (context) => LikeListModal(fetch: fetch)

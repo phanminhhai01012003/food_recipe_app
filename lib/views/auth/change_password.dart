@@ -45,9 +45,9 @@ class _ChangePasswordState extends State<ChangePassword> {
       backgroundColor: AppColors.white,
       appBar: AppBar(
         backgroundColor: AppColors.green,
+        foregroundColor: AppColors.white,
         title: Text("Đổi mật khẩu",
           style: TextStyle(
-            color: AppColors.white,
             fontSize: 16,
             fontWeight: FontWeight.w700
           ),
@@ -63,7 +63,7 @@ class _ChangePasswordState extends State<ChangePassword> {
             children: [
                     Text("Mật khẩu hiện tại",
                       style: TextStyle(
-                        color: AppColors.white,
+                        color: AppColors.black,
                         fontSize: 16,
                         fontWeight: FontWeight.bold
                       ),
@@ -128,7 +128,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     SizedBox(height: 20),
                     Text("Mật khẩu mới",
                       style: TextStyle(
-                        color: AppColors.white,
+                        color: AppColors.black,
                         fontSize: 16,
                         fontWeight: FontWeight.bold
                       ),
@@ -193,7 +193,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     SizedBox(height: 20),
                     Text("Xác nhận mật khẩu",
                       style: TextStyle(
-                        color: AppColors.white,
+                        color: AppColors.black,
                         fontSize: 16,
                         fontWeight: FontWeight.bold
                       ),

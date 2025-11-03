@@ -41,17 +41,13 @@ class _StorageViewState extends State<StorageView> {
                     return Center(child: CircularProgressIndicator());
                   } else {
                     List<UserModel> users = snapshot.data!;
-                    return SizedBox(
-                      height: 200,
-                      child: ListView.builder(
-                        padding: EdgeInsets.all(12),
-                        shrinkWrap: true,
-                        itemCount: users.length,
-                        itemBuilder: (context, index) => UserWidget(
-                          user: users[index], 
-                          onTap: () => Navigator.push(context, checkDeviceRoute(userInform(users[index])))
-                        )
-                      ),
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: users.length,
+                      itemBuilder: (context, index) => UserWidget(
+                        user: users[index], 
+                        onTap: () => Navigator.push(context, checkDeviceRoute(userInform(users[index])))
+                      )
                     );
                   }
                 },

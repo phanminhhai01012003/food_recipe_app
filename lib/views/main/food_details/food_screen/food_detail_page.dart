@@ -293,7 +293,6 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                       color: Colors.black
                     ),
                   ),
-                  SizedBox(height: 10),
                   ListView.builder(
                     itemCount: widget.food.ingredients.length,
                     shrinkWrap: true,
@@ -336,7 +335,6 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                       color: Colors.black
                     ),
                   ),
-                  SizedBox(height: 10),
                   ListView.builder(
                     itemCount: widget.food.steps.length,
                     shrinkWrap: true,
@@ -386,7 +384,6 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                                 size: 20,
                               )
                             ),
-                            SizedBox(width: 5),
                             GestureDetector(
                               onTap: () async{
                                 await showLikesListModal(context, fetchLikeList());
@@ -431,6 +428,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                       ),
                       onPressed: () => Navigator.push(context, checkDeviceRoute(commentPage(widget.food))), 
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(Icons.comment, size: 20),
                           SizedBox(width: 5),
@@ -459,6 +457,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                         Navigator.push(context, checkDeviceRoute(cookbookSelection(widget.food)));
                       }, 
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
                             Icons.add, 

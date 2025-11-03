@@ -42,12 +42,12 @@ class _MainPageState extends State<MainPage> {
         currentIndex: selectedIndex,
         type: BottomNavigationBarType.fixed,
         elevation: 0,
-        iconSize: 25,
+        iconSize: 20,
         selectedItemColor: AppColors.green,
-        selectedFontSize: 16,
+        selectedFontSize: 14,
         selectedLabelStyle: TextStyle(fontWeight: FontWeight.w700),
-        unselectedItemColor: AppColors.black,
-        unselectedFontSize: 16,
+        unselectedItemColor: AppColors.grey,
+        unselectedFontSize: 14,
         unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w500),
         onTap: (value) {
           setState(() {

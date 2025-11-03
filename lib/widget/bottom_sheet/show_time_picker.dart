@@ -2,46 +2,44 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
-import 'package:food_recipe_app/common/convert.dart';
-import 'package:food_recipe_app/model/food_model.dart';
 import 'package:numberpicker/numberpicker.dart';
 
-Future<String?> showTimePickerModal(BuildContext context, FoodModel? food) async {
+Future<Duration?> showTimePickerModal(BuildContext context, Duration? duration) async {
   return await showModalBottomSheet(
     context: context,
     isScrollControlled: true,
-    builder: (context) => ShowTimePicker(food: food)
+    builder: (context) => ShowTimePicker(duration: duration)
   );
 }
 
 class ShowTimePicker extends StatefulWidget {
-  final FoodModel? food;
-  const ShowTimePicker({super.key, required this.food});
+  final Duration? duration;
+  const ShowTimePicker({super.key, required this.duration});
 
   @override
   State<ShowTimePicker> createState() => _ShowTimePickerState();
 }
 
 class _ShowTimePickerState extends State<ShowTimePicker> {
-  late Duration duration = Duration.zero;
-  late int days = duration.inDays.remainder(31);
-  late int hr = duration.inHours.remainder(24);
-  late int min = duration.inMinutes.remainder(60);
-  late int sec = duration.inSeconds.remainder(60);
-  String get _onChanged {
-    duration = Duration(days: days, hours: hr, minutes: min, seconds: sec);
-    return duration.toString();
+  late Duration _duration = Duration.zero;
+  late int days = _duration.inDays.remainder(31);
+  late int hr = _duration.inHours.remainder(24);
+  late int min = _duration.inMinutes.remainder(60);
+  late int sec = _duration.inSeconds.remainder(60);
+  Duration get _onChanged {
+    _duration = Duration(days: days, hours: hr, minutes: min, seconds: sec);
+    return _duration;
   }
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    if (widget.food != null) {
-      duration = convertStrToDur(widget.food);
-      days = duration.inDays.remainder(31);
-      hr = duration.inHours.remainder(24);
-      min = duration.inMinutes.remainder(60);
-      sec = duration.inSeconds.remainder(60);
+    if (widget.duration != null) {
+      _duration = widget.duration!;
+      days = _duration.inDays.remainder(31);
+      hr = _duration.inHours.remainder(24);
+      min = _duration.inMinutes.remainder(60);
+      sec = _duration.inSeconds.remainder(60);
     }
   }
   @override

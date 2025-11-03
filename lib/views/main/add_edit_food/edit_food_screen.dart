@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
+import 'package:food_recipe_app/common/convert.dart';
 import 'package:food_recipe_app/common/extension.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_time_picker.dart';
@@ -21,12 +22,12 @@ class EditFoodScreen extends StatefulWidget {
 
 class _EditFoodScreenState extends State<EditFoodScreen> {
   File? image;
-  String? imageURL;
+  String imageURL = "";
   String? selectCategory;
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   final dietController = TextEditingController();
-  String _duration = Duration.zero.toString();
+  Duration _duration = Duration.zero;
   List<TextEditingController> ingredientController = [TextEditingController()];
   List<TextEditingController> stepController = [TextEditingController()];
   @override
@@ -39,7 +40,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
       descriptionController.text = widget.food.description;
       selectCategory = widget.food.tag;
       dietController.text = widget.food.diet.toString();
-      _duration = widget.food.duration;
+      _duration = convertStrToDur(widget.food);
       ingredientController = widget.food.ingredients.map((e) => TextEditingController(text: e)).toList();
       stepController = widget.food.steps.map((e) => TextEditingController(text: e)).toList();
     });
@@ -51,10 +52,12 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
       context.loaderOverlay.hide();
       return;
     }
-    imageURL = await imageServices.uploadImage(context, image!, foodFolder);
+    if (image != null) {
+      imageURL = await imageServices.uploadImage(context, image!, foodFolder);
+    }
     FoodModel food = FoodModel(
       foodId: widget.food.foodId, 
-      image: image == null && imageURL!.isEmpty ? foodDesignImage : imageURL!, 
+      image: image == null && imageURL.isEmpty ? foodDefaultImage : imageURL, 
       title: titleController.text, 
       description: descriptionController.text, 
       userId: widget.food.userId, 
@@ -128,9 +131,9 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            image == null && imageURL!.isEmpty
+            image == null && imageURL.isEmpty
             ? InkWell(
-              onTap: () => showImagePickerModal(context, image!),
+              onTap: () => showImagePickerModal(context),
               child: Container(
                   height: 200,
                   width: double.infinity,
@@ -148,7 +151,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
               ),
             )
             : image != null ? InkWell(
-              onTap: () => showImagePickerModal(context, image!),
+              onTap: () => showImagePickerModal(context),
               child: ClipRRect(
                 child: Image.file(image!,
                   height: 200,
@@ -157,9 +160,9 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                 ),
               ),
             ) : InkWell(
-              onTap: () => showImagePickerModal(context, image!),
+              onTap: () => showImagePickerModal(context),
               child: ClipRRect(
-                child: Image.network(imageURL!,
+                child: Image.network(imageURL,
                   height: 200,
                   width: double.infinity,
                   fit: BoxFit.cover,
@@ -292,6 +295,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                       width: 70,
                       child: TextField(
                         controller: dietController,
+                        textAlign: TextAlign.center,
                         keyboardType: TextInputType.numberWithOptions(decimal: false),
                         decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(
@@ -316,6 +320,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                         ),
                       ),
                     ),
+                    SizedBox(width: 5),
                     Text("người",
                       style: TextStyle(
                         color: AppColors.black,
@@ -340,7 +345,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                 ),
                 GestureDetector(
                   onTap: () async{
-                    final duration = await showTimePickerModal(context, widget.food);
+                    final duration = await showTimePickerModal(context, _duration);
                     if (duration != null) {
                       setState(() {
                         _duration = duration;
@@ -404,12 +409,17 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(color: AppColors.black)
                     ),
-                    prefixIcon: Text(
-                      "${index + 1}",
-                      style: TextStyle(
-                        color: AppColors.black,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 14
+                    prefixIcon: Container(
+                      alignment: Alignment.center,
+                      width: 20,
+                      height: 20,
+                      child: Text(
+                        "${index + 1}",
+                        style: TextStyle(
+                          color: AppColors.black,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 14
+                        ),
                       ),
                     ),
                     suffixIcon: Visibility(
@@ -437,7 +447,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
             Center(
               child: SizedBox(
                 width: 150,
-                height: 30,
+                height: 50,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.green,
@@ -491,12 +501,17 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(color: AppColors.black)
                     ),
-                    prefixIcon: Text(
-                      "${index + 1}",
-                      style: TextStyle(
-                        color: AppColors.black,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 14
+                    prefixIcon: Container(
+                      width: 20,
+                      height: 20,
+                      alignment: Alignment.center,
+                      child: Text(
+                        "${index + 1}",
+                        style: TextStyle(
+                          color: AppColors.black,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 14
+                        ),
                       ),
                     ),
                     suffixIcon: Visibility(
@@ -524,7 +539,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
             Center(
               child: SizedBox(
                 width: 150,
-                height: 30,
+                height: 50,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.green,

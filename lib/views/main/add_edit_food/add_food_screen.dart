@@ -26,7 +26,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   final dietController = TextEditingController();
-  String _duration = Duration.zero.toString();
+  Duration _duration = Duration.zero;
   List<TextEditingController> ingredientController = [TextEditingController()];
   List<TextEditingController> stepController = [TextEditingController()];
   void onAddFood() async{
@@ -36,10 +36,12 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
       context.loaderOverlay.hide();
       return;
     }
-    imageURL = await imageServices.uploadImage(context, image!, foodFolder);
+    if (image != null) {
+      imageURL = await imageServices.uploadImage(context, image!, foodFolder);
+    }
     FoodModel food = FoodModel(
       foodId: generateRandomString(25), 
-      image: image == null && imageURL.isEmpty ? foodDesignImage : imageURL, 
+      image: image == null && imageURL.isEmpty ? foodDefaultImage : imageURL, 
       title: titleController.text, 
       description: descriptionController.text, 
       userId: currentUser.uid, 
@@ -116,7 +118,14 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             Center(
               child: image == null && imageURL.isEmpty
               ? InkWell(
-                onTap: () => showImagePickerModal(context, image!),
+                onTap: () async{
+                  final imagePicked = await showImagePickerModal(context);
+                  if (imagePicked != null){
+                    setState(() {
+                      image = imagePicked;
+                    });
+                  }
+                },
                 child: Container(
                     height: 200,
                     width: double.infinity,
@@ -134,7 +143,14 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 ),
               )
               : image != null ? InkWell(
-                onTap: () => showImagePickerModal(context, image!),
+                onTap: () async{
+                  final imagePicked = await showImagePickerModal(context);
+                  if (imagePicked != null){
+                    setState(() {
+                      image = imagePicked;
+                    });
+                  }
+                },
                 child: ClipRRect(
                   child: Image.file(image!,
                     height: 200,
@@ -143,7 +159,14 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                   ),
                 ),
               ) : InkWell(
-                onTap: () => showImagePickerModal(context, image!),
+                onTap: () async{
+                  final imagePicked = await showImagePickerModal(context);
+                  if (imagePicked != null){
+                    setState(() {
+                      image = imagePicked;
+                    });
+                  }
+                },
                 child: ClipRRect(
                   child: Image.network(imageURL,
                     height: 200,
@@ -279,6 +302,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                       width: 70,
                       child: TextField(
                         controller: dietController,
+                        textAlign: TextAlign.center,
                         keyboardType: TextInputType.numberWithOptions(decimal: false),
                         decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(

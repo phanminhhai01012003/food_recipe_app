@@ -24,7 +24,7 @@ class EditCookbookPage extends StatefulWidget {
 
 class _EditCookbookPageState extends State<EditCookbookPage> {
   File? image;
-  String? imageURL;
+  String imageURL = "";
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   HashSet<FoodModel> choices = HashSet();
@@ -51,10 +51,12 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
       context.loaderOverlay.hide();
       return;
     }
-    imageURL = await imageServices.uploadImage(context, image!, cookbookFolder);
+    if (image != null) {
+      imageURL = await imageServices.uploadImage(context, image!, cookbookFolder);
+    }
     CookbookModel cookbook = CookbookModel(
       cookbookId: widget.cookbook.cookbookId, 
-      cookbookImage: image == null && imageURL!.isEmpty ? foodDesignImage : imageURL!, 
+      cookbookImage: image == null && imageURL.isEmpty ? foodDesignImage : imageURL, 
       cookbookName: _titleController.text, 
       description: _descriptionController.text, 
       userId: widget.cookbook.userId, 
@@ -137,9 +139,9 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
         child: Column(
           children: [
             Center(
-              child: image == null && imageURL!.isEmpty
+              child: image == null && imageURL.isEmpty
               ? InkWell(
-                onTap: () => showImagePickerModal(context, image!),
+                onTap: () => showImagePickerModal(context),
                 child: Container(
                     height: 200,
                     width: 200,
@@ -157,7 +159,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
                 ),
               )
               : image != null ? InkWell(
-                onTap: () => showImagePickerModal(context, image!),
+                onTap: () => showImagePickerModal(context),
                 child: ClipRRect(
                   child: Image.file(image!,
                     height: 200,
@@ -166,9 +168,9 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
                   ),
                 ),
               ) : InkWell(
-                onTap: () => showImagePickerModal(context, image!),
+                onTap: () => showImagePickerModal(context),
                 child: ClipRRect(
-                  child: Image.network(imageURL!,
+                  child: Image.network(imageURL,
                     height: 200,
                     width: double.infinity,
                     fit: BoxFit.cover,

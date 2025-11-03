@@ -22,13 +22,12 @@ class CommentPage extends StatefulWidget {
 class _CommentPageState extends State<CommentPage> {
   final formKey = GlobalKey<FormState>();
   final _commentController = TextEditingController();
-  bool get checkComment => _commentController.text.isEmpty;
   void onAddComment() async{
     CommentModel comment = CommentModel(
       commentId: generateRandomString(23),
       userId: currentUser.uid,
-      avatar: currentUser.photoURL!, 
-      userName: currentUser.displayName!, 
+      avatar: currentUser.photoURL ?? userDefaultImage, 
+      userName: currentUser.displayName ?? "Người dùng", 
       content: _commentController.text,
       likesList: [],
       replies: [],
@@ -77,7 +76,7 @@ class _CommentPageState extends State<CommentPage> {
         centerTitle: true,
       ),
       body: CommentBox(
-        userImage: CommentBox.commentImageParser(imageURLorPath: currentUser.photoURL!),
+        userImage: CommentBox.commentImageParser(imageURLorPath: currentUser.photoURL ?? userDefaultImage),
         labelText: "Viết bình luận",
         errorText: "Không được để trống bình luận",
         withBorder: true,

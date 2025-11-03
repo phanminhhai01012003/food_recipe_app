@@ -34,7 +34,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         ),
         centerTitle: true,
       ),
-      body: Center(
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16),
         child: Form(
           key: formKey,
           child: Column(

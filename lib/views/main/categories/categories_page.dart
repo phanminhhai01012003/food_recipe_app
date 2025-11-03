@@ -81,7 +81,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
             ),
             SizedBox(height: 20),
             Padding(
-              padding: EdgeInsets.all(12),
+              padding: EdgeInsets.symmetric(horizontal: 12),
               child: TextField(
                 readOnly: true,
                 onTap: () => Navigator.push(context, checkDeviceRoute(searchPage)),

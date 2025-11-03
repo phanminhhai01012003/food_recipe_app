@@ -19,7 +19,7 @@ class EditUser extends StatefulWidget {
 class _EditUserState extends State<EditUser> {
   final formKey = GlobalKey<FormState>();
   File? image;
-  String? imageURL;
+  String imageURL = "";
   final nameController = TextEditingController();
   final descriptionController = TextEditingController();
   final phoneController = TextEditingController();
@@ -38,11 +38,13 @@ class _EditUserState extends State<EditUser> {
     context.loaderOverlay.show();
     if (formKey.currentState!.validate()){
       formKey.currentState!.save();
-      imageURL = await imageServices.uploadImage(context, image!, avatarFolder);
+      if (image != null) {
+        imageURL = await imageServices.uploadImage(context, image!, avatarFolder);
+      }
       UserModel user = UserModel(
         userId: widget.user.userId, 
         userName: nameController.text, 
-        avatar: image == null && imageURL!.isEmpty ? widget.user.avatar : imageURL!, 
+        avatar: image == null && imageURL.isEmpty ? userDefaultImage : imageURL, 
         email: widget.user.email, 
         description: descriptionController.text, 
         phone: phoneController.text.isEmpty ? "Không xác định" : phoneController.text, 
@@ -50,7 +52,7 @@ class _EditUserState extends State<EditUser> {
       );
       await currentUser.updateProfile(
         displayName: nameController.text,
-        photoURL: imageURL
+        photoURL: image == null && imageURL.isEmpty ? userDefaultImage : imageURL
       );
       await userServices.updateUser(context, user).then((_){
         context.loaderOverlay.hide();
@@ -106,43 +108,40 @@ class _EditUserState extends State<EditUser> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
-                child: image == null && imageURL!.isEmpty
-              ? InkWell(
-                onTap: () => showImagePickerModal(context, image!),
-                child: Container(
-                    height: 200,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      border: Border.all(color: Colors.black)
+                child: image != null ? InkWell(
+                  onTap: () async{
+                    final imagePicked = await showImagePickerModal(context);
+                    if (imagePicked != null){
+                      setState(() {
+                        image = imagePicked;
+                      });
+                    }
+                  },
+                  child: ClipRRect(
+                    child: Image.file(image!,
+                      errorBuilder: (context, error, stackTrace) => Image.network(userDefaultImage),
+                      height: 200,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
                     ),
-                    child: Center(
-                      child: Icon(
-                        Icons.add_a_photo,
-                        size: 50,
-                        color: Colors.black,
-                      ),
+                  ),
+                ) : InkWell(
+                  onTap: () async{
+                    final imagePicked = await showImagePickerModal(context);
+                    if (imagePicked != null){
+                      setState(() {
+                        image = imagePicked;
+                      });
+                    }
+                  },
+                  child: ClipRRect(
+                    child: Image.network(imageURL,
+                      errorBuilder: (context, error, stackTrace) => Image.network(userDefaultImage),
+                      height: 200,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
                     ),
-                ),
-              )
-              : image != null ? InkWell(
-                onTap: () => showImagePickerModal(context, image!),
-                child: ClipRRect(
-                  child: Image.file(image!,
-                    height: 200,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
                   ),
-                ),
-              ) : InkWell(
-                onTap: () => showImagePickerModal(context, image!),
-                child: ClipRRect(
-                  child: Image.network(imageURL!,
-                    height: 200,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
-                ),
                 ),
               ),
               SizedBox(height: 20),
@@ -209,7 +208,7 @@ class _EditUserState extends State<EditUser> {
                     ),
               SizedBox(height: 10),
                     TextFormField(
-                      controller: nameController,
+                      controller: descriptionController,
                       maxLength: 1000,
                       maxLines: 5,
                       minLines: 5,
@@ -249,6 +248,14 @@ class _EditUserState extends State<EditUser> {
                       ),
                     ),
                     SizedBox(height: 20),
+                    Text("Số điện thoại",
+                      style: TextStyle(
+                        color: AppColors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    SizedBox(height: 10),
                 TextFormField(
                       controller: phoneController,
                       keyboardType: TextInputType.phone,

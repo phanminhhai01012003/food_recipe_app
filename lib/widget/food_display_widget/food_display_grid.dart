@@ -44,6 +44,7 @@ class _FoodDisplayGridState extends State<FoodDisplayGrid> {
         );
       },
       child: Container(
+        width: 160,
         margin: EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: AppColors.white,
@@ -75,8 +76,8 @@ class _FoodDisplayGridState extends State<FoodDisplayGrid> {
                 child: CachedNetworkImage(
                   imageUrl: widget.food.image,
                   fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: 100,
+                  height: 80,
+                  width: 160,
                   progressIndicatorBuilder: (context, url, imageProgress) => Center(
                     child: CircularProgressIndicator(
                       value: imageProgress.progress,
@@ -105,7 +106,6 @@ class _FoodDisplayGridState extends State<FoodDisplayGrid> {
             ),
             SizedBox(height: 10),
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
