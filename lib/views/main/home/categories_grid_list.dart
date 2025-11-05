@@ -24,13 +24,15 @@ class _CategoriesGridListState extends State<CategoriesGridList> {
         } else {
           List<CategoryModel> grids = snapshot.data!;
           return Wrap(
-            spacing: 32,
-            runSpacing: 32,
+            spacing: 4,
+            runSpacing: 16,
             children: grids.map((tag) {
-              if (tag.tag == "Tất cả") return SizedBox.shrink();
+              if (tag.tag == "Tất cả") return SizedBox();
               return GestureDetector(
                 onTap: () => Navigator.push(context, checkDeviceRoute(listofFoodByTag(tag.tag))),
                 child: Container(
+                  width: 100,
+                  height: 50,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: NetworkImage(tag.image),
@@ -40,12 +42,15 @@ class _CategoriesGridListState extends State<CategoriesGridList> {
                   child: Container(
                     // ignore: deprecated_member_use
                     color: AppColors.black.withOpacity(0.5),
-                    child: Text(
-                      tag.tag,
-                      style: TextStyle(
-                        color: AppColors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700
+                    child: Center(
+                      child: Text(
+                        tag.tag,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: AppColors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700
+                        ),
                       ),
                     ),
                   ),

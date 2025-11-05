@@ -29,36 +29,35 @@ class CommentSelection {
         elevation: 0,
         surfaceTintColor: AppColors.white,
         clipBehavior: Clip.hardEdge,
-        child: Column(
-          children: [
-            ListView(
-              children: [
-                Selection(
-                  onTap: () => EditCommentDialog.checkDeviceEditComment(context, comment, foodId), 
-                  icon: Icons.edit, 
-                  title: "Sửa"
-                ),
-                Selection(
-                  onTap: () {
-                    ShowYesnoDialog.checkDeviceDialog(
-                      context, 
-                      title: "Xóa bình luận", 
-                      content: "Bạn có chắc chắn muốn xóa không?", 
-                      onAcceptTap: () => onDelete(context, comment.commentId, foodId),
-                      onCancelTap: () => Navigator.pop(context)
-                    );
-                  }, 
-                  icon: Icons.delete, 
-                  title: "Xóa"
-                ),
-                Selection(
-                  onTap: () => Clipboard.setData(ClipboardData(text: comment.content)), 
-                  icon: Icons.copy, 
-                  title: "Sao chép"
-                )
-              ],
-            )
-          ],
+        child: SizedBox(
+          height: 175,
+          child: Column(
+            children: [
+              Selection(
+                onTap: () => EditCommentDialog.checkDeviceEditComment(context, comment, foodId), 
+                icon: Icons.edit, 
+                title: "Sửa"
+              ),
+              Selection(
+                onTap: () {
+                  ShowYesnoDialog.checkDeviceDialog(
+                    context, 
+                    title: "Xóa bình luận", 
+                    content: "Bạn có chắc chắn muốn xóa không?", 
+                    onAcceptTap: () => onDelete(context, comment.commentId, foodId),
+                    onCancelTap: () => Navigator.pop(context)
+                  );
+                }, 
+                icon: Icons.delete, 
+                title: "Xóa"
+              ),
+              Selection(
+                onTap: () => Clipboard.setData(ClipboardData(text: comment.content)), 
+                icon: Icons.copy, 
+                title: "Sao chép"
+              )
+            ],
+          ),
         ),
       )
     );
@@ -72,23 +71,22 @@ class CommentSelection {
         elevation: 0,
         surfaceTintColor: AppColors.white,
         clipBehavior: Clip.hardEdge,
-        child: Column(
-          children: [
-            ListView(
-              children: [
-                Selection(
-                  onTap: () async => await showReportModal(context, "bình luận ${comment.content}", comment.userName, null), 
-                  icon: Icons.report_problem, 
-                  title: "Báo cáo/Chặn"
-                ),
-                Selection(
-                  onTap: () => Clipboard.setData(ClipboardData(text: comment.content)), 
-                  icon: Icons.copy, 
-                  title: "Sao chép"
-                )
-              ],
-            )
-          ],
+        child: SizedBox(
+          height: 125,
+          child: Column(
+            children: [
+              Selection(
+                onTap: () async => await showReportModal(context, "bình luận ${comment.content}", comment.userName, null), 
+                icon: Icons.report_problem, 
+                title: "Báo cáo/Chặn"
+              ),
+              Selection(
+                onTap: () => Clipboard.setData(ClipboardData(text: comment.content)), 
+                icon: Icons.copy, 
+                title: "Sao chép"
+              )
+            ],
+          ),
         ),
       )
     );

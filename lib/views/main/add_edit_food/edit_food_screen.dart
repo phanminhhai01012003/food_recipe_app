@@ -34,16 +34,14 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_){
-      imageURL = widget.food.image;
-      titleController.text = widget.food.title;
-      descriptionController.text = widget.food.description;
-      selectCategory = widget.food.tag;
-      dietController.text = widget.food.diet.toString();
-      _duration = convertStrToDur(widget.food);
-      ingredientController = widget.food.ingredients.map((e) => TextEditingController(text: e)).toList();
-      stepController = widget.food.steps.map((e) => TextEditingController(text: e)).toList();
-    });
+    imageURL = widget.food.image;
+    titleController.text = widget.food.title;
+    descriptionController.text = widget.food.description;
+    selectCategory = widget.food.tag;
+    dietController.text = widget.food.diet.toString();
+    _duration = convertStrToDur(widget.food.duration);
+    ingredientController = widget.food.ingredients.map((e) => TextEditingController(text: e)).toList();
+    stepController = widget.food.steps.map((e) => TextEditingController(text: e)).toList();
   }
   void onUpdateFood() async{
     context.loaderOverlay.show();
@@ -131,42 +129,23 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            image == null && imageURL.isEmpty
-            ? InkWell(
+            image != null ? InkWell(
               onTap: () => showImagePickerModal(context),
-              child: Container(
-                  height: 200,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    border: Border.all(color: Colors.black)
-                  ),
-                  child: Center(
-                    child: Icon(
-                      Icons.add_a_photo,
-                      size: 50,
-                      color: Colors.black,
-                    ),
-                  ),
-              ),
-            )
-            : image != null ? InkWell(
-              onTap: () => showImagePickerModal(context),
-              child: ClipRRect(
-                child: Image.file(image!,
-                  height: 200,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
+              child: Image.file(
+                image!,
+                errorBuilder: (context, error, stackTrace) => Image.network(foodDefaultImage),
+                height: 200,
+                width: double.infinity,
+                fit: BoxFit.cover,
               ),
             ) : InkWell(
               onTap: () => showImagePickerModal(context),
-              child: ClipRRect(
-                child: Image.network(imageURL,
-                  height: 200,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
+              child: Image.network(
+                imageURL,
+                errorBuilder: (context, error, stackTrace) => Image.network(foodDefaultImage),
+                height: 200,
+                width: double.infinity,
+                fit: BoxFit.cover,
               ),
             ),
             SizedBox(height: 20),

@@ -20,14 +20,18 @@ class CommentPage extends StatefulWidget {
 }
 
 class _CommentPageState extends State<CommentPage> {
-  final formKey = GlobalKey<FormState>();
   final _commentController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+  Future<int> get getCommentCount async{
+    final snapshot = await commentCollection(widget.food.foodId).count().get();
+    return snapshot.count!;
+  }
   void onAddComment() async{
     CommentModel comment = CommentModel(
       commentId: generateRandomString(23),
       userId: currentUser.uid,
-      avatar: currentUser.photoURL ?? userDefaultImage, 
-      userName: currentUser.displayName ?? "Người dùng", 
+      avatar: currentUser.photoURL!, 
+      userName: currentUser.displayName!, 
       content: _commentController.text,
       likesList: [],
       replies: [],
@@ -67,16 +71,12 @@ class _CommentPageState extends State<CommentPage> {
         ),
         backgroundColor: AppColors.green,
         foregroundColor: AppColors.white,
-        title: Text("Bình luận",
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w800
-          ),
-        ),
+        title: commentTitle,
         centerTitle: true,
       ),
       body: CommentBox(
-        userImage: CommentBox.commentImageParser(imageURLorPath: currentUser.photoURL ?? userDefaultImage),
+        formKey: formKey,
+        userImage: CommentBox.commentImageParser(imageURLorPath: currentUser.photoURL!),
         labelText: "Viết bình luận",
         errorText: "Không được để trống bình luận",
         withBorder: true,
@@ -126,6 +126,33 @@ class _CommentPageState extends State<CommentPage> {
           }
         ),
       )
+    );
+  }
+  Widget get commentTitle {
+    return FutureBuilder<int>(
+      future: getCommentCount, 
+      builder: (context, snapshot){
+        if (!snapshot.hasData || snapshot.hasError){
+          return Text(
+            "Bình luận (0)",
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w800
+            ),
+          );
+        } else if (snapshot.connectionState == ConnectionState.waiting){
+          return CircularProgressIndicator();
+        } else {
+          int data = snapshot.data!;
+          return Text(
+            "Bình luận ($data)",
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w800
+            ),
+          );
+        }
+      }
     );
   }
 }

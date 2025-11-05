@@ -27,12 +27,10 @@ class _EditUserState extends State<EditUser> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_){
-      imageURL = widget.user.avatar;
-      nameController.text = widget.user.userName;
-      descriptionController.text = widget.user.description;
-      phoneController.text = widget.user.phone;
-    });
+    imageURL = widget.user.avatar;
+    nameController.text = widget.user.userName;
+    descriptionController.text = widget.user.description;
+    phoneController.text = widget.user.phone;
   }
   void update() async{
     context.loaderOverlay.show();
@@ -117,13 +115,12 @@ class _EditUserState extends State<EditUser> {
                       });
                     }
                   },
-                  child: ClipRRect(
-                    child: Image.file(image!,
-                      errorBuilder: (context, error, stackTrace) => Image.network(userDefaultImage),
-                      height: 200,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
+                  child: Image.file(
+                    image!,
+                    errorBuilder: (context, error, stackTrace) => Image.network(userDefaultImage),
+                    height: 200,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
                   ),
                 ) : InkWell(
                   onTap: () async{
@@ -134,13 +131,12 @@ class _EditUserState extends State<EditUser> {
                       });
                     }
                   },
-                  child: ClipRRect(
-                    child: Image.network(imageURL,
-                      errorBuilder: (context, error, stackTrace) => Image.network(userDefaultImage),
-                      height: 200,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
+                  child: Image.network(
+                    imageURL,
+                    errorBuilder: (context, error, stackTrace) => Image.network(userDefaultImage),
+                    height: 200,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),

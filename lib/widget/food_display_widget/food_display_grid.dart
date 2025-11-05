@@ -76,8 +76,8 @@ class _FoodDisplayGridState extends State<FoodDisplayGrid> {
                 child: CachedNetworkImage(
                   imageUrl: widget.food.image,
                   fit: BoxFit.cover,
-                  height: 80,
-                  width: 160,
+                  height: 75,
+                  width: 150,
                   progressIndicatorBuilder: (context, url, imageProgress) => Center(
                     child: CircularProgressIndicator(
                       value: imageProgress.progress,

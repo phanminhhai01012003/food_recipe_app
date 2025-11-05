@@ -151,12 +151,12 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     });
                   }
                 },
-                child: ClipRRect(
-                  child: Image.file(image!,
-                    height: 200,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
+                child: Image.file(
+                  image!,
+                  height: 200,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) => Image.network(foodDefaultImage),
                 ),
               ) : InkWell(
                 onTap: () async{
@@ -167,12 +167,12 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     });
                   }
                 },
-                child: ClipRRect(
-                  child: Image.network(imageURL,
-                    height: 200,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
+                child: Image.network(
+                  imageURL,
+                  height: 200,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) => Image.network(foodDefaultImage),
                 ),
               ),
             ),

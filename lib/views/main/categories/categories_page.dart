@@ -107,103 +107,109 @@ class _CategoriesPageState extends State<CategoriesPage> {
               ),
             ),
             SizedBox(height: 20),
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.white,
-                    offset: Offset(5, 5),
-                    blurRadius: 5,
-                    spreadRadius: 5,
-                    blurStyle: BlurStyle.solid
-                  )
-                ]
-              ),
-              child: Column(
-                children: [
-                  StreamBuilder(
-                    stream: tagServices.getTags(context), 
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData || snapshot.hasError) {
-                        return SizedBox.shrink();
-                      } else if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(child: CircularProgressIndicator());
-                      } else {
-                        List<CategoryModel> categories = snapshot.data!;
-                        return SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: List.generate(
-                              categories.length,
-                              (index) => GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    selectCategory = categories[index].tag;
-                                  });
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: selectCategory == categories[index].tag 
-                                      ? AppColors.green : AppColors.white,
-                                    borderRadius: BorderRadius.circular(30),
-                                    border: Border.all(color: selectCategory == categories[index].tag 
-                                      ? AppColors.white : AppColors.black)
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 20,
-                                    vertical: 10
-                                  ),
-                                  margin: EdgeInsets.only(right: 20),
-                                  child: Text(
-                                    categories[index].tag,
-                                    style: TextStyle(
-                                      color: selectCategory == categories[index].tag
-                                        ? Colors.white : Colors.black,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 14
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.white,
+                      offset: Offset(5, 5),
+                      blurRadius: 5,
+                      spreadRadius: 5,
+                      blurStyle: BlurStyle.solid
+                    )
+                  ]
+                ),
+                child: Column(
+                  children: [
+                    StreamBuilder(
+                      stream: tagServices.getTags(context), 
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData || snapshot.hasError) {
+                          return SizedBox.shrink();
+                        } else if (snapshot.connectionState == ConnectionState.waiting) {
+                          return Center(child: CircularProgressIndicator());
+                        } else {
+                          List<CategoryModel> categories = snapshot.data!;
+                          return SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: List.generate(
+                                categories.length,
+                                (index) => GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      selectCategory = categories[index].tag;
+                                    });
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: selectCategory == categories[index].tag 
+                                        ? AppColors.green : AppColors.white,
+                                      borderRadius: BorderRadius.circular(30),
+                                      border: Border.all(color: selectCategory == categories[index].tag 
+                                        ? AppColors.white : AppColors.black)
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 20,
+                                      vertical: 10
+                                    ),
+                                    margin: EdgeInsets.only(right: 20),
+                                    child: Text(
+                                      categories[index].tag,
+                                      style: TextStyle(
+                                        color: selectCategory == categories[index].tag
+                                          ? Colors.white : Colors.black,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 14
+                                      ),
                                     ),
                                   ),
-                                ),
-                              )
+                                )
+                              ),
                             ),
-                          ),
-                        );
+                          );
+                        }
                       }
-                    }
-                  ),
-                  SizedBox(height: 20),
-                  StreamBuilder(
-                    stream: selectCategory == "Tất cả" 
-                      ? foodServices.getFood(context) 
-                      : foodServices.getFoodByTag(context, selectCategory), 
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData || snapshot.hasError) {
-                        return SizedBox.shrink();
-                      } else if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(child: CircularProgressIndicator());
-                      } else {
-                        List<FoodModel> foodList = snapshot.data!;
-                        return GridView.builder(
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          physics: ClampingScrollPhysics(),
-                          hitTestBehavior: HitTestBehavior.translucent,
-                          clipBehavior: Clip.hardEdge,
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            childAspectRatio: 0.8
-                          ),
-                          itemCount: foodList.length, 
-                          itemBuilder: (context, index) => FoodDisplayGrid(food: foodList[index])
-                        );
-                      }
-                    }
-                  )
-                ],
+                    ),
+                    SizedBox(height: 20),
+                    Expanded(
+                      child: StreamBuilder(
+                        stream: selectCategory == "Tất cả" 
+                          ? foodServices.getFood(context) 
+                          : foodServices.getFoodByTag(context, selectCategory), 
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData || snapshot.hasError) {
+                            return SizedBox.shrink();
+                          } else if (snapshot.connectionState == ConnectionState.waiting) {
+                            return Center(child: CircularProgressIndicator());
+                          } else {
+                            List<FoodModel> foodList = snapshot.data!;
+                            return GridView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              physics: ClampingScrollPhysics(),
+                              hitTestBehavior: HitTestBehavior.translucent,
+                              clipBehavior: Clip.hardEdge,
+                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                childAspectRatio: 0.8,
+                                mainAxisSpacing: 8,
+                                crossAxisSpacing: 8
+                              ),
+                              itemCount: foodList.length, 
+                              itemBuilder: (context, index) => FoodDisplayGrid(food: foodList[index])
+                            );
+                          }
+                        }
+                      ),
+                    )
+                  ],
+                ),
               ),
             )
           ],

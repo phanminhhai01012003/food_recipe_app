@@ -82,71 +82,74 @@ class _CommentWidgetState extends State<CommentWidget> {
                 children: [
                   GestureDetector(
                     onTap: () => Navigator.push(context, checkDeviceRoute(personalScreen(widget.comment.userId))),
-                    child: CachedNetworkImage(
-                      imageUrl: widget.comment.avatar,
-                      progressIndicatorBuilder: (context, url, progress) => Center(
-                        child: CircularProgressIndicator(
-                          value: progress.progress,
-                          color: AppColors.yellow,
-                        )
-                      ),
-                      fit: BoxFit.cover,
-                      width: 33,
-                      height: 33,
-                      errorWidget: (context, url, error) => Center(
-                        child: Icon(
-                          Icons.error,
-                          size: 20,
-                          color: AppColors.grey,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: CachedNetworkImage(
+                        imageUrl: widget.comment.avatar,
+                        progressIndicatorBuilder: (context, url, progress) => Center(
+                          child: CircularProgressIndicator(
+                            value: progress.progress,
+                            color: AppColors.yellow,
+                          )
+                        ),
+                        fit: BoxFit.cover,
+                        width: 33,
+                        height: 33,
+                        errorWidget: (context, url, error) => Center(
+                          child: Icon(
+                            Icons.error,
+                            size: 20,
+                            color: AppColors.grey,
+                          ),
                         ),
                       ),
                     ),
                   ),
                   SizedBox(width: 10),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            widget.comment.userName,
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w900
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              widget.comment.userName,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w900
+                              ),
                             ),
-                          ),
-                          SizedBox(width: 3),
-                          Text(
-                            DateFormat("dd/MM/yyyy").format(widget.comment.createdAt),
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w700
-                            ),
-                          ),    
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Expanded(
-                        child: Text(
+                            SizedBox(width: 10),
+                            Text(
+                              DateFormat("dd/MM/yyyy").format(widget.comment.createdAt),
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w700
+                              ),
+                            ),    
+                          ],
+                        ),
+                        SizedBox(height: 5),
+                        Text(
                           widget.comment.content,
                             style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w700
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   )
                 ],
               ),
               SizedBox(height: 5),
               Padding(
-                padding: EdgeInsets.all(12),
+                padding: EdgeInsets.only(top: 12, left: 16),
                 child: Text.rich(
                   TextSpan(
                     children: [
                       TextSpan(
-                        text: "Thích ${widget.comment.likesList.isEmpty ? "" : "(${widget.comment.likesList.length})"}",
+                        text: "Thích ${widget.comment.likesList.isEmpty ? "" : "(${widget.comment.likesList.length})"} ",
                         recognizer: TapGestureRecognizer()..onTap = (){
                           setState(() {
                             isLikedComment = !isLikedComment;
@@ -164,7 +167,12 @@ class _CommentWidgetState extends State<CommentWidget> {
                         )
                       ),
                       TextSpan(
-                        text: "Trả lời",
+                        text: " Trả lời",
+                        style: TextStyle(
+                          color: AppColors.grey,
+                          fontSize: 12,
+                          fontWeight: isLikedComment ? FontWeight.w700 : FontWeight.w300
+                        ),
                         recognizer: TapGestureRecognizer()..onTap = () => Navigator.push(context, checkDeviceRoute(replyPage(widget.comment, widget.id)))
                       )
                     ]

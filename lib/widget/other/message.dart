@@ -9,13 +9,16 @@ class Message {
         clipBehavior: Clip.hardEdge,
         hitTestBehavior: HitTestBehavior.translucent,
         content: SizedBox(
-          height: 50,
-          child: Text(
-            title,
-            style: TextStyle(
-              color: AppColors.white,
-              fontSize: 14,
-              fontWeight: FontWeight.bold
+          height: 30,
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              title,
+              style: TextStyle(
+                color: AppColors.white,
+                fontSize: 14,
+                fontWeight: FontWeight.bold
+              ),
             ),
           ),
         ),

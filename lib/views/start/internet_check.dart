@@ -28,15 +28,15 @@ class _InternetCheckState extends State<InternetCheck> {
       checking = true;
     });
     final connectivityResult = await Connectivity().checkConnectivity();
-    if (connectivityResult != ConnectivityResult.none) {
-      _navigation();
-    }else {
+    if (connectivityResult == ConnectivityResult.none) {
       showNoInternetDialog(context, 
         onPressed: () {
           Navigator.pop(context);
           checkInternetConnection();
         }
       );
+    } else {
+      _navigation();
     }
   }
 
