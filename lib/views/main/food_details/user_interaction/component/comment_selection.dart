@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/model/comment_model.dart';
 import 'package:food_recipe_app/services/firestore/comment/comment_services.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/component/edit_comment_dialog.dart';
@@ -21,13 +20,14 @@ class CommentSelection {
     });  
   }
   static void showSelectionWithCurrentUser(BuildContext context, CommentModel comment, String foodId){
+    final theme = Theme.of(context);
     showDialog(
       context: context, 
       builder: (context) => Dialog(
-        backgroundColor: AppColors.white,
+        backgroundColor: theme.colorScheme.primary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         elevation: 0,
-        surfaceTintColor: AppColors.white,
+        surfaceTintColor: theme.colorScheme.primary,
         clipBehavior: Clip.hardEdge,
         child: SizedBox(
           height: 175,
@@ -63,13 +63,14 @@ class CommentSelection {
     );
   }
   static void showGeneralSelection(BuildContext context, CommentModel comment){
+    final theme = Theme.of(context);
     showDialog(
       context: context, 
       builder: (context) => Dialog(
-        backgroundColor: AppColors.white,
+        backgroundColor: theme.colorScheme.primary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         elevation: 0,
-        surfaceTintColor: AppColors.white,
+        surfaceTintColor: theme.colorScheme.primary,
         clipBehavior: Clip.hardEdge,
         child: SizedBox(
           height: 125,

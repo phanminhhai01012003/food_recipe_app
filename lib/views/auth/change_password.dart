@@ -41,11 +41,12 @@ class _ChangePasswordState extends State<ChangePassword> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
-        backgroundColor: AppColors.green,
-        foregroundColor: AppColors.white,
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        foregroundColor: theme.appBarTheme.foregroundColor,
         title: Text("Đổi mật khẩu",
           style: TextStyle(
             fontSize: 16,
@@ -63,7 +64,7 @@ class _ChangePasswordState extends State<ChangePassword> {
             children: [
                     Text("Mật khẩu hiện tại",
                       style: TextStyle(
-                        color: AppColors.black,
+                        color: theme.colorScheme.secondary,
                         fontSize: 16,
                         fontWeight: FontWeight.bold
                       ),
@@ -76,7 +77,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: AppColors.black)
+                          borderSide: BorderSide(color: theme.colorScheme.secondary)
                         ),
                         errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -88,7 +89,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                         ),
                         hintText: "Nhập mật khẩu hiện tại",
                         hintStyle: TextStyle(
-                          color: AppColors.black,
+                          color: theme.colorScheme.secondary,
                           fontSize: 12,
                           fontWeight: FontWeight.normal
                         ),
@@ -96,12 +97,12 @@ class _ChangePasswordState extends State<ChangePassword> {
                           width: 20,
                           height: 20,
                           alignment: Alignment.center,
-                          child: Icon(Icons.lock, color: AppColors.black)
+                          child: Icon(Icons.lock, color: theme.colorScheme.secondary)
                         ),
                         suffixIcon: IconButton(
                           icon: Icon(
                             isObscured1 ? Icons.visibility : Icons.visibility_off,
-                            color: AppColors.black,
+                            color: theme.colorScheme.secondary,
                           ),
                           onPressed: () {
                             setState(() {
@@ -120,7 +121,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                         return null;
                       },
                       style: TextStyle(
-                        color: AppColors.black,
+                        color: theme.colorScheme.secondary,
                         fontSize: 12,
                         fontWeight: FontWeight.w700
                       ),
@@ -128,7 +129,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     SizedBox(height: 20),
                     Text("Mật khẩu mới",
                       style: TextStyle(
-                        color: AppColors.black,
+                        color: theme.colorScheme.secondary,
                         fontSize: 16,
                         fontWeight: FontWeight.bold
                       ),
@@ -139,14 +140,14 @@ class _ChangePasswordState extends State<ChangePassword> {
                       obscureText: isObscured2,
                       cursorColor: AppColors.blue,
                       style: TextStyle(
-                        color: AppColors.black,
+                        color: theme.colorScheme.secondary,
                         fontSize: 12,
                         fontWeight: FontWeight.w700
                       ),
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: AppColors.black)
+                          borderSide: BorderSide(color: theme.colorScheme.secondary)
                         ),
                         errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -154,7 +155,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                         ),
                         hintText: "Nhập mật khẩu mới",
                         hintStyle: TextStyle(
-                          color: AppColors.black,
+                          color: theme.colorScheme.secondary,
                           fontSize: 12,
                           fontWeight: FontWeight.normal
                         ),
@@ -166,12 +167,12 @@ class _ChangePasswordState extends State<ChangePassword> {
                           width: 20,
                           height: 20,
                           alignment: Alignment.center,
-                          child: Icon(Icons.lock, color: AppColors.black)
+                          child: Icon(Icons.lock, color: theme.colorScheme.secondary)
                         ),
                         suffixIcon: IconButton(
                           icon: Icon(
                             isObscured2 ? Icons.visibility : Icons.visibility_off,
-                            color: AppColors.black,
+                            color: theme.colorScheme.secondary,
                           ),
                           onPressed: () {
                             setState(() {
@@ -193,7 +194,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     SizedBox(height: 20),
                     Text("Xác nhận mật khẩu",
                       style: TextStyle(
-                        color: AppColors.black,
+                        color: theme.colorScheme.secondary,
                         fontSize: 16,
                         fontWeight: FontWeight.bold
                       ),
@@ -202,7 +203,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     TextFormField(
                       controller: confirmController,
                       style: TextStyle(
-                        color: AppColors.black,
+                        color: theme.colorScheme.secondary,
                         fontSize: 12,
                         fontWeight: FontWeight.w700
                       ),
@@ -211,7 +212,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: AppColors.black)
+                          borderSide: BorderSide(color: theme.colorScheme.secondary)
                         ),
                         errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -219,7 +220,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                         ),
                         hintText: "Nhập lại mật khẩu",
                         hintStyle: TextStyle(
-                          color: AppColors.black,
+                          color: theme.colorScheme.secondary,
                           fontSize: 12,
                           fontWeight: FontWeight.normal
                         ),
@@ -231,12 +232,12 @@ class _ChangePasswordState extends State<ChangePassword> {
                           width: 20,
                           height: 20,
                           alignment: Alignment.center,
-                          child: Icon(Icons.lock, color: AppColors.black)
+                          child: Icon(Icons.lock, color: theme.colorScheme.secondary)
                         ),
                         suffixIcon: IconButton(
                           icon: Icon(
                             isObscured3 ? Icons.visibility : Icons.visibility_off,
-                            color: AppColors.black,
+                            color: theme.colorScheme.secondary,
                           ),
                           onPressed: () {
                             setState(() {

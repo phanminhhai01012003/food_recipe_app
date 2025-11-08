@@ -19,25 +19,24 @@ class _CookbookWidgetState extends State<CookbookWidget> {
           borderRadius: BorderRadius.circular(12),
           image: DecorationImage(
             image: NetworkImage(widget.book.cookbookImage),
-            colorFilter: ColorFilter.mode(
-              // ignore: deprecated_member_use
-              AppColors.black.withOpacity(0.5),  
-              BlendMode.dstATop
-            )
+            fit: BoxFit.cover
           ),
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              widget.book.cookbookName,
-              style: TextStyle(
-                color: AppColors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold
-              ),
-            )
-          ],
+        child: Container(
+          color: AppColors.black,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                widget.book.cookbookName,
+                style: TextStyle(
+                  color: AppColors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

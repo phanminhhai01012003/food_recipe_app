@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/app_colors.dart';
 
 class NotificationList extends StatefulWidget {
   final Widget imageWidget;
@@ -19,8 +18,9 @@ class NotificationList extends StatefulWidget {
 class _NotificationListState extends State<NotificationList> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
-      color: AppColors.white,
+      color: theme.colorScheme.primary,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -34,7 +34,7 @@ class _NotificationListState extends State<NotificationList> {
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    color: AppColors.black,
+                    color: theme.colorScheme.secondary,
                     fontSize: 12,
                     fontWeight: FontWeight.w800
                   ),
@@ -45,7 +45,7 @@ class _NotificationListState extends State<NotificationList> {
           Text(
             widget.date,
             style: TextStyle(
-              color: AppColors.black,
+              color: theme.colorScheme.secondary,
               fontSize: 10,
               fontWeight: FontWeight.w300
             ),

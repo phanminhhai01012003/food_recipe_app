@@ -21,11 +21,12 @@ class CookbookDetail extends StatefulWidget {
 class _CookbookDetailState extends State<CookbookDetail> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
-        backgroundColor: AppColors.white,
-        foregroundColor: AppColors.black,
+        backgroundColor: theme.colorScheme.primary,
+        foregroundColor: theme.colorScheme.secondary,
         leading: Padding(
           padding: EdgeInsets.all(8),
           child: IconButton(
@@ -74,7 +75,7 @@ class _CookbookDetailState extends State<CookbookDetail> {
                         widget.cookbook.cookbookName,
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                          color: AppColors.black,
+                          color: theme.colorScheme.secondary,
                           fontSize: 16,
                           fontWeight: FontWeight.bold
                         ),
@@ -85,7 +86,7 @@ class _CookbookDetailState extends State<CookbookDetail> {
                           widget.cookbook.description,
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                            color: AppColors.black,
+                            color: theme.colorScheme.secondary,
                             fontSize: 12,
                             fontWeight: FontWeight.normal
                           ),
@@ -115,7 +116,7 @@ class _CookbookDetailState extends State<CookbookDetail> {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33)),
                     child: Text("Sửa thông tin",
                       style: TextStyle(
-                        color: AppColors.white,
+                        color: theme.colorScheme.primary,
                         fontSize: 14,
                         fontWeight: FontWeight.normal
                       ),
@@ -133,7 +134,7 @@ class _CookbookDetailState extends State<CookbookDetail> {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33)),
                     child: Text("Xóa nhật ký",
                       style: TextStyle(
-                        color: AppColors.white,
+                        color: theme.colorScheme.primary,
                         fontSize: 14,
                         fontWeight: FontWeight.normal
                       ),

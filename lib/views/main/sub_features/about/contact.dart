@@ -6,6 +6,7 @@ class Contact extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Center(
       child: Column(
         children: [
@@ -17,7 +18,7 @@ class Contact extends StatelessWidget {
           SizedBox(height: 20),
             Text("PMH Food Recipe",
               style: TextStyle(
-                  color: Colors.black,
+                  color: theme.colorScheme.secondary,
                   fontSize: 28,
                   fontWeight: FontWeight.w900
               ),
@@ -25,7 +26,7 @@ class Contact extends StatelessWidget {
             SizedBox(height: 50),
             Text("Created by Phan Minh Hai",
               style: TextStyle(
-                  color: Colors.black,
+                  color: theme.colorScheme.secondary,
                   fontSize: 20,
                   fontWeight: FontWeight.w300
               ),
@@ -33,7 +34,7 @@ class Contact extends StatelessWidget {
             SizedBox(height: 20),
             Text("Version: 1.0",
               style: TextStyle(
-                  color: Colors.black,
+                  color: theme.colorScheme.secondary,
                   fontSize: 20,
                   fontWeight: FontWeight.w300
               ),
@@ -41,7 +42,7 @@ class Contact extends StatelessWidget {
             SizedBox(height: 20),
             Text("Thông tin liên hệ:",
               style: TextStyle(
-                  color: Colors.black,
+                  color: theme.colorScheme.secondary,
                   fontSize: 20,
                   fontWeight: FontWeight.w300
               ),
@@ -49,7 +50,7 @@ class Contact extends StatelessWidget {
             SizedBox(height: 20),
             Text("Email: hai0188766@huce.edu.vn",
               style: TextStyle(
-                  color: Colors.black,
+                  color: theme.colorScheme.secondary,
                   fontSize: 20,
                   fontWeight: FontWeight.w300
               ),
@@ -57,7 +58,7 @@ class Contact extends StatelessWidget {
             SizedBox(height: 20),
             Text("Phone: 0984238803",
               style: TextStyle(
-                  color: Colors.black,
+                  color: theme.colorScheme.secondary,
                   fontSize: 20,
                   fontWeight: FontWeight.w300
               ),
@@ -65,7 +66,7 @@ class Contact extends StatelessWidget {
             SizedBox(height: 20),
             Text("Name: Phan Minh Hai",
               style: TextStyle(
-                  color: Colors.black,
+                  color: theme.colorScheme.secondary,
                   fontSize: 20,
                   fontWeight: FontWeight.w300
               ),

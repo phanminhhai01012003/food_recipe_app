@@ -56,8 +56,9 @@ class _CommentPageState extends State<CommentPage> {
   }
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
         leading: Padding(
           padding: EdgeInsets.all(8),
@@ -69,8 +70,8 @@ class _CommentPageState extends State<CommentPage> {
             )
           ),
         ),
-        backgroundColor: AppColors.green,
-        foregroundColor: AppColors.white,
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        foregroundColor: theme.appBarTheme.foregroundColor,
         title: commentTitle,
         centerTitle: true,
       ),
@@ -88,8 +89,8 @@ class _CommentPageState extends State<CommentPage> {
           }
         },
         commentController: _commentController,
-        backgroundColor: AppColors.green,
-        textColor: AppColors.white,
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        textColor: theme.appBarTheme.foregroundColor,
         sendWidget: Icon(
           Icons.send, 
           size: 30, 

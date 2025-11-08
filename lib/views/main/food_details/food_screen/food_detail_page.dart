@@ -88,6 +88,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
       isSaved: true, 
       foods: widget.food
     );
+    final theme = Theme.of(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
@@ -158,6 +159,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                 )
               ],
             ),
+            SizedBox(height: 5),
             Center(
               child: Container(
                 width: 40,
@@ -179,7 +181,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black
+                      color: theme.colorScheme.secondary
                     ),
                   ),
                   SizedBox(height: 20),
@@ -188,14 +190,14 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
-                      color: Colors.black
+                      color: theme.colorScheme.secondary
                     ),
                   ),
                   SizedBox(height: 20),
                   Text(
                     "Đã tạo: ${DateFormat("dd/MM/yyyy").format((widget.food.createdAt))}",
                     style: TextStyle(
-                        color: Colors.black,
+                        color: theme.colorScheme.secondary,
                         fontSize: 14,
                         fontWeight: FontWeight.w700
                     ),
@@ -226,7 +228,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                           widget.food.userName,
                           style: TextStyle(
                             fontSize: 14,
-                            color: Colors.black,
+                            color: theme.colorScheme.secondary,
                             fontWeight: FontWeight.w600
                           ),
                         ),
@@ -236,7 +238,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                   SizedBox(height: 20),
                   Text("Mô tả:",
                     style: TextStyle(
-                      color: Colors.black,
+                      color: theme.colorScheme.secondary,
                       fontSize: 20,
                       fontWeight: FontWeight.bold
                     ),
@@ -264,7 +266,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
-                          color: Colors.black
+                          color: theme.colorScheme.secondary
                         ),
                       ),
                       SizedBox(width: 50),
@@ -279,7 +281,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
-                          color: Colors.black
+                          color: theme.colorScheme.secondary
                         ),
                       ),
                     ],
@@ -290,7 +292,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black
+                      color: theme.colorScheme.secondary
                     ),
                   ),
                   ListView.builder(
@@ -308,7 +310,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.normal,
-                                color: Colors.black
+                                color: theme.colorScheme.secondary
                               ),
                             ),
                             Expanded(
@@ -317,7 +319,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.normal,
-                                  color: Colors.black
+                                  color: theme.colorScheme.secondary
                                 ),
                               ),
                             )
@@ -332,7 +334,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black
+                      color: theme.colorScheme.secondary
                     ),
                   ),
                   ListView.builder(
@@ -350,7 +352,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.normal,
-                                color: Colors.black
+                                color: theme.colorScheme.secondary
                               ),
                             ),
                             Expanded(
@@ -359,7 +361,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.normal,
-                                  color: Colors.black
+                                  color: theme.colorScheme.secondary
                                 ),
                               ),
                             )
@@ -391,7 +393,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                               child: Text(
                                 widget.likedList.length.toString(),
                                 style: TextStyle(
-                                  color: Colors.black,
+                                  color: theme.colorScheme.secondary,
                                   fontSize: 16
                                 ),
                               ),

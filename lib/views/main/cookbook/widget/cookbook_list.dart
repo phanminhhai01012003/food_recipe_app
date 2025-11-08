@@ -16,12 +16,13 @@ class CookbookList extends StatefulWidget {
 class _CookbookListState extends State<CookbookList> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Card(
-      surfaceTintColor: AppColors.white,
+      surfaceTintColor: theme.colorScheme.primary,
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: widget.cookbook.foodsList.contains(widget.food) ? AppColors.green : AppColors.white,
+          color: widget.cookbook.foodsList.contains(widget.food) ? AppColors.green : theme.colorScheme.primary,
           borderRadius: BorderRadius.circular(12)
         ),
         child: Row(
@@ -52,7 +53,7 @@ class _CookbookListState extends State<CookbookList> {
             Text(
               widget.cookbook.cookbookName,
               style: TextStyle(
-                color: widget.cookbook.foodsList.contains(widget.food) ? AppColors.white : AppColors.black,
+                color: widget.cookbook.foodsList.contains(widget.food) ? AppColors.white : theme.colorScheme.secondary,
                 fontSize: 16,
                 fontWeight: FontWeight.bold
               ),

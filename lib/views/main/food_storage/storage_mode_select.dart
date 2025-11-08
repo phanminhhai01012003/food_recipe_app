@@ -55,10 +55,12 @@ class _StorageModeSelectState extends State<StorageModeSelect> {
   }
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
+      backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
-        backgroundColor: AppColors.green,
-        foregroundColor: AppColors.white,
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        foregroundColor: theme.appBarTheme.foregroundColor,
         centerTitle: true,
         leading: Padding(
           padding: EdgeInsets.all(8),

@@ -63,8 +63,9 @@ class _CommentWidgetState extends State<CommentWidget> {
   }
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Card(
-      surfaceTintColor: AppColors.white,
+      surfaceTintColor: theme.colorScheme.primary,
       child: GestureDetector(
         onLongPress: () => widget.comment.userId == currentUser.uid 
           ? CommentSelection.showSelectionWithCurrentUser(context, widget.comment, widget.id)
@@ -73,7 +74,7 @@ class _CommentWidgetState extends State<CommentWidget> {
           padding: EdgeInsets.all(12),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
-            color: AppColors.white
+            color: theme.colorScheme.primary
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,6 +116,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                             Text(
                               widget.comment.userName,
                               style: TextStyle(
+                                color: theme.colorScheme.secondary,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w900
                               ),
@@ -123,6 +125,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                             Text(
                               DateFormat("dd/MM/yyyy").format(widget.comment.createdAt),
                               style: TextStyle(
+                                color: theme.colorScheme.secondary,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w700
                               ),
@@ -132,8 +135,9 @@ class _CommentWidgetState extends State<CommentWidget> {
                         SizedBox(height: 5),
                         Text(
                           widget.comment.content,
-                            style: TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
+                            color: theme.colorScheme.secondary,
                             fontWeight: FontWeight.w700
                           ),
                         ),
@@ -161,7 +165,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                           );
                         },
                         style: TextStyle(
-                          color: isLikedComment ? AppColors.blue : AppColors.grey,
+                          color: isLikedComment ? AppColors.blue : theme.colorScheme.secondary,
                           fontSize: 12,
                           fontWeight: isLikedComment ? FontWeight.w700 : FontWeight.w300
                         )
@@ -169,9 +173,9 @@ class _CommentWidgetState extends State<CommentWidget> {
                       TextSpan(
                         text: " Trả lời",
                         style: TextStyle(
-                          color: AppColors.grey,
+                          color: theme.colorScheme.secondary,
                           fontSize: 12,
-                          fontWeight: isLikedComment ? FontWeight.w700 : FontWeight.w300
+                          fontWeight: FontWeight.w300
                         ),
                         recognizer: TapGestureRecognizer()..onTap = () => Navigator.push(context, checkDeviceRoute(replyPage(widget.comment, widget.id)))
                       )

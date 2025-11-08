@@ -20,8 +20,9 @@ class RecentView extends StatefulWidget {
 class _RecentViewState extends State<RecentView> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
         centerTitle: true,
         leading: Padding(
@@ -34,8 +35,8 @@ class _RecentViewState extends State<RecentView> {
             )
           ),
         ),
-        backgroundColor: AppColors.green,
-        foregroundColor: AppColors.white,
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        foregroundColor: theme.appBarTheme.foregroundColor,
         title: Text(
           "Đã xem gần đây",
           style: TextStyle(
@@ -61,7 +62,7 @@ class _RecentViewState extends State<RecentView> {
                   Text(
                     "Không có dữ liệu",
                     style: TextStyle(
-                      color: AppColors.black,
+                      color: theme.colorScheme.secondary,
                       fontSize: 14,
                       fontWeight: FontWeight.normal
                     ),

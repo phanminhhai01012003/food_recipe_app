@@ -33,10 +33,11 @@ class _ReportSelectionState extends State<ReportSelection> {
   }
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
-        color: AppColors.white
+        color: theme.colorScheme.primary
       ),
       clipBehavior: Clip.hardEdge,
       padding: EdgeInsets.only(bottom: 15, left: 20, right: 20),
@@ -84,7 +85,7 @@ class _ReportSelectionState extends State<ReportSelection> {
                   Text(
                     "Sửa",
                     style: TextStyle(
-                      color: AppColors.black,
+                      color: theme.colorScheme.secondary,
                       fontSize: 12,
                       fontWeight: FontWeight.normal
                     ),
@@ -125,7 +126,7 @@ class _ReportSelectionState extends State<ReportSelection> {
                   Text(
                     "Xóa",
                     style: TextStyle(
-                      color: AppColors.black,
+                      color: theme.colorScheme.secondary,
                       fontSize: 12,
                       fontWeight: FontWeight.normal
                     ),

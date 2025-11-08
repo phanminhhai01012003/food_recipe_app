@@ -73,11 +73,12 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
   }
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
-        backgroundColor: AppColors.green,
-        foregroundColor: AppColors.white,
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        foregroundColor: theme.appBarTheme.foregroundColor,
         centerTitle: true,
         leading: Padding(
           padding: EdgeInsets.all(8),
@@ -137,7 +138,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                       child: Icon(
                         Icons.add_a_photo,
                         size: 50,
-                        color: Colors.black,
+                        color: theme.colorScheme.secondary,
                       ),
                     ),
                 ),
@@ -179,7 +180,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             SizedBox(height: 20),
             Text("Tên món ăn",
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontSize: 16,
                 fontWeight: FontWeight.w900
               ),
@@ -188,7 +189,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             TextField(
               controller: titleController,
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontWeight: FontWeight.w800,
                 fontSize: 14
               ),
@@ -200,11 +201,11 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: AppColors.black)
+                  borderSide: BorderSide(color: theme.colorScheme.secondary)
                 ),
                 hintText: "Nhập tên món ăn",
                 hintStyle: TextStyle(
-                  color: AppColors.black,
+                  color: theme.colorScheme.secondary,
                   fontSize: 14,
                   fontWeight: FontWeight.w800
                 ),
@@ -213,7 +214,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             SizedBox(height: 20),
             Text("Mô tả",
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontSize: 16,
                 fontWeight: FontWeight.w900
               ),
@@ -232,18 +233,18 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: AppColors.black)
+                  borderSide: BorderSide(color: theme.colorScheme.secondary)
                 ),
                 hintText: "Mô tả về món ăn đó",
                 hintStyle: TextStyle(
-                  color: AppColors.black,
+                  color: theme.colorScheme.secondary,
                   fontSize: 14,
                   fontWeight: FontWeight.w800
                 ),
                 counterText: ""
               ),
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontWeight: FontWeight.w800,
                 fontSize: 14
               ),
@@ -251,7 +252,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             SizedBox(height: 20),
             Text("Thể loại",
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontSize: 16,
                 fontWeight: FontWeight.w900
               ),
@@ -261,12 +262,18 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
               padding: EdgeInsets.symmetric(horizontal: 12),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: AppColors.black)
+                border: Border.all(color: theme.colorScheme.secondary)
               ),
               child: DropdownButton(
                 underline: SizedBox(),
                 isExpanded: true,
-                hint: Text("Chọn"),
+                hint: Text("Chọn",
+                  style: TextStyle(
+                    color: theme.colorScheme.secondary,
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal
+                  ),
+                ),
                 items: categoryList.map((String item){
                   return DropdownMenuItem(
                     value: item,
@@ -290,7 +297,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
               children: [
                 Text("Khẩu phần",
                   style: TextStyle(
-                    color: AppColors.black,
+                    color: theme.colorScheme.secondary,
                     fontSize: 16,
                     fontWeight: FontWeight.w900
                   ),
@@ -311,11 +318,11 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide(color: AppColors.black)
+                            borderSide: BorderSide(color: theme.colorScheme.secondary)
                           ),
                         ),
                         style: TextStyle(
-                          color: AppColors.black,
+                          color: theme.colorScheme.secondary,
                           fontWeight: FontWeight.w800,
                           fontSize: 14
                         ),
@@ -324,7 +331,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     SizedBox(width: 5),
                     Text("người",
                       style: TextStyle(
-                        color: AppColors.black,
+                        color: theme.colorScheme.secondary,
                         fontSize: 16,
                         fontWeight: FontWeight.w900
                       ),
@@ -339,7 +346,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
               children: [
                 Text("Thời gian",
                   style: TextStyle(
-                    color: AppColors.black,
+                    color: theme.colorScheme.secondary,
                     fontSize: 16,
                     fontWeight: FontWeight.w900
                   ),
@@ -358,14 +365,14 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     height: 33,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
-                      color: AppColors.white,
-                      border: Border.all(color: AppColors.black)
+                      color: theme.colorScheme.primary,
+                      border: Border.all(color: theme.colorScheme.secondary)
                     ),
                     alignment: Alignment.center,
                     child: Text(
                       _duration.ddhhmmss,
                       style: TextStyle(
-                        color: AppColors.black,
+                        color: theme.colorScheme.secondary,
                         fontSize: 14,
                         fontWeight: FontWeight.w700
                       ),
@@ -377,7 +384,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             SizedBox(height: 20),
             Text("Các nguyên liệu chính",
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontSize: 16,
                 fontWeight: FontWeight.w900
               ),
@@ -391,14 +398,14 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 return TextField(
                   controller: ingredientController[index],
                   style: TextStyle(
-                    color: AppColors.black,
+                    color: theme.colorScheme.secondary,
                     fontWeight: FontWeight.w800,
                     fontSize: 14
                   ),
                   decoration: InputDecoration(
                     hintText: "Nguyên liệu",
                     hintStyle: TextStyle(
-                      color: AppColors.black,
+                      color: theme.colorScheme.secondary,
                       fontSize: 14,
                       fontWeight: FontWeight.w800
                     ),
@@ -408,7 +415,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: AppColors.black)
+                      borderSide: BorderSide(color: theme.colorScheme.secondary)
                     ),
                     prefixIcon: Container(
                       alignment: Alignment.center,
@@ -417,7 +424,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                       child: Text(
                         "${index + 1}",
                         style: TextStyle(
-                          color: AppColors.black,
+                          color: theme.colorScheme.secondary,
                           fontWeight: FontWeight.w800,
                           fontSize: 14
                         ),
@@ -469,7 +476,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             SizedBox(height: 20),
             Text("Cách làm",
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontSize: 16,
                 fontWeight: FontWeight.w900
               ),
@@ -483,14 +490,14 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 return TextField(
                   controller: stepController[index],
                   style: TextStyle(
-                    color: AppColors.black,
+                    color: theme.colorScheme.secondary,
                     fontWeight: FontWeight.w800,
                     fontSize: 14
                   ),
                   decoration: InputDecoration(
                     hintText: "Các bước chế biến",
                     hintStyle: TextStyle(
-                      color: AppColors.black,
+                      color: theme.colorScheme.secondary,
                       fontSize: 14,
                       fontWeight: FontWeight.w800
                     ),
@@ -500,7 +507,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: AppColors.black)
+                      borderSide: BorderSide(color: theme.colorScheme.secondary)
                     ),
                     prefixIcon: Container(
                       width: 20,
@@ -509,7 +516,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                       child: Text(
                         "${index + 1}",
                         style: TextStyle(
-                          color: AppColors.black,
+                          color: theme.colorScheme.secondary,
                           fontWeight: FontWeight.w800,
                           fontSize: 14
                         ),

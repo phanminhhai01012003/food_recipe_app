@@ -19,8 +19,9 @@ class _CategoriesPageState extends State<CategoriesPage> {
   String selectCategory = "Tất cả";
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.green,
+      backgroundColor: theme.appBarTheme.backgroundColor,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,11 +113,11 @@ class _CategoriesPageState extends State<CategoriesPage> {
                 width: double.infinity,
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: AppColors.white,
+                  color: theme.colorScheme.primary,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.white,
+                      color: theme.colorScheme.secondary,
                       offset: Offset(5, 5),
                       blurRadius: 5,
                       spreadRadius: 5,
@@ -149,10 +150,10 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: selectCategory == categories[index].tag 
-                                        ? AppColors.green : AppColors.white,
+                                        ? AppColors.green : theme.colorScheme.primary,
                                       borderRadius: BorderRadius.circular(30),
                                       border: Border.all(color: selectCategory == categories[index].tag 
-                                        ? AppColors.white : AppColors.black)
+                                        ? AppColors.white : theme.colorScheme.secondary)
                                     ),
                                     padding: EdgeInsets.symmetric(
                                       horizontal: 20,
@@ -163,7 +164,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                       categories[index].tag,
                                       style: TextStyle(
                                         color: selectCategory == categories[index].tag
-                                          ? Colors.white : Colors.black,
+                                          ? AppColors.white : theme.colorScheme.secondary,
                                         fontWeight: FontWeight.w400,
                                         fontSize: 14
                                       ),

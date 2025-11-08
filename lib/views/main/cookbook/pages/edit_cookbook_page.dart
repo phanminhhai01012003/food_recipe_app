@@ -79,8 +79,9 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
   }
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
         centerTitle: true,
         title: Text(
@@ -90,8 +91,8 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
             fontWeight: FontWeight.w700
           ),
         ),
-        backgroundColor: AppColors.green,
-        foregroundColor: AppColors.white,
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        foregroundColor: theme.appBarTheme.foregroundColor,
         leading: Padding(
           padding: EdgeInsets.all(8),
           child: canMultiSelected ? IconButton(
@@ -276,7 +277,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
                         elevation: 10,
                         margin: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                        color: canMultiSelected ? AppColors.green : AppColors.white,
+                        color: canMultiSelected ? AppColors.green : theme.colorScheme.primary,
                         child: Row(
                           children: [
                             ClipRRect(
@@ -294,7 +295,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
                               child: Text(
                                 foodData[index].title,
                                 style: TextStyle(
-                                  color: canMultiSelected ? AppColors.white : AppColors.black,
+                                  color: canMultiSelected ? theme.colorScheme.primary : AppColors.black,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w800
                                 ),
@@ -315,7 +316,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.green,
-                  foregroundColor: AppColors.white,
+                  foregroundColor: theme.colorScheme.primary,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33))
                 ),
                 onPressed: add, 

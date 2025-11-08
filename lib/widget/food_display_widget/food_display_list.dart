@@ -21,6 +21,7 @@ class _FoodDisplayListState extends State<FoodDisplayList> {
   final currentUser = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return InkWell(
       onTap: () {
         RecentViewModel recents = RecentViewModel(
@@ -46,18 +47,18 @@ class _FoodDisplayListState extends State<FoodDisplayList> {
         width: double.infinity,
         margin: EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: theme.colorScheme.primary,
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
-              color: AppColors.white,
+              color: theme.colorScheme.primary,
               offset: Offset(5, 5),
               blurRadius: 5,
               spreadRadius: 5,
               blurStyle: BlurStyle.solid
             ),
             BoxShadow(
-              color: AppColors.white,
+              color: theme.colorScheme.primary,
               offset: Offset(4, 2),
               blurRadius: 3,
               spreadRadius: 3,
@@ -100,7 +101,7 @@ class _FoodDisplayListState extends State<FoodDisplayList> {
               children: [
                 Text(widget.food.title,
                   style: TextStyle(
-                    color: AppColors.black,
+                    color: theme.colorScheme.secondary,
                     fontSize: 16,
                     fontWeight: FontWeight.w700
                   ),
@@ -109,7 +110,7 @@ class _FoodDisplayListState extends State<FoodDisplayList> {
                 Text(
                   widget.food.userName,
                   style: TextStyle(
-                    color: AppColors.black,
+                    color: theme.colorScheme.secondary,
                     fontSize: 12,
                     fontWeight: FontWeight.w400
                   ),

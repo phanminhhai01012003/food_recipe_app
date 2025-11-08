@@ -20,12 +20,13 @@ class SaveFood extends StatefulWidget {
 class _SaveFoodState extends State<SaveFood> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: AppColors.green,
-        foregroundColor: AppColors.white,
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        foregroundColor: theme.appBarTheme.foregroundColor,
         leading: Padding(
           padding: EdgeInsets.all(8),
           child: IconButton(
@@ -61,7 +62,7 @@ class _SaveFoodState extends State<SaveFood> {
                   Text(
                     "Không có dữ liệu",
                     style: TextStyle(
-                      color: AppColors.black,
+                      color: theme.colorScheme.secondary,
                       fontSize: 14,
                       fontWeight: FontWeight.normal
                     ),

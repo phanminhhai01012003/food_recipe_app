@@ -15,9 +15,11 @@ class ChangeThemeScreen extends StatefulWidget {
 class _ChangeThemeScreenState extends State<ChangeThemeScreen> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Consumer<ThemeState>(
       builder: (context, value, child) {
         return Scaffold(
+          backgroundColor: theme.colorScheme.primary,
           appBar: AppBar(
             leading: Padding(
               padding: EdgeInsets.all(8),
@@ -29,8 +31,8 @@ class _ChangeThemeScreenState extends State<ChangeThemeScreen> {
                   )
                 ),
             ),
-            backgroundColor: AppColors.green,
-            foregroundColor: AppColors.white,
+            backgroundColor: theme.appBarTheme.backgroundColor,
+            foregroundColor: theme.appBarTheme.foregroundColor,
             title: Text("Chế độ giao diện",
               style: TextStyle(
                 fontSize: 14,
@@ -41,104 +43,103 @@ class _ChangeThemeScreenState extends State<ChangeThemeScreen> {
           ),
           body: Center(
             child: Padding(
-              padding: EdgeInsets.all(8),
+              padding: EdgeInsets.symmetric(horizontal: 12),
               child: Card(
-                surfaceTintColor: AppColors.white,
+                surfaceTintColor: theme.colorScheme.primary,
                 child: Container(
+                  padding: EdgeInsets.all(12),
+                  width: double.infinity,
+                  height: 100,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    color: AppColors.white
+                    color: theme.colorScheme.primary
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Column(
-                        children: [
-                          InkWell(
-                            onTap: (){},
-                            child: Container(
+                      InkWell(
+                        onTap: value.systemTheme,
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 50,
+                              height: 50,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12)
+                                borderRadius: BorderRadius.circular(12),
+                                color: value.isSystem ? AppColors.green : theme.colorScheme.primary
                               ),
-                              child: Stack(
-                                children: [
-                                  Positioned(
-                                    top: 5,
-                                    left: 5,
-                                    child: Icon(
-                                      Icons.sunny, 
-                                      size: 10
-                                    ),
-                                  ),
-                                  Positioned(
-                                    bottom: 5,
-                                    right: 5,
-                                    child: Icon(
-                                      Icons.dark_mode, 
-                                      size: 10
-                                    ),
-                                  )
-                                ],
+                              child: Icon(
+                                Icons.auto_mode,
+                                size: 20,
+                                color: value.isSystem ? AppColors.white : theme.colorScheme.secondary,
+                              )
+                            ),
+                            SizedBox(height: 5),
+                            Text("Hệ thống",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.normal
                               ),
-                            ),
-                          ),
-                          SizedBox(height: 5),
-                          Text("Hệ thống",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.normal
-                            ),
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       ),
-                      Column(
-                        children: [
-                          InkWell(
-                            onTap: (){},
-                            child: Container(
+                      InkWell(
+                        onTap: value.lightTheme,
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 50,
+                              height: 50,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12)
+                                borderRadius: BorderRadius.circular(12),
+                                color: value.isLight ? AppColors.green : theme.colorScheme.primary
                               ),
                               child: Icon(
                                 Icons.sunny, 
-                                size: 20
+                                size: 20,
+                                color: value.isLight ? AppColors.white : theme.colorScheme.secondary,
                               )
                             ),
-                          ),
-                          SizedBox(height: 5),
-                          Text("Sáng",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.normal
-                            ),
-                          )
-                        ],
+                            SizedBox(height: 5),
+                            Text("Sáng",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.normal
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                      Column(
-                        children: [
-                          InkWell(
-                            onTap: (){},
-                            child: Container(
+                      InkWell(
+                        onTap: value.darkTheme,
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 50,
+                              height: 50,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12)
+                                shape: BoxShape.circle,
+                                color: value.isDark ? AppColors.green : theme.colorScheme.primary
                               ),
                               child: Icon(
                                 Icons.dark_mode,
                                 size: 20,
+                                color: value.isDark ? AppColors.white : theme.colorScheme.secondary,
                               )
                             ),
-                          ),
-                          SizedBox(height: 5),
-                          Text("Tối",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.normal
-                            ),
-                          )
-                        ],
+                            SizedBox(height: 5),
+                            Text("Tối",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.normal
+                              ),
+                            )
+                          ],
+                        ),
                       )
                     ],
                   ),

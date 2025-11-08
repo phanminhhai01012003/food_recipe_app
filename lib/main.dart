@@ -40,25 +40,29 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => CookbookState()),
         ChangeNotifierProvider(create: (_) => ThemeState())
       ],
-      child: MediaQuery(
-        data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1)),
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'PMH Food Recipe',
-          theme: AppThemes.lightTheme,
-          darkTheme: AppThemes.darkTheme,
-          themeMode: ThemeMode.system,
-          home: LoaderOverlay(
-            closeOnBackButton: false,
-            overlayColor: Colors.transparent,
-            overlayWidgetBuilder: (progress) => Center(
-              child: CircularProgressIndicator(color: AppColors.yellow)
+      child: Consumer<ThemeState>(
+        builder: (context, value, child) {
+          return MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1)),
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'PMH Food Recipe',
+              theme: AppThemes.lightTheme,
+              darkTheme: AppThemes.darkTheme,
+              themeMode: value.themeMode,
+              home: LoaderOverlay(
+                closeOnBackButton: false,
+                overlayColor: Colors.transparent,
+                overlayWidgetBuilder: (progress) => Center(
+                  child: CircularProgressIndicator(color: AppColors.yellow)
+                ),
+                switchInCurve: Easing.linear,
+                switchOutCurve: Easing.linear,
+                child: splashScreen
+              )
             ),
-            switchInCurve: Easing.linear,
-            switchOutCurve: Easing.linear,
-            child: splashScreen
-          )
-        ),
+          );
+        },
       ),
     );
   }

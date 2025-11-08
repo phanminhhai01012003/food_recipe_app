@@ -18,8 +18,9 @@ class CookbookScreen extends StatefulWidget {
 class _CookbookScreenState extends State<CookbookScreen> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
         centerTitle: true,
         leading: Padding(
@@ -32,8 +33,8 @@ class _CookbookScreenState extends State<CookbookScreen> {
             )
           ),
         ),
-        backgroundColor: AppColors.green,
-        foregroundColor: AppColors.white,
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        foregroundColor: theme.appBarTheme.foregroundColor,
         title: Text(
           "Sổ tay nấu ăn của bạn",
           style: TextStyle(
@@ -59,7 +60,7 @@ class _CookbookScreenState extends State<CookbookScreen> {
                   Text(
                     "Không có dữ liệu",
                     style: TextStyle(
-                      color: AppColors.black,
+                      color: theme.colorScheme.secondary,
                       fontSize: 14,
                       fontWeight: FontWeight.normal
                     ),

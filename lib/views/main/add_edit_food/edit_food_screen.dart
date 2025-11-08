@@ -87,11 +87,12 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
   }
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
-        backgroundColor: AppColors.green,
-        foregroundColor: AppColors.white,
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        foregroundColor: theme.appBarTheme.foregroundColor,
         centerTitle: true,
         title: Text("Chỉnh sửa món ăn"),
         leading: Padding(
@@ -151,7 +152,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
             SizedBox(height: 20),
             Text("Tên món ăn",
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontSize: 16,
                 fontWeight: FontWeight.w900
               ),
@@ -160,7 +161,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
             TextField(
               controller: titleController,
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontWeight: FontWeight.w800,
                 fontSize: 14
               ),
@@ -172,11 +173,11 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: AppColors.black)
+                  borderSide: BorderSide(color: theme.colorScheme.secondary)
                 ),
                 hintText: "Nhập tên món ăn",
                 hintStyle: TextStyle(
-                  color: AppColors.black,
+                  color: theme.colorScheme.secondary,
                   fontSize: 14,
                   fontWeight: FontWeight.w800
                 ),
@@ -185,7 +186,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
             SizedBox(height: 20),
             Text("Mô tả",
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontSize: 16,
                 fontWeight: FontWeight.w900
               ),
@@ -204,18 +205,18 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: AppColors.black)
+                  borderSide: BorderSide(color: theme.colorScheme.secondary)
                 ),
                 hintText: "Mô tả về món ăn đó",
                 hintStyle: TextStyle(
-                  color: AppColors.black,
+                  color: theme.colorScheme.secondary,
                   fontSize: 14,
                   fontWeight: FontWeight.w800
                 ),
                 counterText: ""
               ),
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontWeight: FontWeight.w800,
                 fontSize: 14
               ),
@@ -223,7 +224,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
             SizedBox(height: 20),
             Text("Thể loại",
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontSize: 16,
                 fontWeight: FontWeight.w900
               ),
@@ -233,12 +234,18 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
               padding: EdgeInsets.symmetric(horizontal: 12),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: AppColors.black)
+                border: Border.all(color: theme.colorScheme.secondary)
               ),
               child: DropdownButton(
                 underline: SizedBox(),
                 isExpanded: true,
-                hint: Text("Chọn"),
+                hint: Text("Chọn",
+                  style: TextStyle(
+                    color: theme.colorScheme.secondary,
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal
+                  ),
+                ),
                 items: categoryList.map((String item){
                   return DropdownMenuItem(
                     value: item,
@@ -262,7 +269,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
               children: [
                 Text("Khẩu phần",
                   style: TextStyle(
-                    color: AppColors.black,
+                    color: theme.colorScheme.secondary,
                     fontSize: 16,
                     fontWeight: FontWeight.w900
                   ),
@@ -283,17 +290,17 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide(color: AppColors.black)
+                            borderSide: BorderSide(color: theme.colorScheme.secondary)
                           ),
                           hintText: "Số lượng",
                           hintStyle: TextStyle(
-                            color: AppColors.black,
+                            color: theme.colorScheme.secondary,
                             fontSize: 14,
                             fontWeight: FontWeight.w800
                           )
                         ),
                         style: TextStyle(
-                          color: AppColors.black,
+                          color: theme.colorScheme.secondary,
                           fontWeight: FontWeight.w800,
                           fontSize: 14
                         ),
@@ -302,7 +309,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                     SizedBox(width: 5),
                     Text("người",
                       style: TextStyle(
-                        color: AppColors.black,
+                        color: theme.colorScheme.secondary,
                         fontSize: 16,
                         fontWeight: FontWeight.w900
                       ),
@@ -317,7 +324,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
               children: [
                 Text("Thời gian",
                   style: TextStyle(
-                    color: AppColors.black,
+                    color: theme.colorScheme.secondary,
                     fontSize: 16,
                     fontWeight: FontWeight.w900
                   ),
@@ -336,14 +343,14 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                     height: 33,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
-                      color: AppColors.white,
-                      border: Border.all(color: AppColors.black)
+                      color: theme.colorScheme.primary,
+                      border: Border.all(color: theme.colorScheme.secondary)
                     ),
                     alignment: Alignment.center,
                     child: Text(
                       _duration.ddhhmmss,
                       style: TextStyle(
-                        color: AppColors.black,
+                        color: theme.colorScheme.secondary,
                         fontSize: 14,
                         fontWeight: FontWeight.w700
                       ),
@@ -355,7 +362,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
             SizedBox(height: 20),
             Text("Các nguyên liệu chính",
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontSize: 16,
                 fontWeight: FontWeight.w900
               ),
@@ -369,14 +376,14 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                 return TextField(
                   controller: ingredientController[index],
                   style: TextStyle(
-                    color: AppColors.black,
+                    color: theme.colorScheme.secondary,
                     fontWeight: FontWeight.w800,
                     fontSize: 14
                   ),
                   decoration: InputDecoration(
                     hintText: "Nguyên liệu",
                     hintStyle: TextStyle(
-                      color: AppColors.black,
+                      color: theme.colorScheme.secondary,
                       fontSize: 14,
                       fontWeight: FontWeight.w800
                     ),
@@ -386,7 +393,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: AppColors.black)
+                      borderSide: BorderSide(color: theme.colorScheme.secondary)
                     ),
                     prefixIcon: Container(
                       alignment: Alignment.center,
@@ -395,7 +402,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                       child: Text(
                         "${index + 1}",
                         style: TextStyle(
-                          color: AppColors.black,
+                          color: theme.colorScheme.secondary,
                           fontWeight: FontWeight.w800,
                           fontSize: 14
                         ),
@@ -447,7 +454,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
             SizedBox(height: 20),
             Text("Cách làm",
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontSize: 16,
                 fontWeight: FontWeight.w900
               ),
@@ -461,14 +468,14 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                 return TextField(
                   controller: stepController[index],
                   style: TextStyle(
-                    color: AppColors.black,
+                    color: theme.colorScheme.secondary,
                     fontWeight: FontWeight.w800,
                     fontSize: 14
                   ),
                   decoration: InputDecoration(
                     hintText: "Các bước chế biến",
                     hintStyle: TextStyle(
-                      color: AppColors.black,
+                      color: theme.colorScheme.secondary,
                       fontSize: 14,
                       fontWeight: FontWeight.w800
                     ),
@@ -478,7 +485,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: AppColors.black)
+                      borderSide: BorderSide(color: theme.colorScheme.secondary)
                     ),
                     prefixIcon: Container(
                       width: 20,
@@ -487,7 +494,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                       child: Text(
                         "${index + 1}",
                         style: TextStyle(
-                          color: AppColors.black,
+                          color: theme.colorScheme.secondary,
                           fontWeight: FontWeight.w800,
                           fontSize: 14
                         ),

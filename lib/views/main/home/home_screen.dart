@@ -18,8 +18,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.green,
+      backgroundColor: theme.appBarTheme.backgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -110,11 +111,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 width: double.infinity,
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: AppColors.white,
+                  color: theme.colorScheme.primary,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.white,
+                      color: theme.colorScheme.primary,
                       offset: Offset(5, 5),
                       blurRadius: 5,
                       spreadRadius: 5,
@@ -128,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Text(
                         "Hôm nay có gì mới",                      
                         style: TextStyle(
-                          color: AppColors.black,
+                          color: theme.colorScheme.secondary,
                           fontSize: 16,
                           fontWeight: FontWeight.bold
                         ),
@@ -138,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         "Hãy cùng nhau khám phá những món ăn mà bạn yêu thích "
                         "và học cách chế biến chúng",
                         style: TextStyle(
-                          color: AppColors.black,
+                          color: theme.colorScheme.secondary,
                           fontSize: 12,
                           fontWeight: FontWeight.normal
                         ),
@@ -152,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Text(
                             "Gần đây nhất",
                             style: TextStyle(
-                              color: AppColors.black,
+                              color: theme.colorScheme.secondary,
                               fontSize: 14,
                               fontWeight: FontWeight.w700
                             ),
@@ -179,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Text(
                             "Sớm nhất",
                             style: TextStyle(
-                              color: AppColors.black,
+                              color: theme.colorScheme.secondary,
                               fontSize: 14,
                               fontWeight: FontWeight.w700
                             ),
@@ -206,7 +207,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Text(
                             "Dành cho bạn",
                             style: TextStyle(
-                              color: AppColors.black,
+                              color: theme.colorScheme.secondary,
                               fontSize: 14,
                               fontWeight: FontWeight.w700
                             ),
@@ -232,7 +233,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Text(
                           "Các thể loại phổ biến",
                           style: TextStyle(
-                            color: AppColors.black,
+                            color: theme.colorScheme.secondary,
                             fontSize: 14,
                             fontWeight: FontWeight.w700
                           ),

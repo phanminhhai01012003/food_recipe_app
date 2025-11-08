@@ -19,10 +19,12 @@ class PersonalScreen extends StatefulWidget {
 class _PersonalScreenState extends State<PersonalScreen> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
+      backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
-        backgroundColor: AppColors.green,
-        foregroundColor: AppColors.white,
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        foregroundColor: theme.appBarTheme.foregroundColor,
         title: Text("Trang cá nhân",
           style: TextStyle(
             fontSize: 15,
@@ -41,53 +43,56 @@ class _PersonalScreenState extends State<PersonalScreen> {
           ),
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          FutureBuilder(
-            future: userServices.getUserById(context, widget.id),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData || snapshot.hasError) {
-                return SizedBox();
-              } else if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator(color: AppColors.yellow));
-              } else{
-                List<UserModel> userData = snapshot.data!;
-                return ListView.builder(
-                  itemCount: userData.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) => userInform(user: userData[index])
-                );
+      body: Padding(
+        padding: EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            FutureBuilder(
+              future: userServices.getUserById(context, widget.id),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData || snapshot.hasError) {
+                  return SizedBox();
+                } else if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator(color: AppColors.yellow));
+                } else{
+                  List<UserModel> userData = snapshot.data!;
+                  return ListView.builder(
+                    itemCount: userData.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) => userInform(user: userData[index])
+                  );
+                }
+              },
+            ),
+            SizedBox(height: 20),
+            Divider(color: AppColors.grey, thickness: 1),
+            SizedBox(height: 20),
+            StreamBuilder(
+              stream: foodServices.getFoodByUser(context, widget.id), 
+              builder: (context, snapshot){
+                if (!snapshot.hasData || snapshot.hasError) {
+                  return Center(child: Icon(Icons.error, size: 100, color: AppColors.red));
+                } else if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator(color: AppColors.yellow));
+                } else {
+                  List<FoodModel> foodData = snapshot.data!;
+                  return GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.8
+                    ),
+                    scrollDirection: Axis.vertical,
+                    itemCount: foodData.length,
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) => FoodDisplayGrid(food: foodData[index])
+                  );
+                }
               }
-            },
-          ),
-          SizedBox(height: 20),
-          Divider(color: AppColors.grey, thickness: 1),
-          SizedBox(height: 20),
-          StreamBuilder(
-            stream: foodServices.getFoodByUser(context, widget.id), 
-            builder: (context, snapshot){
-              if (!snapshot.hasData || snapshot.hasError) {
-                return Center(child: Icon(Icons.error, size: 100, color: AppColors.red));
-              } else if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator(color: AppColors.yellow));
-              } else {
-                List<FoodModel> foodData = snapshot.data!;
-                return GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.8
-                  ),
-                  scrollDirection: Axis.vertical,
-                  itemCount: foodData.length,
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) => FoodDisplayGrid(food: foodData[index])
-                );
-              }
-            }
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

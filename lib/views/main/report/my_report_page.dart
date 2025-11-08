@@ -42,11 +42,12 @@ class _MyReportPageState extends State<MyReportPage> {
   }
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
-        backgroundColor: AppColors.green,
-        foregroundColor: AppColors.white,
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        foregroundColor: theme.appBarTheme.foregroundColor,
         centerTitle: true,
         title: Text("Danh sách báo cáo/chặn",
           style: TextStyle(
@@ -82,14 +83,14 @@ class _MyReportPageState extends State<MyReportPage> {
                     height: 50,
                     width: MediaQuery.of(context).size.width / 4,
                     decoration: BoxDecoration(
-                      color: statusIndex == 0 ? AppColors.green : AppColors.white,
+                      color: statusIndex == 0 ? AppColors.green : theme.colorScheme.primary,
                       borderRadius: BorderRadius.circular(33)
                     ),
                     child: Center(
                       child: Text(
                         "Chờ duyệt",
                         style: TextStyle(
-                          color: statusIndex == 0 ? AppColors.white : AppColors.black,
+                          color: statusIndex == 0 ? AppColors.white : theme.colorScheme.secondary,
                           fontSize: 14,
                           fontWeight: FontWeight.w700
                         ),
@@ -107,14 +108,14 @@ class _MyReportPageState extends State<MyReportPage> {
                     height: 50,
                     width: MediaQuery.of(context).size.width / 4,
                     decoration: BoxDecoration(
-                      color: statusIndex == 1 ? AppColors.green : AppColors.white,
+                      color: statusIndex == 1 ? AppColors.green : theme.colorScheme.primary,
                       borderRadius: BorderRadius.circular(33)
                     ),
                     child: Center(
                       child: Text(
                         "Đã duyệt",
                         style: TextStyle(
-                          color: statusIndex == 1 ? AppColors.white : AppColors.black,
+                          color: statusIndex == 1 ? AppColors.white : theme.colorScheme.secondary,
                           fontSize: 14,
                           fontWeight: FontWeight.w700
                         ),
@@ -132,14 +133,14 @@ class _MyReportPageState extends State<MyReportPage> {
                     height: 50,
                     width: MediaQuery.of(context).size.width / 4,
                     decoration: BoxDecoration(
-                      color: statusIndex == 2 ? AppColors.green : AppColors.white,
+                      color: statusIndex == 2 ? AppColors.green : theme.colorScheme.primary,
                       borderRadius: BorderRadius.circular(33)
                     ),
                     child: Center(
                       child: Text(
                         "Từ chối",
                         style: TextStyle(
-                          color: statusIndex == 2 ? AppColors.white : AppColors.black,
+                          color: statusIndex == 2 ? AppColors.white : theme.colorScheme.secondary,
                           fontSize: 14,
                           fontWeight: FontWeight.w700
                         ),
@@ -171,16 +172,16 @@ class _MyReportPageState extends State<MyReportPage> {
                         await showReportSelectionModal(context, reports[index]);
                       },
                       child: Card(
-                        surfaceTintColor: AppColors.white,
+                        surfaceTintColor: theme.colorScheme.primary,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                        color: AppColors.white,
+                        color: theme.colorScheme.primary,
                         child: Column(
                           children: [
                             Expanded(
                               child: Text(
                                 "Tiêu đề: ${reports[index].target}",
                                 style: TextStyle(
-                                  color: AppColors.black,
+                                  color: theme.colorScheme.secondary,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold
                                 ),
@@ -191,7 +192,7 @@ class _MyReportPageState extends State<MyReportPage> {
                               child: Text(
                                 "Nội dung: ${reports[index].reason}",
                                 style: TextStyle(
-                                  color: AppColors.black,
+                                  color: theme.colorScheme.secondary,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w700
                                 ),
@@ -204,7 +205,7 @@ class _MyReportPageState extends State<MyReportPage> {
                                   TextSpan(
                                     text: "Trạng thái: ",
                                     style: TextStyle(
-                                      color: AppColors.black,
+                                      color: theme.colorScheme.secondary,
                                       fontSize: 12,
                                       fontWeight: FontWeight.w700
                                     ),

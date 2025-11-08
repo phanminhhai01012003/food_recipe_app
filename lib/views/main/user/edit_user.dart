@@ -69,8 +69,9 @@ class _EditUserState extends State<EditUser> {
   }
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
         leading: Padding(
           padding: EdgeInsets.all(8),
@@ -82,11 +83,11 @@ class _EditUserState extends State<EditUser> {
             )
           ),
         ),
-        backgroundColor: AppColors.green,
-        foregroundColor: AppColors.white,
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        foregroundColor: theme.appBarTheme.foregroundColor,
         title: Text("Chỉnh sửa thông tin cá nhân",
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 16,
             fontWeight: FontWeight.bold
           ),
         ),
@@ -143,7 +144,7 @@ class _EditUserState extends State<EditUser> {
               SizedBox(height: 20),
                     Text("Tên đầy đủ",
                       style: TextStyle(
-                        color: AppColors.black,
+                        color: theme.colorScheme.secondary,
                         fontSize: 16,
                         fontWeight: FontWeight.bold
                       ),
@@ -153,7 +154,7 @@ class _EditUserState extends State<EditUser> {
                       controller: nameController,
                       keyboardType: TextInputType.text,
                       style: TextStyle(
-                        color: AppColors.black,
+                        color: theme.colorScheme.secondary,
                         fontSize: 12,
                         fontWeight: FontWeight.w700
                       ),
@@ -161,7 +162,7 @@ class _EditUserState extends State<EditUser> {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: AppColors.black)
+                          borderSide: BorderSide(color: theme.colorScheme.secondary)
                         ),
                         errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -173,7 +174,7 @@ class _EditUserState extends State<EditUser> {
                         ),
                         hintText: "Nhập tên của bạn",
                         hintStyle: TextStyle(
-                          color: AppColors.black,
+                          color: theme.colorScheme.secondary,
                           fontSize: 12,
                           fontWeight: FontWeight.normal
                         ),
@@ -181,7 +182,7 @@ class _EditUserState extends State<EditUser> {
                           width: 20,
                           height: 20,
                           alignment: Alignment.center,
-                          child: Icon(Icons.person, color: AppColors.black)
+                          child: Icon(Icons.person, color: theme.colorScheme.secondary)
                         )
                       ),
                       validator: (value) {
@@ -197,7 +198,7 @@ class _EditUserState extends State<EditUser> {
                     SizedBox(height: 20),
                 Text("Giới thiệu bản thân",
                       style: TextStyle(
-                        color: AppColors.black,
+                        color: theme.colorScheme.secondary,
                         fontSize: 16,
                         fontWeight: FontWeight.bold
                       ),
@@ -210,7 +211,7 @@ class _EditUserState extends State<EditUser> {
                       minLines: 5,
                       keyboardType: TextInputType.text,
                       style: TextStyle(
-                        color: AppColors.black,
+                        color: theme.colorScheme.secondary,
                         fontSize: 12,
                         fontWeight: FontWeight.w700
                       ),
@@ -219,7 +220,7 @@ class _EditUserState extends State<EditUser> {
                         counterText: "",
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: AppColors.black)
+                          borderSide: BorderSide(color: theme.colorScheme.secondary)
                         ),
                         errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -231,7 +232,7 @@ class _EditUserState extends State<EditUser> {
                         ),
                         hintText: "Bạn là người như thế nào",
                         hintStyle: TextStyle(
-                          color: AppColors.black,
+                          color: theme.colorScheme.secondary,
                           fontSize: 12,
                           fontWeight: FontWeight.normal
                         ),
@@ -239,14 +240,14 @@ class _EditUserState extends State<EditUser> {
                           width: 20,
                           height: 20,
                           alignment: Alignment.center,
-                          child: Icon(Icons.description, color: AppColors.black)
+                          child: Icon(Icons.description, color: theme.colorScheme.secondary)
                         )
                       ),
                     ),
                     SizedBox(height: 20),
                     Text("Số điện thoại",
                       style: TextStyle(
-                        color: AppColors.black,
+                        color: theme.colorScheme.secondary,
                         fontSize: 16,
                         fontWeight: FontWeight.bold
                       ),
@@ -256,7 +257,7 @@ class _EditUserState extends State<EditUser> {
                       controller: phoneController,
                       keyboardType: TextInputType.phone,
                       style: TextStyle(
-                        color: AppColors.black,
+                        color: theme.colorScheme.secondary,
                         fontSize: 12,
                         fontWeight: FontWeight.w700
                       ),
@@ -264,7 +265,7 @@ class _EditUserState extends State<EditUser> {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: AppColors.black)
+                          borderSide: BorderSide(color: theme.colorScheme.secondary)
                         ),
                         errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -276,7 +277,7 @@ class _EditUserState extends State<EditUser> {
                         ),
                         hintText: "Nhập sdt của bạn",
                         hintStyle: TextStyle(
-                          color: AppColors.black,
+                          color: theme.colorScheme.secondary,
                           fontSize: 12,
                           fontWeight: FontWeight.normal
                         ),
@@ -284,7 +285,7 @@ class _EditUserState extends State<EditUser> {
                           width: 20,
                           height: 20,
                           alignment: Alignment.center,
-                          child: Icon(Icons.phone, color: AppColors.black)
+                          child: Icon(Icons.phone, color: theme.colorScheme.secondary)
                         )
                       ),
                       validator: (value) {

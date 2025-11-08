@@ -44,9 +44,10 @@ class _ShowTimePickerState extends State<ShowTimePicker> {
   }
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: theme.colorScheme.primary,
         borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
       ),
       padding: EdgeInsets.only(
@@ -71,7 +72,7 @@ class _ShowTimePickerState extends State<ShowTimePicker> {
             child: Text(
               "Thiết lập thời gian nấu ăn",
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontSize: 12,
                 fontWeight: FontWeight.normal
               ),
@@ -93,7 +94,7 @@ class _ShowTimePickerState extends State<ShowTimePicker> {
                       itemHeight: 50,
                       itemWidth: 50,
                       textStyle: TextStyle(
-                        color: AppColors.black,
+                        color: theme.colorScheme.secondary,
                         fontWeight: FontWeight.w600,
                         fontSize: 16
                       ),
@@ -112,7 +113,7 @@ class _ShowTimePickerState extends State<ShowTimePicker> {
                       "d",
                       style: TextStyle(
                         fontSize: 14,
-                        color: AppColors.black,
+                        color: theme.colorScheme.secondary,
                         fontWeight: FontWeight.w600
                       ),
                     ),
@@ -124,7 +125,7 @@ class _ShowTimePickerState extends State<ShowTimePicker> {
                       itemHeight: 50,
                       itemWidth: 50,
                       textStyle: TextStyle(
-                        color: AppColors.black,
+                        color: theme.colorScheme.secondary,
                         fontWeight: FontWeight.w600,
                         fontSize: 16
                       ),
@@ -143,7 +144,7 @@ class _ShowTimePickerState extends State<ShowTimePicker> {
                       "h",
                       style: TextStyle(
                         fontSize: 14,
-                        color: AppColors.black,
+                        color: theme.colorScheme.secondary,
                         fontWeight: FontWeight.w600
                       ),
                     ),
@@ -155,7 +156,7 @@ class _ShowTimePickerState extends State<ShowTimePicker> {
                       itemHeight: 50,
                       itemWidth: 50,
                       textStyle: TextStyle(
-                        color: AppColors.black,
+                        color: theme.colorScheme.secondary,
                         fontWeight: FontWeight.w600,
                         fontSize: 16
                       ),
@@ -174,7 +175,7 @@ class _ShowTimePickerState extends State<ShowTimePicker> {
                       "m",
                       style: TextStyle(
                         fontSize: 14,
-                        color: AppColors.black,
+                        color: theme.colorScheme.secondary,
                         fontWeight: FontWeight.w600
                       ),
                     ),
@@ -186,7 +187,7 @@ class _ShowTimePickerState extends State<ShowTimePicker> {
                       itemHeight: 50,
                       itemWidth: 50,
                       textStyle: TextStyle(
-                        color: AppColors.black,
+                        color: theme.colorScheme.secondary,
                         fontWeight: FontWeight.w600,
                         fontSize: 16
                       ),
@@ -205,7 +206,7 @@ class _ShowTimePickerState extends State<ShowTimePicker> {
                       "s",
                       style: TextStyle(
                         fontSize: 14,
-                        color: AppColors.black,
+                        color: theme.colorScheme.secondary,
                         fontWeight: FontWeight.w600
                       ),
                     ),
