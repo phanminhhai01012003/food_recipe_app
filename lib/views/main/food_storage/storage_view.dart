@@ -79,28 +79,31 @@ class _StorageViewState extends State<StorageView> {
                 ],
               ),
               SizedBox(height: 10),
-              StreamBuilder(
-                stream: foodServices.getFoodByUser(context, currentUser.uid), 
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData || snapshot.hasError) {
-                    return SizedBox();
-                  } else if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
-                  } else {
-                    List<FoodModel> data = snapshot.data!;
-                    return SizedBox(
-                      height: 200,
-                      child: ListView.builder(
-                        padding: EdgeInsets.all(12),
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        physics: ClampingScrollPhysics(),
-                        itemCount: (data.length / 2).toInt(),
-                        itemBuilder: (context, index) => FoodDisplayGrid(food: data[index])
-                      ),
-                    );
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: StreamBuilder(
+                  stream: foodServices.getFoodByUser(context, currentUser.uid), 
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData || snapshot.hasError) {
+                      return SizedBox();
+                    } else if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator());
+                    } else {
+                      List<FoodModel> data = snapshot.data!;
+                      return SizedBox(
+                        height: 200,
+                        child: ListView.builder(
+                          padding: EdgeInsets.all(12),
+                          scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          physics: ClampingScrollPhysics(),
+                          itemCount: (data.length / 2).toInt(),
+                          itemBuilder: (context, index) => FoodDisplayGrid(food: data[index])
+                        ),
+                      );
+                    }
                   }
-                }
+                ),
               ),
               SizedBox(height: 20),
               Row(
@@ -128,25 +131,28 @@ class _StorageViewState extends State<StorageView> {
                 ],
               ),
               SizedBox(height: 10),
-              Selector<SaveState, List<SaveFoodModel>>(
-                selector: (context, state) => state.foodProducts,
-                shouldRebuild: (previous, next) => true,
-                builder: (context, value, child) {
-                  if (value.isEmpty) {
-                    return SizedBox.shrink();
-                  }
-                  return SizedBox(
-                    height: 200,
-                    child: ListView.builder(
-                      padding: EdgeInsets.all(12),
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      physics: ClampingScrollPhysics(),
-                      itemCount: (value.length / 2).toInt(),
-                      itemBuilder: (context, index) => FoodDisplayGrid(food: value[index].foods)
-                    ),
-                  );
-                },
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: Selector<SaveState, List<SaveFoodModel>>(
+                  selector: (context, state) => state.foodProducts,
+                  shouldRebuild: (previous, next) => true,
+                  builder: (context, value, child) {
+                    if (value.isEmpty) {
+                      return SizedBox.shrink();
+                    }
+                    return SizedBox(
+                      height: 200,
+                      child: ListView.builder(
+                        padding: EdgeInsets.all(12),
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        physics: ClampingScrollPhysics(),
+                        itemCount: (value.length / 2).toInt(),
+                        itemBuilder: (context, index) => FoodDisplayGrid(food: value[index].foods)
+                      ),
+                    );
+                  },
+                ),
               ),
               SizedBox(height: 20),
               Row(
@@ -174,25 +180,28 @@ class _StorageViewState extends State<StorageView> {
                 ],
               ),
               SizedBox(height: 10),
-              Selector<HistoryState, List<RecentViewModel>>(
-                selector: (context, state) => state.viewProducts,
-                shouldRebuild: (previous, next) => true,
-                builder: (context, value, child) {
-                  if (value.isEmpty) {
-                    return SizedBox.shrink();
-                  }
-                  return SizedBox(
-                    height: 200,
-                    child: ListView.builder(
-                      padding: EdgeInsets.all(12),
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      physics: ClampingScrollPhysics(),
-                      itemCount: (value.length / 2).toInt(),
-                      itemBuilder: (context, index) => FoodDisplayGrid(food: value[index].foods)
-                    ),
-                  );
-                },
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: Selector<HistoryState, List<RecentViewModel>>(
+                  selector: (context, state) => state.viewProducts,
+                  shouldRebuild: (previous, next) => true,
+                  builder: (context, value, child) {
+                    if (value.isEmpty) {
+                      return SizedBox.shrink();
+                    }
+                    return SizedBox(
+                      height: 200,
+                      child: ListView.builder(
+                        padding: EdgeInsets.all(12),
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        physics: ClampingScrollPhysics(),
+                        itemCount: (value.length / 2).toInt(),
+                        itemBuilder: (context, index) => FoodDisplayGrid(food: value[index].foods)
+                      ),
+                    );
+                  },
+                ),
               ),
               SizedBox(height: 20),
               Row(
@@ -220,27 +229,30 @@ class _StorageViewState extends State<StorageView> {
                 ],
               ),
               SizedBox(height: 10),
-              Selector<CookbookState, List<CookbookModel>>(
-                selector: (context, state) => state.bookProducts,
-                shouldRebuild: (previous, next) => true,
-                builder: (context, value, child) {
-                  if (value.isEmpty) {
-                    return SizedBox.shrink();
-                  }
-                  return SizedBox(
-                    height: 200,
-                    child: ListView.builder(
-                      padding: EdgeInsets.all(12),
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      hitTestBehavior: HitTestBehavior.translucent,
-                      clipBehavior: Clip.hardEdge,
-                      physics: ClampingScrollPhysics(),
-                      itemCount: (value.length / 2).toInt(),
-                      itemBuilder: (context, index) => CookbookWidget(book: value[index])
-                    ),
-                  );
-                },
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: Selector<CookbookState, List<CookbookModel>>(
+                  selector: (context, state) => state.bookProducts,
+                  shouldRebuild: (previous, next) => true,
+                  builder: (context, value, child) {
+                    if (value.isEmpty) {
+                      return SizedBox.shrink();
+                    }
+                    return SizedBox(
+                      height: 200,
+                      child: ListView.builder(
+                        padding: EdgeInsets.all(12),
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        hitTestBehavior: HitTestBehavior.translucent,
+                        clipBehavior: Clip.hardEdge,
+                        physics: ClampingScrollPhysics(),
+                        itemCount: (value.length / 2).toInt(),
+                        itemBuilder: (context, index) => CookbookWidget(book: value[index])
+                      ),
+                    );
+                  },
+                ),
               ),
             ],
           ),

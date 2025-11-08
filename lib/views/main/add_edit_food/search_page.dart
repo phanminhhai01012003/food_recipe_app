@@ -40,12 +40,6 @@ class _SearchPageState extends State<SearchPage> {
     return prefs.getStringList('recentSearches') ?? [];
   }
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    loadRecentSearch();
-  }
-  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
@@ -77,6 +71,10 @@ class _SearchPageState extends State<SearchPage> {
                     borderRadius: BorderRadius.circular(33),
                     borderSide: BorderSide(color: theme.colorScheme.secondary)
                   ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(33),
+                    borderSide: BorderSide(color: AppColors.green)
+                  ),
                   prefixIcon: Container(
                     alignment: Alignment.center,
                     width: 20,
@@ -91,15 +89,18 @@ class _SearchPageState extends State<SearchPage> {
                   ),
                   suffixIcon: IconButton(
                     onPressed: () {
-                      _searchController.clear();
-                      searchQuery = "";
+                      setState(() {
+                        _searchController.clear();
+                        searchQuery = "";
+                      });
                     }, 
                     icon: Icon(Icons.clear, size: 20, color: AppColors.grey)
                   )
                 ),
-                onSaved: (newValue) {
+                onFieldSubmitted: (newValue) async{
+                  await saveSearchTerm(newValue);
                   setState(() {
-                    saveSearchTerm(newValue!);
+                    searchQuery = newValue;
                   });
                 },
                 onChanged: (value) {
@@ -108,7 +109,7 @@ class _SearchPageState extends State<SearchPage> {
                   });
                 }
               ),
-              SizedBox(height: 50),
+              SizedBox(height: 20),
               _searchController.text.isEmpty ? FutureBuilder(
                 future: loadRecentSearch(), 
                 builder: (context, snapshot){
@@ -117,20 +118,21 @@ class _SearchPageState extends State<SearchPage> {
                   } else if (snapshot.connectionState == ConnectionState.waiting){ 
                     return LoadData(isList: true);
                   }else{
+                    final recent = snapshot.data!;
                     return ListView.builder(
-                      itemCount: snapshot.data!.length,
+                      itemCount: recent.length,
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: ClampingScrollPhysics(),
                       itemBuilder: (context, index){
                         return ListTile(
                           onTap: () {
-                            _searchController.text = recentSearches[index];
+                            _searchController.text = recent[index];
                             setState(() {
-                              searchQuery = recentSearches[index];
+                              searchQuery = recent[index];
                             });
                           },
                           leading: Icon(Icons.history, size: 20, color: AppColors.grey),
-                          title: Text(recentSearches[index],
+                          title: Text(recent[index],
                             style: TextStyle(
                               color: theme.colorScheme.secondary,
                               fontSize: 14,
@@ -138,11 +140,9 @@ class _SearchPageState extends State<SearchPage> {
                             ),
                           ),
                           trailing: IconButton(
-                            onPressed: () {
-                              removeSearchTerm(recentSearches[index]);
-                              setState(() {
-                                recentSearches.removeAt(index);
-                              });
+                            onPressed: () async{
+                              await removeSearchTerm(recent[index]);
+                              setState((){});
                             },
                             icon: Icon(Icons.close, size: 20, color: AppColors.grey),
                           ),
@@ -166,7 +166,7 @@ class _SearchPageState extends State<SearchPage> {
                       scrollDirection: Axis.vertical,
                       itemCount: filterDoc.length,
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: ClampingScrollPhysics(),
                       itemBuilder: (context, index) => FoodDisplayList(food: filterDoc[index])
                     );
                   }

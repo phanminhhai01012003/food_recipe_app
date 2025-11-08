@@ -160,6 +160,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
             SizedBox(height: 5),
             TextField(
               controller: titleController,
+              cursorColor: AppColors.blue,
               style: TextStyle(
                 color: theme.colorScheme.secondary,
                 fontWeight: FontWeight.w800,
@@ -194,6 +195,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
             SizedBox(height: 5),
             TextField(
               controller: descriptionController,
+              cursorColor: AppColors.blue,
               maxLength: 1000,
               maxLines: 5,
               minLines: 5,
@@ -249,7 +251,13 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                 items: categoryList.map((String item){
                   return DropdownMenuItem(
                     value: item,
-                    child: Text(item),
+                    child: Text(item,
+                      style: TextStyle(
+                        color: theme.colorScheme.secondary,
+                        fontSize: 12,
+                        fontWeight: FontWeight.normal
+                      ),
+                    ),
                   );
                 }).toList(),
                 onChanged: (value){
@@ -281,6 +289,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                       width: 70,
                       child: TextField(
                         controller: dietController,
+                        cursorColor: AppColors.blue,
                         textAlign: TextAlign.center,
                         keyboardType: TextInputType.numberWithOptions(decimal: false),
                         decoration: InputDecoration(
@@ -375,6 +384,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
               itemBuilder: (context, index){
                 return TextField(
                   controller: ingredientController[index],
+                  cursorColor: AppColors.blue,
                   style: TextStyle(
                     color: theme.colorScheme.secondary,
                     fontWeight: FontWeight.w800,
@@ -472,6 +482,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                     fontWeight: FontWeight.w800,
                     fontSize: 14
                   ),
+                  cursorColor: AppColors.blue,
                   decoration: InputDecoration(
                     hintText: "Các bước chế biến",
                     hintStyle: TextStyle(

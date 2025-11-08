@@ -14,30 +14,33 @@ class FoodRecipeDisplay extends StatefulWidget {
 class _FoodRecipeDisplayState extends State<FoodRecipeDisplay> {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: widget.stream, 
-      builder: (context, snapshot) {
-        if (!snapshot.hasData || snapshot.hasError) {
-          return SizedBox();
-        } else if (snapshot.connectionState == ConnectionState.waiting) {
-          return LoadData(isList: false);
-        } else {
-          List<FoodModel> foods = snapshot.data!;
-          return SizedBox(
-            height: 200,
-            child: ListView.builder(
-              padding: EdgeInsets.all(12),
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              physics: ClampingScrollPhysics(),
-              hitTestBehavior: HitTestBehavior.translucent,
-              clipBehavior: Clip.hardEdge,
-              itemCount: (foods.length / 2).toInt(),
-              itemBuilder: (context, index) => FoodDisplayGrid(food: foods[index]),
-            ),
-          );
+    return Align(
+      alignment: AlignmentDirectional.centerStart,
+      child: StreamBuilder(
+        stream: widget.stream, 
+        builder: (context, snapshot) {
+          if (!snapshot.hasData || snapshot.hasError) {
+            return SizedBox();
+          } else if (snapshot.connectionState == ConnectionState.waiting) {
+            return LoadData(isList: false);
+          } else {
+            List<FoodModel> foods = snapshot.data!;
+            return SizedBox(
+              height: 200,
+              child: ListView.builder(
+                padding: EdgeInsets.all(12),
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                physics: ClampingScrollPhysics(),
+                hitTestBehavior: HitTestBehavior.translucent,
+                clipBehavior: Clip.hardEdge,
+                itemCount: (foods.length / 2).toInt(),
+                itemBuilder: (context, index) => FoodDisplayGrid(food: foods[index]),
+              ),
+            );
+          }
         }
-      }
+      ),
     );
   }
 }

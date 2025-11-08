@@ -116,12 +116,15 @@ class _EditUserState extends State<EditUser> {
                       });
                     }
                   },
-                  child: Image.file(
-                    image!,
-                    errorBuilder: (context, error, stackTrace) => Image.network(userDefaultImage),
-                    height: 200,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: Image.file(
+                      image!,
+                      errorBuilder: (context, error, stackTrace) => Image.network(userDefaultImage),
+                      height: 200,
+                      width: 200,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ) : InkWell(
                   onTap: () async{
@@ -132,12 +135,15 @@ class _EditUserState extends State<EditUser> {
                       });
                     }
                   },
-                  child: Image.network(
-                    imageURL,
-                    errorBuilder: (context, error, stackTrace) => Image.network(userDefaultImage),
-                    height: 200,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: Image.network(
+                      imageURL,
+                      errorBuilder: (context, error, stackTrace) => Image.network(userDefaultImage),
+                      height: 200,
+                      width: 200,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),

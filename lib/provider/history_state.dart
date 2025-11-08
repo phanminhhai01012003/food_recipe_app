@@ -50,6 +50,7 @@ class HistoryState extends ChangeNotifier{
     try {
       final snapshot = await historyCollection
         .where("userId", isEqualTo: currentUser.uid)
+        .orderBy("viewedAt", descending: true)
         .get();
       _viewProducts = snapshot.docs.map((e) => RecentViewModel.fromMap(e.data())).toList();
       notifyListeners();

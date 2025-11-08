@@ -188,6 +188,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             SizedBox(height: 5),
             TextField(
               controller: titleController,
+              cursorColor: AppColors.blue,
               style: TextStyle(
                 color: theme.colorScheme.secondary,
                 fontWeight: FontWeight.w800,
@@ -222,6 +223,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             SizedBox(height: 5),
             TextField(
               controller: descriptionController,
+              cursorColor: AppColors.blue,
               maxLength: 1000,
               maxLines: 5,
               minLines: 5,
@@ -277,7 +279,13 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 items: categoryList.map((String item){
                   return DropdownMenuItem(
                     value: item,
-                    child: Text(item),
+                    child: Text(item,
+                      style: TextStyle(
+                        color: theme.colorScheme.secondary,
+                        fontSize: 12,
+                        fontWeight: FontWeight.normal
+                      ),
+                    ),
                   );
                 }).toList(),
                 onChanged: (value){
@@ -310,6 +318,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                       child: TextField(
                         controller: dietController,
                         textAlign: TextAlign.center,
+                        cursorColor: AppColors.blue,
                         keyboardType: TextInputType.numberWithOptions(decimal: false),
                         decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(
@@ -397,6 +406,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
               itemBuilder: (context, index){
                 return TextField(
                   controller: ingredientController[index],
+                  cursorColor: AppColors.blue,
                   style: TextStyle(
                     color: theme.colorScheme.secondary,
                     fontWeight: FontWeight.w800,
@@ -489,6 +499,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
               itemBuilder: (context, index){
                 return TextField(
                   controller: stepController[index],
+                  cursorColor: AppColors.blue,
                   style: TextStyle(
                     color: theme.colorScheme.secondary,
                     fontWeight: FontWeight.w800,
