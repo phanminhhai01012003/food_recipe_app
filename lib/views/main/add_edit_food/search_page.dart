@@ -47,11 +47,12 @@ class _SearchPageState extends State<SearchPage> {
   }
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
-        backgroundColor: AppColors.white,
-        foregroundColor: AppColors.black,
+        backgroundColor: theme.colorScheme.primary,
+        foregroundColor: theme.colorScheme.secondary,
         leading: Padding(
           padding: EdgeInsets.all(8),
           child: IconButton(
@@ -74,7 +75,7 @@ class _SearchPageState extends State<SearchPage> {
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(33),
-                    borderSide: BorderSide(color: AppColors.black)
+                    borderSide: BorderSide(color: theme.colorScheme.secondary)
                   ),
                   prefixIcon: Container(
                     alignment: Alignment.center,
@@ -131,7 +132,7 @@ class _SearchPageState extends State<SearchPage> {
                           leading: Icon(Icons.history, size: 20, color: AppColors.grey),
                           title: Text(recentSearches[index],
                             style: TextStyle(
-                              color: AppColors.black,
+                              color: theme.colorScheme.secondary,
                               fontSize: 14,
                               fontWeight: FontWeight.w600
                             ),

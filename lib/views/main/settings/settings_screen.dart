@@ -64,8 +64,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: theme.colorScheme.primary,
       body: Padding(
         padding: EdgeInsets.only(top: 30, left: 12, right: 12, bottom: 20),
         child: Column(

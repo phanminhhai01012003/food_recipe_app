@@ -14,8 +14,9 @@ class _MainPageState extends State<MainPage> {
   List<Widget> pages = [homeScreen, categoriesPage, foodStorageView, settings];
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: theme.colorScheme.primary,
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(

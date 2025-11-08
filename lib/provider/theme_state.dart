@@ -6,10 +6,14 @@ class ThemeState extends ChangeNotifier{
   String key = "theme_mode";
   ThemeMode theme = ThemeMode.system;
   ThemeMode get themeMode => theme;
-  
+
   bool get isLight => theme == ThemeMode.light;
   bool get isDark => theme == ThemeMode.dark;
   bool get isSystem => theme == ThemeMode.system;
+
+  ThemeState(){
+    loadData();
+  }
   
   void loadData() async{
     try {
@@ -38,14 +42,6 @@ class ThemeState extends ChangeNotifier{
       theme = mode;
       saveData();
       notifyListeners();
-    }
-  }
-
-  void toggleTheme(){
-    if (theme == ThemeMode.light) {
-      theme = ThemeMode.dark;
-    } else {
-      theme = ThemeMode.light;
     }
   }
 

@@ -81,10 +81,11 @@ class _ShowReportModalState extends State<ShowReportModal> {
   }
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       constraints: BoxConstraints(maxHeight: 700),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: theme.colorScheme.primary,
         borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
       ),
       padding: EdgeInsets.only(
@@ -112,7 +113,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
                 Text(
                   "Bạn đang báo cáo/chặn ${widget.title} của ${widget.author}",
                   style: TextStyle(
-                    color: AppColors.black,
+                    color: theme.colorScheme.secondary,
                     fontSize: 14,
                     fontWeight: FontWeight.normal
                   ),
@@ -121,7 +122,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
                 Text(
                   "Hãy cho chúng tôi biết lý do bạn muốn báo cáo/chặn",
                   style: TextStyle(
-                    color: AppColors.black,
+                    color: theme.colorScheme.secondary,
                     fontSize: 12,
                     fontWeight: FontWeight.normal
                   ),
@@ -133,6 +134,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
                       ? reportFoodList.length
                       : reportCommentList.length, 
                     (i) => radio(
+                      context,
                       widget.title.contains("Món") 
                         ? reportFoodList[i] 
                         : reportCommentList[i] 
@@ -150,7 +152,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
                     hintText: "Nhập nội dung",
                     hintStyle: TextStyle(
                       color: selectedOption == reportFoodList.last || selectedOption == reportCommentList.last 
-                        ? AppColors.black 
+                        ? theme.colorScheme.secondary 
                         : AppColors.grey,
                       fontSize: 14,
                       fontWeight: FontWeight.normal
@@ -181,7 +183,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
                     Text(
                       "Tôi đồng ý cam kết thông tin trên là đúng sự thật",
                       style: TextStyle(
-                        color: AppColors.black,
+                        color: theme.colorScheme.secondary,
                         fontSize: 11,
                         fontWeight: FontWeight.w600
                       ),
@@ -236,10 +238,12 @@ class _ShowReportModalState extends State<ShowReportModal> {
       ),
     );
   }
-  Widget radio(String title){
+  Widget radio(BuildContext context, String title){
+    final theme = Theme.of(context);
     return ListTile(
       contentPadding: EdgeInsets.zero,
       leading: Radio<String>(
+        activeColor: theme.colorScheme.secondary,
         value: title,
         groupValue: selectedOption,
         onChanged: (value) {
@@ -251,7 +255,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
       title: Text(
         title,
         style: TextStyle(
-          color: AppColors.black,
+          color: theme.colorScheme.secondary,
           fontSize: 12,
           fontWeight: FontWeight.normal
         ),

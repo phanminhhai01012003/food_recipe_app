@@ -18,11 +18,12 @@ class ShowImagePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       padding: EdgeInsets.only(bottom: 15, left: 20, right: 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
-        color: AppColors.white
+        color: theme.colorScheme.primary
       ),
       width: double.infinity,
       child: Column(

@@ -51,11 +51,12 @@ class _UserInformationState extends State<UserInformation> {
   }
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
-        backgroundColor: AppColors.green,
-        foregroundColor: AppColors.white,
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        foregroundColor: theme.appBarTheme.foregroundColor,
         leading: Padding(
           padding: EdgeInsets.all(8),
           child: IconButton(
@@ -100,23 +101,23 @@ class _UserInformationState extends State<UserInformation> {
               ),
             ),
             SizedBox(height: 30),
-            component("ID", widget.user.userId),
+            component(context, "ID", widget.user.userId),
             SizedBox(height: 15),
             Divider(color: AppColors.grey, thickness: 1, height: 1),
             SizedBox(height: 15),
-            component("Họ và tên", widget.user.userName),
+            component(context, "Họ và tên", widget.user.userName),
             SizedBox(height: 15),
             Divider(color: AppColors.grey, thickness: 1, height: 1),
             SizedBox(height: 15),
-            component("Giới thiệu", widget.user.description),
+            component(context, "Giới thiệu", widget.user.description),
             SizedBox(height: 15),
             Divider(color: AppColors.grey, thickness: 1, height: 1),
             SizedBox(height: 15),
-            component("Số điện thoại", widget.user.phone),
+            component(context, "Số điện thoại", widget.user.phone),
             SizedBox(height: 15),
             Divider(color: AppColors.grey, thickness: 1, height: 1),
             SizedBox(height: 15),
-            component("Email", widget.user.email),
+            component(context, "Email", widget.user.email),
             SizedBox(height: 50),
             SizedBox(
               width: double.infinity,
@@ -208,7 +209,8 @@ class _UserInformationState extends State<UserInformation> {
       ),
     );
   }
-  Widget component(String title, String info){
+  Widget component(BuildContext context, String title, String info){
+    final theme = Theme.of(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -216,7 +218,7 @@ class _UserInformationState extends State<UserInformation> {
           title,
           textAlign: TextAlign.start,
           style: TextStyle(
-            color: AppColors.black,
+            color: theme.colorScheme.secondary,
             fontSize: 14,
             fontWeight: FontWeight.w700
           ),
@@ -228,7 +230,7 @@ class _UserInformationState extends State<UserInformation> {
               info,
               textAlign: TextAlign.end,
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontSize: 14,
                 fontWeight: FontWeight.w700
               ),

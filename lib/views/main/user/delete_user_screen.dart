@@ -27,8 +27,9 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
   }
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: theme.colorScheme.primary,
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 20),
         child: Column(
@@ -36,7 +37,7 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
             Text(
               "Bạn đang thực hiện xóa tài khoản khỏi hệ thống",
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontSize: 24,
                 fontWeight: FontWeight.w800
               ),
@@ -45,14 +46,14 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
             Text(
               "Hãy cho chúng tôi biết lý do bạn muốn xóa tài khoản cá nhân của mình (Trong trường hợp bạn muốn gửi yêu cầu duyệt đến quản trị viên)",
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontSize: 16,
                 fontWeight: FontWeight.w800
               ),
             ),
             SizedBox(height: 20),
-            ListView(
-              children: List.generate(deleteUserList.length, (i) => radio(deleteUserList[i])),
+            Column(
+              children: List.generate(deleteUserList.length, (i) => radio(context, deleteUserList[i])),
             ),
             SizedBox(height: 5),
             TextField(
@@ -62,13 +63,13 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
               decoration: InputDecoration(
                 hintText: "Nhập nội dung",
                 hintStyle: TextStyle(
-                  color: selectedOption == deleteUserList.last ? AppColors.black : AppColors.grey,
+                  color: selectedOption == deleteUserList.last ? theme.colorScheme.secondary : AppColors.grey,
                   fontSize: 14,
                   fontWeight: FontWeight.normal
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: selectedOption == deleteUserList.last ? AppColors.black : AppColors.grey)
+                  borderSide: BorderSide(color: selectedOption == deleteUserList.last ? theme.colorScheme.secondary : AppColors.grey)
                 ),
                 counterText: ""
               ),
@@ -107,7 +108,7 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
               width: MediaQuery.of(context).size.width * 0.75,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.red,
+                  backgroundColor: AppColors.green,
                   foregroundColor: AppColors.white
                 ),
                 onPressed: () async{
@@ -119,6 +120,25 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
                 }, 
                 child: Text(
                   "Gửi yêu cầu",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.normal
+                  ),
+                )
+              ),
+            ),
+            SizedBox(height: 10),
+            SizedBox(
+              height: 50,
+              width: MediaQuery.of(context).size.width * 0.75,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.blue,
+                  foregroundColor: AppColors.white
+                ),
+                onPressed: () => Navigator.pop(context), 
+                child: Text(
+                  "Trang trước",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.normal
@@ -142,15 +162,33 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
       rethrow;
     }
   }
-  Widget radio(String title){
-    return Radio<String>(
-      value: title, 
-      groupValue: selectedOption, 
-      onChanged: (value) {
+  Widget radio(BuildContext context, String title){
+    final theme = Theme.of(context);
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      leading: Radio<String>(
+        activeColor: theme.colorScheme.secondary,
+        value: title,
+        groupValue: selectedOption,
+        onChanged: (value) {
+          setState(() {
+            selectedOption = value;
+          });
+        },
+      ),
+      title: Text(
+        title,
+        style: TextStyle(
+          color: theme.colorScheme.secondary,
+          fontSize: 12,
+          fontWeight: FontWeight.normal
+        ),
+      ),
+      onTap: () {
         setState(() {
-          selectedOption = value;
+          selectedOption = title;
         });
-      }
+      },
     );
   }
 }

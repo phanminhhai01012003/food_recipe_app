@@ -49,8 +49,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
   }
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
         leading: Padding(
           padding: EdgeInsets.all(8),
@@ -63,8 +64,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: AppColors.green,
-        foregroundColor: AppColors.white,
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        foregroundColor: theme.appBarTheme.foregroundColor,
         title: Text("Thông báo",
           style: TextStyle(
             fontSize: 16,
@@ -89,7 +90,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     height: 50,
                     width: MediaQuery.of(context).size.width * 0.25,
                     decoration: BoxDecoration(
-                      color: _btnIndex == 0 ? AppColors.green : AppColors.white,
+                      color: _btnIndex == 0 ? AppColors.green : theme.colorScheme.primary,
                       borderRadius: BorderRadius.circular(18),
                     ),
                     child: Center(
@@ -98,7 +99,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
-                          color: _btnIndex == 0 ? AppColors.white : AppColors.black,
+                          color: _btnIndex == 0 ? AppColors.white : theme.colorScheme.secondary,
                         ),
                       ),
                     ),

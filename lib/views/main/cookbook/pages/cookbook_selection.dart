@@ -32,10 +32,12 @@ class _CookbookSelectionState extends State<CookbookSelection> {
   }
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
-        backgroundColor: AppColors.white,
+        backgroundColor: theme.colorScheme.primary,
+        foregroundColor: theme.colorScheme.secondary,
         leading: Padding(
           padding: EdgeInsets.all(8),
           child: IconButton(
@@ -54,7 +56,7 @@ class _CookbookSelectionState extends State<CookbookSelection> {
             Text(
               "Bạn muốn thêm món ăn này vào đâu?",
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontSize: 20,
                 fontWeight: FontWeight.w900
               ),
@@ -76,7 +78,7 @@ class _CookbookSelectionState extends State<CookbookSelection> {
                         Text(
                           "Không có dữ liệu",
                           style: TextStyle(
-                            color: AppColors.black,
+                            color: theme.colorScheme.secondary,
                             fontSize: 14,
                             fontWeight: FontWeight.normal
                           ),

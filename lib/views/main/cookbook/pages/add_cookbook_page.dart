@@ -77,8 +77,9 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
   }
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
         centerTitle: true,
         title: Text(
@@ -88,8 +89,8 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
             fontWeight: FontWeight.w700
           ),
         ),
-        backgroundColor: AppColors.green,
-        foregroundColor: AppColors.white,
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        foregroundColor: theme.appBarTheme.foregroundColor,
         leading: Padding(
           padding: EdgeInsets.all(8),
           child: canMultiSelected ? IconButton(
@@ -201,7 +202,7 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
             Text(
               "Tên nhật ký",
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontSize: 16,
                 fontWeight: FontWeight.w900
               ),
@@ -210,7 +211,7 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
             TextField(
               controller: _titleController,
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontWeight: FontWeight.w800,
                 fontSize: 14
               ),
@@ -222,11 +223,11 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: AppColors.black)
+                  borderSide: BorderSide(color: theme.colorScheme.secondary)
                 ),
                 hintText: "Nhập tên nhật ký",
                 hintStyle: TextStyle(
-                  color: AppColors.black,
+                  color: theme.colorScheme.secondary,
                   fontSize: 14,
                   fontWeight: FontWeight.w800
                 ),
@@ -235,7 +236,7 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
             SizedBox(height: 20),
             Text("Mô tả",
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontSize: 16,
                 fontWeight: FontWeight.w900
               ),
@@ -254,18 +255,18 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: AppColors.black)
+                  borderSide: BorderSide(color: theme.colorScheme.secondary)
                 ),
                 hintText: "Mô tả về nhật ký đó",
                 hintStyle: TextStyle(
-                  color: AppColors.black,
+                  color: theme.colorScheme.secondary,
                   fontSize: 14,
                   fontWeight: FontWeight.w800
                 ),
                 counterText: ""
               ),
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontWeight: FontWeight.w800,
                 fontSize: 14
               ),
@@ -313,7 +314,7 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
                               child: Text(
                                 foodData[index].title,
                                 style: TextStyle(
-                                  color: canMultiSelected ? AppColors.white : AppColors.black,
+                                  color: canMultiSelected ? AppColors.white : theme.colorScheme.secondary,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w800
                                 ),

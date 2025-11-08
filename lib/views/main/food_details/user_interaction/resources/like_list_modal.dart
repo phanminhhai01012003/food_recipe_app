@@ -3,12 +3,13 @@ import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/routes.dart';
 
 Future showLikesListModal(BuildContext context, Future<List<Map<String, dynamic>>> fetch) async{
+  final theme = Theme.of(context);
   return await showModalBottomSheet(
     context: context,
-    backgroundColor: AppColors.white,
+    backgroundColor: theme.colorScheme.primary,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
     // ignore: deprecated_member_use
-    barrierColor: Colors.black.withOpacity(0.75),
+    barrierColor: AppColors.black.withOpacity(0.75),
     builder: (context) => LikeListModal(fetch: fetch)
   );
 }
@@ -19,6 +20,7 @@ class LikeListModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       constraints: BoxConstraints(maxHeight: 500),
       padding: EdgeInsets.all(16),
@@ -54,7 +56,7 @@ class LikeListModal extends StatelessWidget {
                 itemBuilder: (context, index) => InkWell(
                   onTap: () => checkDeviceRoute(likes[index]['id']),
                   child: Container(
-                    color: Colors.white,
+                    color: theme.colorScheme.primary,
                     padding: EdgeInsets.all(10),
                     child: ListTile(
                       leading: ClipRRect(
@@ -67,7 +69,7 @@ class LikeListModal extends StatelessWidget {
                       ),
                       title: Text(likes[index]['username'],
                         style: TextStyle(
-                          color: Colors.black,
+                          color: theme.colorScheme.secondary,
                           fontSize: 18,
                           fontWeight: FontWeight.w900
                         ),

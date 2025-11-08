@@ -27,8 +27,9 @@ class _MyFoodState extends State<MyFood> {
   }
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
         leading: Padding(
           padding: EdgeInsets.all(8),
@@ -40,7 +41,7 @@ class _MyFoodState extends State<MyFood> {
             )
           ),
         ),
-        backgroundColor: AppColors.green,
+        backgroundColor: theme.appBarTheme.backgroundColor,
         centerTitle: true,
         title: Text(
           "Món ăn của bạn",
@@ -49,7 +50,7 @@ class _MyFoodState extends State<MyFood> {
             fontWeight: FontWeight.bold
           ),
         ),
-        foregroundColor: AppColors.white,
+        foregroundColor: theme.appBarTheme.foregroundColor,
       ),
       body: StreamBuilder(
         stream: foodServices.getFoodByUser(context, currentUser.uid), 

@@ -16,8 +16,9 @@ class _AboutScreenState extends State<AboutScreen> {
   List<Widget> pages = [appoverview, contactpage];
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
         centerTitle: true,
         title: Text("Giới thiệu",
@@ -26,8 +27,8 @@ class _AboutScreenState extends State<AboutScreen> {
             fontWeight: FontWeight.normal
           ),
         ),
-        backgroundColor: AppColors.green,
-        foregroundColor: AppColors.white,
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        foregroundColor: theme.appBarTheme.foregroundColor,
         leading: Padding(
           padding: EdgeInsets.all(8),
           child: IconButton(
@@ -56,14 +57,14 @@ class _AboutScreenState extends State<AboutScreen> {
                     height: 50,
                     width: MediaQuery.of(context).size.width / 3,
                     decoration: BoxDecoration(
-                      color: selectedIndex == 0 ? AppColors.green : AppColors.white,
+                      color: selectedIndex == 0 ? AppColors.green : theme.colorScheme.primary,
                       borderRadius: BorderRadius.circular(33),
                     ),
                     child: Center(
                       child: Text(
                         "Tổng quan",
                         style: TextStyle(
-                          color: selectedIndex == 0 ? AppColors.white : AppColors.black,
+                          color: selectedIndex == 0 ? AppColors.white : theme.colorScheme.secondary,
                           fontSize: 14,
                           fontWeight: FontWeight.w700
                         ),
@@ -81,14 +82,14 @@ class _AboutScreenState extends State<AboutScreen> {
                     height: 50,
                     width: MediaQuery.of(context).size.width / 3,
                     decoration: BoxDecoration(
-                      color: selectedIndex == 1 ? AppColors.green : AppColors.white,
+                      color: selectedIndex == 1 ? AppColors.green : theme.colorScheme.primary,
                       borderRadius: BorderRadius.circular(33),
                     ),
                     child: Center(
                       child: Text(
                         "Liên hệ",
                         style: TextStyle(
-                          color: selectedIndex == 1 ? AppColors.white : AppColors.black,
+                          color: selectedIndex == 1 ? AppColors.white : theme.colorScheme.secondary,
                           fontSize: 14,
                           fontWeight: FontWeight.w700
                         ),

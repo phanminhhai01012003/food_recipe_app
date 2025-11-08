@@ -11,13 +11,14 @@ class ShowYesnoDialog {
     required VoidCallback onAcceptTap,
     required VoidCallback onCancelTap
   }){
+    final theme = Theme.of(context);
     showDialog(
       context: context, 
       builder: (context) => AlertDialog(
-        backgroundColor: AppColors.white,
+        backgroundColor: theme.colorScheme.primary,
         title: Text(title,
           style: TextStyle(
-            color: AppColors.black,
+            color: theme.colorScheme.secondary,
             fontWeight: FontWeight.bold,
             fontSize: 18
           ),
@@ -25,7 +26,7 @@ class ShowYesnoDialog {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         content: Text(content,
           style: TextStyle(
-            color: AppColors.black,
+            color: theme.colorScheme.secondary,
             fontSize: 14,
             fontWeight: FontWeight.normal
           ),
@@ -49,7 +50,7 @@ class ShowYesnoDialog {
             onPressed: onCancelTap, 
             child: Text("Không", 
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontSize: 14,
                 fontWeight: FontWeight.w700
               )
@@ -65,19 +66,20 @@ class ShowYesnoDialog {
     required VoidCallback onAcceptTap,
     required VoidCallback onCancelTap
   }){
+    final theme = Theme.of(context);
     showDialog(
       context: context, 
       builder: (context) => CupertinoAlertDialog(
         title: Text(title,
           style: TextStyle(
-            color: AppColors.black,
+            color: theme.colorScheme.secondary,
             fontSize: 18,
             fontWeight: FontWeight.bold
           ),
         ),
         content: Text(content,
           style: TextStyle(
-            color: AppColors.black,
+            color: theme.colorScheme.secondary,
             fontSize: 14,
             fontWeight: FontWeight.normal
           ),

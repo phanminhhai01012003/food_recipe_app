@@ -10,16 +10,17 @@ import 'package:food_recipe_app/widget/other/message.dart';
 class EditCommentDialog {
   static final commentServices = CommentServices();
   static void showMaterialEdit(BuildContext context, CommentModel comment, String id){
+    final theme = Theme.of(context);
     final commentController = TextEditingController(text: comment.content);
     showDialog(
       context: context, 
       builder: (context) => AlertDialog(
         contentPadding: EdgeInsets.all(12),
-        backgroundColor: Colors.white,
+        backgroundColor: theme.colorScheme.primary,
         title: Text(
           "Sửa bình luận",
           style: TextStyle(
-            color: AppColors.black,
+            color: theme.colorScheme.secondary,
             fontSize: 16,
             fontWeight: FontWeight.w700,
           ),
@@ -31,7 +32,7 @@ class EditCommentDialog {
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: AppColors.black)
+                borderSide: BorderSide(color: theme.colorScheme.secondary)
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -39,7 +40,7 @@ class EditCommentDialog {
               ),
               hintText: "Nhập bình luận",
               hintStyle: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontSize: 12,
                 fontWeight: FontWeight.normal,
               ),
@@ -74,13 +75,14 @@ class EditCommentDialog {
 
   static void showCupertinoEdit(BuildContext context, CommentModel comment, String id) {
     final commentController = TextEditingController(text: comment.content);
+    final theme = Theme.of(context);
     showDialog(
       context: context, 
       builder: (context) => CupertinoAlertDialog(
         title: Text(
           "Sửa bình luận",
           style: TextStyle(
-            color: AppColors.black,
+            color: theme.colorScheme.secondary,
             fontSize: 18,
             fontWeight: FontWeight.bold
           ),
@@ -92,7 +94,7 @@ class EditCommentDialog {
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: AppColors.black)
+                borderSide: BorderSide(color: theme.colorScheme.secondary)
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -100,7 +102,7 @@ class EditCommentDialog {
               ),
               hintText: "Nhập bình luận",
               hintStyle: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontSize: 12,
                 fontWeight: FontWeight.normal,
               ),

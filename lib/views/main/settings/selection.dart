@@ -14,12 +14,14 @@ class Selection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return ListTile(
-      tileColor: AppColors.white,
+      tileColor: theme.colorScheme.primary,
       onTap: onTap,
       leading: Icon(icon, size: 20, color: AppColors.grey),
       title: Text(title,
         style: TextStyle(
+          color: theme.colorScheme.secondary,
           fontSize: 14,
           fontWeight: FontWeight.normal
         ),

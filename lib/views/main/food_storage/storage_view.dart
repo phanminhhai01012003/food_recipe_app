@@ -25,8 +25,9 @@ class StorageView extends StatefulWidget {
 class _StorageViewState extends State<StorageView> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: theme.colorScheme.primary,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.all(16),
@@ -59,7 +60,7 @@ class _StorageViewState extends State<StorageView> {
                   Text(
                     "Món ăn của bạn",
                     style: TextStyle(
-                      color: AppColors.black,
+                      color: theme.colorScheme.secondary,
                       fontSize: 16,
                       fontWeight: FontWeight.bold
                     ),
@@ -108,7 +109,7 @@ class _StorageViewState extends State<StorageView> {
                   Text(
                     "Món ăn đã lưu",
                     style: TextStyle(
-                      color: AppColors.black,
+                      color: theme.colorScheme.secondary,
                       fontSize: 16,
                       fontWeight: FontWeight.bold
                     ),
@@ -154,7 +155,7 @@ class _StorageViewState extends State<StorageView> {
                   Text(
                     "Đã xem gần đây",
                     style: TextStyle(
-                      color: AppColors.black,
+                      color: theme.colorScheme.secondary,
                       fontSize: 16,
                       fontWeight: FontWeight.bold
                     ),
@@ -200,7 +201,7 @@ class _StorageViewState extends State<StorageView> {
                   Text(
                     "Sổ tay nấu ăn",
                     style: TextStyle(
-                      color: AppColors.black,
+                      color: theme.colorScheme.secondary,
                       fontSize: 16,
                       fontWeight: FontWeight.bold
                     ),
