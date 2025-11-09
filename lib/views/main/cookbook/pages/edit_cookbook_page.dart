@@ -30,14 +30,12 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
   HashSet<FoodModel> choices = HashSet();
   bool canMultiSelected = false;
   void onMultiSelect(FoodModel food){
-    if (canMultiSelected){
-      if (choices.contains(food)){
-        choices.remove(food);
-      } else {
-        choices.add(food);
-      }
-      setState(() {});
+    if (choices.contains(food)){
+      choices.remove(food);
+    } else{
+      choices.add(food);
     }
+    setState(() {});
   }
   String get getSelectedItemCount {
     return choices.isEmpty 
@@ -126,9 +124,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
             visible: choices.isNotEmpty,
             child: IconButton(
               onPressed: () {
-                choices.forEach((food){
-                  onMultiSelect(food);
-                });
+                choices.forEach((food) => onMultiSelect(food));
               }, 
               icon: Icon(Icons.select_all, size: 20)
             ),
@@ -138,28 +134,10 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: image == null && imageURL.isEmpty
-              ? InkWell(
-                onTap: () => showImagePickerModal(context),
-                child: Container(
-                    height: 200,
-                    width: 200,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      border: Border.all(color: Colors.black)
-                    ),
-                    child: Center(
-                      child: Icon(
-                        Icons.add_a_photo,
-                        size: 50,
-                        color: Colors.black,
-                      ),
-                    ),
-                ),
-              )
-              : image != null ? InkWell(
+              child: image != null ? InkWell(
                 onTap: () => showImagePickerModal(context),
                 child: ClipRRect(
                   child: Image.file(image!,
@@ -183,7 +161,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
             Text(
               "Tên nhật ký",
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontSize: 16,
                 fontWeight: FontWeight.w900
               ),
@@ -192,7 +170,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
             TextField(
               controller: _titleController,
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontWeight: FontWeight.w800,
                 fontSize: 14
               ),
@@ -204,11 +182,11 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: AppColors.black)
+                  borderSide: BorderSide(color: theme.colorScheme.secondary)
                 ),
                 hintText: "Nhập tên nhật ký",
                 hintStyle: TextStyle(
-                  color: AppColors.black,
+                  color: theme.colorScheme.secondary,
                   fontSize: 14,
                   fontWeight: FontWeight.w800
                 ),
@@ -217,7 +195,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
             SizedBox(height: 20),
             Text("Mô tả",
               style: TextStyle(
-                color: AppColors.black,
+                color: theme.colorScheme.secondary,
                 fontSize: 16,
                 fontWeight: FontWeight.w900
               ),
@@ -236,11 +214,11 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: AppColors.black)
+                  borderSide: BorderSide(color: theme.colorScheme.secondary)
                 ),
                 hintText: "Mô tả về nhật ký đó",
                 hintStyle: TextStyle(
-                  color: AppColors.black,
+                  color: theme.colorScheme.secondary,
                   fontSize: 14,
                   fontWeight: FontWeight.w800
                 ),
@@ -277,7 +255,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
                         elevation: 10,
                         margin: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                        color: canMultiSelected ? AppColors.green : theme.colorScheme.primary,
+                        color: choices.contains(foodData[index]) ? AppColors.green : theme.colorScheme.primary,
                         child: Row(
                           children: [
                             ClipRRect(
@@ -295,7 +273,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
                               child: Text(
                                 foodData[index].title,
                                 style: TextStyle(
-                                  color: canMultiSelected ? theme.colorScheme.primary : AppColors.black,
+                                  color: choices.contains(foodData[index]) ? AppColors.white : theme.colorScheme.secondary,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w800
                                 ),

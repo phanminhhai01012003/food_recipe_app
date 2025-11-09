@@ -37,6 +37,8 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
         choices.add(food);
       }
       setState(() {});
+    } else {
+
     }
   }
   String get getSelectedItemCount {
@@ -55,6 +57,11 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
     context.loaderOverlay.show();
     if (_titleController.text.isEmpty){
       Message.showToast("Tên nhật ký là bắt buộc");
+      context.loaderOverlay.hide();
+      return;
+    }
+    if (choices.isEmpty) {
+      Message.showToast("Bạn phải chọn ít nhất 1 món ăn");
       context.loaderOverlay.hide();
       return;
     }
@@ -124,9 +131,7 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
             visible: choices.isNotEmpty,
             child: IconButton(
               onPressed: () {
-                choices.forEach((food){
-                  onMultiSelect(food);
-                });
+                choices.forEach((food) => onMultiSelect(food));
               }, 
               icon: Icon(Icons.select_all, size: 20)
             ),
@@ -136,6 +141,7 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
               child: image == null && imageURL.isEmpty
@@ -159,7 +165,7 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
                       child: Icon(
                         Icons.add_a_photo,
                         size: 50,
-                        color: Colors.black,
+                        color: theme.colorScheme.secondary,
                       ),
                     ),
                 ),
@@ -296,7 +302,7 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
                         elevation: 10,
                         margin: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                        color: canMultiSelected ? AppColors.green : AppColors.white,
+                        color: choices.contains(foodData[index]) ? AppColors.green : theme.colorScheme.primary,
                         child: Row(
                           children: [
                             ClipRRect(
@@ -304,20 +310,18 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
                               child: CachedNetworkImage(
                                 imageUrl: foodData[index].image,
                                 progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator(value: progress.progress)),
-                                width: 30,
-                                height: 30,
+                                width: 50,
+                                height: 50,
                                 errorWidget: (context, url, error) => Image.asset(foodDesignImage),
                               ),
                             ),
                             SizedBox(width: 10),
-                            Expanded(
-                              child: Text(
-                                foodData[index].title,
-                                style: TextStyle(
-                                  color: canMultiSelected ? AppColors.white : theme.colorScheme.secondary,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w800
-                                ),
+                            Text(
+                              foodData[index].title,
+                              style: TextStyle(
+                                color: choices.contains(foodData[index]) ? AppColors.white : theme.colorScheme.secondary,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w800
                               ),
                             )
                           ],

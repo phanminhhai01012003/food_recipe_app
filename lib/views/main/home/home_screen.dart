@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             "Xin chào! ${currentUser.displayName}",
                             style: TextStyle(
                               color: AppColors.white,
-                              fontSize: 14,
+                              fontSize: 12,
                               fontWeight: FontWeight.w700
                             ),
                           ),
@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             DateFormat("dd/MM/yyyy").format(DateTime.now()),
                             style: TextStyle(
                               color: AppColors.white,
-                              fontSize: 14,
+                              fontSize: 12,
                               fontWeight: FontWeight.w500
                             ),
                           )
