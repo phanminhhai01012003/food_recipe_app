@@ -216,7 +216,7 @@ class _StorageViewState extends State<StorageView> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () => Navigator.push(context, checkDeviceRoute(recentScreen)), 
+                    onPressed: () => Navigator.push(context, checkDeviceRoute(cookbookPage)), 
                     child: Text(
                       "Xem tất cả",
                       style: TextStyle(

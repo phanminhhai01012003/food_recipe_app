@@ -115,7 +115,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     height: 50,
                     width: MediaQuery.of(context).size.width * 0.25,
                     decoration: BoxDecoration(
-                      color: _btnIndex == 1 ? AppColors.green : AppColors.white,
+                      color: _btnIndex == 1 ? AppColors.green : theme.colorScheme.primary,
                       borderRadius: BorderRadius.circular(18),
                     ),
                     child: Center(
@@ -124,7 +124,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
-                          color: _btnIndex == 1 ? AppColors.white : AppColors.black,
+                          color: _btnIndex == 1 ? AppColors.white : theme.colorScheme.secondary,
                         ),
                       ),
                     ),
@@ -140,7 +140,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     height: 50,
                     width: MediaQuery.of(context).size.width * 0.25,
                     decoration: BoxDecoration(
-                      color: _btnIndex == 2 ? AppColors.green : AppColors.white,
+                      color: _btnIndex == 2 ? AppColors.green : theme.colorScheme.primary,
                       borderRadius: BorderRadius.circular(18),
                     ),
                     child: Center(
@@ -149,7 +149,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
-                          color: _btnIndex == 2 ? AppColors.white : AppColors.black,
+                          color: _btnIndex == 2 ? AppColors.white : theme.colorScheme.secondary,
                         ),
                       ),
                     ),
