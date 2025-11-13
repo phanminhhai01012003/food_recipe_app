@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
+import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/convert.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/food_model.dart';
@@ -23,7 +24,7 @@ class _FoodDisplayListState extends State<FoodDisplayList> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return InkWell(
-      onTap: () {
+      onTap: () async{
         RecentViewModel recents = RecentViewModel(
           viewId: generateRandomString(21),
           userId: currentUser.uid, 
@@ -31,6 +32,10 @@ class _FoodDisplayListState extends State<FoodDisplayList> {
           viewedAt: DateTime.now(), 
           foods: widget.food
         );
+        setState(() {
+          widget.food.views++;
+        });
+        await foodCollection.doc(widget.food.foodId).update({'views': widget.food.views});
         context.read<HistoryState>().toggle(recents);
         Navigator.push(
           context,

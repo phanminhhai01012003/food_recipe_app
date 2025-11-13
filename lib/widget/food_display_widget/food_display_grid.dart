@@ -24,7 +24,7 @@ class _FoodDisplayGridState extends State<FoodDisplayGrid> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return InkWell(
-      onTap: () {
+      onTap: () async{
         RecentViewModel recents = RecentViewModel(
           viewId: generateRandomString(21),
           userId: currentUser.uid, 
@@ -33,6 +33,10 @@ class _FoodDisplayGridState extends State<FoodDisplayGrid> {
           foods: widget.food
         );
         context.read<HistoryState>().toggle(recents);
+        setState(() {
+          widget.food.views++;
+        });
+        await foodCollection.doc(widget.food.foodId).update({'views': widget.food.views});
         Navigator.push(
           context,
           checkDeviceRoute(

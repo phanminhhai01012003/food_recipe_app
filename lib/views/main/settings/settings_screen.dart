@@ -32,6 +32,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
       case ModeSelection.theme:
         Navigator.push(context, checkDeviceRoute(changeThemeScreen));
         break;
+      case ModeSelection.rating:
+        Navigator.push(context, checkDeviceRoute(fullRatingPage));
+        break;
     }
   }
   IconData getIcon(ModeSelection mode){
@@ -46,6 +49,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
         return Icons.lock;
       case ModeSelection.theme:
         return Icons.sunny;
+      case ModeSelection.rating:
+        return Icons.star;
     }
   }
   String renderTitle(ModeSelection mode){
@@ -60,6 +65,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
         return "Đổi mật khẩu";
       case ModeSelection.theme:
         return "Giao diện";
+      case ModeSelection.rating:
+        return "Đánh giá";
     }
   }
   @override
@@ -123,6 +130,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   onTap: () => onChooseMode(ModeSelection.theme),
                   icon: getIcon(ModeSelection.theme),
                   title: renderTitle(ModeSelection.theme),
+                ),
+                Selection(
+                  onTap: () => onChooseMode(ModeSelection.rating),
+                  icon: getIcon(ModeSelection.rating),
+                  title: renderTitle(ModeSelection.rating),
                 )
               ],
             ),

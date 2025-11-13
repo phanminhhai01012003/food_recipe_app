@@ -9,5 +9,6 @@ enum ModeSelection {
   storage,
   report,
   changePassword, 
-  theme
+  theme,
+  rating
 }

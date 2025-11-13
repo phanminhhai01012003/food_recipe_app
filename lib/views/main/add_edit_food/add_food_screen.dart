@@ -51,7 +51,8 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
       diet: int.parse(dietController.text), 
       duration: _duration.ddhhmmss, 
       ingredients: ingredientController.map((e) => e.text).toList(), 
-      steps: stepController.map((e) => e.text).toList(), 
+      steps: stepController.map((e) => e.text).toList(),
+      views: 0,
       createdAt: DateTime.now(), 
       likes: [],
     );

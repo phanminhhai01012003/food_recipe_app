@@ -66,6 +66,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
       duration: _duration.ddhhmmss, 
       ingredients: ingredientController.map((e) => e.text).toList(), 
       steps: stepController.map((e) => e.text).toList(), 
+      views: widget.food.views,
       createdAt: widget.food.createdAt, 
       likes: widget.food.likes
     );
