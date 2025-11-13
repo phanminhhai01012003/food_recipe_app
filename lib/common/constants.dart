@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/services/authentication/auth_services.dart';
 import 'package:food_recipe_app/services/firestore/comment/comment_services.dart';
 import 'package:food_recipe_app/services/firestore/food_recipe/food_services.dart';
+import 'package:food_recipe_app/services/firestore/rate/rate_services.dart';
 import 'package:food_recipe_app/services/firestore/report/report_services.dart';
 import 'package:food_recipe_app/services/firestore/user/user_services.dart';
 import 'package:food_recipe_app/services/image/image_service.dart';
@@ -66,6 +67,15 @@ List<String> deleteUserList = [
   "Tôi muốn bảo vệ quyền lợi của mình",
   "Khác (vui lòng ghi rõ bên dưới)"
 ];
+List<String> rates = [
+  "Đánh giá trực tiếp trong app",
+  "Đánh giá qua Google Play/App Store"
+];
+List<String> filterRating = [
+  "Phổ biến",
+  "Mới nhất",
+  "Cũ nhất"
+];
 
 //storage
 String foodFolder = "food_recipe";
@@ -74,7 +84,7 @@ String cookbookFolder = "cookbook";
 
 //document
 String docPath = "assets/document";
-String pdfFile = "$docPath/document.pdf";
+String overviewPDFFile = "$docPath/document.pdf";
 
 //firebase
 final auth = FirebaseAuth.instance;
@@ -93,6 +103,7 @@ final historyCollection = FirebaseFirestore.instance.collection("history");
 final bookCollection = FirebaseFirestore.instance.collection("cookbook");
 final reportCollection = FirebaseFirestore.instance.collection("report");
 final tagCollection = FirebaseFirestore.instance.collection("categories");
+final rateCollection = FirebaseFirestore.instance.collection("rating");
 CollectionReference<Map<String, dynamic>> delAccReqCollection(String userId) {
   return userCollection
     .doc(userId)
@@ -108,3 +119,4 @@ final userServices = UserServices();
 final notificationData = NotificationData();
 final commentServices = CommentServices();
 final reportServices = ReportServices();
+final rateServices = RateServices();

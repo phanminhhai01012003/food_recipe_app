@@ -139,8 +139,8 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                         height: 50,
                         width: 50,
                         decoration: BoxDecoration(
-                            color: Colors.green.shade400,
-                            shape: BoxShape.circle
+                          color: AppColors.green,
+                          shape: BoxShape.circle
                         ),
                         alignment: Alignment.center,
                         child: IconButton(
@@ -150,7 +150,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                           icon: Icon(
                             Icons.warning_sharp,
                             size: 20,
-                            color: Colors.white,
+                            color: AppColors.white,
                           )
                         ),
                       ),
@@ -165,7 +165,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                 width: 40,
                 height: 8,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
+                  color: AppColors.grey,
                   borderRadius: BorderRadius.circular(20)
                 ),
               ),
@@ -194,13 +194,26 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                     ),
                   ),
                   SizedBox(height: 20),
-                  Text(
-                    "Đã tạo: ${DateFormat("dd/MM/yyyy").format((widget.food.createdAt))}",
-                    style: TextStyle(
-                        color: theme.colorScheme.secondary,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        "Đã tạo: ${DateFormat("dd/MM/yyyy").format((widget.food.createdAt))}",
+                        style: TextStyle(
+                          color: theme.colorScheme.secondary,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700
+                        ),
+                      ),
+                      SizedBox(width: 50),
+                      Text(
+                        "${widget.food.views} lượt xem",
+                        style: TextStyle(
+                          color: theme.colorScheme.secondary,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700
+                        ),
+                      )
+                    ],
                   ),
                   SizedBox(height: 20),
                   InkWell(

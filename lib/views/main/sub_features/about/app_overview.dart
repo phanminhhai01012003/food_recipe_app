@@ -15,7 +15,7 @@ class _AppOverviewState extends State<AppOverview> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _pdfControllerPinch = PdfControllerPinch(document: PdfDocument.openAsset(pdfFile));
+    _pdfControllerPinch = PdfControllerPinch(document: PdfDocument.openAsset(overviewPDFFile));
   }
   @override
   Widget build(BuildContext context) {

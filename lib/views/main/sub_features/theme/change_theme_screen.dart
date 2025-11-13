@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/provider/theme_state.dart';
+import 'package:food_recipe_app/views/main/sub_features/theme/change_theme_button.dart';
 import 'package:provider/provider.dart';
 
 class ChangeThemeScreen extends StatefulWidget {
@@ -57,90 +57,24 @@ class _ChangeThemeScreenState extends State<ChangeThemeScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      InkWell(
-                        onTap: value.systemTheme,
-                        child: Column(
-                          children: [
-                            Container(
-                              width: 50,
-                              height: 50,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: value.isSystem ? AppColors.green : theme.colorScheme.primary
-                              ),
-                              child: Icon(
-                                Icons.auto_mode,
-                                size: 20,
-                                color: value.isSystem ? AppColors.white : theme.colorScheme.secondary,
-                              )
-                            ),
-                            SizedBox(height: 5),
-                            Text("Hệ thống",
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.normal
-                              ),
-                            )
-                          ],
-                        ),
+                      ChangeThemeButton(
+                        onTap: value.systemTheme, 
+                        screenState: value.isSystem, 
+                        themeIcon: Icons.auto_mode, 
+                        text: "Hệ thống"
                       ),
-                      InkWell(
-                        onTap: value.lightTheme,
-                        child: Column(
-                          children: [
-                            Container(
-                              width: 50,
-                              height: 50,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: value.isLight ? AppColors.green : theme.colorScheme.primary
-                              ),
-                              child: Icon(
-                                Icons.sunny, 
-                                size: 20,
-                                color: value.isLight ? AppColors.white : theme.colorScheme.secondary,
-                              )
-                            ),
-                            SizedBox(height: 5),
-                            Text("Sáng",
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.normal
-                              ),
-                            )
-                          ],
-                        ),
+                      ChangeThemeButton(
+                        onTap: value.lightTheme, 
+                        screenState: value.isLight, 
+                        themeIcon: Icons.light_mode, 
+                        text: "Sáng"
                       ),
-                      InkWell(
-                        onTap: value.darkTheme,
-                        child: Column(
-                          children: [
-                            Container(
-                              width: 50,
-                              height: 50,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: value.isDark ? AppColors.green : theme.colorScheme.primary
-                              ),
-                              child: Icon(
-                                Icons.dark_mode,
-                                size: 20,
-                                color: value.isDark ? AppColors.white : theme.colorScheme.secondary,
-                              )
-                            ),
-                            SizedBox(height: 5),
-                            Text("Tối",
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.normal
-                              ),
-                            )
-                          ],
-                        ),
-                      )
+                      ChangeThemeButton(
+                        onTap: value.darkTheme, 
+                        screenState: value.isDark, 
+                        themeIcon: Icons.dark_mode, 
+                        text: "Tối"
+                      ),
                     ],
                   ),
                 )
