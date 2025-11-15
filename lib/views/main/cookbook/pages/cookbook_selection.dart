@@ -107,7 +107,32 @@ class _CookbookSelectionState extends State<CookbookSelection> {
                   )
                 );      
               },
-            )
+            ),
+            SizedBox(height: 20),
+            SizedBox(
+              height: 50,
+              width: MediaQuery.of(context).size.width / 2,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.green,
+                  foregroundColor: AppColors.white,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33))
+                ),
+                onPressed: () {
+                  for (var cookbook in choices) {
+                    context.read<CookbookState>().toggleFoodOnCookbook(cookbook, widget.food);
+                  }
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  "Thêm",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700
+                  ),
+                )
+              ),
+            )            
           ],
         ),
       ),

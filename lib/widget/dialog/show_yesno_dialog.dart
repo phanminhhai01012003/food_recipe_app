@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 
 class ShowYesnoDialog {
-  static void showMaterialDialog(BuildContext context, {
+  static void showMaterialDialog(
+    BuildContext context, {
     required String title,
     required String content,
     required VoidCallback onAcceptTap,
@@ -60,7 +61,8 @@ class ShowYesnoDialog {
       )
     );
   }
-  static void showCupertinoDialog(BuildContext context, {
+  static void showCupertinoDialog(
+    BuildContext context, {
     required String title,
     required String content,
     required VoidCallback onAcceptTap,
@@ -87,28 +89,43 @@ class ShowYesnoDialog {
         actions: [
           CupertinoDialogAction(
             onPressed: onAcceptTap,
-            child: Text("Có", style: TextStyle(color: AppColors.blue)),
+            child: Text("Có", 
+              style: TextStyle(
+                color: AppColors.blue,
+                fontSize: 14,
+                fontWeight: FontWeight.w500
+              )
+            ),
           ),
           CupertinoDialogAction(
             onPressed: onCancelTap,
-            child: Text("Không", style: TextStyle(color: AppColors.red)),
+            child: Text("Không", 
+              style: TextStyle(
+                color: AppColors.red,
+                fontSize: 14,
+                fontWeight: FontWeight.w500
+              )
+            ),
           )
         ],
       )
     );
   }
-  static void checkDeviceDialog(BuildContext context, {
+  static void checkDeviceDialog(
+    BuildContext context, {
     required String title,
     required String content,
     required VoidCallback onAcceptTap,
     required VoidCallback onCancelTap 
   }) {
-    Platform.isAndroid ? showMaterialDialog(context, 
+    Platform.isAndroid ? showMaterialDialog(
+      context, 
       title: title, 
       content: content, 
       onAcceptTap: onAcceptTap, 
       onCancelTap: onCancelTap
-    ) : showCupertinoDialog(context, 
+    ) : showCupertinoDialog(
+      context, 
       title: title, 
       content: content, 
       onAcceptTap: onAcceptTap, 

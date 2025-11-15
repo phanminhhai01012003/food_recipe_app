@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/model/mock_case.dart';
 
 class MockPicker extends StatelessWidget {
@@ -9,7 +10,7 @@ class MockPicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-        backgroundColor: Colors.black,
+        backgroundColor: AppColors.black,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -18,8 +19,8 @@ class MockPicker extends StatelessWidget {
             ),
             Text(
               "Pick case for: $action",
-              style: const TextStyle(
-                color: Colors.white
+              style: TextStyle(
+                color: AppColors.white
               ),
             ),
             ListView.builder(
@@ -31,7 +32,7 @@ class MockPicker extends StatelessWidget {
                     Navigator.of(context).pop(mock[index].response);
                   },
                   child: Container(
-                    color: Colors.white10,
+                    color: AppColors.black,
                     margin: const EdgeInsets.all(8),
                     padding: const EdgeInsets.all(8),
                     child: Column(
@@ -39,14 +40,14 @@ class MockPicker extends StatelessWidget {
                       children: [
                         Text(
                           mock[index].name,
-                          style: const TextStyle(
-                            color: Colors.white
+                          style: TextStyle(
+                            color: AppColors.white
                           ),
                         ),
                         Text(
                           mock[index].description,
-                          style: const TextStyle(
-                            color: Colors.white
+                          style: TextStyle(
+                            color: AppColors.white
                           ),
                         ),
                       ],

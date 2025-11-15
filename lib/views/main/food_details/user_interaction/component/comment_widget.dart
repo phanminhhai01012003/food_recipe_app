@@ -11,8 +11,9 @@ import 'package:intl/intl.dart';
 
 class CommentWidget extends StatefulWidget {
   final String id;
+  final bool isReply;
   final CommentModel comment;
-  const CommentWidget({super.key, required this.comment, required this.id});
+  const CommentWidget({super.key, required this.comment, required this.id, required this.isReply});
 
   @override
   State<CommentWidget> createState() => _CommentWidgetState();
@@ -68,7 +69,7 @@ class _CommentWidgetState extends State<CommentWidget> {
       surfaceTintColor: theme.colorScheme.primary,
       child: GestureDetector(
         onLongPress: () => widget.comment.userId == currentUser.uid 
-          ? CommentSelection.showSelectionWithCurrentUser(context, widget.comment, widget.id)
+          ? CommentSelection.showSelectionWithCurrentUser(context, widget.comment, widget.id, widget.isReply)
           : CommentSelection.showGeneralSelection(context, widget.comment),
         child: Container(
           padding: EdgeInsets.all(12),

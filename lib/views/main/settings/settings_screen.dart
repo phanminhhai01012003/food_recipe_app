@@ -20,6 +20,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
       case ModeSelection.about:
         Navigator.push(context, checkDeviceRoute(about));
         break;
+      case ModeSelection.appServices:
+        Navigator.push(context, checkDeviceRoute(service));
+        break;
       case ModeSelection.storage:
         Navigator.push(context, checkDeviceRoute(storageMode));
         break;
@@ -41,6 +44,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     switch (mode) {
       case ModeSelection.about:
         return Icons.info;
+      case ModeSelection.appServices:
+        return Icons.room_service;
       case ModeSelection.storage:
         return Icons.storage;
       case ModeSelection.report:
@@ -57,6 +62,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     switch (mode) {
       case ModeSelection.about:
         return "Giới thiệu";
+      case ModeSelection.appServices:
+        return "Dịch vụ";
       case ModeSelection.storage:
         return "Kho lưu trữ";
       case ModeSelection.report:
@@ -110,6 +117,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   onTap: () => onChooseMode(ModeSelection.about), 
                   icon: getIcon(ModeSelection.about), 
                   title: renderTitle(ModeSelection.about)
+                ),
+                Selection(
+                  onTap: () => onChooseMode(ModeSelection.appServices), 
+                  icon: getIcon(ModeSelection.appServices), 
+                  title: renderTitle(ModeSelection.appServices)
                 ),
                 Selection(
                   onTap: () => onChooseMode(ModeSelection.storage), 

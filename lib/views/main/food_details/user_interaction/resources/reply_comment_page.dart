@@ -101,7 +101,8 @@ class _ReplyCommentPageState extends State<ReplyCommentPage> {
           physics: ClampingScrollPhysics(),
           itemBuilder: (context, index) => CommentWidget(
             comment: widget.comment.replies[index], 
-            id: widget.id
+            id: widget.id,
+            isReply: true,
           ),
         )
       )

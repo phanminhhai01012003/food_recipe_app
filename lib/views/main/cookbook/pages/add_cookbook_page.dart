@@ -30,16 +30,12 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
   HashSet<FoodModel> choices = HashSet();
   bool canMultiSelected = false;
   void onMultiSelect(FoodModel food){
-    if (canMultiSelected){
-      if (choices.contains(food)){
-        choices.remove(food);
-      } else {
-        choices.add(food);
-      }
-      setState(() {});
+    if (choices.contains(food)){
+      choices.remove(food);
     } else {
-
+      choices.add(food);
     }
+    setState(() {});
   }
   String get getSelectedItemCount {
     return choices.isEmpty 

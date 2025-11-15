@@ -9,7 +9,12 @@ import 'package:food_recipe_app/widget/other/message.dart';
 
 class EditCommentDialog {
   static final commentServices = CommentServices();
-  static void showMaterialEdit(BuildContext context, CommentModel comment, String id){
+  static void showMaterialEdit(
+    BuildContext context, 
+    CommentModel comment, 
+    String id, 
+    bool isReply
+  ){
     final theme = Theme.of(context);
     final commentController = TextEditingController(text: comment.content);
     showDialog(
@@ -59,7 +64,8 @@ class EditCommentDialog {
                 context, 
                 content: commentController.text, 
                 comment: comment,
-                id: id
+                id: id,
+                isReply: isReply
               );
             },
             child: Text("Gửi")
@@ -73,7 +79,12 @@ class EditCommentDialog {
     );
   }
 
-  static void showCupertinoEdit(BuildContext context, CommentModel comment, String id) {
+  static void showCupertinoEdit(
+    BuildContext context, 
+    CommentModel comment, 
+    String id, 
+    bool isReply
+  ) {
     final commentController = TextEditingController(text: comment.content);
     final theme = Theme.of(context);
     showDialog(
@@ -116,7 +127,8 @@ class EditCommentDialog {
                 context,  
                 content: commentController.text, 
                 comment: comment,
-                id: id
+                id: id,
+                isReply: isReply
               );
             },
             child: Text("Gửi", style: TextStyle(color: AppColors.blue)),
@@ -130,21 +142,29 @@ class EditCommentDialog {
     );
   }
   
-  static void checkDeviceEditComment(BuildContext context, CommentModel comment, String id) => Platform.isAndroid 
-    ? showMaterialEdit(context, comment, id) 
-    : showCupertinoEdit(context, comment, id);
+  static void checkDeviceEditComment(BuildContext context, CommentModel comment, String id, bool isReply) => Platform.isAndroid 
+    ? showMaterialEdit(context, comment, id, isReply) 
+    : showCupertinoEdit(context, comment, id, isReply);
   
   static Future<void> onUpdateComment(
     BuildContext context, {
       required String content, 
       required CommentModel comment,
-      required String id
+      required String id,
+      required bool isReply
     }) async{
     if (content.isEmpty) return;
-    await commentServices.updateComment(context, comment, id).then((_){
-      Message.showToast("Đã cập nhật");
-      Navigator.pop(context);
-    });
+    if (isReply) {
+      await commentServices.updateReplyComment(context, comment, id).then((_){
+        Message.showToast("Đã cập nhật");
+        Navigator.pop(context);
+      });
+    } else {
+      await commentServices.updateComment(context, comment, id).then((_){
+        Message.showToast("Đã cập nhật");
+        Navigator.pop(context);
+      });
+    }
     await Future.delayed(Duration(seconds: 2), (){
       Navigator.pop(context);
     });

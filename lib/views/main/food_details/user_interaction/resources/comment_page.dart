@@ -120,7 +120,8 @@ class _CommentPageState extends State<CommentPage> {
                 physics: ClampingScrollPhysics(),
                 itemBuilder: (context, index) => CommentWidget(
                   comment: comments[index], 
-                  id: widget.food.foodId
+                  id: widget.food.foodId,
+                  isReply: false,
                 ),
               );
             }

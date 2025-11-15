@@ -85,6 +85,8 @@ String cookbookFolder = "cookbook";
 //document
 String docPath = "assets/document";
 String overviewPDFFile = "$docPath/document.pdf";
+String rulesPDFFile = "$docPath/pairpro.pdf";
+String instructionPDFFile = "$docPath/Flutter.pdf";
 
 //firebase
 final auth = FirebaseAuth.instance;

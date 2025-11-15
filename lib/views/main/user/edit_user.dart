@@ -295,7 +295,10 @@ class _EditUserState extends State<EditUser> {
                         )
                       ),
                       validator: (value) {
-                        if (!RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)').hasMatch(value!)) {
+                        if (value == null || value.isEmpty) {
+                          return null;
+                        }
+                        if (!RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)').hasMatch(value)) {
                           return "Số điện thoại không hợp lệ";
                         }
                         return null;

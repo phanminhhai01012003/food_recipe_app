@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
+import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/cookbook_model.dart';
 
 class CookbookWidget extends StatefulWidget {
@@ -14,6 +15,7 @@ class _CookbookWidgetState extends State<CookbookWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: () => Navigator.push(context, checkDeviceRoute(cookbookDetail(widget.book))),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),

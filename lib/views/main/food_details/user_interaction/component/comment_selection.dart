@@ -10,16 +10,34 @@ import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 
 class CommentSelection {
   static final commentServices = CommentServices();
-  static void onDelete(BuildContext context, String commentId, String foodId) async{
-    await commentServices.deleteComment(context, commentId, foodId).then((_){
-      Message.showToast("Đã xóa bình luận");
-      Navigator.pop(context);
-    }); 
+  static void onDelete(
+    BuildContext context, 
+    CommentModel comment, 
+    String commentId, 
+    String foodId, 
+    bool isReply
+  ) async{
+    if (isReply) {
+      await commentServices.deleteReplyComment(context, comment, foodId).then((_){
+        Message.showToast("Đã xóa bình luận");
+        Navigator.pop(context);
+      });
+    } else {
+      await commentServices.deleteComment(context, commentId, foodId).then((_){
+        Message.showToast("Đã xóa bình luận");
+        Navigator.pop(context);
+      });
+    }
     await Future.delayed(Duration(seconds: 2), (){
       Navigator.pop(context);
     });  
   }
-  static void showSelectionWithCurrentUser(BuildContext context, CommentModel comment, String foodId){
+  static void showSelectionWithCurrentUser(
+    BuildContext context, 
+    CommentModel comment, 
+    String foodId, 
+    bool isReply
+  ){
     final theme = Theme.of(context);
     showDialog(
       context: context, 
@@ -34,7 +52,7 @@ class CommentSelection {
           child: Column(
             children: [
               Selection(
-                onTap: () => EditCommentDialog.checkDeviceEditComment(context, comment, foodId), 
+                onTap: () => EditCommentDialog.checkDeviceEditComment(context, comment, foodId, isReply), 
                 icon: Icons.edit, 
                 title: "Sửa"
               ),
@@ -44,7 +62,7 @@ class CommentSelection {
                     context, 
                     title: "Xóa bình luận", 
                     content: "Bạn có chắc chắn muốn xóa không?", 
-                    onAcceptTap: () => onDelete(context, comment.commentId, foodId),
+                    onAcceptTap: () => onDelete(context, comment, comment.commentId, foodId, isReply),
                     onCancelTap: () => Navigator.pop(context)
                   );
                 }, 
