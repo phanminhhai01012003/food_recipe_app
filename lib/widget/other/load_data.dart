@@ -13,6 +13,7 @@ class LoadData extends StatelessWidget {
       highlightColor: AppColors.grey,
       child: isList ? ListView.builder(
         itemCount: 10,
+        shrinkWrap: true,
         itemBuilder: (context, index) => loadingListCard
       ) : GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -20,6 +21,7 @@ class LoadData extends StatelessWidget {
           childAspectRatio: 0.8
         ),
         itemCount: 10,
+        shrinkWrap: true,
         itemBuilder: (context, index) => loadingGridCard
       ),
     );

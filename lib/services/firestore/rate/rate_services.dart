@@ -49,7 +49,7 @@ class RateServices extends RateRepo{
   Future<void> updateRating(BuildContext context, RatingModel rating) async{
     // TODO: implement updateRating
     try {
-      await rateCollection.doc(rating.ratingId).set(rating.updateMap());
+      await rateCollection.doc(rating.ratingId).update(rating.updateMap());
     } catch (e) {
       Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
       Logger.log(e);

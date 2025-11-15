@@ -8,11 +8,11 @@ void showNoInternetDialog(BuildContext context, {required VoidCallback onPressed
     barrierColor: AppColors.black.withValues(alpha: 0.5),
     builder: (context) => Dialog(
       backgroundColor: AppColors.white,
+      surfaceTintColor: AppColors.white,
       alignment: Alignment.center,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       insetAnimationCurve: Easing.legacyAccelerate,
       insetAnimationDuration: Duration(milliseconds: 200),
-      insetPadding: EdgeInsets.all(12),
       child: Column(
         children: [
           SizedBox(

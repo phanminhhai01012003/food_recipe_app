@@ -5,6 +5,7 @@ import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/rating_model.dart';
+import 'package:food_recipe_app/views/main/sub_features/app_rating/rating_selection.dart';
 import 'package:intl/intl.dart';
 
 class RateComponent extends StatefulWidget {
@@ -43,6 +44,9 @@ class _RateComponentState extends State<RateComponent> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return GestureDetector(
+      onLongPress: () => widget.rate.userId == currentUser.uid 
+        ? RatingSelection.showCurrentUserRateSelection(context, widget.rate)
+        : RatingSelection.showGeneralRateSelection(context, widget.rate),
       child: Container(
         width: double.infinity,
         padding: EdgeInsets.all(12),
@@ -70,13 +74,14 @@ class _RateComponentState extends State<RateComponent> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
                     GestureDetector(
                       onTap: () => Navigator.push(context, checkDeviceRoute(personalScreen(widget.rate.userId))),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(50),
                         child: CachedNetworkImage(
                           imageUrl: widget.rate.avatar,
                           progressIndicatorBuilder: (context, url, progress) => Center(
@@ -171,9 +176,8 @@ class _RateComponentState extends State<RateComponent> {
                     color: isLikedRate ? AppColors.red : AppColors.grey,
                   )
                 ),
-                SizedBox(height: 5),
                 Text(
-                  widget.rate.likes.toString(),
+                  widget.rate.likes.length.toString(),
                   style: TextStyle(
                     color: theme.colorScheme.secondary,
                     fontSize: 12,

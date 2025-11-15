@@ -26,6 +26,7 @@ class _RateScreenState extends State<RateScreen> {
     // TODO: implement initState
     super.initState();
     if (widget.rating != null) {
+      selectRatingMethod = rates.first;
       rate = widget.rating!.ratingStar;
       contentController.text = widget.rating!.content;
     }
@@ -33,20 +34,28 @@ class _RateScreenState extends State<RateScreen> {
   void onDirectRating() async{
     context.loaderOverlay.show();
     RatingModel rating = RatingModel(
-      ratingId: generateRandomString(20), 
-      userId: currentUser.uid, 
-      avatar: currentUser.photoURL!, 
-      userName: currentUser.displayName!, 
+      ratingId: widget.rating == null ? generateRandomString(20) : widget.rating!.ratingId, 
+      userId: widget.rating == null ? currentUser.uid : widget.rating!.userId, 
+      avatar: widget.rating == null ? currentUser.photoURL! : widget.rating!.avatar, 
+      userName: widget.rating == null ? currentUser.displayName! : widget.rating!.userName, 
       ratingStar: rate, 
       content: contentController.text, 
-      createdAt: DateTime.now(), 
-      likes: []
+      createdAt: widget.rating == null ? DateTime.now() : widget.rating!.createdAt, 
+      likes: widget.rating == null ? [] : widget.rating!.likes
     );
-    await rateServices.addRating(context, rating).then((_){
-      context.loaderOverlay.hide();
-      Message.showScaffoldMessage(context, "Cảm ơn bạn đã đánh giá", AppColors.green);
-      Navigator.pop(context);
-    });
+    if (widget.rating == null) {
+      await rateServices.addRating(context, rating).then((_){
+        context.loaderOverlay.hide();
+        Message.showScaffoldMessage(context, "Cảm ơn bạn đã đánh giá", AppColors.green);
+        Navigator.pop(context);
+      });
+    } else {
+      await rateServices.updateRating(context, rating).then((_){
+        context.loaderOverlay.hide();
+        Message.showScaffoldMessage(context, "Cập nhật thành công", AppColors.green);
+        Navigator.pop(context);
+      });
+    }
   }
   @override
   Widget build(BuildContext context) {
@@ -90,7 +99,7 @@ class _RateScreenState extends State<RateScreen> {
                 children: [
                   RatingBar.builder(
                     direction: Axis.horizontal,
-                    maxRating: 1,
+                    minRating: 1,
                     initialRating: rate,
                     allowHalfRating: true,
                     itemCount: 5,
@@ -114,6 +123,7 @@ class _RateScreenState extends State<RateScreen> {
                       fontWeight: FontWeight.normal
                     ),
                   ),
+                  SizedBox(height: 10),
                   TextField(
                     controller: contentController,
                     style: TextStyle(

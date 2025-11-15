@@ -64,81 +64,84 @@ class _FullRatingPageState extends State<FullRatingPage> {
           )
         ],
       ),
-      body: Column(
-        children: [
-          Text(
-            "Lưu ý: Chỉ hiển thị ý kiến của khách hàng khi đánh giá trực tiếp trong app",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w800,
-              color: theme.colorScheme.secondary
-            ),
-          ),
-          SizedBox(height: 20),
-          Container(
-            width: MediaQuery.of(context).size.width / 2,
-            height: 50,
-            padding: EdgeInsets.symmetric(horizontal: 12),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: theme.colorScheme.secondary)
-            ),
-            child: DropdownButton(
-              underline: SizedBox(),
-              isExpanded: true,
-              hint: Text("Lọc dữ liệu",
-                style: TextStyle(
-                  color: theme.colorScheme.secondary,
-                  fontSize: 14,
-                  fontWeight: FontWeight.normal
-                ),
+      body: Padding(
+        padding: EdgeInsets.all(12),
+        child: Column(
+          children: [
+            Text(
+              "Lưu ý: Chỉ hiển thị ý kiến của khách hàng khi đánh giá trực tiếp trong app",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w800,
+                color: theme.colorScheme.secondary
               ),
-              items: filterRating.map((String item){
-                return DropdownMenuItem(
-                  value: item,
-                  child: Text(item,
-                    style: TextStyle(
-                      color: theme.colorScheme.secondary,
-                      fontSize: 12,
-                      fontWeight: FontWeight.normal
-                    ),
-                  ),
-                );
-              }).toList(),
-              onChanged: (value){
-                setState(() {
-                  selectedFilterRate = value;
-                });
-              },
-              value: selectedFilterRate,
-              icon: Icon(Icons.keyboard_arrow_down),
-              iconSize: 20,
-              style: TextStyle(color: Colors.black),
             ),
-          ),
-          SizedBox(height: 20),
-          StreamBuilder(
-            stream: getRatingData(), 
-            builder: (context, snapshot) {
-              if (!snapshot.hasData || snapshot.hasError) {
-                return SizedBox.shrink();
-              } else if (snapshot.connectionState == ConnectionState.waiting) {
-                return LoadData(isList: true);
-              } else {
-                List<RatingModel> ratingData = snapshot.data!;
-                return ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  clipBehavior: Clip.hardEdge,
-                  hitTestBehavior: HitTestBehavior.translucent,
-                  physics: ClampingScrollPhysics(),
-                  itemCount: ratingData.length,
-                  itemBuilder: (context, index) => RateComponent(rate: ratingData[index]),
-                );
-              }
-            },
-          )
-        ],
+            SizedBox(height: 20),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.75,
+              height: 50,
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: theme.colorScheme.secondary)
+              ),
+              child: DropdownButton(
+                underline: SizedBox(),
+                isExpanded: true,
+                hint: Text("Lọc dữ liệu",
+                  style: TextStyle(
+                    color: theme.colorScheme.secondary,
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal
+                  ),
+                ),
+                items: filterRating.map((String item){
+                  return DropdownMenuItem(
+                    value: item,
+                    child: Text(item,
+                      style: TextStyle(
+                        color: theme.colorScheme.secondary,
+                        fontSize: 12,
+                        fontWeight: FontWeight.normal
+                      ),
+                    ),
+                  );
+                }).toList(),
+                onChanged: (value){
+                  setState(() {
+                    selectedFilterRate = value;
+                  });
+                },
+                value: selectedFilterRate,
+                icon: Icon(Icons.keyboard_arrow_down),
+                iconSize: 20,
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
+            SizedBox(height: 20),
+            StreamBuilder(
+              stream: getRatingData(), 
+              builder: (context, snapshot) {
+                if (!snapshot.hasData || snapshot.hasError) {
+                  return SizedBox.shrink();
+                } else if (snapshot.connectionState == ConnectionState.waiting) {
+                  return LoadData(isList: true);
+                } else {
+                  List<RatingModel> ratingData = snapshot.data!;
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    clipBehavior: Clip.hardEdge,
+                    hitTestBehavior: HitTestBehavior.translucent,
+                    physics: ClampingScrollPhysics(),
+                    itemCount: ratingData.length,
+                    itemBuilder: (context, index) => RateComponent(rate: ratingData[index]),
+                  );
+                }
+              },
+            )
+          ],
+        ),
       ),
     );
   }
