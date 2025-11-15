@@ -30,7 +30,7 @@ class ChangeThemeButton extends StatelessWidget {
               color: screenState ? AppColors.green : theme.colorScheme.primary
             ),
             child: Icon(
-              Icons.auto_mode,
+              themeIcon,
               size: 20,
               color: screenState ? AppColors.white : theme.colorScheme.secondary,
             )
