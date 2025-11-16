@@ -8,6 +8,8 @@ import 'package:food_recipe_app/model/cookbook_model.dart';
 import 'package:food_recipe_app/provider/cookbook_state.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:food_recipe_app/widget/food_display_widget/food_display_list.dart';
+import 'package:food_recipe_app/widget/other/message.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';
 
 class CookbookDetail extends StatefulWidget {
@@ -127,7 +129,7 @@ class _CookbookDetailState extends State<CookbookDetail> {
                       context, 
                       title: "Xóa nhật ký", 
                       content: "Bạn có muốn xóa nhật ký vừa tạo không?", 
-                      onAcceptTap: () => context.read<CookbookState>().removeCookbook(widget.cookbook.cookbookId), 
+                      onAcceptTap: () => onDelete(widget.cookbook.cookbookId), 
                       onCancelTap: () => Navigator.pop(context)
                     ),
                     color: AppColors.red,
@@ -147,5 +149,13 @@ class _CookbookDetailState extends State<CookbookDetail> {
         ),
       ),
     );
+  }
+  void onDelete(String id) async{
+    context.loaderOverlay.show();
+    context.read<CookbookState>().removeCookbook(id);
+    context.loaderOverlay.hide();
+    Message.showScaffoldMessage(context, "Đã xóa", AppColors.green);
+    Navigator.pop(context);
+    await Future.delayed(Duration(seconds: 1), () => Navigator.pop(context));
   }
 }

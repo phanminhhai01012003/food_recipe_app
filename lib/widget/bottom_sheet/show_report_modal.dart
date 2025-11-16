@@ -58,7 +58,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
     // TODO: implement initState
     super.initState();
     if (widget.reports != null) {
-      if (widget.title.contains("Món")) {
+      if (widget.title.contains("món")) {
         if (selectedOption == reportFoodList.last) {
           _otherReport.text = widget.reports!.reason;
         } else {
@@ -130,12 +130,12 @@ class _ShowReportModalState extends State<ShowReportModal> {
                 SizedBox(height: 10),
                 Column(
                   children: List.generate(
-                    widget.title.contains("Món") 
+                    widget.title.contains("món") 
                       ? reportFoodList.length
                       : reportCommentList.length, 
                     (i) => radio(
                       context,
-                      widget.title.contains("Món") 
+                      widget.title.contains("món") 
                         ? reportFoodList[i] 
                         : reportCommentList[i] 
                     )
@@ -145,7 +145,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
                 TextField(
                   maxLength: 500,
                   controller: _otherReport,
-                  enabled: widget.title.contains("Món") 
+                  enabled: widget.title.contains("món") 
                     ? selectedOption == reportFoodList.last 
                     : selectedOption == reportCommentList.last,
                   decoration: InputDecoration(

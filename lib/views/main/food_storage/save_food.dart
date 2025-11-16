@@ -8,6 +8,7 @@ import 'package:food_recipe_app/provider/save_state.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:food_recipe_app/widget/other/slider.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';
 
 class SaveFood extends StatefulWidget {
@@ -101,7 +102,9 @@ class _SaveFoodState extends State<SaveFood> {
       title: "Xóa món ăn đã lưu", 
       content: "Bạn có chắc chắn muốn xóa món ăn đã lưu không?", 
       onAcceptTap: () {
+        context.loaderOverlay.show();
         context.read<SaveState>().toggle(model);
+        context.loaderOverlay.hide();
         Message.showScaffoldMessage(context, "Đã xóa", AppColors.green);
         Navigator.pop(context);
       }, 

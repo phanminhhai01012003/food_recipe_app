@@ -26,7 +26,7 @@ class _FoodRecipeDisplayState extends State<FoodRecipeDisplay> {
           } else {
             List<FoodModel> foods = snapshot.data!;
             return SizedBox(
-              height: 200,
+              height: 222,
               child: ListView.builder(
                 padding: EdgeInsets.all(12),
                 scrollDirection: Axis.horizontal,

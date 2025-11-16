@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/routes.dart';
+import 'package:food_recipe_app/data/enum.dart';
 import 'package:food_recipe_app/model/cookbook_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/model/recent_view_model.dart';
@@ -23,6 +24,22 @@ class StorageView extends StatefulWidget {
 }
 
 class _StorageViewState extends State<StorageView> {
+  void onNavigation(StorageMode mode){
+    switch(mode){
+      case StorageMode.myFood:
+        Navigator.push(context, checkDeviceRoute(myFoodScreen));
+        break;
+      case StorageMode.saveFood:
+        Navigator.push(context, checkDeviceRoute(saveFoodScreen));
+        break;
+      case StorageMode.recentView:
+        Navigator.push(context, checkDeviceRoute(recentScreen));
+        break;
+      case StorageMode.cookbook:
+        Navigator.push(context, checkDeviceRoute(cookbookPage));
+        break;
+    }
+  }
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -66,7 +83,7 @@ class _StorageViewState extends State<StorageView> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () => Navigator.push(context, checkDeviceRoute(myFoodScreen)), 
+                    onPressed: () => onNavigation(StorageMode.myFood), 
                     child: Text(
                       "Xem tất cả",
                       style: TextStyle(
@@ -91,7 +108,7 @@ class _StorageViewState extends State<StorageView> {
                     } else {
                       List<FoodModel> data = snapshot.data!;
                       return SizedBox(
-                        height: 200,
+                        height: 222,
                         child: ListView.builder(
                           padding: EdgeInsets.all(12),
                           scrollDirection: Axis.horizontal,
@@ -118,7 +135,7 @@ class _StorageViewState extends State<StorageView> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () => Navigator.push(context, checkDeviceRoute(saveFoodScreen)), 
+                    onPressed: () => onNavigation(StorageMode.saveFood), 
                     child: Text(
                       "Xem tất cả",
                       style: TextStyle(
@@ -141,7 +158,7 @@ class _StorageViewState extends State<StorageView> {
                       return SizedBox.shrink();
                     }
                     return SizedBox(
-                      height: 200,
+                      height: 222,
                       child: ListView.builder(
                         padding: EdgeInsets.all(12),
                         scrollDirection: Axis.horizontal,
@@ -167,7 +184,7 @@ class _StorageViewState extends State<StorageView> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () => Navigator.push(context, checkDeviceRoute(recentScreen)), 
+                    onPressed: () => onNavigation(StorageMode.recentView), 
                     child: Text(
                       "Xem tất cả",
                       style: TextStyle(
@@ -190,7 +207,7 @@ class _StorageViewState extends State<StorageView> {
                       return SizedBox.shrink();
                     }
                     return SizedBox(
-                      height: 200,
+                      height: 222,
                       child: ListView.builder(
                         padding: EdgeInsets.all(12),
                         scrollDirection: Axis.horizontal,
@@ -216,7 +233,7 @@ class _StorageViewState extends State<StorageView> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () => Navigator.push(context, checkDeviceRoute(cookbookPage)), 
+                    onPressed: () => onNavigation(StorageMode.cookbook), 
                     child: Text(
                       "Xem tất cả",
                       style: TextStyle(
@@ -239,7 +256,7 @@ class _StorageViewState extends State<StorageView> {
                       return SizedBox.shrink();
                     }
                     return SizedBox(
-                      height: 200,
+                      height: 222,
                       child: ListView.builder(
                         padding: EdgeInsets.all(12),
                         scrollDirection: Axis.horizontal,

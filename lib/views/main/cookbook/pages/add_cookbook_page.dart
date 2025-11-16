@@ -75,6 +75,7 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
     );
     context.read<CookbookState>().createCookbook(cookbook);
     if (!mounted) return;
+    context.loaderOverlay.hide();
     Message.showScaffoldMessage(context, "Thêm thành công", AppColors.green);
     Navigator.pop(context);
   }

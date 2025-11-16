@@ -113,11 +113,12 @@ class _FoodDisplayGridState extends State<FoodDisplayGrid> {
             Row(
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(50),
                   child: CachedNetworkImage(
                     imageUrl: widget.food.avatar,
                     fit: BoxFit.cover,
                     height: 30,
+                    width: 30,
                     errorWidget: (context, url, error) => Image.asset(userDefaultImage),
                   ),
                 ),

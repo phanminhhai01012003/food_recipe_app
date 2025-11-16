@@ -7,6 +7,8 @@ import 'package:food_recipe_app/model/cookbook_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/provider/cookbook_state.dart';
 import 'package:food_recipe_app/views/main/cookbook/widget/cookbook_list.dart';
+import 'package:food_recipe_app/widget/other/message.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';
 
 class CookbookSelection extends StatefulWidget {
@@ -21,14 +23,12 @@ class _CookbookSelectionState extends State<CookbookSelection> {
   HashSet<CookbookModel> choices = HashSet();
   bool canMultiSelected = false;
   void onMultiSelect(CookbookModel cookbook){
-    if (canMultiSelected){
-      if (choices.contains(cookbook)){
-        choices.remove(cookbook);
-      } else {
-        choices.add(cookbook);
-      }
-      setState(() {});
+    if (choices.contains(cookbook)){
+      choices.remove(cookbook);
+    } else {
+      choices.add(cookbook);
     }
+    setState(() {});
   }
   @override
   Widget build(BuildContext context) {
@@ -119,9 +119,12 @@ class _CookbookSelectionState extends State<CookbookSelection> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33))
                 ),
                 onPressed: () {
+                  context.loaderOverlay.show();
                   for (var cookbook in choices) {
                     context.read<CookbookState>().toggleFoodOnCookbook(cookbook, widget.food);
                   }
+                  context.loaderOverlay.hide();
+                  Message.showScaffoldMessage(context, "Thêm thành công", AppColors.green);
                   Navigator.pop(context);
                 },
                 child: Text(

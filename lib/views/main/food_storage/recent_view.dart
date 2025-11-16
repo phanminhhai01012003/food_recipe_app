@@ -8,6 +8,7 @@ import 'package:food_recipe_app/provider/history_state.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:food_recipe_app/widget/other/slider.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';
 
 class RecentView extends StatefulWidget {
@@ -101,7 +102,9 @@ class _RecentViewState extends State<RecentView> {
       title: "Xóa lịch sử", 
       content: "Bạn có chắc chắn muốn xóa món ăn gần đây bạn đã xem không?", 
       onAcceptTap: () {
+        context.loaderOverlay.show();
         context.read<HistoryState>().toggle(model);
+        context.loaderOverlay.hide();
         Message.showScaffoldMessage(context, "Đã xóa", AppColors.green);
         Navigator.pop(context);
       }, 

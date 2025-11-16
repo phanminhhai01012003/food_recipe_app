@@ -19,7 +19,7 @@ class _LoginState extends State<Login> {
   final passwordController = TextEditingController();
   bool isObscured = true;
   void handleAccount() async{
-    context.loaderOverlay.hide();
+    context.loaderOverlay.show();
     if (formKey.currentState!.validate()){
       formKey.currentState!.save();
       await authServices.loginWithAccount(context, emailController.text, passwordController.text).then((value) {

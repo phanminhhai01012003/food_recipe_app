@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/app_themes.dart';
+import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/firebase/firebase_options.dart';
 import 'package:food_recipe_app/provider/cookbook_state.dart';
@@ -44,22 +45,23 @@ class _MyAppState extends State<MyApp> {
         builder: (context, value, child) {
           return MediaQuery(
             data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1)),
-            child: MaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: 'PMH Food Recipe',
-              theme: AppThemes.lightTheme,
-              darkTheme: AppThemes.darkTheme,
-              themeMode: value.themeMode,
-              home: LoaderOverlay(
-                closeOnBackButton: false,
-                overlayColor: Colors.transparent,
-                overlayWidgetBuilder: (progress) => Center(
-                  child: CircularProgressIndicator(color: AppColors.yellow)
-                ),
-                switchInCurve: Easing.linear,
-                switchOutCurve: Easing.linear,
-                child: splashScreen
-              )
+            child: GlobalLoaderOverlay(
+              closeOnBackButton: false,
+              overlayColor: Colors.white24,
+              overlayWidgetBuilder: (progress) => Center(
+                child: CircularProgressIndicator(color: AppColors.yellow)
+              ),
+              switchInCurve: Easing.linear,
+              switchOutCurve: Easing.linear,
+              child: MaterialApp(
+                navigatorKey: navigatorKey,
+                debugShowCheckedModeBanner: false,
+                title: 'PMH Food Recipe',
+                theme: AppThemes.lightTheme,
+                darkTheme: AppThemes.darkTheme,
+                themeMode: value.themeMode,
+                home: splashScreen
+              ),
             ),
           );
         },

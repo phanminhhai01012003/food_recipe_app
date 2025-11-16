@@ -63,6 +63,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
     );
     context.read<CookbookState>().updateCookbook(cookbook);
     if (!mounted) return;
+    context.loaderOverlay.hide();
     Message.showScaffoldMessage(context, "Cập nhật thành công", AppColors.green);
     Navigator.pop(context);
   }

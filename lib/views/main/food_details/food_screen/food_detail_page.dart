@@ -145,7 +145,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                         alignment: Alignment.center,
                         child: IconButton(
                           onPressed: () async{
-                            await showReportModal(context, "Món ${widget.food.title}", widget.food.userName, null);
+                            await showReportModal(context, "món ${widget.food.title}", widget.food.userName, null);
                           },
                           icon: Icon(
                             Icons.warning_sharp,

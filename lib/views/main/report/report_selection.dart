@@ -5,6 +5,7 @@ import 'package:food_recipe_app/model/report_model.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_report_modal.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 Future showReportSelectionModal(BuildContext context, ReportModel report) async{
   return await showModalBottomSheet(
@@ -26,7 +27,9 @@ class ReportSelection extends StatefulWidget {
 
 class _ReportSelectionState extends State<ReportSelection> {
   void onDelete(String id) async{
+    context.loaderOverlay.show();
     await reportServices.deleteReport(context, id).then((_){
+      context.loaderOverlay.hide();
       Message.showScaffoldMessage(context, "Đã xóa", AppColors.green);
       Navigator.pop(context);
     });
@@ -96,6 +99,7 @@ class _ReportSelectionState extends State<ReportSelection> {
                 children: [
                   GestureDetector(
                     onTap: () {
+                      Navigator.pop(context);
                       if (widget.report.status != 0) {
                         onDelete(widget.report.reportId);
                       }

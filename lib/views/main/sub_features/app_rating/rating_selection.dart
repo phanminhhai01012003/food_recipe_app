@@ -4,6 +4,7 @@ import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/rating_model.dart';
 import 'package:food_recipe_app/services/firestore/rate/rate_services.dart';
+import 'package:food_recipe_app/widget/bottom_sheet/show_report_modal.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 
@@ -152,6 +153,38 @@ class RatingSelection {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             GestureDetector(
+              onTap: () async{
+                await showReportModal(context, "đánh giá ${rate.content}", rate.userName, null);
+              },
+              child: Container(
+                width: 75,
+                height: 75,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: AppColors.blue
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.report_problem,
+                      size: 20,
+                      color: AppColors.white,
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      "Báo cáo",
+                      style: TextStyle(
+                        color: AppColors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            GestureDetector(
               onTap: () => Clipboard.setData(ClipboardData(text: rate.content)),
               child: Container(
                 width: 75,
@@ -160,26 +193,24 @@ class RatingSelection {
                   borderRadius: BorderRadius.circular(12),
                   color: AppColors.blue
                 ),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.copy,
-                        size: 20,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.copy,
+                      size: 20,
+                      color: AppColors.white,
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      "Sao chép",
+                      style: TextStyle(
                         color: AppColors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700
                       ),
-                      SizedBox(height: 5),
-                      Text(
-                        "Sao chép",
-                        style: TextStyle(
-                          color: AppColors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700
-                        ),
-                      )
-                    ],
-                  ),
+                    )
+                  ],
                 ),
               ),
             )
