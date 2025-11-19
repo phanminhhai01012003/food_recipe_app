@@ -14,6 +14,7 @@ void showNoInternetDialog(BuildContext context, {required VoidCallback onPressed
       insetAnimationCurve: Easing.legacyAccelerate,
       insetAnimationDuration: Duration(milliseconds: 200),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(
             width: 100,

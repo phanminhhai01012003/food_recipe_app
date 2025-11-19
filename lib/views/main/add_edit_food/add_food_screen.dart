@@ -133,7 +133,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       shape: BoxShape.rectangle,
-                      border: Border.all(color: Colors.black)
+                      border: Border.all(color: theme.colorScheme.secondary)
                     ),
                     child: Center(
                       child: Icon(
