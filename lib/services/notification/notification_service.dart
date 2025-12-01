@@ -5,14 +5,13 @@ import 'package:food_recipe_app/common/logger.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/notification_model.dart';
 import 'package:food_recipe_app/services/notification/notification_data.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest_all.dart' as tz;
 
 class NotificationService {
   static final firebaseMessaging = FirebaseMessaging.instance;
   static final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-  static const androidInitSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
+  static const androidInitSettings = AndroidInitializationSettings('assets/images/FoodDesign.png');
   static const iosInitSettings = DarwinInitializationSettings(
     requestAlertPermission: true,
     requestBadgePermission: true,
@@ -108,8 +107,5 @@ class NotificationService {
       androidScheduleMode: AndroidScheduleMode.exact
     );
   }
-  static void saveToken(String token) async{
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString("token", token);
-  }
+  static void saveToken(String token) async => await userCollection.doc(currentUser.uid).update({"token": token});
 }

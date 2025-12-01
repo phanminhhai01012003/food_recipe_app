@@ -269,7 +269,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                 value: selectCategory,
                 icon: Icon(Icons.keyboard_arrow_down),
                 iconSize: 20,
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: theme.colorScheme.secondary),
               ),
             ),
             SizedBox(height: 20),

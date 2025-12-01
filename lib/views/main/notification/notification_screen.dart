@@ -18,7 +18,6 @@ class NotificationScreen extends StatefulWidget {
 
 class _NotificationScreenState extends State<NotificationScreen> {
   int _btnIndex = 0;
-  bool get isRead => _btnIndex == 1;
   Widget renderImageWidget(String type, String fromUserAvatar){
     switch(type) {
       case "Thích bài viết":
@@ -45,6 +44,15 @@ class _NotificationScreenState extends State<NotificationScreen> {
         );
       default:
         return SizedBox();
+    }
+  }
+  Future<List<NotificationModel>> getNotifications() {
+    if (_btnIndex == 0){
+      return notificationData.getSystemNotifications();
+    } else if (_btnIndex == 1){
+      return notificationData.getReadNotifications(true);
+    } else {
+      return notificationData.getReadNotifications(false);
     }
   }
   @override
@@ -159,9 +167,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
             ),
             SizedBox(height: 20),
             FutureBuilder(
-              future: _btnIndex == 0 
-                ? notificationData.getSystemNotifications() 
-                : notificationData.getReadNotifications(isRead), 
+              future: getNotifications(), 
               builder: (context, snapshot){
                 if (!snapshot.hasData || snapshot.hasError){
                   return SizedBox.shrink();
