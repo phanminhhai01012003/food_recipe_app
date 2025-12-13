@@ -73,7 +73,7 @@ class NotificationService {
       isRead: false, 
       createdAt: DateTime.now()
     );
-    await notifyData.pushNotification(notify);
+    await notifyData.pushNotification(notify, false);
   }
   static void handleNotification(RemoteMessage? message){
     if (message == null) return;

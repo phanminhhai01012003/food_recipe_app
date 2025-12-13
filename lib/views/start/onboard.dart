@@ -34,7 +34,7 @@ class _OnboardState extends State<Onboard> with TickerProviderStateMixin{
     _scaleController = AnimationController(vsync: this, duration: Duration(milliseconds: 400));
     _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(parent: _fadeController, curve: Curves.easeInOut));
     _slideAnimation = Tween<Offset>(begin: Offset(0, 0.2), end: Offset.zero).animate(CurvedAnimation(parent: _slideController, curve: Curves.easeInOutBack));
-    _floatAnimation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(parent: _floatController, curve: Curves.easeInOut));
+    _floatAnimation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(parent: _floatController, curve: Curves.easeInQuad));
     _scaleAnimation = Tween<double>(begin: 0.8, end: 1).animate(CurvedAnimation(parent: _scaleController, curve: Curves.elasticOut));
     _startAnimations();
     _floatController.repeat(reverse: true);
@@ -135,19 +135,16 @@ class _OnboardState extends State<Onboard> with TickerProviderStateMixin{
                         image: foodDesignImage, 
                         title: "PMH Food Recipe", 
                         desc: "Hãy bắt đầu trải nghiệm chế biến các món ăn cho riêng bạn", 
-                        isFirst: true
                       ),
                       _buildPage(
                         image: foodImage, 
                         title: "Những ý tưởng mới", 
                         desc: "Khám phá những ý tưởng mới về món ăn và truyền cảm hứng cho tất cả mọi người", 
-                        isFirst: false
                       ),
                       _buildPage(
                         image: cookingImage, 
                         title: "Gia đình là số 1", 
                         desc: "Những món ăn ngon miệng sẽ đem lại hạnh phúc cho cả gia đình bạn", 
-                        isFirst: false
                       )
                     ],
                   ),
@@ -238,7 +235,6 @@ class _OnboardState extends State<Onboard> with TickerProviderStateMixin{
     required String image,
     required String title,
     required String desc,
-    required bool isFirst
   }){
     return FadeTransition(
       opacity: _fadeAnimation,

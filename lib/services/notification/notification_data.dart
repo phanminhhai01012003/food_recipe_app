@@ -5,9 +5,9 @@ import 'package:food_recipe_app/widget/other/message.dart';
 
 class NotificationData {
   
-  Future<void> pushNotification(NotificationModel model) async{
+  Future<void> pushNotification(NotificationModel model, bool isSpecificUser) async{
     try {
-      await notificationCollection.doc(model.id).set(model.toAllUserMap());
+      await notificationCollection.doc(model.id).set(isSpecificUser ? model.toSpecificUserMap() : model.toAllUserMap());
     } catch (e) {
       Message.showToast("Lỗi đẩy thông báo");
       Logger.log(e);
@@ -81,6 +81,6 @@ class NotificationData {
       isRead: isRead, 
       createdAt: createdAt
     );
-    await pushNotification(model);
+    await pushNotification(model, true);
   }
 }

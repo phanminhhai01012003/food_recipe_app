@@ -147,7 +147,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   onTap: () => onChooseMode(ModeSelection.rating),
                   icon: getIcon(ModeSelection.rating),
                   title: renderTitle(ModeSelection.rating),
-                )
+                ),
+                Selection(
+                  onTap: (){
+
+                  },
+                  icon: Icons.language,
+                  title: "Ngôn ngữ",
+                ),
               ],
             ),
           ],

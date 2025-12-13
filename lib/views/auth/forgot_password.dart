@@ -104,7 +104,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   foregroundColor: AppColors.white
                 ),
                 onPressed: handle,
-                child: Text("Gửi yêu cầu"),
+                child: Text("Gửi yêu cầu",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700
+                  ),
+                ),
               )
             ],
           ),
