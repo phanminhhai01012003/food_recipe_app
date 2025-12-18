@@ -195,7 +195,7 @@ class _OnboardState extends State<Onboard> with TickerProviderStateMixin{
         height: 8,
         decoration: BoxDecoration(
           // ignore: deprecated_member_use
-          color: currentPage == _currentPage ? Colors.white : Colors.white.withOpacity(0.5),
+          color: currentPage == _currentPage ? AppColors.white : AppColors.white.withOpacity(0.5),
           borderRadius: BorderRadius.circular(12),
         ),
       ),
