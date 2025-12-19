@@ -120,7 +120,7 @@ class _OnboardState extends State<Onboard> with TickerProviderStateMixin{
                     onPressed: navigateToNewPage, 
                     child: Text("Bỏ qua", 
                       style: TextStyle(
-                        color: Colors.white, 
+                        color: AppColors.white, 
                         fontSize: 16
                       )
                     )

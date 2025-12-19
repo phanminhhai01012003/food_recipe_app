@@ -65,8 +65,9 @@ class NotificationData {
     required String id,
     required String title,
     required String body,
-    required String from,
-    required String to,
+    String? from,
+    String? to,
+    Map<String, dynamic>? extraData,
     required String type,
     required bool isRead,
     required DateTime createdAt
@@ -77,7 +78,8 @@ class NotificationData {
       body: body, 
       from: from,
       to: to,
-      type: type, 
+      type: type,
+      extraData: extraData,
       isRead: isRead, 
       createdAt: createdAt
     );

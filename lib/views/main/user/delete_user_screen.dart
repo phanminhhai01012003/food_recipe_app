@@ -169,7 +169,9 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
       leading: Radio<String>(
         activeColor: theme.colorScheme.secondary,
         value: title,
+        // ignore: deprecated_member_use
         groupValue: selectedOption,
+        // ignore: deprecated_member_use
         onChanged: (value) {
           setState(() {
             selectedOption = value;

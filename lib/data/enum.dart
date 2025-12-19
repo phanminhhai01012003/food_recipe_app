@@ -11,5 +11,6 @@ enum ModeSelection {
   report,
   changePassword, 
   theme,
-  rating
+  rating,
+  language
 }

@@ -19,12 +19,10 @@ import 'package:share_plus/share_plus.dart';
 
 class FoodDetailPage extends StatefulWidget {
   final FoodModel food;
-  final String id;
   final List<Map<String, dynamic>> likedList;
   const FoodDetailPage({
     super.key, 
     required this.food,
-    required this.id,
     required this.likedList
   });
 
@@ -45,7 +43,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
       isLikedPost = !isLikedPost;
     });
     if (isLikedPost) {
-      foodCollection.doc(widget.id).update({
+      foodCollection.doc(widget.food.foodId).update({
         "likes": FieldValue.arrayUnion([{
           "id": currentUser.uid,
           "avatar": currentUser.photoURL,
@@ -54,7 +52,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
       });
       // pushLikesNotifications();
     } else {
-      foodCollection.doc(widget.id).update({
+      foodCollection.doc(widget.food.foodId).update({
         "likes": FieldValue.arrayRemove([{
           "id": currentUser.uid,
           "avatar": currentUser.photoURL,
@@ -64,7 +62,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
     }
   }
   Future<List<Map<String, dynamic>>> fetchLikeList() async{
-    final doc = await foodCollection.doc(widget.id).get();
+    final doc = await foodCollection.doc(widget.food.foodId).get();
     List<Map<String, dynamic>> likes = List<Map<String, dynamic>>.from(doc['likes']);
     return likes;
   }
@@ -74,7 +72,8 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
       title: "${currentUser.displayName} đã thích bài viết của bạn", 
       body: "Nhấn để xem", 
       from: currentUser.displayName!, 
-      to: widget.food.userName, 
+      to: widget.food.userName,
+      extraData: widget.food.toMap(), 
       type: "Thích bài viết", 
       isRead: false, 
       createdAt: DateTime.now()

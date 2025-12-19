@@ -28,7 +28,8 @@ class _CommentWidgetState extends State<CommentWidget> {
       body: "Nhấn để xem", 
       from: currentUser.displayName!, 
       to: widget.comment.userName, 
-      type: "Thích bình luận", 
+      type: "Thích bình luận",
+      extraData: widget.comment.toMap(), 
       isRead: false, 
       createdAt: DateTime.now()
     );

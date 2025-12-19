@@ -3,6 +3,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/logger.dart';
 import 'package:food_recipe_app/common/routes.dart';
+import 'package:food_recipe_app/model/comment_model.dart';
+import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/model/notification_model.dart';
 import 'package:food_recipe_app/services/notification/notification_data.dart';
 import 'package:timezone/timezone.dart' as tz;
@@ -77,7 +79,38 @@ class NotificationService {
   }
   static void handleNotification(RemoteMessage? message){
     if (message == null) return;
-    navigatorKey.currentState!.push(checkDeviceRoute(notification));
+    handleClickNotification(message.data);
+  }
+  static void handleClickNotification(Map<String, dynamic> data){
+    if (data['type'] == "Hệ thống"){
+      navigatorKey.currentState!.push(checkDeviceRoute(notification));
+    } else if (data['type'] == "Thích bài viết"){
+      navigatorKey.currentState!.push(
+        checkDeviceRoute(
+          foodDetailPage(
+            FoodModel.fromMap(data['extraData']),
+            List<Map<String, dynamic>>.from(data['extraData']['likedList'])
+          )
+        )
+      );
+    } else if (data['type'] == "Bình luận bài viết"){
+      navigatorKey.currentState!.push(
+        checkDeviceRoute(
+          commentPage(
+            FoodModel.fromMap(data['extraData'])
+          )
+        )
+      );
+    } else {
+      navigatorKey.currentState!.push(
+        checkDeviceRoute(
+          replyPage(
+            CommentModel.fromMap(data['extraData']),
+            data['extraData']['foodId'].toString()
+          )
+        )
+      );
+    }
   }
   static void showNotification({
     required String title,

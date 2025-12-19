@@ -26,7 +26,8 @@ class _ReplyCommentPageState extends State<ReplyCommentPage> {
       body: "Nhấn để xem", 
       from: currentUser.displayName!, 
       to: widget.comment.userName, 
-      type: "Trả lời bình luận", 
+      type: "Trả lời bình luận",
+      extraData: widget.comment.toMap(), 
       isRead: false, 
       createdAt: DateTime.now()
     );

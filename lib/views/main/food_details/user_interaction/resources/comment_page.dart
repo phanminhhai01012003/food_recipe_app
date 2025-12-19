@@ -50,6 +50,7 @@ class _CommentPageState extends State<CommentPage> {
       from: currentUser.displayName!,
       to: widget.food.userName,
       type: "Bình luận bài viết",
+      extraData: widget.food.toMap(),
       isRead: false,
       createdAt: DateTime.now()
     );

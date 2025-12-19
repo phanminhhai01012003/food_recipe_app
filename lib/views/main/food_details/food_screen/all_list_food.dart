@@ -23,7 +23,7 @@ class _AllListFoodState extends State<AllListFood> {
         backgroundColor: theme.appBarTheme.backgroundColor,
         foregroundColor: theme.appBarTheme.foregroundColor,
         elevation: 0,
-        title: Text("PMH Food Recipe",
+        title: Text("Dành cho bạn",
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold

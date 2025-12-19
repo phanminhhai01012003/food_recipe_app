@@ -5,6 +5,7 @@ class NotificationModel {
   late String type;
   late String? from;
   late String? to;
+  late Map<String, dynamic>? extraData;
   late bool isRead;
   late DateTime createdAt;
   late DateTime? readAt;
@@ -15,6 +16,7 @@ class NotificationModel {
     required this.type,
     this.from,
     this.to,
+    this.extraData,
     required this.isRead,
     required this.createdAt,
     this.readAt
@@ -27,6 +29,7 @@ class NotificationModel {
       type: data['type'] ?? "",
       from: data['from'] ?? "",
       to: data['to'] ?? "",
+      extraData: data['extraData'] ?? {},
       isRead: data['isRead'] ?? false,
       createdAt: DateTime.tryParse(data['created_at'] ?? "") ?? DateTime.now(),
       readAt: DateTime.tryParse(data['read_at'] ?? "") ?? DateTime.now(),
@@ -47,6 +50,7 @@ class NotificationModel {
     'type': type,
     'from': from,
     'to': to,
+    'extraData': extraData,
     'isRead': isRead,
     'created_at': createdAt
   };

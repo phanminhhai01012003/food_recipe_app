@@ -43,13 +43,31 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
     ingredientController = widget.food.ingredients.map((e) => TextEditingController(text: e)).toList();
     stepController = widget.food.steps.map((e) => TextEditingController(text: e)).toList();
   }
-  void onUpdateFood() async{
-    context.loaderOverlay.show();
+  void invalidInformation(){
     if (titleController.text.isEmpty) {
       Message.showToast("Tên món ăn là bắt buộc");
       context.loaderOverlay.hide();
       return;
     }
+    if (selectCategory == null && selectCategory!.isEmpty){
+      Message.showToast("Vui lòng chọn thể loại");
+      context.loaderOverlay.hide();
+      return;
+    }
+    if (ingredientController.any((e) => e.text.isEmpty) || stepController.any((e) => e.text.isEmpty)){
+      Message.showToast("Nguyên liệu hoặc cách làm không được để trống");
+      context.loaderOverlay.hide();
+      return;
+    }
+    if (int.parse(dietController.text) <= 0 || _duration.ddhhmmss == "00:00:00:00"){
+      Message.showToast("Khẩu phần ăn uống hoặc thời gian thực hiện không hợp lệ");
+      context.loaderOverlay.hide();
+      return;
+    }
+  }
+  void onUpdateFood() async{
+    context.loaderOverlay.show();
+    invalidInformation();
     if (image != null) {
       imageURL = await imageServices.uploadImage(context, image!, foodFolder);
     }

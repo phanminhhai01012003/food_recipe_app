@@ -42,7 +42,6 @@ class _FoodDisplayGridState extends State<FoodDisplayGrid> {
           checkDeviceRoute(
             foodDetailPage(
               widget.food, 
-              widget.food.foodId, 
               List<Map<String, dynamic>>.from(widget.food.likes)
             )
           )

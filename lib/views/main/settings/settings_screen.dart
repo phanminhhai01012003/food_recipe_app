@@ -6,6 +6,7 @@ import 'package:food_recipe_app/data/enum.dart';
 import 'package:food_recipe_app/model/user_model.dart';
 import 'package:food_recipe_app/views/main/settings/selection.dart';
 import 'package:food_recipe_app/views/main/settings/user_widget.dart';
+import 'package:food_recipe_app/widget/bottom_sheet/change_language_modal.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -38,6 +39,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
       case ModeSelection.rating:
         Navigator.push(context, checkDeviceRoute(fullRatingPage));
         break;
+      case ModeSelection.language:
+        changeLanguageModal(context);
+        break;
     }
   }
   IconData getIcon(ModeSelection mode){
@@ -56,6 +60,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
         return Icons.sunny;
       case ModeSelection.rating:
         return Icons.star;
+      case ModeSelection.language:
+        return Icons.language;
     }
   }
   String renderTitle(ModeSelection mode){
@@ -74,6 +80,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
         return "Giao diện";
       case ModeSelection.rating:
         return "Đánh giá";
+      case ModeSelection.language:
+        return "Ngôn ngữ"; 
     }
   }
   @override
@@ -107,7 +115,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               }
             ),
             SizedBox(height: 30),
-            Divider(height: 1, thickness: 1, color: AppColors.grey,),
+            Divider(height: 1, thickness: 1, color: AppColors.grey),
             ListView(
               shrinkWrap: true,
               physics: ClampingScrollPhysics(),
@@ -149,11 +157,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   title: renderTitle(ModeSelection.rating),
                 ),
                 Selection(
-                  onTap: (){
-
-                  },
-                  icon: Icons.language,
-                  title: "Ngôn ngữ",
+                  onTap: () => onChooseMode(ModeSelection.language),
+                  icon: getIcon(ModeSelection.language),
+                  title: renderTitle(ModeSelection.language),
                 ),
               ],
             ),

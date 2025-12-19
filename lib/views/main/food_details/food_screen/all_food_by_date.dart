@@ -24,7 +24,7 @@ class _AllFoodByDateState extends State<AllFoodByDate> {
         backgroundColor: theme.appBarTheme.backgroundColor,
         foregroundColor: theme.appBarTheme.foregroundColor,
         elevation: 0,
-        title: Text("PMH Food Recipe",
+        title: Text(widget.isDescending ? "Gần đây nhất" : "Sớm nhất",
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold
