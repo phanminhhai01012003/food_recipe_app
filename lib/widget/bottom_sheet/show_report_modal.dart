@@ -5,6 +5,7 @@ import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/convert.dart';
 import 'package:food_recipe_app/model/report_model.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
+import 'package:food_recipe_app/widget/other/radio_selection.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 Future<void> showReportModal(BuildContext context, String title, String author, ReportModel? reports) async{
@@ -34,12 +35,19 @@ class _ShowReportModalState extends State<ShowReportModal> {
   void onReport() async{
     if (!agree) return;
     context.loaderOverlay.show();
+    if (selectedOption!.contains("Khác")){
+      if (_otherReport.text.isEmpty){
+        Message.showToast("Vui lòng điền đầy đủ thông tin");
+        context.loaderOverlay.hide();
+        return;
+      }
+    }
     ReportModel report = ReportModel(
       reportId: generateRandomString(20), 
       target: widget.title,
       author: widget.author,
       reporter: currentUser.displayName!,
-      reason: selectedOption == 'Khác' ? _otherReport.text : selectedOption!, 
+      reason: selectedOption!.contains("Khác") ? _otherReport.text : selectedOption!, 
       createdAt: DateTime.now(), 
       status: 0
     );
@@ -133,11 +141,25 @@ class _ShowReportModalState extends State<ShowReportModal> {
                     widget.title.contains("món") 
                       ? reportFoodList.length
                       : reportCommentList.length, 
-                    (i) => radio(
-                      context,
-                      widget.title.contains("món") 
-                        ? reportFoodList[i] 
-                        : reportCommentList[i] 
+                    (i) => RadioSelection(
+                      title: widget.title.contains("món") 
+                        ? reportFoodList[i]
+                        : reportCommentList[i], 
+                      selectedOption: selectedOption, 
+                      onTap: (){
+                        setState(() {
+                          if (widget.title.contains("món")) {
+                            selectedOption = reportFoodList[i];
+                          } else {
+                            selectedOption = reportCommentList[i];
+                          }
+                        });
+                      }, 
+                      onChanged: (value){
+                        setState(() {
+                          selectedOption = value;
+                        });
+                      }
                     )
                   ),
                 ),
@@ -151,7 +173,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
                   decoration: InputDecoration(
                     hintText: "Nhập nội dung",
                     hintStyle: TextStyle(
-                      color: selectedOption == reportFoodList.last || selectedOption == reportCommentList.last 
+                      color: selectedOption!.contains("Khác") 
                         ? theme.colorScheme.secondary 
                         : AppColors.grey,
                       fontSize: 14,
@@ -160,7 +182,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(
-                        color: selectedOption == reportFoodList.last || selectedOption == reportCommentList.last
+                        color: selectedOption!.contains("Khác")
                           ? AppColors.black 
                           : AppColors.grey
                       )
@@ -236,37 +258,6 @@ class _ShowReportModalState extends State<ShowReportModal> {
           )
         ],
       ),
-    );
-  }
-  Widget radio(BuildContext context, String title){
-    final theme = Theme.of(context);
-    return ListTile(
-      contentPadding: EdgeInsets.zero,
-      leading: Radio<String>(
-        activeColor: theme.colorScheme.secondary,
-        value: title,
-        // ignore: deprecated_member_use
-        groupValue: selectedOption,
-        // ignore: deprecated_member_use
-        onChanged: (value) {
-          setState(() {
-            selectedOption = value;
-          });
-        },
-      ),
-      title: Text(
-        title,
-        style: TextStyle(
-          color: theme.colorScheme.secondary,
-          fontSize: 12,
-          fontWeight: FontWeight.normal
-        ),
-      ),
-      onTap: () {
-        setState(() {
-          selectedOption = title;
-        });
-      },
     );
   }
 }
