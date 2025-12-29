@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
@@ -19,7 +18,6 @@ class FoodDisplayList extends StatefulWidget {
 }
 
 class _FoodDisplayListState extends State<FoodDisplayList> {
-  final currentUser = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);

@@ -5,6 +5,7 @@ import 'package:food_recipe_app/common/logger.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
+import 'package:food_recipe_app/widget/other/radio_selection.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 class DeleteUserScreen extends StatefulWidget {
@@ -53,7 +54,23 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
             ),
             SizedBox(height: 20),
             Column(
-              children: List.generate(deleteUserList.length, (i) => radio(context, deleteUserList[i])),
+              children: List.generate(
+                deleteUserList.length, 
+                (i) => RadioSelection(
+                  title: deleteUserList[i], 
+                  selectedOption: selectedOption, 
+                  onTap: (){
+                    setState(() {
+                      selectedOption = deleteUserList[i];
+                    });
+                  }, 
+                  onChanged: (value){
+                    setState(() {
+                      selectedOption = value;
+                    });
+                  }
+                )
+              ),
             ),
             SizedBox(height: 5),
             TextField(
@@ -113,6 +130,13 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
                 ),
                 onPressed: () async{
                   context.loaderOverlay.show();
+                  if (selectedOption == deleteUserList.last) {
+                    if (_otherReport.text.isEmpty){
+                      Message.showToast("Vui lòng điền đầy đủ thông tin");
+                      context.loaderOverlay.hide();
+                      return;
+                    }
+                  }
                   sendRequest();
                   context.loaderOverlay.hide();
                   Message.showScaffoldMessage(context, "Đã gửi yêu cầu", AppColors.green);
@@ -161,36 +185,5 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
       Logger.log(e);
       rethrow;
     }
-  }
-  Widget radio(BuildContext context, String title){
-    final theme = Theme.of(context);
-    return ListTile(
-      contentPadding: EdgeInsets.zero,
-      leading: Radio<String>(
-        activeColor: theme.colorScheme.secondary,
-        value: title,
-        // ignore: deprecated_member_use
-        groupValue: selectedOption,
-        // ignore: deprecated_member_use
-        onChanged: (value) {
-          setState(() {
-            selectedOption = value;
-          });
-        },
-      ),
-      title: Text(
-        title,
-        style: TextStyle(
-          color: theme.colorScheme.secondary,
-          fontSize: 12,
-          fontWeight: FontWeight.normal
-        ),
-      ),
-      onTap: () {
-        setState(() {
-          selectedOption = title;
-        });
-      },
-    );
   }
 }
