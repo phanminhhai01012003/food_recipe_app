@@ -23,6 +23,7 @@ class _EditUserState extends State<EditUser> {
   final nameController = TextEditingController();
   final descriptionController = TextEditingController();
   final phoneController = TextEditingController();
+  final nickNameController = TextEditingController();
   @override
   void initState() {
     // TODO: implement initState
@@ -31,10 +32,16 @@ class _EditUserState extends State<EditUser> {
     nameController.text = widget.user.userName;
     descriptionController.text = widget.user.description;
     phoneController.text = widget.user.phone;
+    nickNameController.text = widget.user.nickName;
   }
   void update() async{
     context.loaderOverlay.show();
     if (formKey.currentState!.validate()){
+      if (nickNameController.text == nameController.text) {
+        context.loaderOverlay.hide();
+        Message.showToast("Biệt danh không được trùng với tên của bạn");
+        return;
+      }
       formKey.currentState!.save();
       if (image != null) {
         imageURL = await imageServices.uploadImage(context, image!, avatarFolder);
@@ -44,7 +51,8 @@ class _EditUserState extends State<EditUser> {
         userName: nameController.text, 
         avatar: image == null && imageURL.isEmpty ? userDefaultImage : imageURL, 
         email: widget.user.email, 
-        description: descriptionController.text, 
+        description: descriptionController.text,
+        nickName: nickNameController.text,
         phone: phoneController.text.isEmpty ? "Không xác định" : phoneController.text, 
         loginMethod: widget.user.loginMethod
       );
@@ -197,6 +205,60 @@ class _EditUserState extends State<EditUser> {
                         }
                         if (!RegExp(r'^[a-zA-Z0-9]+$').hasMatch(value)) {
                           return "Tên không được chứa ký tự đặc biệt";
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 20),
+                    Text("Biệt danh",
+                      style: TextStyle(
+                        color: theme.colorScheme.secondary,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    TextFormField(
+                      controller: nickNameController,
+                      keyboardType: TextInputType.text,
+                      style: TextStyle(
+                        color: theme.colorScheme.secondary,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700
+                      ),
+                      cursorColor: AppColors.blue,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(color: theme.colorScheme.secondary)
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(color: AppColors.red)
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(color: AppColors.green)
+                        ),
+                        hintText: "Nhập biệt danh của bạn",
+                        hintStyle: TextStyle(
+                          color: theme.colorScheme.secondary,
+                          fontSize: 12,
+                          fontWeight: FontWeight.normal
+                        ),
+                        prefixIcon: Container(
+                          width: 20,
+                          height: 20,
+                          alignment: Alignment.center,
+                          child: Icon(Icons.person_pin, color: theme.colorScheme.secondary)
+                        )
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty){
+                          return null;
+                        }
+                        if (!RegExp(r'^[a-zA-Z0-9]+$').hasMatch(value)) {
+                          return "Biệt danh không được chứa ký tự đặc biệt";
                         }
                         return null;
                       },

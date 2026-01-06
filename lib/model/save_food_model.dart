@@ -27,4 +27,10 @@ class SaveFoodModel {
       'foods': foods.toMap(),
     };
   }
+  SaveFoodModel.empty(){
+    saveId = "";
+    userId = "";
+    isSaved = false;
+    foods = FoodModel.empty();
+  }
 }

@@ -45,6 +45,7 @@ class _LoginState extends State<Login> {
           avatar: value.user!.photoURL!, 
           email: value.user!.email!, 
           description: "",
+          nickName: "",
           phone: "",
           loginMethod: "Google"
         );
@@ -69,6 +70,7 @@ class _LoginState extends State<Login> {
           avatar: value.user!.photoURL!, 
           email: value.user!.email!, 
           description: "",
+          nickName: "",
           phone: "",
           loginMethod: "Facebook"
         );

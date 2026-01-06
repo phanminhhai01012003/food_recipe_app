@@ -41,6 +41,7 @@ class _RegisterState extends State<Register> {
             userName: nameController.text, 
             avatar: userDefaultImage, 
             email: emailController.text, 
+            nickName: "",
             description: "",
             phone: phoneController.text.isEmpty ? "Không xác định" : phoneController.text,
             loginMethod: "Email and Password"

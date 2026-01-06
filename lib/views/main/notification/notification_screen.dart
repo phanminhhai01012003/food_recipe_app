@@ -6,7 +6,7 @@ import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/model/notification_model.dart';
 import 'package:food_recipe_app/views/main/notification/notification_image_widget.dart';
 import 'package:food_recipe_app/views/main/notification/notification_list.dart';
-import 'package:food_recipe_app/widget/other/load_data.dart';
+import 'package:food_recipe_app/widget/load_data/load_data.dart';
 import 'package:intl/intl.dart';
 
 class NotificationScreen extends StatefulWidget {

@@ -49,4 +49,13 @@ class CookbookModel {
       'foodsList': foodsList.map((e) => e.toMap()).toList(),
     };
   }
+  CookbookModel.empty(){
+    cookbookId = "";
+    cookbookImage = "";
+    cookbookName = "";
+    description = "";
+    userId = "";
+    createdAt = DateTime.now();
+    foodsList = [];
+  }
 }

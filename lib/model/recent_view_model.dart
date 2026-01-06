@@ -31,4 +31,11 @@ class RecentViewModel {
       'foods': foods.toMap(),
     };
   }
+  RecentViewModel.empty(){
+    viewId = "";
+    userId = "";
+    isViewed = false;
+    viewedAt = DateTime.now();
+    foods = FoodModel.empty();
+  }
 }

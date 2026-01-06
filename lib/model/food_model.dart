@@ -81,4 +81,21 @@ class FoodModel {
       'steps': steps,
     };
   }
+  FoodModel.empty(){
+    foodId = "";
+    image = "";
+    title = "";
+    description = "";
+    userId = "";
+    userName = "";
+    avatar = "";
+    tag = "";
+    diet = 0;
+    duration = "";
+    ingredients = [];
+    steps = [];
+    views = 0;
+    createdAt = DateTime.now();
+    likes = [];
+  }
 }

@@ -35,4 +35,13 @@ class ReportModel {
     "createdAt": createdAt,
     "status": status
   };
+  ReportModel.empty(){
+    reportId = "";
+    target = "";
+    author = "";
+    reporter = "";
+    reason = "";
+    createdAt = DateTime.now();
+    status = 0;
+  }
 }

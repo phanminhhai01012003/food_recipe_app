@@ -5,7 +5,7 @@ import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/model/report_model.dart';
 import 'package:food_recipe_app/views/main/report/report_selection.dart';
-import 'package:food_recipe_app/widget/other/load_data.dart';
+import 'package:food_recipe_app/widget/load_data/load_data.dart';
 
 class MyReportPage extends StatefulWidget {
   const MyReportPage({super.key});

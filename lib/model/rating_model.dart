@@ -47,4 +47,14 @@ class RatingModel {
       'content': content,
     };
   }
+  RatingModel.empty(){
+    ratingId = "";
+    userId = "";
+    avatar = "";
+    userName = "";
+    ratingStar = 0.0;
+    content = "";
+    createdAt = DateTime.now();
+    likes = [];
+  }
 }

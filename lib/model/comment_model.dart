@@ -48,4 +48,14 @@ class CommentModel {
       'content': content
     };
   }
+  CommentModel.empty(){
+    commentId = "";
+    userId = "";
+    avatar = "";
+    userName = "";
+    content = "";
+    likesList = [];
+    replies = [];
+    createdAt = DateTime.now();
+  }
 }

@@ -8,7 +8,7 @@ import 'package:food_recipe_app/common/convert.dart';
 import 'package:food_recipe_app/model/comment_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/component/comment_widget.dart';
-import 'package:food_recipe_app/widget/other/load_data.dart';
+import 'package:food_recipe_app/widget/load_data/load_data.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 
 class CommentPage extends StatefulWidget {

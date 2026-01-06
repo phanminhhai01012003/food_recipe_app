@@ -52,10 +52,10 @@ class _UserWidgetState extends State<UserWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  widget.user.userName,
+                  "${widget.user.userName} (${widget.user.nickName})",
                   style: TextStyle(
                     color: AppColors.white,
-                    fontSize: 16,
+                    fontSize: 14,
                     fontWeight: FontWeight.w800
                   ),
                 ),
@@ -64,7 +64,7 @@ class _UserWidgetState extends State<UserWidget> {
                   widget.user.email,
                   style: TextStyle(
                     color: AppColors.white,
-                    fontSize: 14,
+                    fontSize: 12,
                     fontWeight: FontWeight.w600
                   ),
                 )

@@ -54,4 +54,16 @@ class NotificationModel {
     'isRead': isRead,
     'created_at': createdAt
   };
+  NotificationModel.empty(){
+    id = "";
+    title = "";
+    body = "";
+    type = "";
+    from = "";
+    to = "";
+    extraData = {};
+    isRead = false;
+    createdAt = DateTime.now();
+    readAt = DateTime.now();
+  }
 }
