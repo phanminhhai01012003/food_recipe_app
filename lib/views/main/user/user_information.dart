@@ -8,7 +8,6 @@ import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/user_model.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
-import 'package:full_screen_image/full_screen_image.dart';
 
 class UserInformation extends StatefulWidget {
   final UserModel user;
@@ -80,8 +79,8 @@ class _UserInformationState extends State<UserInformation> {
         padding: EdgeInsets.all(16),
         child: Column(
           children: [
-            FullScreenWidget(
-              disposeLevel: DisposeLevel.Medium,
+            GestureDetector(
+              onTap: () => Navigator.push(context, checkDeviceRoute(fullScreenImage(widget.user.avatar))),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(50),
                 child: CachedNetworkImage(

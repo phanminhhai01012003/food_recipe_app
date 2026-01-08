@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
 
-Future changeLanguageModal(BuildContext context) async{
+Future<void> changeLanguageModal(BuildContext context) async{
   return await showModalBottomSheet(
     context: context,
     // ignore: deprecated_member_use
