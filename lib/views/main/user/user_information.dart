@@ -6,6 +6,7 @@ import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/model/user_model.dart';
+import 'package:food_recipe_app/views/main/sub_features/full_screen_image/show_image_sheet.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 
@@ -80,7 +81,7 @@ class _UserInformationState extends State<UserInformation> {
         child: Column(
           children: [
             GestureDetector(
-              onTap: () => Navigator.push(context, checkDeviceRoute(fullScreenImage(widget.user.avatar))),
+              onTap: () async => await showImageChoiceBottomSheet(context, widget.user.avatar),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(50),
                 child: CachedNetworkImage(

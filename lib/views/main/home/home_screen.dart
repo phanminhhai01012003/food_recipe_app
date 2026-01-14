@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             "Xin chào! ${currentUser.displayName}",
                             style: TextStyle(
                               color: AppColors.white,
-                              fontSize: 12,
+                              fontSize: 14,
                               fontWeight: FontWeight.w700
                             ),
                           ),
@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             DateFormat("dd/MM/yyyy").format(DateTime.now()),
                             style: TextStyle(
                               color: AppColors.white,
-                              fontSize: 12,
+                              fontSize: 14,
                               fontWeight: FontWeight.w500
                             ),
                           )
@@ -67,18 +67,30 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                  IconButton(
-                    onPressed: () => Navigator.push(context, checkDeviceRoute(notification)), 
-                    icon: Icon(
-                      Icons.notifications,
-                      size: 20,
-                      color: AppColors.white,
-                    )
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () => Navigator.push(context, checkDeviceRoute(subscriptionScreen)),
+                        icon: Icon(
+                          Icons.wallet,
+                          size: 20,
+                          color: AppColors.white,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () => Navigator.push(context, checkDeviceRoute(notification)), 
+                        icon: Icon(
+                          Icons.notifications,
+                          size: 20,
+                          color: AppColors.white,
+                        )
+                      ),
+                    ],
                   )
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 15),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12),
               child: TextField(

@@ -1,6 +1,6 @@
 import 'package:food_recipe_app/common/constants.dart';
 
-final foodData = [
+List<Map<String, dynamic>> foodData = [
   {
     "foodId": "835903893835343",
     "image": "",
@@ -34,5 +34,24 @@ final foodData = [
     "steps": [],
     "createdAt": "20/12/2024",
     "likes": []
+  }
+];
+
+List<Map<String, dynamic>> subscriptionData = [
+  {
+    "subscriptionId": "12mpK190Ld22",
+    "subscriptionName": "Hàng tháng",
+    "price": 50000,
+    "priceUnit": "đ",
+    "offer": "",
+    "time": "1 tháng"
+  },
+  {
+    "subscriptionId": "42lpX100vL23",
+    "subscriptionName": "Hàng năm",
+    "price": 450000,
+    "priceUnit": "đ",
+    "offer": "",
+    "time": "1 năm"
   }
 ];

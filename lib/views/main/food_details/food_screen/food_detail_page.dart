@@ -11,6 +11,7 @@ import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/model/save_food_model.dart';
 import 'package:food_recipe_app/provider/save_state.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/resources/like_list_modal.dart';
+import 'package:food_recipe_app/views/main/sub_features/full_screen_image/show_image_sheet.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_report_modal.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -95,7 +96,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
             Stack(
               children: [
                 GestureDetector(
-                  onTap: () => Navigator.push(context, checkDeviceRoute(fullScreenImage(widget.food.image))),
+                  onTap: () async => await showImageChoiceBottomSheet(context, widget.food.image),
                   child: Hero(
                     tag: widget.food.image,
                     child: Container(

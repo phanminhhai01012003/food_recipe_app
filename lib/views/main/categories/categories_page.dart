@@ -69,13 +69,25 @@ class _CategoriesPageState extends State<CategoriesPage> {
                       ),
                     ],
                   ),
-                  IconButton(
-                    onPressed: () => Navigator.push(context, checkDeviceRoute(notification)), 
-                    icon: Icon(
-                      Icons.notifications,
-                      size: 20,
-                      color: AppColors.white,
-                    )
+                   Row(
+                    children: [
+                      IconButton(
+                        onPressed: () => Navigator.push(context, checkDeviceRoute(subscriptionScreen)),
+                        icon: Icon(
+                          Icons.wallet,
+                          size: 20,
+                          color: AppColors.white,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () => Navigator.push(context, checkDeviceRoute(notification)), 
+                        icon: Icon(
+                          Icons.notifications,
+                          size: 20,
+                          color: AppColors.white,
+                        )
+                      ),
+                    ],
                   )
                 ],
               ),

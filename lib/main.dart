@@ -18,9 +18,7 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await NotificationService.initNotifications();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp
-  ]);
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(const MyApp());
 }
 
@@ -48,9 +46,7 @@ class _MyAppState extends State<MyApp> {
             child: GlobalLoaderOverlay(
               closeOnBackButton: false,
               overlayColor: Colors.white24,
-              overlayWidgetBuilder: (progress) => Center(
-                child: CircularProgressIndicator(color: AppColors.yellow)
-              ),
+              overlayWidgetBuilder: (progress) => Center(child: CircularProgressIndicator(color: AppColors.yellow)),
               switchInCurve: Easing.linear,
               switchOutCurve: Easing.linear,
               child: MaterialApp(
