@@ -1,9 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/app_colors.dart';
 import 'package:food_recipe_app/common/logger.dart';
 import 'package:food_recipe_app/common/routes.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
-import 'package:image_downloader/image_downloader.dart';
+import 'package:gal/gal.dart';
+import 'package:path_provider/path_provider.dart';
 
 Future<void> showImageChoiceBottomSheet(BuildContext context, String imageUrl) async{
   return await showModalBottomSheet(
@@ -78,12 +80,19 @@ class ShowImageSheet extends StatelessWidget {
 
   void onDownload(BuildContext context) async {
     try {
-      await ImageDownloader.downloadImage(imageUrl).then((value){
-        Message.showScaffoldMessage(context, "Tải ảnh $value về thiết bị thành công", AppColors.green);
-        Navigator.pop(context);
-      });
+      final dio = Dio();
+      final hasAccess = await Gal.hasAccess();
+      if(!hasAccess){
+        await Gal.requestAccess();
+      }
+      final tempDir = await getTemporaryDirectory();
+      final path = "${tempDir.path}/$imageUrl";
+      await dio.download(imageUrl, path);
+      await Gal.putImage(path);
+      Message.showScaffoldMessage(context, "Tải ảnh thành công", AppColors.green);
+      Navigator.pop(context);
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi khi tải xuống", AppColors.red);
+      Message.showScaffoldMessage(context, "Đã xảy ra lỗi khi tải ảnh", AppColors.red);
       Logger.log(e);
       rethrow;
     }

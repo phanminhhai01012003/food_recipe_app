@@ -63,7 +63,9 @@ dependencies:
   flutter_local_notifications: ^18.0.0
   firebase_storage: ^13.0.0
   flutter_rating_bar: ^4.0.1
-  image_downloader: ^0.31.0
+  dio: ^5.0.0      
+  gal: ^2.0.0 
+  path_provider: ^2.1.0
 
 dev_dependencies:
   flutter_test:
