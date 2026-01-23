@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
-import 'package:food_recipe_app/common/constants.dart';
+import 'package:food_recipe_app/common/style/app_assets.dart';
 
 Future<void> changeLanguageModal(BuildContext context) async{
   return await showModalBottomSheet(
