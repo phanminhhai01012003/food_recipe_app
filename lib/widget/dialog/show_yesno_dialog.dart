@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/app_colors.dart';
+import 'package:food_recipe_app/common/style/app_colors.dart';
 
 class ShowYesnoDialog {
   static void showMaterialDialog(

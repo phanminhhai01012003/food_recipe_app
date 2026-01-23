@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/app_colors.dart';
+import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
-import 'package:food_recipe_app/common/routes.dart';
+import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/model/rating_model.dart';
 import 'package:food_recipe_app/views/main/sub_features/app_rating/rating_selection.dart';
 import 'package:intl/intl.dart';

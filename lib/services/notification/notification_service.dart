@@ -1,8 +1,9 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:food_recipe_app/common/constants.dart';
-import 'package:food_recipe_app/common/logger.dart';
-import 'package:food_recipe_app/common/routes.dart';
+import 'package:food_recipe_app/common/configure/logger.dart';
+import 'package:food_recipe_app/common/configure/routes.dart';
+import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/model/comment_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/model/notification_model.dart';

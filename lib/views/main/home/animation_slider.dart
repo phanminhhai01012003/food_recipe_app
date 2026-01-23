@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/app_colors.dart';
-import 'package:food_recipe_app/common/constants.dart';
+import 'package:food_recipe_app/common/constants/list_constants.dart';
+import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class AnimationSlider extends StatefulWidget {

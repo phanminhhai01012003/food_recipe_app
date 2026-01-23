@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/app_colors.dart';
-import 'package:food_recipe_app/common/constants.dart';
-import 'package:food_recipe_app/common/routes.dart';
+import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/common/constants/firebase_constants.dart';
+import 'package:food_recipe_app/common/style/app_colors.dart';
+
+import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/data/enum.dart';
 import 'package:food_recipe_app/model/user_model.dart';
 import 'package:food_recipe_app/views/main/settings/selection.dart';

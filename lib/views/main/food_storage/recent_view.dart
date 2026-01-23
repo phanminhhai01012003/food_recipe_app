@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:food_recipe_app/common/app_colors.dart';
+import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/model/recent_view_model.dart';
 import 'package:food_recipe_app/provider/history_state.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';

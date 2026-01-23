@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/app_colors.dart';
-import 'package:food_recipe_app/common/constants.dart';
-import 'package:food_recipe_app/common/logger.dart';
-import 'package:food_recipe_app/common/routes.dart';
+import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/common/constants/firebase_constants.dart';
+import 'package:food_recipe_app/common/constants/list_constants.dart';
+import 'package:food_recipe_app/common/style/app_colors.dart';
+import 'package:food_recipe_app/common/configure/logger.dart';
+import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:food_recipe_app/widget/other/radio_selection.dart';

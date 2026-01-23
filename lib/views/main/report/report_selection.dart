@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/app_colors.dart';
-import 'package:food_recipe_app/common/constants.dart';
+import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/model/report_model.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_report_modal.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';

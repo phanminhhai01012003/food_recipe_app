@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/app_colors.dart';
-import 'package:food_recipe_app/common/constants.dart';
+import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/common/style/app_colors.dart';
 
 Future<File?> showImagePickerModal(BuildContext context) async{
   return await showModalBottomSheet(

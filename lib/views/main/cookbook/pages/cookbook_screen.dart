@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/app_colors.dart';
-import 'package:food_recipe_app/common/routes.dart';
+import 'package:food_recipe_app/common/style/app_colors.dart';
+import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/model/cookbook_model.dart';
 import 'package:food_recipe_app/provider/cookbook_state.dart';
 import 'package:food_recipe_app/views/main/cookbook/widget/cookbook_widget.dart';

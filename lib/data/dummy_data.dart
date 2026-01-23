@@ -1,4 +1,4 @@
-import 'package:food_recipe_app/common/constants.dart';
+import 'package:food_recipe_app/common/style/app_assets.dart';
 
 List<Map<String, dynamic>> foodData = [
   {

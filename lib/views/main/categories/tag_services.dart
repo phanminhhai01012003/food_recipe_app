@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/app_colors.dart';
-import 'package:food_recipe_app/common/constants.dart';
+import 'package:food_recipe_app/common/constants/firebase_constants.dart';
+import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/model/category_model.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 
-import '../../../common/logger.dart';
+import '../../../common/configure/logger.dart';
 
 class TagServices {
   Stream<List<CategoryModel>> getTags(BuildContext context) {

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/routes.dart';
+import 'package:food_recipe_app/common/configure/routes.dart';
+import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/common/style/app_assets.dart';
 import 'package:food_recipe_app/model/user_model.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import '../../common/app_colors.dart';
-import '../../common/constants.dart';
+import '../../common/style/app_colors.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});

@@ -3,9 +3,9 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/app_colors.dart';
+import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
-import 'package:food_recipe_app/common/convert.dart';
+import 'package:food_recipe_app/common/configure/convert.dart';
 import 'package:food_recipe_app/model/cookbook_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/provider/cookbook_state.dart';

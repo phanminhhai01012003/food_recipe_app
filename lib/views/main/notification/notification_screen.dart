@@ -1,8 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/app_colors.dart';
-import 'package:food_recipe_app/common/constants.dart';
+import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/common/style/app_assets.dart';
+import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/model/notification_model.dart';
 import 'package:food_recipe_app/views/main/notification/notification_image_widget.dart';
 import 'package:food_recipe_app/views/main/notification/notification_list.dart';

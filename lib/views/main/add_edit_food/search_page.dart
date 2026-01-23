@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/app_colors.dart';
-import 'package:food_recipe_app/common/constants.dart';
+import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/widget/food_display_widget/food_display_list.dart';
 import 'package:food_recipe_app/widget/load_data/load_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
