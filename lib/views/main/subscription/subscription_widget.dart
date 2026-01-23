@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/app_colors.dart';
+import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:intl/intl.dart';
 
 class SubscriptionWidget extends StatefulWidget {

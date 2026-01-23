@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/logger.dart';
+import 'package:food_recipe_app/common/configure/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeState extends ChangeNotifier{

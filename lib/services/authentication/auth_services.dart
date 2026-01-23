@@ -1,13 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:food_recipe_app/common/constants.dart';
-import 'package:food_recipe_app/common/logger.dart';
+import 'package:food_recipe_app/common/constants/firebase_constants.dart';
+import 'package:food_recipe_app/common/configure/logger.dart';
 import 'package:food_recipe_app/services/authentication/auth_repo.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../../common/app_colors.dart';
+import '../../common/style/app_colors.dart';
 
 class AuthServices extends AuthRepo{
 

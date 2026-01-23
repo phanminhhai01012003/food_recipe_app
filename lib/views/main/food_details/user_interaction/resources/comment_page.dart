@@ -2,9 +2,10 @@ import 'dart:io';
 
 import 'package:comment_box/comment/comment.dart';
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/app_colors.dart';
-import 'package:food_recipe_app/common/constants.dart';
-import 'package:food_recipe_app/common/convert.dart';
+import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/common/constants/firebase_constants.dart';
+import 'package:food_recipe_app/common/style/app_colors.dart';
+import 'package:food_recipe_app/common/configure/convert.dart';
 import 'package:food_recipe_app/model/comment_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/component/comment_widget.dart';

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants.dart';
-import 'package:food_recipe_app/common/routes.dart';
+import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/model/rating_model.dart';
 import 'package:food_recipe_app/views/main/sub_features/app_rating/rate_component.dart';
 import 'package:food_recipe_app/widget/load_data/load_data.dart';

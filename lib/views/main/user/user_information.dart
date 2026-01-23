@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/app_colors.dart';
-import 'package:food_recipe_app/common/constants.dart';
-import 'package:food_recipe_app/common/routes.dart';
+import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/common/style/app_colors.dart';
+import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/model/user_model.dart';
 import 'package:food_recipe_app/views/main/sub_features/full_screen_image/show_image_sheet.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';

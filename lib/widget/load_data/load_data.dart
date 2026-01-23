@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/app_colors.dart';
+import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:shimmer/shimmer.dart';
 
 class LoadData extends StatelessWidget {

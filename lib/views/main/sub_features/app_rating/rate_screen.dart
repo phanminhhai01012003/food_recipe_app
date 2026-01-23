@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:food_recipe_app/common/app_colors.dart';
+import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/constants.dart';
-import 'package:food_recipe_app/common/convert.dart';
+import 'package:food_recipe_app/common/configure/convert.dart';
 import 'package:food_recipe_app/model/rating_model.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:loader_overlay/loader_overlay.dart';

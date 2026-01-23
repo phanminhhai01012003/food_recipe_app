@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:food_recipe_app/common/app_colors.dart';
-import 'package:food_recipe_app/common/routes.dart';
+import 'package:food_recipe_app/common/style/app_colors.dart';
+import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/model/rating_model.dart';
 import 'package:food_recipe_app/services/firestore/rate/rate_services.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_report_modal.dart';

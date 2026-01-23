@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/app_colors.dart';
-import 'package:food_recipe_app/common/routes.dart';
+import 'package:food_recipe_app/common/style/app_colors.dart';
+import 'package:food_recipe_app/common/configure/routes.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
