@@ -9,8 +9,9 @@ class MockPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Dialog(
-        backgroundColor: AppColors.black,
+        backgroundColor: theme.colorScheme.primary,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -32,7 +33,7 @@ class MockPicker extends StatelessWidget {
                     Navigator.of(context).pop(mock[index].response);
                   },
                   child: Container(
-                    color: AppColors.black,
+                    color: theme.colorScheme.primary,
                     margin: const EdgeInsets.all(8),
                     padding: const EdgeInsets.all(8),
                     child: Column(
@@ -41,13 +42,17 @@ class MockPicker extends StatelessWidget {
                         Text(
                           mock[index].name,
                           style: TextStyle(
-                            color: AppColors.white
+                            color: theme.colorScheme.secondary,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold
                           ),
                         ),
                         Text(
                           mock[index].description,
                           style: TextStyle(
-                            color: AppColors.white
+                            color: theme.colorScheme.secondary,
+                            fontSize: 12,
+                            fontWeight: FontWeight.normal
                           ),
                         ),
                       ],

@@ -141,5 +141,12 @@ class NotificationService {
       androidScheduleMode: AndroidScheduleMode.exact
     );
   }
-  static void saveToken(String token) async => await userCollection.doc(currentUser.uid).update({"token": token});
+  static Future<void> saveToken(String token) async {
+    try {
+      await userCollection.doc(currentUser.uid).update({"token": token});
+    } catch (e) {
+      Logger.log("Error to save token: $e");
+      rethrow;
+    }
+  }
 }

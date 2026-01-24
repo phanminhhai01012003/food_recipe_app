@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/constants.dart';
+import 'package:food_recipe_app/common/style/app_assets.dart';
 
 class Contact extends StatelessWidget {
   const Contact({super.key});
