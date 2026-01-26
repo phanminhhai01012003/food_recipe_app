@@ -217,6 +217,9 @@ class _LoginState extends State<Login> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Vui lòng điền mật khẩu";
+                      } 
+                      if (value.length < 6){
+                        return "Mật khẩu không dưới 6 ký tự";
                       }
                       return null;
                     },

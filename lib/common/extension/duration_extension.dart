@@ -1,5 +1,3 @@
-import 'package:intl/intl.dart';
-
 extension DurationExtension on Duration {
   String twoDigits(int n) => n >= 10 ? "$n" : "0$n";
   String get ddhhmmss {
@@ -9,26 +7,6 @@ extension DurationExtension on Duration {
       String minutes = twoDigits(inMinutes.remainder(60));
       String seconds = twoDigits(inSeconds.remainder(60));
       return "$days:$hours:$minutes:$seconds";
-    } catch (e) {
-      return "";
-    }
-  }
-}
-
-extension DateTimeExtension on DateTime {
-  String get ddmmyyyy {
-    try {
-      return DateFormat("dd/MM/yyyy").format(this);
-    } catch (e) {
-      return "dd/MM/yyyy";
-    }
-  }
-}
-
-extension StringExtension on String {
-  String get priceFormat {
-    try {
-      return NumberFormat('#,###').format(this).replaceAll(',', '.');
     } catch (e) {
       return "";
     }
