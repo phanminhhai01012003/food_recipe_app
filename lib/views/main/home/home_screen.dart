@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/configure/extension.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/style/app_assets.dart';
@@ -9,7 +10,6 @@ import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/views/main/home/animation_slider.dart';
 import 'package:food_recipe_app/views/main/home/categories_grid_list.dart';
 import 'package:food_recipe_app/views/main/home/food_recipe_display.dart';
-import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           SizedBox(height: 5),
                           Text(
-                            DateFormat("dd/MM/yyyy").format(DateTime.now()),
+                            DateTime.now().ddmmyyyy,
                             style: TextStyle(
                               color: AppColors.white,
                               fontSize: 14,

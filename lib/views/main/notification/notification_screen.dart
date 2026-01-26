@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/configure/extension.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/style/app_assets.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
@@ -8,7 +9,6 @@ import 'package:food_recipe_app/model/notification_model.dart';
 import 'package:food_recipe_app/views/main/notification/notification_image_widget.dart';
 import 'package:food_recipe_app/views/main/notification/notification_list.dart';
 import 'package:food_recipe_app/widget/load_data/load_data.dart';
-import 'package:intl/intl.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
@@ -191,7 +191,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         notifications[index].from!
                       ), 
                       title: notifications[index].title, 
-                      date: DateFormat("dd/MM/yyyy").format(notifications[index].createdAt)
+                      date: notifications[index].createdAt.ddmmyyyy
                     ),
                   );
                 }

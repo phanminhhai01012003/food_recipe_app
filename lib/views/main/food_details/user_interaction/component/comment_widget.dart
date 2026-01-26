@@ -2,13 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/configure/extension.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/model/comment_model.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/component/comment_selection.dart';
-import 'package:intl/intl.dart';
 
 class CommentWidget extends StatefulWidget {
   final String id;
@@ -126,7 +126,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                             ),
                             SizedBox(width: 10),
                             Text(
-                              DateFormat("dd/MM/yyyy").format(widget.comment.createdAt),
+                              widget.comment.createdAt.ddmmyyyy,
                               style: TextStyle(
                                 color: theme.colorScheme.secondary,
                                 fontSize: 12,

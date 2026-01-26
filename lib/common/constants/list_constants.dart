@@ -49,3 +49,11 @@ List<String> filterRating = [
   "Mới nhất",
   "Cũ nhất"
 ];
+List<List<String>> benefitList = [
+  ["Quyền lợi được hưởng", "Miễn phí", "Gói dịch vụ"],
+  ["Loại bỏ quảng cáo", "Không", "Có"],
+  ["Số lượng món ăn", "1000 món", "Không giới hạn"],
+  ["Đề xuất món ăn", "Ngẫu nhiên", "Theo sở thích cá nhân"],
+  ["Bộ lọc tìm kiếm", "Thông thường", "Nâng cao"],
+  ["Số lượng sổ tay", "100 cuốn", "Không giới hạn"]
+];

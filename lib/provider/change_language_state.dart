@@ -3,25 +3,20 @@ import 'package:food_recipe_app/common/configure/logger.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ThemeState extends ChangeNotifier{
-  String key = "theme_mode";
-  ThemeMode theme = ThemeMode.system;
-  ThemeMode get themeMode => theme;
+class ChangeLanguageState extends ChangeNotifier{
+  String language_key = "language";
+  bool _isEng = false;
+  bool get isEng => _isEng;
 
-  bool get isLight => theme == ThemeMode.light;
-  bool get isDark => theme == ThemeMode.dark;
-  bool get isSystem => theme == ThemeMode.system;
-
-  ThemeState(){
+  ChangeLanguageState(){
     loadData();
   }
-  
+
   void loadData() async{
-    try {
+    try { 
       final pref = await SharedPreferences.getInstance();
-      final themeIndex = pref.getInt(key) ?? 0;
-      theme = ThemeMode.values[themeIndex];
-      notifyListeners();
+      final langKey = pref.getBool(language_key) ?? false;
+      _isEng = langKey;
     } catch (e) {
       Message.showToast("Đã xảy ra lỗi");
       Logger.log("Error: $e");
@@ -32,7 +27,7 @@ class ThemeState extends ChangeNotifier{
   void saveData() async{
     try {
       final pref = await SharedPreferences.getInstance();
-      await pref.setInt(key, theme.index);
+      await pref.setBool(language_key, _isEng);
     } catch (e) {
       Message.showToast("Đã xảy ra lỗi");
       Logger.log("Error: $e");
@@ -40,15 +35,14 @@ class ThemeState extends ChangeNotifier{
     }
   }
 
-  void setupTheme(ThemeMode mode){
-    if (theme != mode){
-      theme = mode;
+  void setupLanguage(bool eng){
+    if (_isEng != eng) {
+      _isEng = eng;
       saveData();
       notifyListeners();
     }
   }
 
-  void lightTheme() => setupTheme(ThemeMode.light);
-  void darkTheme() => setupTheme(ThemeMode.dark);
-  void systemTheme() => setupTheme(ThemeMode.system);
+  void setEnglishLanguage() => setupLanguage(true);
+  void setVietnameseLanguage() => setupLanguage(false);
 }

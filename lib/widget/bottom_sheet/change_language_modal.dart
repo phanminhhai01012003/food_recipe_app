@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/style/app_assets.dart';
 
-Future<void> changeLanguageModal(BuildContext context) async{
+Future<Locale?> changeLanguageModal(BuildContext context) async{
   return await showModalBottomSheet(
     context: context,
     // ignore: deprecated_member_use
@@ -60,14 +60,16 @@ class _ChangeLanguageModalState extends State<ChangeLanguageModal> {
             context, 
             langImage: viFlag, 
             langTitle: "Tiếng Việt", 
-            onChanged: (){}
+            onChanged: (){},
+            isSelected: true
           ),
           SizedBox(height: 10),
           selectLanguageTileButton(
             context, 
             langImage: enFlag, 
             langTitle: "English", 
-            onChanged: (){}
+            onChanged: (){},
+            isSelected: false
           ),
         ],
       ),
@@ -77,6 +79,7 @@ class _ChangeLanguageModalState extends State<ChangeLanguageModal> {
     required String langImage,
     required String langTitle,
     required VoidCallback onChanged,
+    required bool isSelected,
   }){
     final theme = Theme.of(context);
     return ListTile(
@@ -94,6 +97,7 @@ class _ChangeLanguageModalState extends State<ChangeLanguageModal> {
         ),
       ),
       trailing: Visibility(
+        visible: isSelected,
         child: Icon(
           Icons.check_circle,
           size: 20,

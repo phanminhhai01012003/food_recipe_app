@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/configure/extension.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/model/rating_model.dart';
 import 'package:food_recipe_app/views/main/sub_features/app_rating/rating_selection.dart';
-import 'package:intl/intl.dart';
 
 class RateComponent extends StatefulWidget {
   final RatingModel rate;
@@ -146,7 +146,7 @@ class _RateComponentState extends State<RateComponent> {
                     ),
                     SizedBox(width: 10),
                     Text(
-                      DateFormat("dd/MM/yyyy").format(widget.rate.createdAt),
+                      widget.rate.createdAt.ddmmyyyy,
                       style: TextStyle(
                         color: theme.colorScheme.secondary,
                         fontSize: 14,

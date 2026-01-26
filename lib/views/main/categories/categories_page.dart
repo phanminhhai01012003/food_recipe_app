@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/configure/extension.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/style/app_assets.dart';
@@ -8,7 +9,6 @@ import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/model/category_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/widget/food_display_widget/food_display_grid.dart';
-import 'package:intl/intl.dart';
 
 class CategoriesPage extends StatefulWidget {
   const CategoriesPage({super.key});
@@ -60,7 +60,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                           ),
                           SizedBox(height: 5),
                           Text(
-                            DateFormat("dd/MM/yyyy").format(DateTime.now()),
+                            DateTime.now().ddmmyyyy,
                             style: TextStyle(
                               color: AppColors.white,
                               fontSize: 12,

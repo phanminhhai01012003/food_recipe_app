@@ -42,7 +42,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         Navigator.push(context, checkDeviceRoute(fullRatingPage));
         break;
       case ModeSelection.language:
-        changeLanguageModal(context);
+        onChangeLanguage();
         break;
     }
   }
@@ -85,6 +85,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
       case ModeSelection.language:
         return "Ngôn ngữ"; 
     }
+  }
+  Future<void> onChangeLanguage() async{
+    await changeLanguageModal(context).then((value){});
   }
   @override
   Widget build(BuildContext context) {

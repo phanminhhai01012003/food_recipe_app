@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/configure/extension.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
@@ -14,7 +15,6 @@ import 'package:food_recipe_app/provider/save_state.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/resources/like_list_modal.dart';
 import 'package:food_recipe_app/views/main/sub_features/full_screen_image/show_image_sheet.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_report_modal.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -197,7 +197,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                   Row(
                     children: [
                       Text(
-                        "Đã tạo: ${DateFormat("dd/MM/yyyy").format((widget.food.createdAt))}",
+                        "Đã tạo: ${widget.food.createdAt.ddmmyyyy}",
                         style: TextStyle(
                           color: theme.colorScheme.secondary,
                           fontSize: 14,

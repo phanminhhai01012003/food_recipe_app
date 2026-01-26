@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/configure/extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
-import 'package:intl/intl.dart';
 
 class SubscriptionWidget extends StatefulWidget {
   final Map<String, dynamic> sub;
@@ -18,7 +18,12 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
       _ => AppColors.black
     };
   }
-  String priceFormat(String price, String priceUnit) => NumberFormat('#,###').format(price).replaceAll(',', '.') + priceUnit;
+  String priceFormat(String price, String priceUnit) {
+    if (priceUnit == "đ"){
+      return price.priceFormat + priceUnit;
+    }
+    return priceUnit + price.priceFormat;
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
