@@ -1,11 +1,7 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
-import 'package:food_recipe_app/common/configure/logger.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
-import 'package:food_recipe_app/widget/other/message.dart';
-import 'package:gal/gal.dart';
-import 'package:path_provider/path_provider.dart';
 
 Future<void> showImageChoiceBottomSheet(BuildContext context, String imageUrl) async{
   return await showModalBottomSheet(
@@ -48,9 +44,7 @@ class ShowImageSheet extends StatelessWidget {
               backgroundColor: AppColors.yellow,
               foregroundColor: AppColors.white
             ),
-            onPressed: () {
-              Navigator.push(context, checkDeviceRoute(fullScreenImage(imageUrl)));
-            },
+            onPressed: () => Navigator.push(context, checkDeviceRoute(fullScreenImage(imageUrl))),
             child: Text("Xem ảnh",
               style: TextStyle(
                 fontSize: 14,
@@ -65,7 +59,7 @@ class ShowImageSheet extends StatelessWidget {
               backgroundColor: AppColors.yellow,
               foregroundColor: AppColors.white
             ),
-            onPressed: () => onDownload(context),
+            onPressed: () => imageServices.downloadImage(context, imageUrl),
             child: Text("Tải xuống",
               style: TextStyle(
                 fontSize: 14,
@@ -76,25 +70,5 @@ class ShowImageSheet extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  void onDownload(BuildContext context) async {
-    try {
-      final dio = Dio();
-      final hasAccess = await Gal.hasAccess();
-      if(!hasAccess){
-        await Gal.requestAccess();
-      }
-      final tempDir = await getTemporaryDirectory();
-      final path = "${tempDir.path}/$imageUrl";
-      await dio.download(imageUrl, path);
-      await Gal.putImage(path);
-      Message.showScaffoldMessage(context, "Tải ảnh thành công", AppColors.green);
-      Navigator.pop(context);
-    } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi khi tải ảnh", AppColors.red);
-      Logger.log(e);
-      rethrow;
-    }
   }
 }

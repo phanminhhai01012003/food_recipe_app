@@ -36,9 +36,10 @@ class _EditUserState extends State<EditUser> {
     phoneController.text = widget.user.phone;
     nickNameController.text = widget.user.nickName;
   }
-  void update() async{
+
+  void update() async {
     context.loaderOverlay.show();
-    if (formKey.currentState!.validate()){
+    if (formKey.currentState!.validate()) {
       if (nickNameController.text == nameController.text) {
         context.loaderOverlay.hide();
         Message.showToast("Biệt danh không được trùng với tên của bạn");
@@ -46,29 +47,42 @@ class _EditUserState extends State<EditUser> {
       }
       formKey.currentState!.save();
       if (image != null) {
-        imageURL = await imageServices.uploadImage(context, image!, avatarFolder);
+        imageURL = await imageServices.uploadImage(
+          context,
+          image!,
+          avatarFolder,
+        );
       }
       UserModel user = UserModel(
-        userId: widget.user.userId, 
-        userName: nameController.text, 
-        avatar: image == null && imageURL.isEmpty ? userDefaultImage : imageURL, 
-        email: widget.user.email, 
+        userId: widget.user.userId,
+        userName: nameController.text,
+        avatar: image == null && imageURL.isEmpty ? userDefaultImage : imageURL,
+        email: widget.user.email,
         description: descriptionController.text,
         nickName: nickNameController.text,
-        phone: phoneController.text.isEmpty ? "Không xác định" : phoneController.text, 
-        loginMethod: widget.user.loginMethod
+        phone:
+            phoneController.text.isEmpty
+                ? "Không xác định"
+                : phoneController.text,
+        loginMethod: widget.user.loginMethod,
       );
       await currentUser.updateProfile(
         displayName: nameController.text,
-        photoURL: image == null && imageURL.isEmpty ? userDefaultImage : imageURL
+        photoURL:
+            image == null && imageURL.isEmpty ? userDefaultImage : imageURL,
       );
-      await userServices.updateUser(context, user).then((_){
+      await userServices.updateUser(context, user).then((_) {
         context.loaderOverlay.hide();
-        Message.showScaffoldMessage(context, "Cập nhật thành công", AppColors.green);
+        Message.showScaffoldMessage(
+          context,
+          "Cập nhật thành công",
+          AppColors.green,
+        );
         Navigator.pop(context);
       });
     }
   }
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -77,6 +91,7 @@ class _EditUserState extends State<EditUser> {
     descriptionController.dispose();
     phoneController.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -86,27 +101,25 @@ class _EditUserState extends State<EditUser> {
         leading: Padding(
           padding: EdgeInsets.all(8),
           child: IconButton(
-            onPressed: () => Navigator.pop(context), 
+            onPressed: () => Navigator.pop(context),
             icon: Icon(
               Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
               size: 20,
-            )
+            ),
           ),
         ),
         backgroundColor: theme.appBarTheme.backgroundColor,
         foregroundColor: theme.appBarTheme.foregroundColor,
-        title: Text("Chỉnh sửa thông tin cá nhân",
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold
-          ),
+        title: Text(
+          "Chỉnh sửa thông tin cá nhân",
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: update, 
-            icon: Icon(Icons.check_circle, size: 30)
-          )
+            onPressed: update,
+            icon: Icon(Icons.check_circle, size: 30),
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -117,257 +130,302 @@ class _EditUserState extends State<EditUser> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
-                child: image != null ? InkWell(
-                  onTap: () async{
-                    final imagePicked = await showImagePickerModal(context);
-                    if (imagePicked != null){
-                      setState(() {
-                        image = imagePicked;
-                      });
-                    }
-                  },
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: Image.file(
-                      image!,
-                      errorBuilder: (context, error, stackTrace) => Image.network(userDefaultImage),
-                      height: 200,
-                      width: 200,
-                      fit: BoxFit.cover,
+                child: image != null
+                        ? InkWell(
+                          onTap: () async {
+                            final imagePicked = await showImagePickerModal(context);
+                            if (imagePicked != null) {
+                              setState(() {
+                                image = imagePicked;
+                              });
+                            }
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+                            child: Image.file(
+                              image!,
+                              errorBuilder: (context, error, stackTrace) => Image.network(userDefaultImage),
+                              height: 200,
+                              width: 200,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        )
+                        : InkWell(
+                          onTap: () async {
+                            final imagePicked = await showImagePickerModal(context);
+                            if (imagePicked != null) {
+                              setState(() {
+                                image = imagePicked;
+                              });
+                            }
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+                            child: Image.network(
+                              imageURL,
+                              errorBuilder: (context, error, stackTrace) => Image.network(userDefaultImage),
+                              height: 200,
+                              width: 200,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+              ),
+              SizedBox(height: 20),
+              Text(
+                "Tên đầy đủ",
+                style: TextStyle(
+                  color: theme.colorScheme.secondary,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 10),
+              TextFormField(
+                controller: nameController,
+                keyboardType: TextInputType.text,
+                style: TextStyle(
+                  color: theme.colorScheme.secondary,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                ),
+                cursorColor: AppColors.blue,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: theme.colorScheme.secondary),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: AppColors.red),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: AppColors.green),
+                  ),
+                  hintText: "Nhập tên của bạn",
+                  hintStyle: TextStyle(
+                    color: theme.colorScheme.secondary,
+                    fontSize: 12,
+                    fontWeight: FontWeight.normal,
+                  ),
+                  prefixIcon: Container(
+                    width: 20,
+                    height: 20,
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.person,
+                      color: theme.colorScheme.secondary,
                     ),
                   ),
-                ) : InkWell(
-                  onTap: () async{
-                    final imagePicked = await showImagePickerModal(context);
-                    if (imagePicked != null){
-                      setState(() {
-                        image = imagePicked;
-                      });
-                    }
-                  },
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: Image.network(
-                      imageURL,
-                      errorBuilder: (context, error, stackTrace) => Image.network(userDefaultImage),
-                      height: 200,
-                      width: 200,
-                      fit: BoxFit.cover,
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Vui lòng điền tên của bạn";
+                  }
+                  if (!RegExp(r'^[a-zA-Z0-9]+$').hasMatch(value)) {
+                    return "Tên không được chứa ký tự đặc biệt";
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 20),
+              Text(
+                "Biệt danh",
+                style: TextStyle(
+                  color: theme.colorScheme.secondary,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 10),
+              TextFormField(
+                controller: nickNameController,
+                keyboardType: TextInputType.text,
+                style: TextStyle(
+                  color: theme.colorScheme.secondary,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                ),
+                cursorColor: AppColors.blue,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: theme.colorScheme.secondary),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: AppColors.red),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: AppColors.green),
+                  ),
+                  hintText: "Nhập biệt danh của bạn",
+                  hintStyle: TextStyle(
+                    color: theme.colorScheme.secondary,
+                    fontSize: 12,
+                    fontWeight: FontWeight.normal,
+                  ),
+                  prefixIcon: Container(
+                    width: 20,
+                    height: 20,
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.person_pin,
+                      color: theme.colorScheme.secondary,
+                    ),
+                  ),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return null;
+                  }
+                  if (!RegExp(r'^[a-zA-Z0-9]+$').hasMatch(value)) {
+                    return "Biệt danh không được chứa ký tự đặc biệt";
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 20),
+              Text(
+                "Giới thiệu bản thân",
+                style: TextStyle(
+                  color: theme.colorScheme.secondary,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 10),
+              TextFormField(
+                controller: descriptionController,
+                maxLength: 1000,
+                maxLines: 5,
+                minLines: 5,
+                keyboardType: TextInputType.text,
+                style: TextStyle(
+                  color: theme.colorScheme.secondary,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                ),
+                cursorColor: AppColors.blue,
+                decoration: InputDecoration(
+                  counterText: "",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: theme.colorScheme.secondary),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: AppColors.red),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: AppColors.green),
+                  ),
+                  hintText: "Bạn là người như thế nào",
+                  hintStyle: TextStyle(
+                    color: theme.colorScheme.secondary,
+                    fontSize: 12,
+                    fontWeight: FontWeight.normal,
+                  ),
+                  prefixIcon: Container(
+                    width: 20,
+                    height: 20,
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.description,
+                      color: theme.colorScheme.secondary,
                     ),
                   ),
                 ),
               ),
               SizedBox(height: 20),
-                    Text("Tên đầy đủ",
-                      style: TextStyle(
-                        color: theme.colorScheme.secondary,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    TextFormField(
-                      controller: nameController,
-                      keyboardType: TextInputType.text,
-                      style: TextStyle(
-                        color: theme.colorScheme.secondary,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w700
-                      ),
-                      cursorColor: AppColors.blue,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: theme.colorScheme.secondary)
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: AppColors.red)
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: AppColors.green)
-                        ),
-                        hintText: "Nhập tên của bạn",
-                        hintStyle: TextStyle(
-                          color: theme.colorScheme.secondary,
-                          fontSize: 12,
-                          fontWeight: FontWeight.normal
-                        ),
-                        prefixIcon: Container(
-                          width: 20,
-                          height: 20,
-                          alignment: Alignment.center,
-                          child: Icon(Icons.person, color: theme.colorScheme.secondary)
-                        )
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty){
-                          return "Vui lòng điền tên của bạn";
-                        }
-                        if (!RegExp(r'^[a-zA-Z0-9]+$').hasMatch(value)) {
-                          return "Tên không được chứa ký tự đặc biệt";
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(height: 20),
-                    Text("Biệt danh",
-                      style: TextStyle(
-                        color: theme.colorScheme.secondary,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    TextFormField(
-                      controller: nickNameController,
-                      keyboardType: TextInputType.text,
-                      style: TextStyle(
-                        color: theme.colorScheme.secondary,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w700
-                      ),
-                      cursorColor: AppColors.blue,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: theme.colorScheme.secondary)
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: AppColors.red)
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: AppColors.green)
-                        ),
-                        hintText: "Nhập biệt danh của bạn",
-                        hintStyle: TextStyle(
-                          color: theme.colorScheme.secondary,
-                          fontSize: 12,
-                          fontWeight: FontWeight.normal
-                        ),
-                        prefixIcon: Container(
-                          width: 20,
-                          height: 20,
-                          alignment: Alignment.center,
-                          child: Icon(Icons.person_pin, color: theme.colorScheme.secondary)
-                        )
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty){
-                          return null;
-                        }
-                        if (!RegExp(r'^[a-zA-Z0-9]+$').hasMatch(value)) {
-                          return "Biệt danh không được chứa ký tự đặc biệt";
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(height: 20),
-                Text("Giới thiệu bản thân",
-                      style: TextStyle(
-                        color: theme.colorScheme.secondary,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold
-                      ),
-                    ),
+              Text(
+                "Số điện thoại",
+                style: TextStyle(
+                  color: theme.colorScheme.secondary,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               SizedBox(height: 10),
-                    TextFormField(
-                      controller: descriptionController,
-                      maxLength: 1000,
-                      maxLines: 5,
-                      minLines: 5,
-                      keyboardType: TextInputType.text,
-                      style: TextStyle(
-                        color: theme.colorScheme.secondary,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w700
-                      ),
-                      cursorColor: AppColors.blue,
-                      decoration: InputDecoration(
-                        counterText: "",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: theme.colorScheme.secondary)
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: AppColors.red)
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: AppColors.green)
-                        ),
-                        hintText: "Bạn là người như thế nào",
-                        hintStyle: TextStyle(
+              TextFormField(
+                controller: phoneController,
+                keyboardType: TextInputType.phone,
+                style: TextStyle(
+                  color: theme.colorScheme.secondary,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                ),
+                cursorColor: AppColors.blue,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: theme.colorScheme.secondary),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: AppColors.red),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: AppColors.green),
+                  ),
+                  hintText: "Nhập sdt của bạn",
+                  hintStyle: TextStyle(
+                    color: theme.colorScheme.secondary,
+                    fontSize: 12,
+                    fontWeight: FontWeight.normal,
+                  ),
+                  prefixIcon: Container(
+                    width: 20,
+                    height: 20,
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.phone,
+                      color: theme.colorScheme.secondary,
+                    ),
+                  ),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return null;
+                  }
+                  if (!RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)').hasMatch(value)) {
+                    return "Số điện thoại không hợp lệ";
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Email:",
+                    style: TextStyle(
+                      color: theme.colorScheme.secondary,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 200,
+                    child: Expanded(
+                      child: Text(
+                        widget.user.email,
+                        style: TextStyle(
                           color: theme.colorScheme.secondary,
-                          fontSize: 12,
+                          fontSize: 16,
                           fontWeight: FontWeight.normal
                         ),
-                        prefixIcon: Container(
-                          width: 20,
-                          height: 20,
-                          alignment: Alignment.center,
-                          child: Icon(Icons.description, color: theme.colorScheme.secondary)
-                        )
                       ),
                     ),
-                    SizedBox(height: 20),
-                    Text("Số điện thoại",
-                      style: TextStyle(
-                        color: theme.colorScheme.secondary,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                TextFormField(
-                      controller: phoneController,
-                      keyboardType: TextInputType.phone,
-                      style: TextStyle(
-                        color: theme.colorScheme.secondary,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w700
-                      ),
-                      cursorColor: AppColors.blue,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: theme.colorScheme.secondary)
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: AppColors.red)
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: AppColors.green)
-                        ),
-                        hintText: "Nhập sdt của bạn",
-                        hintStyle: TextStyle(
-                          color: theme.colorScheme.secondary,
-                          fontSize: 12,
-                          fontWeight: FontWeight.normal
-                        ),
-                        prefixIcon: Container(
-                          width: 20,
-                          height: 20,
-                          alignment: Alignment.center,
-                          child: Icon(Icons.phone, color: theme.colorScheme.secondary)
-                        )
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return null;
-                        }
-                        if (!RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)').hasMatch(value)) {
-                          return "Số điện thoại không hợp lệ";
-                        }
-                        return null;
-                      },
-                    ),
+                  )
+                ],
+              )
             ],
           ),
         ),

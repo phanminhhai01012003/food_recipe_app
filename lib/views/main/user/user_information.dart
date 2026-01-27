@@ -102,25 +102,15 @@ class _UserInformationState extends State<UserInformation> {
             ),
             SizedBox(height: 30),
             component(context, "ID", widget.user.userId),
-            SizedBox(height: 15),
-            Divider(color: AppColors.grey, thickness: 1, height: 1),
-            SizedBox(height: 15),
+            divider(),
             component(context, "Họ và tên", widget.user.userName),
-            SizedBox(height: 15),
-            Divider(color: AppColors.grey, thickness: 1, height: 1),
-            SizedBox(height: 15),
+            divider(),
             component(context, "Biệt danh", widget.user.nickName),
-            SizedBox(height: 15),
-            Divider(color: AppColors.grey, thickness: 1, height: 1),
-            SizedBox(height: 15),
+            divider(),
             component(context, "Giới thiệu", widget.user.description),
-            SizedBox(height: 15),
-            Divider(color: AppColors.grey, thickness: 1, height: 1),
-            SizedBox(height: 15),
+            divider(),
             component(context, "Số điện thoại", widget.user.phone),
-            SizedBox(height: 15),
-            Divider(color: AppColors.grey, thickness: 1, height: 1),
-            SizedBox(height: 15),
+            divider(),
             component(context, "Email", widget.user.email),
             SizedBox(height: 50),
             SizedBox(
@@ -241,6 +231,15 @@ class _UserInformationState extends State<UserInformation> {
             ),
           ),
         )
+      ],
+    );
+  }
+  Widget divider() {
+    return Column(
+      children: [
+        SizedBox(height: 15),
+        Divider(color: AppColors.grey, thickness: 1, height: 1),
+        SizedBox(height: 15),
       ],
     );
   }

@@ -1,12 +1,15 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/logger.dart';
 import 'package:food_recipe_app/services/image/image_repo.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
+import 'package:gal/gal.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 class ImageService extends ImageRepo{
   @override
@@ -36,6 +39,28 @@ class ImageService extends ImageRepo{
       return await taskSnapshot.ref.getDownloadURL();
     } catch (e) {
       Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Logger.log(e);
+      rethrow;
+    }
+  }
+  
+  @override
+  Future<void> downloadImage(BuildContext context, String imageUrl) async{
+    // TODO: implement downloadImage
+    try {
+      final dio = Dio();
+      final hasAccess = await Gal.hasAccess();
+      if(!hasAccess){
+        await Gal.requestAccess();
+      }
+      final tempDir = await getTemporaryDirectory();
+      final path = "${tempDir.path}/$imageUrl";
+      await dio.download(imageUrl, path);
+      await Gal.putImage(path);
+      Message.showScaffoldMessage(context, "Tải ảnh thành công", AppColors.green);
+      Navigator.pop(context);
+    } catch (e) {
+      Message.showScaffoldMessage(context, "Đã xảy ra lỗi khi tải ảnh", AppColors.red);
       Logger.log(e);
       rethrow;
     }
