@@ -44,7 +44,10 @@ class ShowImageSheet extends StatelessWidget {
               backgroundColor: AppColors.yellow,
               foregroundColor: AppColors.white
             ),
-            onPressed: () => Navigator.push(context, checkDeviceRoute(fullScreenImage(imageUrl))),
+            onPressed: () async{
+              Navigator.push(context, checkDeviceRoute(fullScreenImage(imageUrl)));
+              await Future.delayed(Duration(seconds: 2), () => Navigator.pop(context));
+            },
             child: Text("Xem ảnh",
               style: TextStyle(
                 fontSize: 14,
