@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:numberpicker/numberpicker.dart';
 
@@ -70,7 +71,7 @@ class _ShowTimePickerState extends State<ShowTimePicker> {
           ),
           Center(
             child: Text(
-              "Thiết lập thời gian nấu ăn",
+              "setupDuration".tr(),
               style: TextStyle(
                 color: theme.colorScheme.secondary,
                 fontSize: 12,
@@ -226,7 +227,7 @@ class _ShowTimePickerState extends State<ShowTimePicker> {
                   ),
                   onPressed: () => Navigator.pop(context), 
                   child: Text(
-                    "Hủy",
+                    "cancel".tr(),
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w700
@@ -244,7 +245,7 @@ class _ShowTimePickerState extends State<ShowTimePicker> {
                   ),
                   onPressed: () => Navigator.pop(context, _onChanged), 
                   child: Text(
-                    "Xác nhận",
+                    "confirm".tr(),
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w700

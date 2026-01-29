@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/constants/list_constants.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/convert.dart';
 import 'package:food_recipe_app/model/report_model.dart';
@@ -49,7 +50,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
       target: widget.title,
       author: widget.author,
       reporter: currentUser.displayName!,
-      reason: selectedOption!.contains("Khác") ? _otherReport.text : selectedOption!, 
+      reason: selectedOption == "reportOther".tr() ? _otherReport.text : selectedOption!, 
       createdAt: DateTime.now(), 
       status: 0
     );
@@ -121,7 +122,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
             child: Column(
               children: [
                 Text(
-                  "Bạn đang báo cáo/chặn ${widget.title} của ${widget.author}",
+                  "${"reportBlockForSomeone".tr()} ${widget.title} ${"for".tr()} ${widget.author}",
                   style: TextStyle(
                     color: theme.colorScheme.secondary,
                     fontSize: 14,
@@ -130,7 +131,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "Hãy cho chúng tôi biết lý do bạn muốn báo cáo/chặn",
+                  "reportReason".tr(),
                   style: TextStyle(
                     color: theme.colorScheme.secondary,
                     fontSize: 12,
@@ -140,17 +141,17 @@ class _ShowReportModalState extends State<ShowReportModal> {
                 SizedBox(height: 10),
                 Column(
                   children: List.generate(
-                    widget.title.contains("món") 
+                    widget.title.contains("food".tr()) 
                       ? reportFoodList.length
                       : reportCommentList.length, 
                     (i) => RadioSelection(
-                      title: widget.title.contains("món") 
+                      title: widget.title.contains("food".tr()) 
                         ? reportFoodList[i]
                         : reportCommentList[i], 
                       selectedOption: selectedOption, 
                       onTap: (){
                         setState(() {
-                          if (widget.title.contains("món")) {
+                          if (widget.title.contains("food".tr())) {
                             selectedOption = reportFoodList[i];
                           } else {
                             selectedOption = reportCommentList[i];
@@ -169,13 +170,13 @@ class _ShowReportModalState extends State<ShowReportModal> {
                 TextField(
                   maxLength: 500,
                   controller: _otherReport,
-                  enabled: widget.title.contains("món") 
+                  enabled: widget.title.contains("food".tr()) 
                     ? selectedOption == reportFoodList.last 
                     : selectedOption == reportCommentList.last,
                   decoration: InputDecoration(
-                    hintText: "Nhập nội dung",
+                    hintText: "contentInput".tr(),
                     hintStyle: TextStyle(
-                      color: selectedOption!.contains("Khác") 
+                      color: selectedOption == "reportOther".tr() 
                         ? theme.colorScheme.secondary 
                         : AppColors.grey,
                       fontSize: 14,
@@ -184,7 +185,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(
-                        color: selectedOption!.contains("Khác")
+                        color: selectedOption == "reportOther".tr()
                           ? AppColors.black 
                           : AppColors.grey
                       )
@@ -205,7 +206,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
                       }
                     ),
                     Text(
-                      "Tôi đồng ý cam kết thông tin trên là đúng sự thật",
+                      "agreeForTrue".tr(),
                       style: TextStyle(
                         color: theme.colorScheme.secondary,
                         fontSize: 11,
@@ -226,7 +227,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
                         ),
                         onPressed: () => Navigator.pop(context), 
                         child: Text(
-                          "Hủy",
+                          "cancel".tr(),
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w700
@@ -245,7 +246,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
                         ),
                         onPressed: onReport, 
                         child: Text(
-                          "Xác nhận",
+                          "confirm".tr(),
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w700

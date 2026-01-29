@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/constants/list_constants.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 
 class Benefit extends StatelessWidget {
   final Color color;
@@ -18,12 +18,12 @@ class Benefit extends StatelessWidget {
         2: FractionColumnWidth(0.25),
       },
       children: [
-        row(benefitList.first, true),
-        row(benefitList[1], false),
-        row(benefitList[2], false),
-        row(benefitList[3], false),
-        row(benefitList[4], false),
-        row(benefitList.last, false),
+        row(["benefit".tr(), "free".tr(), "premiumPackage".tr()], true),
+        row(["removeAd".tr(), "no".tr(), "yes".tr()], false),
+        row(["foodCount".tr(), "1000 ${"food".tr()}", "unlimited".tr()], false),
+        row(["recommendedFood".tr(), "random".tr(), "preferences".tr()], false),
+        row(["searchFilter".tr(), "normal".tr(), "advanced".tr()], false),
+        row(["cookbookCount".tr(), "100 ${"books".tr()}", "unlimited".tr()], false),
       ],
     );
   }

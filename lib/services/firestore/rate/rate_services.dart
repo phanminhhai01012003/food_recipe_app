@@ -1,5 +1,6 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/logger.dart';
 import 'package:food_recipe_app/model/rating_model.dart';
@@ -13,7 +14,7 @@ class RateServices extends RateRepo{
     try {
       await rateCollection.doc(rating.ratingId).set(rating.toMap());
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -25,7 +26,7 @@ class RateServices extends RateRepo{
     try {
       await rateCollection.doc(id).delete();
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -39,7 +40,7 @@ class RateServices extends RateRepo{
         .snapshots()
         .map((value) => value.docs.map((e) => RatingModel.fromMap(e.data())).toList());
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -51,7 +52,7 @@ class RateServices extends RateRepo{
     try {
       await rateCollection.doc(rating.ratingId).update(rating.updateMap());
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -66,7 +67,7 @@ class RateServices extends RateRepo{
         .snapshots()
         .map((value) => value.docs.map((e) => RatingModel.fromMap(e.data())).toList());
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }

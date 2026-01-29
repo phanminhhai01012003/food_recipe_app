@@ -2,15 +2,15 @@ List<String> categoryList = [
   "tagBeef", 
   "tagChicken", 
   "tagSeafood", 
-  "Lẩu/Nướng", 
-  "Lợn", 
-  "Canh/Cháo/Súp", 
-  "Bánh mì/Ăn vặt", 
-  "Tráng miệng/Bánh ngọt", 
-  "Rau/củ/quả", 
-  "Đặc sản/Đặc trưng",
-  "Hỗn hợp",
-  "Khác"
+  "tagHotpotGrill", 
+  "tagPork", 
+  "tagSoup", 
+  "tagBread", 
+  "tagDessert", 
+  "tagVegetables", 
+  "tagCharacteristics",
+  "tagMix",
+  "tagOther"
 ];
 List<String> sliderImage = [
   "https://plus.unsplash.com/premium_photo-1728412897842-06f0fc4c2ec6?q=80&w=1245&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -20,41 +20,32 @@ List<String> sliderImage = [
   "https://images.unsplash.com/photo-1556910096-6f5e72db6803?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 ];
 List<String> reportFoodList = [
-  "Món ăn kém chất lượng hoặc không đảm bảo vệ sinh an toàn thực phẩm",
-  "Hình ảnh chứa nội dung nhạy cảm, đồi trụy (quảng cáo trá hình, khiêu dâm, kích động bạo lực, ...)",
-  "Sử dụng một số từ ngữ thô tục, xúc phạm danh dự của người khác",
-  "Nội dung đăng tải giả mạo, không đúng sự thật",
-  "Khác (vui lòng ghi rõ bên dưới)"
+  "reportFoodNotHygiene",
+  "reportFoodContainOffense",
+  "reportFoodContainVulgarWord",
+  "reportFoodNotReal",
+  "reportOther"
 ];
 List<String> reportCommentList = [
-  "Sử dụng một số từ ngữ thô tục, tiêu cực, không phù hợp",
-  "Xúc phạm danh dự, gây ảnh hưởng đến tâm lý của người khác",
-  "Quảng cáo trá hình, bán hàng trái phép",
-  "Lộ thông tin bảo mật (số điện thoại, định danh cá nhân, ...)",
-  "Khác (vui lòng ghi rõ bên dưới)"
+  "reportCommentContainVulgarWord",
+  "reportCommentDamages",
+  "reportCommentIllegalAd",
+  "reportCommentWithSecurity",
+  "reportOther"
 ];
 List<String> deleteUserList = [
-  "Tôi không muốn sử dụng ứng dụng này nữa",
-  "Tài khoản có dấu hiệu bị rò rỉ dữ liệu",
-  "Tôi muốn bỏ tài khoản này và tạo tài khoản khác",
-  "Tôi muốn bảo vệ quyền lợi của mình",
-  "Khác (vui lòng ghi rõ bên dưới)"
+  "dontwanttouse",
+  "leakData",
+  "useOtherAcc",
+  "protect",
+  "reportOther"
 ];
 List<String> rates = [
-  "Đánh giá trực tiếp trong app",
-  "Đánh giá qua Google Play/App Store"
+  "rateInApp",
+  "rateInStore"
 ];
 List<String> filterRating = [
-  "Phổ biến",
-  "Mới nhất",
-  "Cũ nhất"
+  "popular",
+  "latest",
+  "oldest"
 ];
-List<List<String>> benefitList = [
-  ["Quyền lợi được hưởng", "Miễn phí", "Gói dịch vụ"],
-  ["Loại bỏ quảng cáo", "Không", "Có"],
-  ["Số lượng món ăn", "1000 món", "Không giới hạn"],
-  ["Đề xuất món ăn", "Ngẫu nhiên", "Theo sở thích cá nhân"],
-  ["Bộ lọc tìm kiếm", "Thông thường", "Nâng cao"],
-  ["Số lượng sổ tay", "100 cuốn", "Không giới hạn"]
-];
-List<String> languages = ["eng", "vi"];

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/model/cookbook_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
@@ -30,7 +31,7 @@ class CookbookState extends ChangeNotifier{
     try {
       await bookCollection.doc(cookbook.cookbookId).set(cookbook.toMap());
     } catch (e) {
-      Message.showToast("Đã xảy ra lỗi");
+      Message.showToast("shortError".tr());
       Logger.log(e);
       rethrow;
     }
@@ -42,7 +43,7 @@ class CookbookState extends ChangeNotifier{
         "foodsList": FieldValue.arrayUnion([food.toMap()])
       });
     } catch (e) {
-      Message.showToast("Đã xảy ra lỗi");
+      Message.showToast("shortError".tr());
       Logger.log(e);
       rethrow;
     }
@@ -52,7 +53,7 @@ class CookbookState extends ChangeNotifier{
     try {
       await bookCollection.doc(cookbook.cookbookId).update(cookbook.updateMap());
     } catch (e) {
-      Message.showToast("Đã xảy ra lỗi");
+      Message.showToast("shortError".tr());
       Logger.log(e);
       rethrow;
     }
@@ -62,7 +63,7 @@ class CookbookState extends ChangeNotifier{
     try {
       await bookCollection.doc(id).delete();
     } catch (e) {
-      Message.showToast("Đã xảy ra lỗi");
+      Message.showToast("shortError".tr());
       Logger.log(e);
       rethrow;
     }
@@ -74,7 +75,7 @@ class CookbookState extends ChangeNotifier{
         "foodsList": FieldValue.arrayRemove([food.toMap()])
       });
     } catch (e) {
-      Message.showToast("Đã xảy ra lỗi");
+      Message.showToast("shortError".tr());
       Logger.log(e);
       rethrow;
     }
@@ -86,7 +87,7 @@ class CookbookState extends ChangeNotifier{
       _bookProducts = snapshot.docs.map((doc) => CookbookModel.fromMap(doc.data())).toList();
       notifyListeners();
     } catch (e) {
-      Message.showToast("Đã xảy ra lỗi");
+      Message.showToast("shortError".tr());
       Logger.log(e);
       rethrow;
     }

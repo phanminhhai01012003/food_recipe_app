@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/model/recent_view_model.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 
@@ -30,7 +31,7 @@ class HistoryState extends ChangeNotifier{
     try {
       await historyCollection.doc(view.viewId).set(view.toMap());
     } catch (e) {
-      Message.showToast("Đã xảy ra lỗi");
+      Message.showToast("shortError".tr());
       Logger.log(e);
       rethrow;
     }
@@ -40,7 +41,7 @@ class HistoryState extends ChangeNotifier{
     try {
       await historyCollection.doc(id).delete();
     } catch (e) {
-      Message.showToast("Đã xảy ra lỗi");
+      Message.showToast("shortError".tr());
       Logger.log(e);
       rethrow;
     }
@@ -55,7 +56,7 @@ class HistoryState extends ChangeNotifier{
       _viewProducts = snapshot.docs.map((e) => RecentViewModel.fromMap(e.data())).toList();
       notifyListeners();
     } catch (e) {
-      Message.showToast("Đã xảy ra lỗi");
+      Message.showToast("shortError".tr());
       Logger.log(e);
       rethrow;
     }

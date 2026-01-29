@@ -1,5 +1,6 @@
 import 'package:food_recipe_app/common/configure/logger.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/model/notification_model.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 
@@ -9,7 +10,7 @@ class NotificationData {
     try {
       await notificationCollection.doc(model.id).set(isSpecificUser ? model.toSpecificUserMap() : model.toAllUserMap());
     } catch (e) {
-      Message.showToast("Lỗi đẩy thông báo");
+      Message.showToast("notifyError".tr());
       Logger.log(e);
       rethrow;
     }
@@ -21,7 +22,7 @@ class NotificationData {
         'readAt': DateTime.now()
       });
     } catch (e) {
-      Message.showToast("Đã xảy ra lỗi");
+      Message.showToast("shortError".tr());
       Logger.log(e);
       rethrow;
     }
@@ -32,7 +33,7 @@ class NotificationData {
         .get()
         .then((ss) => ss.docs.map((e) => NotificationModel.fromMap(e.data())).toList());
     } catch (e) {
-      Message.showToast("Đã xảy ra lỗi");
+      Message.showToast("shortError".tr());
       Logger.log(e);
       rethrow;
     }
@@ -44,7 +45,7 @@ class NotificationData {
         .get()
         .then((ss) => ss.docs.map((e) => NotificationModel.fromMap(e.data())).toList());
     } catch (e) {
-      Message.showToast("Đã xảy ra lỗi");
+      Message.showToast("shortError".tr());
       Logger.log(e);
       rethrow;
     }
@@ -56,7 +57,7 @@ class NotificationData {
         .get()
         .then((ss) => ss.docs.map((e) => NotificationModel.fromMap(e.data())).toList());
     } catch (e) {
-      Message.showToast("Đã xảy ra lỗi");
+      Message.showToast("shortError".tr());
       Logger.log(e);
       rethrow;
     }

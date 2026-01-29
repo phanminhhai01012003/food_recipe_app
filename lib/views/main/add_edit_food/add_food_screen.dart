@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/list_constants.dart';
 import 'package:food_recipe_app/common/extension/duration_extension.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_assets.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
@@ -291,7 +292,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
               child: DropdownButton(
                 underline: SizedBox(),
                 isExpanded: true,
-                hint: Text("Chọn",
+                hint: Text("select".tr(),
                   style: TextStyle(
                     color: theme.colorScheme.secondary,
                     fontSize: 14,
@@ -301,7 +302,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 items: categoryList.map((String item){
                   return DropdownMenuItem(
                     value: item,
-                    child: Text(item,
+                    child: Text(item.tr(),
                       style: TextStyle(
                         color: theme.colorScheme.secondary,
                         fontSize: 12,

@@ -54,7 +54,7 @@ class _ChangeLanguageModalState extends State<ChangeLanguageModal> {
                 ),
               ),
               Text(
-                "Thay đổi ngôn ngữ",
+                "changeLanguage".tr(),
                 style: TextStyle(
                   color: theme.colorScheme.secondary,
                   fontSize: 16,

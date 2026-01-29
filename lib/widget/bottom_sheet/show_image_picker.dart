@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 
 Future<File?> showImagePickerModal(BuildContext context) async{
@@ -50,7 +51,7 @@ class ShowImagePicker extends StatelessWidget {
                 Navigator.pop(context, imagePicked);
               }
             },
-            child: Text("Chụp ảnh",
+            child: Text("camera".tr(),
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w800
@@ -70,7 +71,7 @@ class ShowImagePicker extends StatelessWidget {
                 Navigator.pop(context, imagePicked);
               }
             },
-            child: Text("Chọn ảnh",
+            child: Text("gallery".tr(),
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w800

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/logger.dart';
 import 'package:food_recipe_app/model/food_model.dart';
@@ -14,7 +15,7 @@ class FoodServices extends FoodRepo{
     try {
       await foodCollection.doc(food.foodId).set(food.toMap());
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -26,7 +27,7 @@ class FoodServices extends FoodRepo{
     try {
       await foodCollection.doc(id).delete();
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -40,7 +41,7 @@ class FoodServices extends FoodRepo{
         .snapshots()
         .map((snapshot) => snapshot.docs.map((doc) => FoodModel.fromMap(doc.data())).toList());
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -55,7 +56,7 @@ class FoodServices extends FoodRepo{
         .snapshots()
         .map((snapshot) => snapshot.docs.map((doc) => FoodModel.fromMap(doc.data())).toList());
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -70,7 +71,7 @@ class FoodServices extends FoodRepo{
         .snapshots()
         .map((snapshot) => snapshot.docs.map((doc) => FoodModel.fromMap(doc.data())).toList());
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -85,7 +86,7 @@ class FoodServices extends FoodRepo{
         .snapshots()
         .map((snapshot) => snapshot.docs.map((doc) => FoodModel.fromMap(doc.data())).toList());
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -97,7 +98,7 @@ class FoodServices extends FoodRepo{
     try {
       await foodCollection.doc(food.foodId).update(food.updateMap());
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/logger.dart';
 import 'package:food_recipe_app/model/report_model.dart';
@@ -14,7 +15,7 @@ class ReportServices extends ReportRepo{
     try { 
       await reportCollection.doc(report.reportId).set(report.toMap());
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -26,7 +27,7 @@ class ReportServices extends ReportRepo{
     try { 
       await reportCollection.doc(id).delete();
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -42,7 +43,7 @@ class ReportServices extends ReportRepo{
         .snapshots()
         .map((event) => event.docs.map((doc) => ReportModel.fromMap(doc.data())).toList());
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -54,7 +55,7 @@ class ReportServices extends ReportRepo{
     try { 
       await reportCollection.doc(report.reportId).update(report.toMap());
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }

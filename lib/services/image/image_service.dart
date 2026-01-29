@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/logger.dart';
 import 'package:food_recipe_app/services/image/image_repo.dart';
@@ -38,7 +39,7 @@ class ImageService extends ImageRepo{
       TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() => null);
       return await taskSnapshot.ref.getDownloadURL();
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -57,10 +58,10 @@ class ImageService extends ImageRepo{
       final path = "${tempDir.path}/$imageUrl";
       await dio.download(imageUrl, path);
       await Gal.putImage(path);
-      Message.showScaffoldMessage(context, "Tải ảnh thành công", AppColors.green);
+      Message.showScaffoldMessage(context, "downloadImageSuccess".tr(), AppColors.green);
       Navigator.pop(context);
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi khi tải ảnh", AppColors.red);
+      Message.showScaffoldMessage(context, "downloadImageFail".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }

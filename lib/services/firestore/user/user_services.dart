@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/logger.dart';
 import 'package:food_recipe_app/model/user_model.dart';
@@ -14,7 +15,7 @@ class UserServices extends UserRepo{
     try {
       await userCollection.doc(user.userId).set(user.toMap());
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -29,7 +30,7 @@ class UserServices extends UserRepo{
         await userCollection.doc(user.userId).set(user.toMap());
       } 
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }   
@@ -44,7 +45,7 @@ class UserServices extends UserRepo{
         .get()
         .then((value) => value.docs.map((e) => UserModel.fromMap(e.data())).toList());
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -56,7 +57,7 @@ class UserServices extends UserRepo{
     try {
       await userCollection.doc(user.userId).update(user.updateMap());
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -68,7 +69,7 @@ class UserServices extends UserRepo{
     try {
       await userCollection.doc(id).delete();
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }

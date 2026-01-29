@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/configure/logger.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,7 +24,7 @@ class ThemeState extends ChangeNotifier{
       theme = ThemeMode.values[themeIndex];
       notifyListeners();
     } catch (e) {
-      Message.showToast("Đã xảy ra lỗi");
+      Message.showToast("shortError".tr());
       Logger.log("Error: $e");
       rethrow;
     }
@@ -34,7 +35,7 @@ class ThemeState extends ChangeNotifier{
       final pref = await SharedPreferences.getInstance();
       await pref.setInt(key, theme.index);
     } catch (e) {
-      Message.showToast("Đã xảy ra lỗi");
+      Message.showToast("shortError".tr());
       Logger.log("Error: $e");
       rethrow;
     }

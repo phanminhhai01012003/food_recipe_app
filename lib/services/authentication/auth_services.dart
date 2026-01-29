@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/configure/logger.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/services/authentication/auth_repo.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -24,7 +25,7 @@ class AuthServices extends AuthRepo{
       await user?.reauthenticateWithCredential(credential);
       await user?.updatePassword(newPassword);
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đổi mật khẩu thất bại", AppColors.red);
+      Message.showScaffoldMessage(context, "changePasswordFail".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -36,7 +37,7 @@ class AuthServices extends AuthRepo{
     try{
       await auth.sendPasswordResetEmail(email: email);
     } catch(e){
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -48,7 +49,7 @@ class AuthServices extends AuthRepo{
     try {
       await auth.signOut();
     } catch (e) {
-      Message.showScaffoldMessage(context, "Lỗi khi thoát khỏi phiên đăng nhập", AppColors.red);
+      Message.showScaffoldMessage(context, "signOutFail".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -66,7 +67,7 @@ class AuthServices extends AuthRepo{
       User? user = credential.user;
       return user;
     } catch (e) {
-      Message.showScaffoldMessage(context, "Email hoặc mật khẩu không chính xác", AppColors.red);
+      Message.showScaffoldMessage(context, "signInFail".tr(), AppColors.red);
       Logger.log(e);
       return null;
     }
@@ -89,7 +90,7 @@ class AuthServices extends AuthRepo{
         );
       }
     } catch (e) {
-      Message.showScaffoldMessage(context, "Lỗi đăng nhập Facebook", AppColors.red);
+      Message.showScaffoldMessage(context, "facebookSignInFail".tr(), AppColors.red);
       Logger.log(e);
       return null;
     }
@@ -107,7 +108,7 @@ class AuthServices extends AuthRepo{
       );
       return await auth.signInWithCredential(credential);
     } catch (e) {
-      Message.showScaffoldMessage(context, "Lỗi đăng nhập Google", AppColors.red);
+      Message.showScaffoldMessage(context, "googleSignInFail".tr(), AppColors.red);
       Logger.log(e);
       return null;
     }
@@ -128,7 +129,7 @@ class AuthServices extends AuthRepo{
       user?.updateProfile(displayName: name, photoURL: avatar);
       return user;
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đăng ký tài khoản thất bại", AppColors.red);
+      Message.showScaffoldMessage(context, "signUpFail".tr(), AppColors.red);
       Logger.log(e);
       return null;
     }
@@ -140,7 +141,7 @@ class AuthServices extends AuthRepo{
     try {
       await auth.currentUser!.delete();
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi trong quá trình thực hiện", AppColors.red);
+      Message.showScaffoldMessage(context, "longError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -155,7 +156,7 @@ class AuthServices extends AuthRepo{
         FacebookAuth.instance.logOut()
       ]);
     } catch (e) {
-      Message.showScaffoldMessage(context, "Lỗi khi thoát khỏi phiên đăng nhập", AppColors.red);
+      Message.showScaffoldMessage(context, "signOutFail".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -170,7 +171,7 @@ class AuthServices extends AuthRepo{
         auth.signOut()
       ]);
     } catch (e) {
-      Message.showScaffoldMessage(context, "Lỗi khi thoát khỏi phiên đăng nhập", AppColors.red);
+      Message.showScaffoldMessage(context, "signOutFail".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }

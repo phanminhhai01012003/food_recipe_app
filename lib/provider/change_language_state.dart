@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/configure/logger.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,7 +19,7 @@ class ChangeLanguageState extends ChangeNotifier{
       final langKey = pref.getString(language_key) ?? "";
       _languageCode = langKey;
     } catch (e) {
-      Message.showToast("Đã xảy ra lỗi");
+      Message.showToast("shortError".tr());
       Logger.log("Error: $e");
       rethrow;
     }
@@ -29,7 +30,7 @@ class ChangeLanguageState extends ChangeNotifier{
       final pref = await SharedPreferences.getInstance();
       await pref.setString(language_key, _languageCode);
     } catch (e) {
-      Message.showToast("Đã xảy ra lỗi");
+      Message.showToast("shortError".tr());
       Logger.log("Error: $e");
       rethrow;
     }

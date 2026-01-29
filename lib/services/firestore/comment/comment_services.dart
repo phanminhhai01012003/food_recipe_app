@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/logger.dart';
 import 'package:food_recipe_app/model/comment_model.dart';
@@ -15,7 +16,7 @@ class CommentServices extends CommentRepo{
     try {
       await commentCollection(foodId).doc(comment.commentId).set(comment.toMap()); 
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -27,7 +28,7 @@ class CommentServices extends CommentRepo{
     try {
       await commentCollection(foodId).doc(commentId).delete();
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -41,7 +42,7 @@ class CommentServices extends CommentRepo{
         .snapshots()
         .map((ss) => ss.docs.map((e) => CommentModel.fromMap(e.data())).toList());
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -53,7 +54,7 @@ class CommentServices extends CommentRepo{
     try {
       await commentCollection(foodId).doc(comment.commentId).update(comment.updateMap());
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -67,7 +68,7 @@ class CommentServices extends CommentRepo{
         'replies': FieldValue.arrayUnion([comment.toMap()])
       });
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -81,7 +82,7 @@ class CommentServices extends CommentRepo{
         'replies': FieldValue.arrayRemove([comment.toMap()])
       });
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }
@@ -112,7 +113,7 @@ class CommentServices extends CommentRepo{
         }
       }
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }

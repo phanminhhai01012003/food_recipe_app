@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/model/save_food_model.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 
@@ -30,7 +31,7 @@ class SaveState extends ChangeNotifier{
     try {
       await saveCollection.doc(save.saveId).set(save.toMap());
     } catch (e) {
-      Message.showToast("Đã xảy ra lỗi");
+      Message.showToast("shortError".tr());
       Logger.log(e);
       rethrow;
     }
@@ -40,7 +41,7 @@ class SaveState extends ChangeNotifier{
     try {
       await saveCollection.doc(id).delete();
     } catch (e) {
-      Message.showToast("Đã xảy ra lỗi");
+      Message.showToast("shortError".tr());
       Logger.log(e);
       rethrow;
     }
@@ -52,7 +53,7 @@ class SaveState extends ChangeNotifier{
       _foodProducts = snapshot.docs.map((e) => SaveFoodModel.fromMap(e.data())).toList();
       notifyListeners();
     } catch (e) {
-      Message.showToast("Đã xảy ra lỗi");
+      Message.showToast("shortError".tr());
       Logger.log(e);
       rethrow;
     }
