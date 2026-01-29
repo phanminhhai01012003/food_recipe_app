@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/style/app_themes.dart';
@@ -17,6 +19,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
+    final localizedDelegated = LocalizedApp.of(context).delegate;
     return Consumer<ThemeState>(
       builder: (context, value, child) {
         return MediaQuery(
@@ -28,6 +31,14 @@ class _MyAppState extends State<MyApp> {
             switchInCurve: Easing.linear,
             switchOutCurve: Easing.linear,
             child: MaterialApp(
+              localizationsDelegates: [
+                GlobalMaterialLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                localizedDelegated
+              ],
+              supportedLocales: localizedDelegated.supportedLocales,
+              locale: localizedDelegated.currentLocale,
               navigatorKey: navigatorKey,
               debugShowCheckedModeBanner: false,
               title: 'PMH Food Recipe',

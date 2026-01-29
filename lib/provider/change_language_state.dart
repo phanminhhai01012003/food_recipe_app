@@ -5,8 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ChangeLanguageState extends ChangeNotifier{
   String language_key = "language";
-  bool _isEng = false;
-  bool get isEng => _isEng;
+  String _languageCode = "vi";
+  String get languageCode => _languageCode;
 
   ChangeLanguageState(){
     loadData();
@@ -15,8 +15,8 @@ class ChangeLanguageState extends ChangeNotifier{
   void loadData() async{
     try { 
       final pref = await SharedPreferences.getInstance();
-      final langKey = pref.getBool(language_key) ?? false;
-      _isEng = langKey;
+      final langKey = pref.getString(language_key) ?? "";
+      _languageCode = langKey;
     } catch (e) {
       Message.showToast("Đã xảy ra lỗi");
       Logger.log("Error: $e");
@@ -27,7 +27,7 @@ class ChangeLanguageState extends ChangeNotifier{
   void saveData() async{
     try {
       final pref = await SharedPreferences.getInstance();
-      await pref.setBool(language_key, _isEng);
+      await pref.setString(language_key, _languageCode);
     } catch (e) {
       Message.showToast("Đã xảy ra lỗi");
       Logger.log("Error: $e");
@@ -35,14 +35,14 @@ class ChangeLanguageState extends ChangeNotifier{
     }
   }
 
-  void setupLanguage(bool eng){
-    if (_isEng != eng) {
-      _isEng = eng;
+  void setupLanguage(String langCode){
+    if (_languageCode != langCode) {
+      _languageCode = langCode;
       saveData();
       notifyListeners();
     }
   }
 
-  void setEnglishLanguage() => setupLanguage(true);
-  void setVietnameseLanguage() => setupLanguage(false);
+  void setEnglishLanguage() => setupLanguage("en");
+  void setVietnameseLanguage() => setupLanguage("vi");
 }

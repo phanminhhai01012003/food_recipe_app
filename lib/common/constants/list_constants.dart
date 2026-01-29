@@ -1,7 +1,7 @@
 List<String> categoryList = [
-  "Bò", 
-  "Gà", 
-  "Hải sản", 
+  "tagBeef", 
+  "tagChicken", 
+  "tagSeafood", 
   "Lẩu/Nướng", 
   "Lợn", 
   "Canh/Cháo/Súp", 
@@ -57,3 +57,4 @@ List<List<String>> benefitList = [
   ["Bộ lọc tìm kiếm", "Thông thường", "Nâng cao"],
   ["Số lượng sổ tay", "100 cuốn", "Không giới hạn"]
 ];
+List<String> languages = ["eng", "vi"];

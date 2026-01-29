@@ -49,7 +49,7 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
                 ),
               ),
               Text(
-                "${priceFormat(widget.sub['price'], widget.sub['priceUnit'])}/${widget.sub['time']}",
+                "${priceFormat(widget.sub['price'].toString(), widget.sub['priceUnit'])}/${widget.sub['time']}",
                 style: TextStyle(
                   color: AppColors.white,
                   fontSize: 14,

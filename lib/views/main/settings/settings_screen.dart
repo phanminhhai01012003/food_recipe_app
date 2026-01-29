@@ -18,7 +18,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  void onChooseMode(ModeSelection mode){
+  void onChooseMode(ModeSelection mode) async{
     switch(mode){
       case ModeSelection.about:
         Navigator.push(context, checkDeviceRoute(about));
@@ -42,7 +42,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         Navigator.push(context, checkDeviceRoute(fullRatingPage));
         break;
       case ModeSelection.language:
-        onChangeLanguage();
+        await changeLanguageModal(context);
         break;
     }
   }
@@ -85,9 +85,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       case ModeSelection.language:
         return "Ngôn ngữ"; 
     }
-  }
-  Future<void> onChangeLanguage() async{
-    await changeLanguageModal(context).then((value){});
   }
   @override
   Widget build(BuildContext context) {

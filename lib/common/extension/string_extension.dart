@@ -1,3 +1,4 @@
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:intl/intl.dart';
 
 extension StringExtension on String {
@@ -7,5 +8,8 @@ extension StringExtension on String {
     } catch (e) {
       return "";
     }
+  }
+  String tr([String? value]){
+    return translate(this, args: {"value": value});
   }
 }
