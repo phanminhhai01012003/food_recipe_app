@@ -2,6 +2,7 @@ import 'dart:collection';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/model/cookbook_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
@@ -21,7 +22,6 @@ class CookbookSelection extends StatefulWidget {
 
 class _CookbookSelectionState extends State<CookbookSelection> {
   HashSet<CookbookModel> choices = HashSet();
-  bool canMultiSelected = false;
   void onMultiSelect(CookbookModel cookbook){
     if (choices.contains(cookbook)){
       choices.remove(cookbook);
@@ -76,7 +76,7 @@ class _CookbookSelectionState extends State<CookbookSelection> {
                         ),
                         SizedBox(height: 10),
                         Text(
-                          "Không có dữ liệu",
+                          "noData".tr(),
                           style: TextStyle(
                             color: theme.colorScheme.secondary,
                             fontSize: 14,
@@ -96,10 +96,6 @@ class _CookbookSelectionState extends State<CookbookSelection> {
                   itemCount: value.length,
                   itemBuilder: (context, index) => GestureDetector(
                     onTap: () => onMultiSelect(value[index]),
-                    onLongPress: () {
-                      canMultiSelected = true;
-                      onMultiSelect(value[index]);
-                    },
                     child: CookbookList(
                       cookbook: value[index],
                       food: widget.food,
@@ -124,11 +120,11 @@ class _CookbookSelectionState extends State<CookbookSelection> {
                     context.read<CookbookState>().toggleFoodOnCookbook(cookbook, widget.food);
                   }
                   context.loaderOverlay.hide();
-                  Message.showScaffoldMessage(context, "Thêm thành công", AppColors.green);
+                  Message.showScaffoldMessage(context, "addCookbookSuccess".tr(), AppColors.green);
                   Navigator.pop(context);
                 },
                 child: Text(
-                  "Thêm",
+                  "add".tr(),
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w700

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/model/cookbook_model.dart';
@@ -116,7 +117,7 @@ class _CookbookDetailState extends State<CookbookDetail> {
                     onPressed: () => Navigator.push(context, checkDeviceRoute(editCookbook(widget.cookbook))),
                     color: AppColors.yellow,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33)),
-                    child: Text("Sửa thông tin",
+                    child: Text("editInformation".tr(),
                       style: TextStyle(
                         color: theme.colorScheme.primary,
                         fontSize: 14,
@@ -127,14 +128,14 @@ class _CookbookDetailState extends State<CookbookDetail> {
                   MaterialButton(
                     onPressed: () => ShowYesnoDialog.checkDeviceDialog(
                       context, 
-                      title: "Xóa nhật ký", 
-                      content: "Bạn có muốn xóa nhật ký vừa tạo không?", 
+                      title: "cookbookDeleteTitle".tr(), 
+                      content: "cookbookDeleteDesc".tr(), 
                       onAcceptTap: () => onDelete(widget.cookbook.cookbookId), 
                       onCancelTap: () => Navigator.pop(context)
                     ),
                     color: AppColors.red,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33)),
-                    child: Text("Xóa nhật ký",
+                    child: Text("cookbookDeleteTitle".tr(),
                       style: TextStyle(
                         color: theme.colorScheme.primary,
                         fontSize: 14,

@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_assets.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/model/cookbook_model.dart';
@@ -30,7 +31,6 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   HashSet<FoodModel> choices = HashSet();
-  bool canMultiSelected = false;
   void onMultiSelect(FoodModel food){
     if (choices.contains(food)){
       choices.remove(food);
@@ -39,15 +39,15 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
     }
     setState(() {});
   }
-  String get getSelectedItemCount {
-    return choices.isEmpty 
-      ? "Chưa chọn món ăn nào" 
-      : "${choices.length.toString()} món ăn được chọn";
-  }
   void add() async{
     context.loaderOverlay.show();
     if (_titleController.text.isEmpty){
-      Message.showToast("Tên nhật ký là bắt buộc");
+      Message.showToast("cookbookTitleRequired".tr());
+      context.loaderOverlay.hide();
+      return;
+    }
+    if (choices.isEmpty) {
+      Message.showToast("cookbookFoodRequired".tr());
       context.loaderOverlay.hide();
       return;
     }
@@ -66,7 +66,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
     context.read<CookbookState>().updateCookbook(cookbook);
     if (!mounted) return;
     context.loaderOverlay.hide();
-    Message.showScaffoldMessage(context, "Cập nhật thành công", AppColors.green);
+    Message.showScaffoldMessage(context, "updateFoodSuccess".tr(), AppColors.green);
     Navigator.pop(context);
   }
   @override
@@ -86,7 +86,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          canMultiSelected ? getSelectedItemCount : "Chỉnh sửa thông tin",
+          choices.isNotEmpty ? "updateCookbook".tr() : "selectedFood".tr(choices.length.toString()),
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w700
@@ -96,18 +96,17 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
         foregroundColor: theme.appBarTheme.foregroundColor,
         leading: Padding(
           padding: EdgeInsets.all(8),
-          child: canMultiSelected ? IconButton(
+          child: choices.isNotEmpty ? IconButton(
             onPressed: (){
               choices.clear();
-              canMultiSelected = false;
               setState(() {});
             }, 
             icon: Icon(Icons.close, size: 20)
           ) : IconButton(
             onPressed: () => ShowYesnoDialog.checkDeviceDialog(
               context, 
-              title: "Loại bỏ thay đổi", 
-              content: "Bạn có chắc chắn muốn bỏ thay đổi không? Mọi thay đổi sẽ không được lưu", 
+              title: "discardChangeTitle".tr(), 
+              content: "discardChangeDesc".tr(), 
               onAcceptTap: () async{
                 Navigator.pop(context);
                 await Future.delayed(Duration(seconds: 1), (){
@@ -122,17 +121,6 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
             )
           ),
         ),
-        actions: [
-          Visibility(
-            visible: choices.isNotEmpty,
-            child: IconButton(
-              onPressed: () {
-                choices.forEach((food) => onMultiSelect(food));
-              }, 
-              icon: Icon(Icons.select_all, size: 20)
-            ),
-          )
-        ],
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
@@ -162,7 +150,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
             ),
             SizedBox(height: 20),
             Text(
-              "Tên nhật ký",
+              "cookbookName".tr(),
               style: TextStyle(
                 color: theme.colorScheme.secondary,
                 fontSize: 16,
@@ -187,7 +175,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(color: theme.colorScheme.secondary)
                 ),
-                hintText: "Nhập tên nhật ký",
+                hintText: "cookbookNameInput".tr(),
                 hintStyle: TextStyle(
                   color: theme.colorScheme.secondary,
                   fontSize: 14,
@@ -196,7 +184,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
               ),
             ),
             SizedBox(height: 20),
-            Text("Mô tả",
+            Text("foodDesc".tr(),
               style: TextStyle(
                 color: theme.colorScheme.secondary,
                 fontSize: 16,
@@ -219,7 +207,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(color: theme.colorScheme.secondary)
                 ),
-                hintText: "Mô tả về nhật ký đó",
+                hintText: "cookbookDescInput".tr(),
                 hintStyle: TextStyle(
                   color: theme.colorScheme.secondary,
                   fontSize: 14,
@@ -250,10 +238,6 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
                     itemCount: foodData.length,
                     itemBuilder: (context, index) => InkWell(
                       onTap: () => onMultiSelect(foodData[index]),
-                      onLongPress: (){
-                        canMultiSelected = true;
-                        onMultiSelect(foodData[index]);
-                      },
                       child: Card(
                         elevation: 10,
                         margin: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -302,7 +286,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
                 ),
                 onPressed: add, 
                 child: Text(
-                  "Cập nhật",
+                  "update".tr(),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w700

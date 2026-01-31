@@ -49,22 +49,22 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
   }
   void invalidInformation(){
     if (titleController.text.isEmpty) {
-      Message.showToast("Tên món ăn là bắt buộc");
+      Message.showToast("foodTitleRequired".tr());
       context.loaderOverlay.hide();
       return;
     }
     if (selectCategory == null && selectCategory!.isEmpty){
-      Message.showToast("Vui lòng chọn thể loại");
+      Message.showToast("categoriesInvalid".tr());
       context.loaderOverlay.hide();
       return;
     }
     if (ingredientController.any((e) => e.text.isEmpty) || stepController.any((e) => e.text.isEmpty)){
-      Message.showToast("Nguyên liệu hoặc cách làm không được để trống");
+      Message.showToast("ingredientsOrStepsInvalid".tr());
       context.loaderOverlay.hide();
       return;
     }
     if (int.parse(dietController.text) <= 0 || _duration.ddhhmmss == "00:00:00:00"){
-      Message.showToast("Khẩu phần ăn uống hoặc thời gian thực hiện không hợp lệ");
+      Message.showToast("dietOrDurationInvalid".tr());
       context.loaderOverlay.hide();
       return;
     }
@@ -95,7 +95,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
     await foodServices.updateFood(context, food);
     if(!mounted) return;
     context.loaderOverlay.hide();
-    Message.showScaffoldMessage(context, "Cập nhật thành công", AppColors.green);
+    Message.showScaffoldMessage(context, "updateFoodSuccess".tr(), AppColors.green);
     Navigator.pop(context);
   }
   @override
@@ -117,15 +117,15 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
         backgroundColor: theme.appBarTheme.backgroundColor,
         foregroundColor: theme.appBarTheme.foregroundColor,
         centerTitle: true,
-        title: Text("Chỉnh sửa món ăn"),
+        title: Text("updateFood".tr()),
         leading: Padding(
           padding: EdgeInsets.all(8),
           child: IconButton(
             onPressed: () {
               ShowYesnoDialog.checkDeviceDialog(
                 context, 
-                title: "Loại bỏ thay đổi", 
-                content: "Bạn có chắc chắn muốn bỏ thay đổi không? Mọi thay đổi sẽ không được lưu", 
+                title: "discardChangeTitle".tr(), 
+                content: "discardChangeDesc".tr(), 
                 onAcceptTap: () async{
                   Navigator.pop(context);
                   await Future.delayed(Duration(seconds: 1),(){
@@ -173,7 +173,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
               ),
             ),
             SizedBox(height: 20),
-            Text("Tên món ăn",
+            Text("foodTitle".tr(),
               style: TextStyle(
                 color: theme.colorScheme.secondary,
                 fontSize: 16,
@@ -199,7 +199,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(color: theme.colorScheme.secondary)
                 ),
-                hintText: "Nhập tên món ăn",
+                hintText: "foodTitleInput".tr(),
                 hintStyle: TextStyle(
                   color: theme.colorScheme.secondary,
                   fontSize: 14,
@@ -208,7 +208,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
               ),
             ),
             SizedBox(height: 20),
-            Text("Mô tả",
+            Text("foodDesc".tr(),
               style: TextStyle(
                 color: theme.colorScheme.secondary,
                 fontSize: 16,
@@ -232,7 +232,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(color: theme.colorScheme.secondary)
                 ),
-                hintText: "Mô tả về món ăn đó",
+                hintText: "foodDescInput".tr(),
                 hintStyle: TextStyle(
                   color: theme.colorScheme.secondary,
                   fontSize: 14,
@@ -247,7 +247,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
               ),
             ),
             SizedBox(height: 20),
-            Text("Thể loại",
+            Text("categories".tr(),
               style: TextStyle(
                 color: theme.colorScheme.secondary,
                 fontSize: 16,
@@ -298,7 +298,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Khẩu phần",
+                Text("diet".tr(),
                   style: TextStyle(
                     color: theme.colorScheme.secondary,
                     fontSize: 16,
@@ -324,12 +324,6 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(color: theme.colorScheme.secondary)
                           ),
-                          hintText: "Số lượng",
-                          hintStyle: TextStyle(
-                            color: theme.colorScheme.secondary,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w800
-                          )
                         ),
                         style: TextStyle(
                           color: theme.colorScheme.secondary,
@@ -339,7 +333,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                       ),
                     ),
                     SizedBox(width: 5),
-                    Text("người",
+                    Text("people".tr(),
                       style: TextStyle(
                         color: theme.colorScheme.secondary,
                         fontSize: 16,
@@ -354,7 +348,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Thời gian",
+                Text("duration".tr(),
                   style: TextStyle(
                     color: theme.colorScheme.secondary,
                     fontSize: 16,
@@ -392,7 +386,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
               ],
             ),
             SizedBox(height: 20),
-            Text("Các nguyên liệu chính",
+            Text("ingredients".tr(),
               style: TextStyle(
                 color: theme.colorScheme.secondary,
                 fontSize: 16,
@@ -414,7 +408,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                     fontSize: 14
                   ),
                   decoration: InputDecoration(
-                    hintText: "Nguyên liệu",
+                    hintText: "ingredientsInput".tr(),
                     hintStyle: TextStyle(
                       color: theme.colorScheme.secondary,
                       fontSize: 14,
@@ -478,14 +472,14 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                       ingredientController.add(TextEditingController());
                     });
                   }, 
-                  child: Text("Thêm",
+                  child: Text("add".tr(),
                     style: TextStyle(fontSize: 16),
                   )
                 ),
               ),
             ),
             SizedBox(height: 20),
-            Text("Cách làm",
+            Text("steps1".tr(),
               style: TextStyle(
                 color: theme.colorScheme.secondary,
                 fontSize: 16,
@@ -507,7 +501,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                   ),
                   cursorColor: AppColors.blue,
                   decoration: InputDecoration(
-                    hintText: "Các bước chế biến",
+                    hintText: "stepsInput".tr(),
                     hintStyle: TextStyle(
                       color: theme.colorScheme.secondary,
                       fontSize: 14,
@@ -571,7 +565,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                       stepController.add(TextEditingController());
                     });
                   }, 
-                  child: Text("Thêm",
+                  child: Text("add".tr(),
                     style: TextStyle(fontSize: 16),
                   )
                 ),

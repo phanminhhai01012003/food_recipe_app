@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_assets.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
@@ -118,7 +119,7 @@ class _OnboardState extends State<Onboard> with TickerProviderStateMixin{
                   alignment: Alignment.topRight,
                   child: TextButton(
                     onPressed: navigateToNewPage, 
-                    child: Text("Bỏ qua", 
+                    child: Text("skip".tr(), 
                       style: TextStyle(
                         color: AppColors.white, 
                         fontSize: 16
@@ -134,17 +135,17 @@ class _OnboardState extends State<Onboard> with TickerProviderStateMixin{
                       _buildPage(
                         image: foodDesignImage, 
                         title: "PMH Food Recipe", 
-                        desc: "Hãy bắt đầu trải nghiệm chế biến các món ăn cho riêng bạn", 
+                        desc: "exp".tr(), 
                       ),
                       _buildPage(
                         image: foodImage, 
-                        title: "Những ý tưởng mới", 
-                        desc: "Khám phá những ý tưởng mới về món ăn và truyền cảm hứng cho tất cả mọi người", 
+                        title: "idea".tr(), 
+                        desc: "discoverIdea".tr(), 
                       ),
                       _buildPage(
                         image: cookingImage, 
-                        title: "Gia đình là số 1", 
-                        desc: "Những món ăn ngon miệng sẽ đem lại hạnh phúc cho cả gia đình bạn", 
+                        title: "numberone".tr(), 
+                        desc: "deliciousFood".tr(), 
                       )
                     ],
                   ),
@@ -164,14 +165,14 @@ class _OnboardState extends State<Onboard> with TickerProviderStateMixin{
                           child: _navigatorButton(
                             pageChanged: prevPage, 
                             buttonColor: AppColors.white, 
-                            text: "Trước", 
+                            text: "prev".tr(), 
                             textColor: AppColors.black
                           ),
                         ),
                         _navigatorButton(
                           pageChanged: nextPage, 
                           buttonColor: AppColors.green, 
-                          text: _currentPage == 2 ? "Bắt đầu" : "Tiếp theo", 
+                          text: _currentPage == 2 ? "start".tr() : "next".tr(), 
                           textColor: AppColors.white
                         )
                       ],

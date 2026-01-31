@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/extension/datetime_extension.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/convert.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
@@ -145,7 +146,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                         alignment: Alignment.center,
                         child: IconButton(
                           onPressed: () async{
-                            await showReportModal(context, "món ${widget.food.title}", widget.food.userName, null);
+                            await showReportModal(context, "${"food".tr()} ${widget.food.title}", widget.food.userName, null);
                           },
                           icon: Icon(
                             Icons.warning_sharp,
@@ -186,7 +187,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                   ),
                   SizedBox(height: 20),
                   Text(
-                    "Thể loại: ${widget.food.tag}",
+                    "${"categories".tr()}: ${widget.food.tag}",
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
@@ -197,7 +198,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                   Row(
                     children: [
                       Text(
-                        "Đã tạo: ${widget.food.createdAt.ddmmyyyy}",
+                        "created".tr(widget.food.createdAt.ddmmyyyy),
                         style: TextStyle(
                           color: theme.colorScheme.secondary,
                           fontSize: 14,
@@ -206,7 +207,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                       ),
                       SizedBox(width: 50),
                       Text(
-                        "${widget.food.views} lượt xem",
+                        "views".tr(widget.food.views.toString()),
                         style: TextStyle(
                           color: theme.colorScheme.secondary,
                           fontSize: 14,
@@ -249,7 +250,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                     ),
                   ),
                   SizedBox(height: 20),
-                  Text("Mô tả:",
+                  Text("${"foodDesc".tr()}:",
                     style: TextStyle(
                       color: theme.colorScheme.secondary,
                       fontSize: 20,
@@ -275,7 +276,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                       ),
                       SizedBox(width: 10),
                       Text(
-                        "${widget.food.diet} người",
+                        "${widget.food.diet} ${"people".tr()}",
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
@@ -301,7 +302,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                   ),
                   SizedBox(height: 20),
                   Text(
-                    "Nguyên liệu:",
+                    "${"ingredientsInput".tr()}:",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -343,7 +344,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                   ),
                   SizedBox(height: 20),
                   Text(
-                    "Các bước thực hiện:",
+                    "steps2".tr(),
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -361,7 +362,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Bước ${index + 1}: ",
+                              "step".tr("${index + 1}"),
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.normal,
@@ -448,7 +449,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                           Icon(Icons.comment, size: 20),
                           SizedBox(width: 5),
                           Text(
-                            "Bình luận",
+                            "comment".tr(),
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w700
@@ -480,7 +481,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                           ),
                           SizedBox(width: 5),
                           Text(
-                            "Nhật ký",
+                            "cookbook".tr(),
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w700

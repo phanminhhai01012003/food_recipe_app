@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/widget/food_display_widget/food_display_grid.dart';
@@ -25,7 +26,7 @@ class _AllFoodByDateState extends State<AllFoodByDate> {
         backgroundColor: theme.appBarTheme.backgroundColor,
         foregroundColor: theme.appBarTheme.foregroundColor,
         elevation: 0,
-        title: Text(widget.isDescending ? "Gần đây nhất" : "Sớm nhất",
+        title: Text(widget.isDescending ? "mostRecent".tr() : "earliest".tr(),
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold

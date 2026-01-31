@@ -19,37 +19,40 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    final localizedDelegated = LocalizedApp.of(context).delegate;
-    return Consumer<ThemeState>(
-      builder: (context, value, child) {
-        return MediaQuery(
-          data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1)),
-          child: GlobalLoaderOverlay(
-            closeOnBackButton: false,
-            overlayColor: Colors.white24,
-            overlayWidgetBuilder: (progress) => Center(child: CircularProgressIndicator(color: AppColors.yellow)),
-            switchInCurve: Easing.linear,
-            switchOutCurve: Easing.linear,
-            child: MaterialApp(
-              localizationsDelegates: [
-                GlobalMaterialLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                localizedDelegated
-              ],
-              supportedLocales: localizedDelegated.supportedLocales,
-              locale: localizedDelegated.currentLocale,
-              navigatorKey: navigatorKey,
-              debugShowCheckedModeBanner: false,
-              title: 'PMH Food Recipe',
-              theme: AppThemes.lightTheme,
-              darkTheme: AppThemes.darkTheme,
-              themeMode: value.themeMode,
-              home: splashScreen
+    var localizedDelegated = LocalizedApp.of(context).delegate;
+    return LocalizationProvider(
+      state: LocalizationProvider.of(context).state,
+      child: Consumer<ThemeState>(
+        builder: (context, value, child) {
+          return MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1)),
+            child: GlobalLoaderOverlay(
+              closeOnBackButton: false,
+              overlayColor: Colors.white24,
+              overlayWidgetBuilder: (progress) => Center(child: CircularProgressIndicator(color: AppColors.yellow)),
+              switchInCurve: Easing.linear,
+              switchOutCurve: Easing.linear,
+              child: MaterialApp(
+                localizationsDelegates: [
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  localizedDelegated
+                ],
+                supportedLocales: localizedDelegated.supportedLocales,
+                locale: localizedDelegated.currentLocale,
+                navigatorKey: navigatorKey,
+                debugShowCheckedModeBanner: false,
+                title: 'PMH Food Recipe',
+                theme: AppThemes.lightTheme,
+                darkTheme: AppThemes.darkTheme,
+                themeMode: value.themeMode,
+                home: splashScreen
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

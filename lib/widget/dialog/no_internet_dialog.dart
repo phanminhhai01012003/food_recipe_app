@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 
 void showNoInternetDialog(BuildContext context, {required VoidCallback onPressed}) {
@@ -22,7 +23,7 @@ void showNoInternetDialog(BuildContext context, {required VoidCallback onPressed
             child: Icon(Icons.wifi_off, color: AppColors.red),
           ),
           SizedBox(height: 30),
-          Text("Không có internet",
+          Text("noInternetTitle".tr(),
             style: TextStyle(
               color: AppColors.black,
               fontSize: 18,
@@ -30,7 +31,7 @@ void showNoInternetDialog(BuildContext context, {required VoidCallback onPressed
             ),
           ),
           SizedBox(height: 5),
-          Text("Vui lòng kiểm tra kết nối của bạn và thử lại",
+          Text("noInternetDesc".tr(),
             style: TextStyle(
               color: AppColors.black,
               fontSize: 14,
@@ -48,7 +49,7 @@ void showNoInternetDialog(BuildContext context, {required VoidCallback onPressed
                 foregroundColor: AppColors.white,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33))
               ),
-              child: Text("Thử lại",
+              child: Text("tryAgain".tr(),
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700

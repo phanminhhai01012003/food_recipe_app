@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/model/category_model.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
@@ -13,7 +14,7 @@ class TagServices {
         .snapshots()
         .map((event) => event.docs.map((e) => CategoryModel.fromMap(e.data())).toList());
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }

@@ -67,22 +67,22 @@ class _ChangeLanguageModalState extends State<ChangeLanguageModal> {
                 langImage: viFlag, 
                 langTitle: "vi".tr(), 
                 onChanged: () async{
-                  await changeLocale(context, "vi");
+                  await changeLocale(context, localeToString(Locale("vi")));
                   value.setVietnameseLanguage();
                   Navigator.pop(context);
                 }, 
-                isSelected: value.languageCode == "vi"
+                isSelected: value.isVietnamese
               ),
               selectLanguageTileButton(
                 context, 
                 langImage: enFlag, 
                 langTitle: "en".tr(), 
                 onChanged: () async{
-                  await changeLocale(context, "en");
+                  await changeLocale(context, localeToString(Locale("en")));
                   value.setEnglishLanguage();
                   Navigator.pop(context);
                 }, 
-                isSelected: value.languageCode == "en"
+                isSelected: value.isEnglish
               )
             ],
           ),

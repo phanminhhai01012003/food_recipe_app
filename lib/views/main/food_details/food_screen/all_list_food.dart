@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/widget/food_display_widget/food_display_grid.dart';
 import 'package:food_recipe_app/widget/load_data/load_data.dart';
@@ -23,7 +24,7 @@ class _AllListFoodState extends State<AllListFood> {
         backgroundColor: theme.appBarTheme.backgroundColor,
         foregroundColor: theme.appBarTheme.foregroundColor,
         elevation: 0,
-        title: Text("Dành cho bạn",
+        title: Text("forYou".tr(),
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold

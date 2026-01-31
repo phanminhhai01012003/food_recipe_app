@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/widget/food_display_widget/food_display_list.dart';
 import 'package:food_recipe_app/widget/load_data/load_data.dart';
@@ -81,7 +82,7 @@ class _SearchPageState extends State<SearchPage> {
                     height: 20,
                     child: Icon(Icons.search, color: AppColors.grey),
                   ),
-                  hintText: "Tìm kiếm",
+                  hintText: "search".tr(),
                   hintStyle: TextStyle(
                     color: AppColors.grey,
                     fontSize: 12,

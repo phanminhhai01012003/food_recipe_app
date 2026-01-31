@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/extension/datetime_extension.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_assets.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
@@ -18,7 +19,7 @@ class CategoriesPage extends StatefulWidget {
 }
 
 class _CategoriesPageState extends State<CategoriesPage> {
-  String selectCategory = "Tất cả";
+  String selectCategory = "all";
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -112,7 +113,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     height: 20,
                     child: Icon(Icons.search, color: AppColors.grey),
                   ),
-                  hintText: "Tìm kiếm",
+                  hintText: "search".tr(),
                   hintStyle: TextStyle(
                     color: AppColors.grey,
                     fontSize: 12,
@@ -175,7 +176,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                     ),
                                     margin: EdgeInsets.only(right: 20),
                                     child: Text(
-                                      categories[index].tag,
+                                      categories[index].tag.tr(),
                                       style: TextStyle(
                                         color: selectCategory == categories[index].tag
                                           ? AppColors.white : theme.colorScheme.secondary,
@@ -194,7 +195,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     SizedBox(height: 20),
                     Expanded(
                       child: StreamBuilder(
-                        stream: selectCategory == "Tất cả" 
+                        stream: selectCategory == "all" 
                           ? foodServices.getFood(context) 
                           : foodServices.getFoodByTag(context, selectCategory), 
                         builder: (context, snapshot) {

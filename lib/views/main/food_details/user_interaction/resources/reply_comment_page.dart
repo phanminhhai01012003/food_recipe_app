@@ -4,6 +4,7 @@ import 'package:comment_box/comment/comment.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/model/comment_model.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/component/comment_widget.dart';
@@ -65,7 +66,7 @@ class _ReplyCommentPageState extends State<ReplyCommentPage> {
         backgroundColor: theme.appBarTheme.backgroundColor,
         foregroundColor: theme.appBarTheme.foregroundColor,
         title: Text(
-          "Trả lời bình luận của ${widget.comment.userName} (${widget.comment.replies.length})",
+          "${"replyComment".tr(widget.comment.userName)} (${widget.comment.replies.length})",
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w800
@@ -76,8 +77,8 @@ class _ReplyCommentPageState extends State<ReplyCommentPage> {
       body: CommentBox(
         formKey: formKey,
         userImage: CommentBox.commentImageParser(imageURLorPath: currentUser.photoURL!),
-        labelText: "Viết bình luận",
-        errorText: "Không được để trống bình luận",
+        labelText: "writeComment".tr(),
+        errorText: "commentInvalid".tr(),
         withBorder: true,
         sendButtonMethod: () {
           if (formKey.currentState!.validate()){

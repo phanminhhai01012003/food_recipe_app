@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 
 class ShowYesnoDialog {
@@ -40,7 +41,7 @@ class ShowYesnoDialog {
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))
             ),
             onPressed: onAcceptTap,
-            child: Text("Có",
+            child: Text("yes".tr(),
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w700
@@ -49,7 +50,7 @@ class ShowYesnoDialog {
           ),
           TextButton(
             onPressed: onCancelTap, 
-            child: Text("Không", 
+            child: Text("no".tr(), 
               style: TextStyle(
                 color: theme.colorScheme.secondary,
                 fontSize: 14,
@@ -89,7 +90,7 @@ class ShowYesnoDialog {
         actions: [
           CupertinoDialogAction(
             onPressed: onAcceptTap,
-            child: Text("Có", 
+            child: Text("yes".tr(), 
               style: TextStyle(
                 color: AppColors.blue,
                 fontSize: 14,
@@ -99,7 +100,7 @@ class ShowYesnoDialog {
           ),
           CupertinoDialogAction(
             onPressed: onCancelTap,
-            child: Text("Không", 
+            child: Text("no".tr(), 
               style: TextStyle(
                 color: AppColors.red,
                 fontSize: 14,

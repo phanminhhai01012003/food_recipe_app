@@ -4,6 +4,7 @@ import 'package:comment_box/comment/comment.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/convert.dart';
 import 'package:food_recipe_app/model/comment_model.dart';
@@ -39,7 +40,7 @@ class _CommentPageState extends State<CommentPage> {
       createdAt: DateTime.now()
     );
     await commentServices.addComment(context, comment, widget.food.foodId).then((_) async{
-      Message.showScaffoldMessage(context, "Đã gửi bình luận", AppColors.green);
+      Message.showScaffoldMessage(context, "sendCommentSuccess".tr(), AppColors.green);
       // pushCommentNotifications();
     });
   }
@@ -80,8 +81,8 @@ class _CommentPageState extends State<CommentPage> {
       body: CommentBox(
         formKey: formKey,
         userImage: CommentBox.commentImageParser(imageURLorPath: currentUser.photoURL!),
-        labelText: "Viết bình luận",
-        errorText: "Không được để trống bình luận",
+        labelText: "writeComment".tr(),
+        errorText: "commentInvalid".tr(),
         withBorder: true,
         sendButtonMethod: () {
           if (formKey.currentState!.validate()){
@@ -138,7 +139,7 @@ class _CommentPageState extends State<CommentPage> {
       builder: (context, snapshot){
         if (!snapshot.hasData || snapshot.hasError){
           return Text(
-            "Bình luận (0)",
+            "${"comment".tr()} (0)",
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w800
@@ -149,7 +150,7 @@ class _CommentPageState extends State<CommentPage> {
         } else {
           int data = snapshot.data!;
           return Text(
-            "Bình luận ($data)",
+            "${"comment".tr()} ($data)",
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w800

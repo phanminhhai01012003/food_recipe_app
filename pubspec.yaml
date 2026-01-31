@@ -115,6 +115,8 @@ flutter:
     - assets/document/document.pdf
     - assets/document/pairpro.pdf
     - assets/document/Flutter.pdf
+    - assets/language/en.json
+    - assets/language/vi.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

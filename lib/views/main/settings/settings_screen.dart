@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 
 import 'package:food_recipe_app/common/configure/routes.dart';
@@ -69,21 +70,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
   String renderTitle(ModeSelection mode){
     switch (mode) {
       case ModeSelection.about:
-        return "Giới thiệu";
+        return "about".tr();
       case ModeSelection.appServices:
-        return "Dịch vụ";
+        return "appServices".tr();
       case ModeSelection.storage:
-        return "Kho lưu trữ";
+        return "storage".tr();
       case ModeSelection.report:
-        return "Danh sách báo cáo/chặn";
+        return "reportList".tr();
       case ModeSelection.changePassword:
-        return "Đổi mật khẩu";
+        return "changePassword".tr();
       case ModeSelection.theme:
-        return "Giao diện";
+        return "theme".tr();
       case ModeSelection.rating:
-        return "Đánh giá";
+        return "rate".tr();
       case ModeSelection.language:
-        return "Ngôn ngữ"; 
+        return "lang".tr(); 
     }
   }
   @override

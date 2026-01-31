@@ -40,7 +40,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
     context.loaderOverlay.show();
     if (selectedOption!.contains("Khác")){
       if (_otherReport.text.isEmpty){
-        Message.showToast("Vui lòng điền đầy đủ thông tin");
+        Message.showToast("infoEmpty".tr());
         context.loaderOverlay.hide();
         return;
       }
@@ -58,7 +58,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
       context.loaderOverlay.hide();
       Message.showScaffoldMessage(
         context, 
-        "Cảm ơn bạn! Kết quả duyệt sẽ được công bố trong thời gian sớm nhất", 
+        "reportSuccess".tr(), 
         AppColors.green
       );
       Navigator.pop(context);
@@ -69,7 +69,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
     // TODO: implement initState
     super.initState();
     if (widget.reports != null) {
-      if (widget.title.contains("món")) {
+      if (widget.title.contains("food".tr())) {
         if (selectedOption == reportFoodList.last) {
           _otherReport.text = widget.reports!.reason;
         } else {

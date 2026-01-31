@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/model/cookbook_model.dart';
@@ -36,7 +37,7 @@ class _CookbookScreenState extends State<CookbookScreen> {
         backgroundColor: theme.appBarTheme.backgroundColor,
         foregroundColor: theme.appBarTheme.foregroundColor,
         title: Text(
-          "Sổ tay nấu ăn của bạn",
+          "myCookbook".tr(),
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w500
@@ -58,7 +59,7 @@ class _CookbookScreenState extends State<CookbookScreen> {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    "Không có dữ liệu",
+                    "noData".tr(),
                     style: TextStyle(
                       color: theme.colorScheme.secondary,
                       fontSize: 14,
