@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/model/comment_model.dart';
 import 'package:food_recipe_app/services/firestore/comment/comment_services.dart';
@@ -23,7 +24,7 @@ class EditCommentDialog {
         contentPadding: EdgeInsets.all(12),
         backgroundColor: theme.colorScheme.primary,
         title: Text(
-          "Sửa bình luận",
+          "editComment".tr(),
           style: TextStyle(
             color: theme.colorScheme.secondary,
             fontSize: 16,
@@ -43,7 +44,7 @@ class EditCommentDialog {
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide(color: AppColors.green)
               ),
-              hintText: "Nhập bình luận",
+              hintText: "commentInput".tr(),
               hintStyle: TextStyle(
                 color: theme.colorScheme.secondary,
                 fontSize: 12,
@@ -68,11 +69,11 @@ class EditCommentDialog {
                 isReply: isReply
               );
             },
-            child: Text("Gửi")
+            child: Text("send".tr())
           ),
           TextButton(
             onPressed: () => Navigator.pop(context), 
-            child: Text("Hủy", style: TextStyle(color: AppColors.black))
+            child: Text("cancel".tr(), style: TextStyle(color: AppColors.black))
           )
         ],
       )
@@ -91,7 +92,7 @@ class EditCommentDialog {
       context: context, 
       builder: (context) => CupertinoAlertDialog(
         title: Text(
-          "Sửa bình luận",
+          "editComment".tr(),
           style: TextStyle(
             color: theme.colorScheme.secondary,
             fontSize: 18,
@@ -111,7 +112,7 @@ class EditCommentDialog {
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide(color: AppColors.green)
               ),
-              hintText: "Nhập bình luận",
+              hintText: "commentInput".tr(),
               hintStyle: TextStyle(
                 color: theme.colorScheme.secondary,
                 fontSize: 12,
@@ -131,11 +132,11 @@ class EditCommentDialog {
                 isReply: isReply
               );
             },
-            child: Text("Gửi", style: TextStyle(color: AppColors.blue)),
+            child: Text("send".tr(), style: TextStyle(color: AppColors.blue)),
           ),
           CupertinoDialogAction(
             onPressed: () => Navigator.pop(context),
-            child: Text("Hủy", style: TextStyle(color: AppColors.red)),
+            child: Text("cancel".tr(), style: TextStyle(color: AppColors.red)),
           )
         ],
       )
@@ -156,12 +157,12 @@ class EditCommentDialog {
     if (content.isEmpty) return;
     if (isReply) {
       await commentServices.updateReplyComment(context, comment, id).then((_){
-        Message.showToast("Đã cập nhật");
+        Message.showToast("updated".tr());
         Navigator.pop(context);
       });
     } else {
       await commentServices.updateComment(context, comment, id).then((_){
-        Message.showToast("Đã cập nhật");
+        Message.showToast("updated".tr());
         Navigator.pop(context);
       });
     }

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/model/user_model.dart';
@@ -25,7 +26,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
       appBar: AppBar(
         backgroundColor: theme.appBarTheme.backgroundColor,
         foregroundColor: theme.appBarTheme.foregroundColor,
-        title: Text("Trang cá nhân",
+        title: Text("personalPage".tr(),
           style: TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.bold

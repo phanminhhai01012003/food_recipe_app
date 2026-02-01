@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_assets.dart';
 import 'package:food_recipe_app/model/user_model.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
@@ -27,7 +28,7 @@ class _RegisterState extends State<Register> {
     if (formKey.currentState!.validate()) {
       if (passwordController.text != confirmController.text) {
         context.loaderOverlay.hide();
-        Message.showToast("Mật khẩu không khớp");
+        Message.showToast("passwordInvalid2".tr());
         return;
       }
       formKey.currentState!.save();
@@ -44,12 +45,12 @@ class _RegisterState extends State<Register> {
             email: emailController.text, 
             nickName: "",
             description: "",
-            phone: phoneController.text.isEmpty ? "Không xác định" : phoneController.text,
+            phone: phoneController.text.isEmpty ? "unknown" : phoneController.text,
             loginMethod: "Email and Password"
           );
           await userServices.addUserWithAccount(context, user);
           context.loaderOverlay.hide();
-          Message.showScaffoldMessage(context, "Tạo tài khoản thành công", AppColors.green);
+          Message.showScaffoldMessage(context, "signUpSuccess".tr(), AppColors.green);
           Navigator.pushAndRemoveUntil(
             context, 
             checkDeviceRoute(mainPage), 
@@ -67,7 +68,7 @@ class _RegisterState extends State<Register> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Tạo tài khoản mới",
+          Text("signUp".tr(),
             style: TextStyle(
               color: AppColors.white,
               fontSize: 30,
@@ -119,7 +120,7 @@ class _RegisterState extends State<Register> {
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(color: AppColors.green)
                         ),
-                        hintText: "Nhập tên của bạn",
+                        hintText: "nameInput".tr(),
                         hintStyle: TextStyle(
                           color: AppColors.black,
                           fontSize: 12,
@@ -134,10 +135,10 @@ class _RegisterState extends State<Register> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty){
-                          return "Vui lòng điền tên của bạn";
+                          return "nameEmpty".tr();
                         }
                         if (!RegExp(r'^[a-zA-Z0-9]+$').hasMatch(value)) {
-                          return "Tên không được chứa ký tự đặc biệt";
+                          return "nameInvalid".tr();
                         }
                         return null;
                       },
@@ -165,7 +166,7 @@ class _RegisterState extends State<Register> {
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(color: AppColors.green)
                         ),
-                        hintText: "Nhập sdt của bạn",
+                        hintText: "phoneInput".tr(),
                         hintStyle: TextStyle(
                           color: AppColors.black,
                           fontSize: 12,
@@ -183,7 +184,7 @@ class _RegisterState extends State<Register> {
                           return null;
                         }
                         if (!RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)').hasMatch(value)) {
-                          return "Số điện thoại không hợp lệ";
+                          return "phoneInvalid".tr();
                         }
                         return null;
                       },
@@ -211,7 +212,7 @@ class _RegisterState extends State<Register> {
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(color: AppColors.green)
                         ),
-                        hintText: "Nhập email",
+                        hintText: "emailInput".tr(),
                         hintStyle: TextStyle(
                           color: AppColors.black,
                           fontSize: 12,
@@ -226,10 +227,10 @@ class _RegisterState extends State<Register> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty){
-                          return "Vui lòng điền email";
+                          return "emailEmpty".tr();
                         }
                         if (!RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$').hasMatch(value)) {
-                          return "Email không hợp lệ";
+                          return "emailInvalid".tr();
                         }
                         return null;
                       },
@@ -257,7 +258,7 @@ class _RegisterState extends State<Register> {
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(color: AppColors.green)
                         ),
-                        hintText: "Nhập mật khẩu",
+                        hintText: "passwordInput".tr(),
                         hintStyle: TextStyle(
                           color: AppColors.black,
                           fontSize: 12,
@@ -283,10 +284,10 @@ class _RegisterState extends State<Register> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Vui lòng điền mật khẩu";
+                          return "passwordEmpty".tr();
                         }
                         if (value.length < 6) {
-                          return "Mật khẩu không dưới 6 ký tự";
+                          return "passwordInvalid1".tr();
                         }
                         return null;
                       },
@@ -305,7 +306,7 @@ class _RegisterState extends State<Register> {
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(color: AppColors.red)
                         ),
-                        hintText: "Nhập lại mật khẩu",
+                        hintText: "confirmPasswordInput".tr(),
                         hintStyle: TextStyle(
                           color: AppColors.black,
                           fontSize: 12,
@@ -340,10 +341,10 @@ class _RegisterState extends State<Register> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Vui lòng điền mật khẩu";
+                          return "passwordEmpty".tr();
                         }
                         if (value.length < 6) {
-                          return "Mật khẩu không dưới 6 ký tự";
+                          return "passwordInvalid1".tr();
                         }
                         return null;
                       },
@@ -359,7 +360,7 @@ class _RegisterState extends State<Register> {
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33))
                         ),
                         onPressed: handle,
-                        child: Text("Xác nhận", 
+                        child: Text("confirm".tr(), 
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w700
@@ -371,7 +372,7 @@ class _RegisterState extends State<Register> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Bạn đã có tài khoản? ",
+                        Text("haveAcc".tr(),
                           style: TextStyle(
                             color: AppColors.black,
                             fontSize: 12,
@@ -382,7 +383,7 @@ class _RegisterState extends State<Register> {
                           onTap: () {
                             Navigator.push(context, checkDeviceRoute(loginPage));
                           },
-                          child: Text("Về trang đăng nhập",
+                          child: Text("loginBack".tr(),
                             style: TextStyle(
                               color: AppColors.black,
                               fontSize: 12,

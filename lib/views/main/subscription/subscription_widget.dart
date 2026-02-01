@@ -13,8 +13,8 @@ class SubscriptionWidget extends StatefulWidget {
 class _SubscriptionWidgetState extends State<SubscriptionWidget> {
   Color renderBgColor(String time){
     return switch(time) {
-      "1 tháng" => AppColors.blue,
-      "1 năm" => AppColors.green,
+      "onemonth" => AppColors.blue,
+      "oneyear" => AppColors.green,
       _ => AppColors.black
     };
   }
@@ -28,7 +28,7 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: renderBgColor(widget.sub['time']),
+        color: renderBgColor(widget.sub['time'].toString()),
         borderRadius: BorderRadius.circular(12)
       ),
       width: double.infinity,
@@ -41,7 +41,7 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                widget.sub['subscriptionName'],
+                widget.sub['subscriptionName'].toString().tr(),
                 style: TextStyle(
                   color: AppColors.white,
                   fontSize: 16,
@@ -49,7 +49,9 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
                 ),
               ),
               Text(
-                "${priceFormat(widget.sub['price'].toString(), widget.sub['priceUnit'])}/${widget.sub['time']}",
+                "${priceFormat(
+                  widget.sub['price'].toString(), 
+                  widget.sub['priceUnit'].toString())}/${widget.sub['time'].toString().tr()}",
                 style: TextStyle(
                   color: AppColors.white,
                   fontSize: 14,
@@ -61,7 +63,7 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
           TextButton(
             onPressed: (){}, 
             child: Text(
-              "Mua",
+              "buy".tr(),
               style: TextStyle(
                 color: AppColors.white,
                 fontSize: 18,

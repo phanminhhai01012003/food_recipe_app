@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
@@ -76,7 +77,7 @@ class _StorageViewState extends State<StorageView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Món ăn của bạn",
+                    "myFood".tr(),
                     style: TextStyle(
                       color: theme.colorScheme.secondary,
                       fontSize: 16,
@@ -86,7 +87,7 @@ class _StorageViewState extends State<StorageView> {
                   TextButton(
                     onPressed: () => onNavigation(StorageMode.myFood), 
                     child: Text(
-                      "Xem tất cả",
+                      "viewAll".tr(),
                       style: TextStyle(
                         color: AppColors.blue,
                         fontSize: 14,
@@ -128,7 +129,7 @@ class _StorageViewState extends State<StorageView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Món ăn đã lưu",
+                    "saveFood".tr(),
                     style: TextStyle(
                       color: theme.colorScheme.secondary,
                       fontSize: 16,
@@ -138,7 +139,7 @@ class _StorageViewState extends State<StorageView> {
                   TextButton(
                     onPressed: () => onNavigation(StorageMode.saveFood), 
                     child: Text(
-                      "Xem tất cả",
+                      "viewAll".tr(),
                       style: TextStyle(
                         color: AppColors.blue,
                         fontSize: 14,
@@ -177,7 +178,7 @@ class _StorageViewState extends State<StorageView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Đã xem gần đây",
+                    "recentFood".tr(),
                     style: TextStyle(
                       color: theme.colorScheme.secondary,
                       fontSize: 16,
@@ -187,7 +188,7 @@ class _StorageViewState extends State<StorageView> {
                   TextButton(
                     onPressed: () => onNavigation(StorageMode.recentView), 
                     child: Text(
-                      "Xem tất cả",
+                      "viewAll".tr(),
                       style: TextStyle(
                         color: AppColors.blue,
                         fontSize: 14,
@@ -226,7 +227,7 @@ class _StorageViewState extends State<StorageView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Sổ tay nấu ăn",
+                    "myCookbook".tr(),
                     style: TextStyle(
                       color: theme.colorScheme.secondary,
                       fontSize: 16,
@@ -236,7 +237,7 @@ class _StorageViewState extends State<StorageView> {
                   TextButton(
                     onPressed: () => onNavigation(StorageMode.cookbook), 
                     child: Text(
-                      "Xem tất cả",
+                      "viewAll".tr(),
                       style: TextStyle(
                         color: AppColors.blue,
                         fontSize: 14,

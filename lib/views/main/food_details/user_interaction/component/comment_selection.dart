@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/model/comment_model.dart';
 import 'package:food_recipe_app/services/firestore/comment/comment_services.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/component/edit_comment_dialog.dart';
@@ -19,12 +20,12 @@ class CommentSelection {
   ) async{
     if (isReply) {
       await commentServices.deleteReplyComment(context, comment, foodId).then((_){
-        Message.showToast("Đã xóa bình luận");
+        Message.showToast("deleteCommentSuccess".tr());
         Navigator.pop(context);
       });
     } else {
       await commentServices.deleteComment(context, commentId, foodId).then((_){
-        Message.showToast("Đã xóa bình luận");
+        Message.showToast("deleteCommentSuccess".tr());
         Navigator.pop(context);
       });
     }
@@ -54,7 +55,7 @@ class CommentSelection {
               Selection(
                 onTap: () => EditCommentDialog.checkDeviceEditComment(context, comment, foodId, isReply), 
                 icon: Icons.edit, 
-                title: "Sửa"
+                title: "edit".tr()
               ),
               Selection(
                 onTap: () {
@@ -67,12 +68,12 @@ class CommentSelection {
                   );
                 }, 
                 icon: Icons.delete, 
-                title: "Xóa"
+                title: "delete".tr()
               ),
               Selection(
                 onTap: () => Clipboard.setData(ClipboardData(text: comment.content)), 
                 icon: Icons.copy, 
-                title: "Sao chép"
+                title: "copy".tr()
               )
             ],
           ),
@@ -97,12 +98,12 @@ class CommentSelection {
               Selection(
                 onTap: () async => await showReportModal(context, "bình luận ${comment.content}", comment.userName, null), 
                 icon: Icons.report_problem, 
-                title: "Báo cáo/Chặn"
+                title: "reportOrStop".tr()
               ),
               Selection(
                 onTap: () => Clipboard.setData(ClipboardData(text: comment.content)), 
                 icon: Icons.copy, 
-                title: "Sao chép"
+                title: "copy".tr()
               )
             ],
           ),

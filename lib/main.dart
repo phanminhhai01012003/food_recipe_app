@@ -14,8 +14,8 @@ import 'package:provider/provider.dart';
 
 void main() async{
   var delegate = await LocalizationDelegate.create(
-    fallbackLocale: "en", 
-    supportedLocales: ["en", "vi"],
+    fallbackLocale: "vi", 
+    supportedLocales: ["vi", "en"],
     basePath: "assets/language/"
   );
   WidgetsFlutterBinding.ensureInitialized();

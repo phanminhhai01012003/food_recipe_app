@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 
@@ -48,7 +49,7 @@ class ShowImageSheet extends StatelessWidget {
               Navigator.push(context, checkDeviceRoute(fullScreenImage(imageUrl)));
               await Future.delayed(Duration(seconds: 2), () => Navigator.pop(context));
             },
-            child: Text("Xem ảnh",
+            child: Text("viewImage".tr(),
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w800
@@ -63,7 +64,7 @@ class ShowImageSheet extends StatelessWidget {
               foregroundColor: AppColors.white
             ),
             onPressed: () => imageServices.downloadImage(context, imageUrl),
-            child: Text("Tải xuống",
+            child: Text("downloadImage".tr(),
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w800

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -19,7 +20,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     await authServices.forgotPassword(context, emailController.text);
     emailController.clear();
     context.loaderOverlay.hide();
-    Message.showScaffoldMessage(context, "Đã gửi yêu cầu, vui lòng kiểm tra email", AppColors.green);
+    Message.showScaffoldMessage(context, "forgotPasswordSuccess".tr(), AppColors.green);
     Navigator.pop(context);
   }
   @override
@@ -29,7 +30,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       appBar: AppBar(
         backgroundColor: AppColors.green,
         foregroundColor: AppColors.white,
-        title: Text("Quên mật khẩu",
+        title: Text("forgotPassword".tr(),
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold
@@ -44,7 +45,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Nhập địa chỉ email của bạn để khôi phục",
+              Text("forgotPasswordTitle".tr(),
                 style: TextStyle(
                   color: AppColors.black,
                   fontSize: 28,
@@ -73,7 +74,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide(color: AppColors.green)
                   ),
-                  hintText: "Nhập email",
+                  hintText: "emailInput".tr(),
                   hintStyle: TextStyle(
                     color: AppColors.black,
                     fontSize: 12,
@@ -88,10 +89,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty){
-                    return "Vui lòng điền email";
+                    return "emailEmpty".tr();
                   }
                   if (!RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$').hasMatch(value)) {
-                    return "Email không hợp lệ";
+                    return "emailInvalid".tr();
                   }
                   return null;
                 },
@@ -104,7 +105,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   foregroundColor: AppColors.white
                 ),
                 onPressed: handle,
-                child: Text("Gửi yêu cầu",
+                child: Text("sendRequest".tr(),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w700

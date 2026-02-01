@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -24,7 +25,7 @@ class _ChangePasswordState extends State<ChangePassword> {
     if (formKey.currentState!.validate()){
       if (newpasswordController.text != confirmController.text){
         context.loaderOverlay.hide();
-        Message.showToast("Mật khẩu không trùng khớp");
+        Message.showToast("passwordInvalid2".tr());
         return;
       }
       formKey.currentState!.save();
@@ -34,7 +35,7 @@ class _ChangePasswordState extends State<ChangePassword> {
         newPassword: newpasswordController.text
       ).then((_){
         context.loaderOverlay.hide();
-        Message.showScaffoldMessage(context, "Đổi mật khẩu thành công", AppColors.green);
+        Message.showScaffoldMessage(context, "changePasswordSuccess".tr(), AppColors.green);
         Navigator.pop(context);
       });
     }
@@ -48,7 +49,7 @@ class _ChangePasswordState extends State<ChangePassword> {
       appBar: AppBar(
         backgroundColor: theme.appBarTheme.backgroundColor,
         foregroundColor: theme.appBarTheme.foregroundColor,
-        title: Text("Đổi mật khẩu",
+        title: Text("changePassword".tr(),
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w700
@@ -63,7 +64,7 @@ class _ChangePasswordState extends State<ChangePassword> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-                    Text("Mật khẩu hiện tại",
+                    Text("oldPassword".tr(),
                       style: TextStyle(
                         color: theme.colorScheme.secondary,
                         fontSize: 16,
@@ -88,7 +89,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(color: AppColors.green)
                         ),
-                        hintText: "Nhập mật khẩu hiện tại",
+                        hintText: "oldPasswordInput".tr(),
                         hintStyle: TextStyle(
                           color: theme.colorScheme.secondary,
                           fontSize: 12,
@@ -114,10 +115,10 @@ class _ChangePasswordState extends State<ChangePassword> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Vui lòng điền mật khẩu";
+                          return "passwordEmpty".tr();
                         }
                         if (value.length < 6) {
-                          return "Mật khẩu không dưới 6 ký tự";
+                          return "passwordInvalid1".tr();
                         }
                         return null;
                       },
@@ -128,7 +129,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                       ),
                     ),
                     SizedBox(height: 20),
-                    Text("Mật khẩu mới",
+                    Text("newPassword".tr(),
                       style: TextStyle(
                         color: theme.colorScheme.secondary,
                         fontSize: 16,
@@ -154,7 +155,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(color: AppColors.red)
                         ),
-                        hintText: "Nhập mật khẩu mới",
+                        hintText: "newPasswordInput".tr(),
                         hintStyle: TextStyle(
                           color: theme.colorScheme.secondary,
                           fontSize: 12,
@@ -184,16 +185,16 @@ class _ChangePasswordState extends State<ChangePassword> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Vui lòng điền mật khẩu";
+                          return "passwordEmpty".tr();
                         }
                         if (value.length < 6) {
-                          return "Mật khẩu không dưới 6 ký tự";
+                          return "passwordInvalid1".tr();
                         }
                         return null;
                       },
                     ),
                     SizedBox(height: 20),
-                    Text("Xác nhận mật khẩu",
+                    Text("confirmPassword".tr(),
                       style: TextStyle(
                         color: theme.colorScheme.secondary,
                         fontSize: 16,
@@ -219,7 +220,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(color: AppColors.red)
                         ),
-                        hintText: "Nhập lại mật khẩu",
+                        hintText: "confirmPasswordInput".tr(),
                         hintStyle: TextStyle(
                           color: theme.colorScheme.secondary,
                           fontSize: 12,
@@ -249,10 +250,10 @@ class _ChangePasswordState extends State<ChangePassword> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Vui lòng điền mật khẩu";
+                          return "passwordEmpty".tr();
                         }
                         if (value.length < 6) {
-                          return "Mật khẩu không dưới 6 ký tự";
+                          return "passwordInvalid1".tr();
                         }
                         return null;
                       },
@@ -268,7 +269,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33))
                         ),
                         onPressed: handle,
-                        child: Text("Xác nhận", 
+                        child: Text("confirm".tr(), 
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w700

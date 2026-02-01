@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/constants/list_constants.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/logger.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
@@ -25,7 +26,7 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
     await authServices.deleteAccount(context);
     await userServices.deleteUser(context, currentUser.uid);
     context.loaderOverlay.hide();
-    Message.showScaffoldMessage(context, "Tài khoản cũ của bạn đã xóa. Hãy tạo tài khoản mới để tiếp tục sử dụng", AppColors.green);
+    Message.showScaffoldMessage(context, "deleteOldAcc".tr(), AppColors.green);
     Navigator.pushAndRemoveUntil(context, checkDeviceRoute(loginPage), (route) => false);
   }
   @override
@@ -38,7 +39,7 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
         child: Column(
           children: [
             Text(
-              "Bạn đang thực hiện xóa tài khoản khỏi hệ thống",
+              "deleteUserTitle".tr(),
               style: TextStyle(
                 color: theme.colorScheme.secondary,
                 fontSize: 24,
@@ -47,7 +48,7 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
             ),
             SizedBox(height: 20),
             Text(
-              "Hãy cho chúng tôi biết lý do bạn muốn xóa tài khoản cá nhân của mình (Trong trường hợp bạn muốn gửi yêu cầu duyệt đến quản trị viên)",
+              "deleteUserReason".tr(),
               style: TextStyle(
                 color: theme.colorScheme.secondary,
                 fontSize: 16,
@@ -59,7 +60,7 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
               children: List.generate(
                 deleteUserList.length, 
                 (i) => RadioSelection(
-                  title: deleteUserList[i], 
+                  title: deleteUserList[i].tr(), 
                   selectedOption: selectedOption, 
                   onTap: (){
                     setState(() {
@@ -80,7 +81,7 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
               controller: _otherReport,
               enabled: selectedOption == deleteUserList.last,
               decoration: InputDecoration(
-                hintText: "Nhập nội dung",
+                hintText: "contentInput".tr(),
                 hintStyle: TextStyle(
                   color: selectedOption == deleteUserList.last ? theme.colorScheme.secondary : AppColors.grey,
                   fontSize: 14,
@@ -106,14 +107,14 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
                 onPressed: (){
                   ShowYesnoDialog.checkDeviceDialog(
                     context, 
-                    title: "Xác nhận xóa", 
-                    content: "Bạn có cảm thấy ổn khi xóa tài khoản chứ? Mọi dữ liệu sẽ mất hoàn toàn nếu bạn thực hiện", 
+                    title: "deleteUserConfirm".tr(), 
+                    content: "deleteUserDesc".tr(), 
                     onAcceptTap: onDeleteAccount, 
                     onCancelTap: () => Navigator.pop(context)
                   );
                 }, 
                 child: Text(
-                  "Xóa tài khoản",
+                  "deleteAcc".tr(),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.normal
@@ -134,18 +135,18 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
                   context.loaderOverlay.show();
                   if (selectedOption == deleteUserList.last) {
                     if (_otherReport.text.isEmpty){
-                      Message.showToast("Vui lòng điền đầy đủ thông tin");
+                      Message.showToast("infoEmpty".tr());
                       context.loaderOverlay.hide();
                       return;
                     }
                   }
                   sendRequest();
                   context.loaderOverlay.hide();
-                  Message.showScaffoldMessage(context, "Đã gửi yêu cầu", AppColors.green);
+                  Message.showScaffoldMessage(context, "sendRequestSuccess".tr(), AppColors.green);
                   Navigator.pop(context);
                 }, 
                 child: Text(
-                  "Gửi yêu cầu",
+                  "sendRequest".tr(),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.normal
@@ -164,7 +165,7 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
                 ),
                 onPressed: () => Navigator.pop(context), 
                 child: Text(
-                  "Trang trước",
+                  "prev".tr(),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.normal
@@ -184,7 +185,7 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
         'status': 0
       });
     } catch (e) {
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }

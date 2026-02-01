@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_assets.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/model/user_model.dart';
@@ -33,7 +34,7 @@ class _EditUserState extends State<EditUser> {
     imageURL = widget.user.avatar;
     nameController.text = widget.user.userName;
     descriptionController.text = widget.user.description;
-    phoneController.text = widget.user.phone;
+    phoneController.text = widget.user.phone == "unknown" ? "" : widget.user.phone;
     nickNameController.text = widget.user.nickName;
   }
 
@@ -42,7 +43,7 @@ class _EditUserState extends State<EditUser> {
     if (formKey.currentState!.validate()) {
       if (nickNameController.text == nameController.text) {
         context.loaderOverlay.hide();
-        Message.showToast("Biệt danh không được trùng với tên của bạn");
+        Message.showToast("nickNameInvalid2".tr());
         return;
       }
       formKey.currentState!.save();
@@ -60,22 +61,18 @@ class _EditUserState extends State<EditUser> {
         email: widget.user.email,
         description: descriptionController.text,
         nickName: nickNameController.text,
-        phone:
-            phoneController.text.isEmpty
-                ? "Không xác định"
-                : phoneController.text,
+        phone: phoneController.text.isEmpty ? "unknown" : phoneController.text,
         loginMethod: widget.user.loginMethod,
       );
       await currentUser.updateProfile(
         displayName: nameController.text,
-        photoURL:
-            image == null && imageURL.isEmpty ? userDefaultImage : imageURL,
+        photoURL: image == null && imageURL.isEmpty ? userDefaultImage : imageURL,
       );
       await userServices.updateUser(context, user).then((_) {
         context.loaderOverlay.hide();
         Message.showScaffoldMessage(
           context,
-          "Cập nhật thành công",
+          "updateFoodSuccess".tr(),
           AppColors.green,
         );
         Navigator.pop(context);
@@ -111,7 +108,7 @@ class _EditUserState extends State<EditUser> {
         backgroundColor: theme.appBarTheme.backgroundColor,
         foregroundColor: theme.appBarTheme.foregroundColor,
         title: Text(
-          "Chỉnh sửa thông tin cá nhân",
+          "editPersonalInformation".tr(),
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -174,7 +171,7 @@ class _EditUserState extends State<EditUser> {
               ),
               SizedBox(height: 20),
               Text(
-                "Tên đầy đủ",
+                "name".tr(),
                 style: TextStyle(
                   color: theme.colorScheme.secondary,
                   fontSize: 16,
@@ -204,7 +201,7 @@ class _EditUserState extends State<EditUser> {
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide(color: AppColors.green),
                   ),
-                  hintText: "Nhập tên của bạn",
+                  hintText: "nameInput".tr(),
                   hintStyle: TextStyle(
                     color: theme.colorScheme.secondary,
                     fontSize: 12,
@@ -222,17 +219,17 @@ class _EditUserState extends State<EditUser> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "Vui lòng điền tên của bạn";
+                    return "nameEmpty".tr();
                   }
                   if (!RegExp(r'^[a-zA-Z0-9]+$').hasMatch(value)) {
-                    return "Tên không được chứa ký tự đặc biệt";
+                    return "nameInvalid".tr();
                   }
                   return null;
                 },
               ),
               SizedBox(height: 20),
               Text(
-                "Biệt danh",
+                "nickName".tr(),
                 style: TextStyle(
                   color: theme.colorScheme.secondary,
                   fontSize: 16,
@@ -262,7 +259,7 @@ class _EditUserState extends State<EditUser> {
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide(color: AppColors.green),
                   ),
-                  hintText: "Nhập biệt danh của bạn",
+                  hintText: "nickNameInput".tr(),
                   hintStyle: TextStyle(
                     color: theme.colorScheme.secondary,
                     fontSize: 12,
@@ -283,14 +280,14 @@ class _EditUserState extends State<EditUser> {
                     return null;
                   }
                   if (!RegExp(r'^[a-zA-Z0-9]+$').hasMatch(value)) {
-                    return "Biệt danh không được chứa ký tự đặc biệt";
+                    return "nickNameInvalid1".tr();
                   }
                   return null;
                 },
               ),
               SizedBox(height: 20),
               Text(
-                "Giới thiệu bản thân",
+                "description2".tr(),
                 style: TextStyle(
                   color: theme.colorScheme.secondary,
                   fontSize: 16,
@@ -324,7 +321,7 @@ class _EditUserState extends State<EditUser> {
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide(color: AppColors.green),
                   ),
-                  hintText: "Bạn là người như thế nào",
+                  hintText: "descriptionInput".tr(),
                   hintStyle: TextStyle(
                     color: theme.colorScheme.secondary,
                     fontSize: 12,
@@ -343,7 +340,7 @@ class _EditUserState extends State<EditUser> {
               ),
               SizedBox(height: 20),
               Text(
-                "Số điện thoại",
+                "phone".tr(),
                 style: TextStyle(
                   color: theme.colorScheme.secondary,
                   fontSize: 16,
@@ -373,7 +370,7 @@ class _EditUserState extends State<EditUser> {
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide(color: AppColors.green),
                   ),
-                  hintText: "Nhập sdt của bạn",
+                  hintText: "phoneInput".tr(),
                   hintStyle: TextStyle(
                     color: theme.colorScheme.secondary,
                     fontSize: 12,
@@ -394,7 +391,7 @@ class _EditUserState extends State<EditUser> {
                     return null;
                   }
                   if (!RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)').hasMatch(value)) {
-                    return "Số điện thoại không hợp lệ";
+                    return "phoneInvalid".tr();
                   }
                   return null;
                 },
@@ -404,7 +401,7 @@ class _EditUserState extends State<EditUser> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Email:",
+                    "${"email".tr()}:",
                     style: TextStyle(
                       color: theme.colorScheme.secondary,
                       fontSize: 16,

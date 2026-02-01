@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/data/enum.dart';
@@ -44,13 +45,13 @@ class _StorageModeSelectState extends State<StorageModeSelect> {
   String renderTitle(StorageMode storage) {
     switch(storage) {
       case StorageMode.myFood:
-        return "Món ăn của tôi";
+        return "myFood".tr();
       case StorageMode.saveFood:
-        return "Món ăn đã lưu";
+        return "saveFood".tr();
       case StorageMode.recentView:
-        return "Đã xem gần đây";
+        return "recentFood".tr();
       case StorageMode.cookbook:
-        return "Sổ tay nấu ăn";
+        return "myCookbook".tr();
     }
   }
   @override
@@ -72,7 +73,7 @@ class _StorageModeSelectState extends State<StorageModeSelect> {
             )
           ),
         ),
-        title: Text("Lưu trữ",
+        title: Text("storage".tr(),
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold

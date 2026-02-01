@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_assets.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
@@ -26,7 +27,7 @@ class _LoginState extends State<Login> {
       await authServices.loginWithAccount(context, emailController.text, passwordController.text).then((value) {
         if (value != null){
           context.loaderOverlay.hide();
-          Message.showScaffoldMessage(context, "Đăng nhập thành công", AppColors.green);
+          Message.showScaffoldMessage(context, "signInSuccess".tr(), AppColors.green);
           Navigator.pushAndRemoveUntil(
             context, 
             checkDeviceRoute(mainPage), 
@@ -52,7 +53,7 @@ class _LoginState extends State<Login> {
         );
         await userServices.addUserWithThirdParty(context, user);
         context.loaderOverlay.hide();
-        Message.showScaffoldMessage(context, "", AppColors.green);
+        Message.showScaffoldMessage(context, "signInSuccess".tr(), AppColors.green);
         Navigator.pushAndRemoveUntil(
           context, 
           checkDeviceRoute(mainPage), 
@@ -77,7 +78,7 @@ class _LoginState extends State<Login> {
         );
         await userServices.addUserWithThirdParty(context, user);
         context.loaderOverlay.hide();
-        Message.showScaffoldMessage(context, "", AppColors.green);
+        Message.showScaffoldMessage(context, "signInSuccess".tr(), AppColors.green);
         Navigator.pushAndRemoveUntil(
           context, 
           checkDeviceRoute(mainPage), 
@@ -94,7 +95,7 @@ class _LoginState extends State<Login> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Đăng nhập",
+          Text("login".tr(),
             style: TextStyle(
               color: AppColors.white,
               fontSize: 30,
@@ -139,7 +140,7 @@ class _LoginState extends State<Login> {
                         borderRadius: BorderRadius.circular(12),
                         borderSide: BorderSide(color: AppColors.green)
                       ),
-                      hintText: "Nhập email",
+                      hintText: "emailInput".tr(),
                       hintStyle: TextStyle(
                         color: AppColors.black,
                         fontSize: 12,
@@ -159,10 +160,10 @@ class _LoginState extends State<Login> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty){
-                        return "Vui lòng điền email";
+                        return "emailEmpty".tr();
                       }
                       if (!RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$').hasMatch(value)) {
-                        return "Email không hợp lệ";
+                        return "emailInvalid".tr();
                       }
                       return null;
                     },
@@ -190,7 +191,7 @@ class _LoginState extends State<Login> {
                         borderRadius: BorderRadius.circular(12),
                         borderSide: BorderSide(color: AppColors.green)
                       ),
-                      hintText: "Nhập mật khẩu",
+                      hintText: "passwordInput".tr(),
                       hintStyle: TextStyle(
                         color: AppColors.black,
                         fontSize: 12,
@@ -216,10 +217,10 @@ class _LoginState extends State<Login> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return "Vui lòng điền mật khẩu";
+                        return "passwordEmpty".tr();
                       } 
                       if (value.length < 6){
-                        return "Mật khẩu không dưới 6 ký tự";
+                        return "passwordInvalid1".tr();
                       }
                       return null;
                     },
@@ -231,7 +232,7 @@ class _LoginState extends State<Login> {
                       onPressed: () {
                         Navigator.push(context, checkDeviceRoute(forgotPasswordPage));
                       },
-                      child: Text("Quên mật khẩu?",
+                      child: Text("${"forgotPassword".tr()}?",
                         style: TextStyle(
                           color: AppColors.black,
                           fontSize: 12,
@@ -251,7 +252,7 @@ class _LoginState extends State<Login> {
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33))
                       ),
                       onPressed: handleAccount,
-                      child: Text("Đăng nhập", 
+                      child: Text("login".tr(), 
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w700
@@ -263,7 +264,7 @@ class _LoginState extends State<Login> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Bạn chưa có tài khoản? ",
+                      Text("noAcc".tr(),
                         style: TextStyle(
                           color: AppColors.black,
                           fontSize: 12,
@@ -274,7 +275,7 @@ class _LoginState extends State<Login> {
                         onTap: () {
                           Navigator.push(context, checkDeviceRoute(registerPage));
                         },
-                        child: Text("Tạo tài khoản mới",
+                        child: Text("signUp".tr(),
                           style: TextStyle(
                             color: AppColors.black,
                             fontSize: 12,
@@ -285,7 +286,7 @@ class _LoginState extends State<Login> {
                     ],
                   ),
                   SizedBox(height: 20),
-                  Text("Hoặc đăng nhập bằng:",
+                  Text("otherMethod".tr(),
                     style: TextStyle(
                       color: AppColors.black,
                       fontSize: 14,

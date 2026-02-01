@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/provider/theme_state.dart';
 import 'package:food_recipe_app/views/main/sub_features/theme/change_theme_button.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +34,7 @@ class _ChangeThemeScreenState extends State<ChangeThemeScreen> {
             ),
             backgroundColor: theme.appBarTheme.backgroundColor,
             foregroundColor: theme.appBarTheme.foregroundColor,
-            title: Text("Chế độ giao diện",
+            title: Text("themeMode".tr(),
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w500
@@ -61,19 +62,19 @@ class _ChangeThemeScreenState extends State<ChangeThemeScreen> {
                         onTap: value.systemTheme, 
                         screenState: value.isSystem, 
                         themeIcon: Icons.auto_mode, 
-                        text: "Hệ thống"
+                        text: "system".tr()
                       ),
                       ChangeThemeButton(
                         onTap: value.lightTheme, 
                         screenState: value.isLight, 
                         themeIcon: Icons.light_mode, 
-                        text: "Sáng"
+                        text: "light".tr()
                       ),
                       ChangeThemeButton(
                         onTap: value.darkTheme, 
                         screenState: value.isDark, 
                         themeIcon: Icons.dark_mode, 
-                        text: "Tối"
+                        text: "dark".tr()
                       ),
                     ],
                   ),

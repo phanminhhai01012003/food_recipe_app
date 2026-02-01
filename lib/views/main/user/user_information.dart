@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/model/user_model.dart';
@@ -22,7 +23,7 @@ class _UserInformationState extends State<UserInformation> {
   void onLogOut() async{
     if (widget.user.loginMethod == "Google") {
       await authServices.logOutFromGoogle(context).then((_){
-        Message.showScaffoldMessage(context, "Đã đăng xuất khỏi hệ thống", AppColors.green);
+        Message.showScaffoldMessage(context, "signOutSuccess".tr(), AppColors.green);
         Navigator.pushAndRemoveUntil(
           context, 
           checkDeviceRoute(loginPage), 
@@ -31,7 +32,7 @@ class _UserInformationState extends State<UserInformation> {
       });
     } else if (widget.user.loginMethod == "Facebook") {
       await authServices.logOutFromFacebook(context).then((_){
-        Message.showScaffoldMessage(context, "Đã đăng xuất khỏi hệ thống", AppColors.green);
+        Message.showScaffoldMessage(context, "signOutSuccess".tr(), AppColors.green);
         Navigator.pushAndRemoveUntil(
           context, 
           checkDeviceRoute(loginPage), 
@@ -40,7 +41,7 @@ class _UserInformationState extends State<UserInformation> {
       });
     } else {
       await authServices.logOutFromAccount(context).then((_){
-        Message.showScaffoldMessage(context, "Đã đăng xuất khỏi hệ thống", AppColors.green);
+        Message.showScaffoldMessage(context, "signOutSuccess".tr(), AppColors.green);
         Navigator.pushAndRemoveUntil(
           context, 
           checkDeviceRoute(loginPage), 
@@ -68,7 +69,7 @@ class _UserInformationState extends State<UserInformation> {
           ),
         ),
         title: Text(
-          "Thông tin cá nhân",
+          "userInformation".tr(),
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold
@@ -101,17 +102,17 @@ class _UserInformationState extends State<UserInformation> {
               ),
             ),
             SizedBox(height: 30),
-            component(context, "ID", widget.user.userId),
+            component(context, "id".tr(), widget.user.userId),
             divider(),
-            component(context, "Họ và tên", widget.user.userName),
+            component(context, "name".tr(), widget.user.userName),
             divider(),
-            component(context, "Biệt danh", widget.user.nickName),
+            component(context, "nickName".tr(), widget.user.nickName),
             divider(),
-            component(context, "Giới thiệu", widget.user.description),
+            component(context, "description1".tr(), widget.user.description),
             divider(),
-            component(context, "Số điện thoại", widget.user.phone),
+            component(context, "phone".tr(), widget.user.phone == "unknown" ? "unknown".tr() : widget.user.phone),
             divider(),
-            component(context, "Email", widget.user.email),
+            component(context, "email".tr(), widget.user.email),
             SizedBox(height: 50),
             SizedBox(
               width: double.infinity,
@@ -129,7 +130,7 @@ class _UserInformationState extends State<UserInformation> {
                     Icon(Icons.person_2, size: 20),
                     SizedBox(width: 5),
                     Text(
-                      "Chỉnh sửa thông tin",
+                      "editUser".tr(),
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w800
@@ -156,7 +157,7 @@ class _UserInformationState extends State<UserInformation> {
                     Icon(Icons.delete_forever, size: 20),
                     SizedBox(width: 5),
                     Text(
-                      "Xóa tài khoản",
+                      "deleteAcc".tr(),
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w800
@@ -178,8 +179,8 @@ class _UserInformationState extends State<UserInformation> {
                 ),
                 onPressed: () => ShowYesnoDialog.checkDeviceDialog(
                   context, 
-                  title: "Đăng xuất", 
-                  content: "Bạn có chắc chắn muốn đăng xuất khỏi hệ thống không?", 
+                  title: "signOut".tr(), 
+                  content: "signOutDesc".tr(), 
                   onAcceptTap: () => onLogOut(), 
                   onCancelTap: () => Navigator.pop(context)
                 ),
@@ -188,7 +189,7 @@ class _UserInformationState extends State<UserInformation> {
                   children: [
                     Icon(Icons.logout, size: 20),
                     SizedBox(width: 5),
-                    Text("Đăng xuất",
+                    Text("signOut".tr(),
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w900
