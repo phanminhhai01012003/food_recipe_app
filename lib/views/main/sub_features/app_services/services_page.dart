@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 
@@ -21,7 +22,7 @@ class _ServicesPageState extends State<ServicesPage> {
       backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Sử dụng dịch vụ",
+        title: Text("termOfServices".tr(),
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.normal
@@ -62,7 +63,7 @@ class _ServicesPageState extends State<ServicesPage> {
                     ),
                     child: Center(
                       child: Text(
-                        "Điều khoản",
+                        "rules".tr(),
                         style: TextStyle(
                           color: selectedIndex == 0 ? AppColors.white : theme.colorScheme.secondary,
                           fontSize: 14,
@@ -87,7 +88,7 @@ class _ServicesPageState extends State<ServicesPage> {
                     ),
                     child: Center(
                       child: Text(
-                        "Hướng dẫn",
+                        "instruction".tr(),
                         style: TextStyle(
                           color: selectedIndex == 1 ? AppColors.white : theme.colorScheme.secondary,
                           fontSize: 14,

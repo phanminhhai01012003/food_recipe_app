@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/extension/datetime_extension.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_assets.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 
@@ -50,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Xin chào! ${currentUser.displayName}",
+                            "hello".tr(currentUser.displayName),
                             style: TextStyle(
                               color: AppColors.white,
                               fontSize: 14,
@@ -111,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 20,
                     child: Icon(Icons.search, color: AppColors.grey),
                   ),
-                  hintText: "Tìm kiếm",
+                  hintText: "search".tr(),
                   hintStyle: TextStyle(
                     color: AppColors.grey,
                     fontSize: 12,
@@ -142,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     children: [
                       Text(
-                        "Hôm nay có gì mới",                      
+                        "today".tr(),                      
                         style: TextStyle(
                           color: theme.colorScheme.secondary,
                           fontSize: 16,
@@ -151,8 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       SizedBox(height: 5),
                       Text(
-                        "Hãy cùng nhau khám phá những món ăn mà bạn yêu thích "
-                        "và học cách chế biến chúng",
+                        "discoverFood".tr(),
                         style: TextStyle(
                           color: theme.colorScheme.secondary,
                           fontSize: 12,
@@ -166,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Gần đây nhất",
+                            "latest".tr(),
                             style: TextStyle(
                               color: theme.colorScheme.secondary,
                               fontSize: 14,
@@ -176,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           TextButton(
                             onPressed: () => Navigator.push(context, checkDeviceRoute(listofFoodByDate(true))), 
                             child: Text(
-                              "Xem tất cả",
+                              "viewAll".tr(),
                               style: TextStyle(
                                 color: AppColors.blue,
                                 fontSize: 14,
@@ -193,7 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Sớm nhất",
+                            "earliest".tr(),
                             style: TextStyle(
                               color: theme.colorScheme.secondary,
                               fontSize: 14,
@@ -203,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           TextButton(
                             onPressed: () => Navigator.push(context, checkDeviceRoute(listofFoodByDate(false))), 
                             child: Text(
-                              "Xem tất cả",
+                              "viewAll".tr(),
                               style: TextStyle(
                                 color: AppColors.blue,
                                 fontSize: 14,
@@ -220,7 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Dành cho bạn",
+                            "forYou".tr(),
                             style: TextStyle(
                               color: theme.colorScheme.secondary,
                               fontSize: 14,
@@ -230,7 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           TextButton(
                             onPressed: () => Navigator.push(context, checkDeviceRoute(listofFoodView)), 
                             child: Text(
-                              "Xem tất cả",
+                              "viewAll".tr(),
                               style: TextStyle(
                                 color: AppColors.blue,
                                 fontSize: 14,
@@ -246,7 +246,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "Các thể loại phổ biến",
+                          "popularCategories".tr(),
                           style: TextStyle(
                             color: theme.colorScheme.secondary,
                             fontSize: 14,

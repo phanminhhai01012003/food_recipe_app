@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/extension/datetime_extension.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/model/rating_model.dart';
@@ -116,7 +117,7 @@ class _RateComponentState extends State<RateComponent> {
                     Visibility(
                       visible: widget.rate.userId == currentUser.uid,
                       child: Text(
-                        "Tôi",
+                        "me".tr(),
                         style: TextStyle(
                           backgroundColor: AppColors.blue,
                           color: AppColors.white,

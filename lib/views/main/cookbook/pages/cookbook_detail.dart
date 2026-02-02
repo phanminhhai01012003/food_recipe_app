@@ -155,7 +155,7 @@ class _CookbookDetailState extends State<CookbookDetail> {
     context.loaderOverlay.show();
     context.read<CookbookState>().removeCookbook(id);
     context.loaderOverlay.hide();
-    Message.showScaffoldMessage(context, "Đã xóa", AppColors.green);
+    Message.showScaffoldMessage(context, "deleteSuccess".tr(), AppColors.green);
     Navigator.pop(context);
     await Future.delayed(Duration(seconds: 1), () => Navigator.pop(context));
   }

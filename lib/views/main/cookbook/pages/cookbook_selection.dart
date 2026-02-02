@@ -54,7 +54,7 @@ class _CookbookSelectionState extends State<CookbookSelection> {
         child: Column(
           children: [
             Text(
-              "Bạn muốn thêm món ăn này vào đâu?",
+              "addFoodToCookbook".tr(),
               style: TextStyle(
                 color: theme.colorScheme.secondary,
                 fontSize: 20,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 
 import 'package:food_recipe_app/common/configure/routes.dart';
@@ -28,7 +29,7 @@ class _CategoriesGridListState extends State<CategoriesGridList> {
             spacing: 4,
             runSpacing: 16,
             children: grids.map((tag) {
-              if (tag.tag == "Tất cả") return SizedBox();
+              if (tag.tag == "all") return SizedBox();
               return GestureDetector(
                 onTap: () => Navigator.push(context, checkDeviceRoute(listofFoodByTag(tag.tag))),
                 child: Container(
@@ -45,7 +46,7 @@ class _CategoriesGridListState extends State<CategoriesGridList> {
                     color: AppColors.black.withOpacity(0.5),
                     child: Center(
                       child: Text(
-                        tag.tag,
+                        tag.tag.tr(),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: AppColors.white,

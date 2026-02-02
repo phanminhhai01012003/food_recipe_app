@@ -96,7 +96,7 @@ class CommentSelection {
           child: Column(
             children: [
               Selection(
-                onTap: () async => await showReportModal(context, "bình luận ${comment.content}", comment.userName, null), 
+                onTap: () async => await showReportModal(context, "${"commentLowerCase".tr()} ${comment.content}", comment.userName, null), 
                 icon: Icons.report_problem, 
                 title: "reportOrStop".tr()
               ),

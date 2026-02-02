@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/model/report_model.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_report_modal.dart';
@@ -30,7 +31,7 @@ class _ReportSelectionState extends State<ReportSelection> {
     context.loaderOverlay.show();
     await reportServices.deleteReport(context, id).then((_){
       context.loaderOverlay.hide();
-      Message.showScaffoldMessage(context, "Đã xóa", AppColors.green);
+      Message.showScaffoldMessage(context, "deleteSuccess".tr(), AppColors.green);
       Navigator.pop(context);
     });
   }
@@ -65,7 +66,7 @@ class _ReportSelectionState extends State<ReportSelection> {
                   GestureDetector(
                     onTap: () async{
                       if (widget.report.status != 0) {
-                        Message.showToast("Bạn không có quyền sửa thông tin do quản trị viên đã duyệt");
+                        Message.showToast("noPermissionToEdit".tr());
                       }
                       await showReportModal(context, widget.report.target, widget.report.author, widget.report);
                     },
@@ -86,7 +87,7 @@ class _ReportSelectionState extends State<ReportSelection> {
                   ),
                   SizedBox(height: 5),
                   Text(
-                    "Sửa",
+                    "edit".tr(),
                     style: TextStyle(
                       color: theme.colorScheme.secondary,
                       fontSize: 12,
@@ -105,8 +106,8 @@ class _ReportSelectionState extends State<ReportSelection> {
                       }
                       ShowYesnoDialog.checkDeviceDialog(
                         context, 
-                        title: "Xóa báo cáo", 
-                        content: "Quản trị viên chưa duyệt, bạn muốn xóa không?", 
+                        title: "deleteReportTitle".tr(), 
+                        content: "deleteReportDesc".tr(), 
                         onAcceptTap: () => onDelete(widget.report.reportId), 
                         onCancelTap: () => Navigator.pop(context)
                       );
@@ -128,7 +129,7 @@ class _ReportSelectionState extends State<ReportSelection> {
                   ),
                   SizedBox(height: 5),
                   Text(
-                    "Xóa",
+                    "delete".tr(),
                     style: TextStyle(
                       color: theme.colorScheme.secondary,
                       fontSize: 12,

@@ -22,7 +22,7 @@ class ImageService extends ImageRepo{
       if (imagePicker == null) return null;
       return File(imagePicker.path);
     } catch (e){
-      Message.showScaffoldMessage(context, "Đã xảy ra lỗi", AppColors.red);
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
       Logger.log(e);
       rethrow;
     }

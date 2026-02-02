@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/model/recent_view_model.dart';
 import 'package:food_recipe_app/provider/history_state.dart';
@@ -39,7 +40,7 @@ class _RecentViewState extends State<RecentView> {
         backgroundColor: theme.appBarTheme.backgroundColor,
         foregroundColor: theme.appBarTheme.foregroundColor,
         title: Text(
-          "Đã xem gần đây",
+          "recentFood".tr(),
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold
@@ -61,7 +62,7 @@ class _RecentViewState extends State<RecentView> {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    "Không có dữ liệu",
+                    "noData".tr(),
                     style: TextStyle(
                       color: theme.colorScheme.secondary,
                       fontSize: 14,
@@ -84,7 +85,7 @@ class _RecentViewState extends State<RecentView> {
               food: value[index].foods, 
               children: [
                 SlidableAction(
-                  onPressed: (context) => context.read<HistoryState>().toggle(value[index]),
+                  onPressed: (context) => onDelete(context, value[index]),
                   backgroundColor: AppColors.red,
                   foregroundColor: AppColors.white,
                   icon: Icons.delete,
@@ -99,13 +100,13 @@ class _RecentViewState extends State<RecentView> {
   void onDelete(BuildContext context, RecentViewModel model) {
     ShowYesnoDialog.checkDeviceDialog(
       context, 
-      title: "Xóa lịch sử", 
-      content: "Bạn có chắc chắn muốn xóa món ăn gần đây bạn đã xem không?", 
+      title: "deleteRecentTitle".tr(), 
+      content: "deleteRecentDesc".tr(), 
       onAcceptTap: () {
         context.loaderOverlay.show();
         context.read<HistoryState>().toggle(model);
         context.loaderOverlay.hide();
-        Message.showScaffoldMessage(context, "Đã xóa", AppColors.green);
+        Message.showScaffoldMessage(context, "deleteSuccess".tr(), AppColors.green);
         Navigator.pop(context);
       }, 
       onCancelTap: () => Navigator.pop(context)

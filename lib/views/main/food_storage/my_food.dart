@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/model/food_model.dart';
@@ -25,7 +26,7 @@ class _MyFoodState extends State<MyFood> {
     context.loaderOverlay.show();
     await foodServices.deleteFood(context, id).then((_){
       context.loaderOverlay.hide();
-      Message.showScaffoldMessage(context, "Đã xóa", AppColors.green);
+      Message.showScaffoldMessage(context, "deleteSuccess".tr(), AppColors.green);
       Navigator.pop(context);
     });
   }
@@ -48,7 +49,7 @@ class _MyFoodState extends State<MyFood> {
         backgroundColor: theme.appBarTheme.backgroundColor,
         centerTitle: true,
         title: Text(
-          "Món ăn của bạn",
+          "myFood".tr(),
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold
@@ -61,7 +62,7 @@ class _MyFoodState extends State<MyFood> {
         builder: (context, snapshot){
           if (!snapshot.hasData || snapshot.hasError) {
             return Center(
-              child: Text("Không có dữ liệu",
+              child: Text("noData".tr(),
                 style: TextStyle(
                   color: AppColors.black,
                   fontSize: 14,
@@ -94,8 +95,8 @@ class _MyFoodState extends State<MyFood> {
                     onPressed: (context) {
                       ShowYesnoDialog.checkDeviceDialog(
                         context, 
-                        title: "Xóa món ăn", 
-                        content: "Bạn có chắc chắn muốn xóa không? Bạn sẽ không thể khôi phục thành quả của mình sau khi xóa", 
+                        title: "deleteFoodTitle".tr(), 
+                        content: "deleteFoodDesc".tr(), 
                         onAcceptTap: () => onDelete(foodData[index].foodId), 
                         onCancelTap: () => Navigator.pop(context)
                       );

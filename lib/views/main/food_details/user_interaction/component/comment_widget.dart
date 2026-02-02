@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/extension/datetime_extension.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/model/comment_model.dart';
@@ -156,7 +157,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                   TextSpan(
                     children: [
                       TextSpan(
-                        text: "Thích ${widget.comment.likesList.isEmpty ? "" : "(${widget.comment.likesList.length})"} ",
+                        text: "${"like".tr()} ${widget.comment.likesList.isEmpty ? "" : "(${widget.comment.likesList.length})"} ",
                         recognizer: TapGestureRecognizer()..onTap = (){
                           setState(() {
                             isLikedComment = !isLikedComment;
@@ -174,7 +175,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                         )
                       ),
                       TextSpan(
-                        text: " Trả lời",
+                        text: " ${"reply".tr()}",
                         style: TextStyle(
                           color: theme.colorScheme.secondary,
                           fontSize: 12,

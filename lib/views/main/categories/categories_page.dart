@@ -52,7 +52,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Xin chào! ${currentUser.displayName}",
+                            "hello".tr(),
                             style: TextStyle(
                               color: AppColors.white,
                               fontSize: 12,

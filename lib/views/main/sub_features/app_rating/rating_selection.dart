@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/model/rating_model.dart';
@@ -47,7 +48,7 @@ class RatingSelection {
                     ),
                     SizedBox(height: 5),
                     Text(
-                      "Sửa",
+                      "edit".tr(),
                       style: TextStyle(
                         color: AppColors.white,
                         fontSize: 14,
@@ -63,11 +64,11 @@ class RatingSelection {
                 Navigator.pop(context);
                 ShowYesnoDialog.checkDeviceDialog(
                   context, 
-                  title: "Xóa đánh giá", 
-                  content: "Bạn chắc chắn muốn xóa đánh giá của bạn chứ!", 
+                  title: "deleteRateTitle".tr(), 
+                  content: "deleteRateDesc".tr(), 
                   onAcceptTap: () async{
                     await rateServices.deleteRating(context, rate.ratingId).then((_){
-                      Message.showScaffoldMessage(context, "Đã xóa", AppColors.green);
+                      Message.showScaffoldMessage(context, "deleteSuccess".tr(), AppColors.green);
                       Navigator.pop(context);
                     });
                   }, 
@@ -91,7 +92,7 @@ class RatingSelection {
                     ),
                     SizedBox(height: 5),
                     Text(
-                      "Xóa",
+                      "delete".tr(),
                       style: TextStyle(
                         color: AppColors.white,
                         fontSize: 14,
@@ -121,7 +122,7 @@ class RatingSelection {
                     ),
                     SizedBox(height: 5),
                     Text(
-                      "Sao chép",
+                      "copy".tr(),
                       style: TextStyle(
                         color: AppColors.white,
                         fontSize: 14,
@@ -154,7 +155,7 @@ class RatingSelection {
           children: [
             GestureDetector(
               onTap: () async{
-                await showReportModal(context, "đánh giá ${rate.content}", rate.userName, null);
+                await showReportModal(context, "${"rateUpperCase".tr()} ${rate.content}", rate.userName, null);
               },
               child: Container(
                 width: 75,
@@ -173,7 +174,7 @@ class RatingSelection {
                     ),
                     SizedBox(height: 5),
                     Text(
-                      "Báo cáo",
+                      "report".tr(),
                       style: TextStyle(
                         color: AppColors.white,
                         fontSize: 14,
@@ -203,7 +204,7 @@ class RatingSelection {
                     ),
                     SizedBox(height: 5),
                     Text(
-                      "Sao chép",
+                      "copy".tr(),
                       style: TextStyle(
                         color: AppColors.white,
                         fontSize: 14,

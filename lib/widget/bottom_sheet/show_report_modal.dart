@@ -38,7 +38,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
   void onReport() async{
     if (!agree) return;
     context.loaderOverlay.show();
-    if (selectedOption!.contains("Khác")){
+    if (selectedOption == "reportOther"){
       if (_otherReport.text.isEmpty){
         Message.showToast("infoEmpty".tr());
         context.loaderOverlay.hide();
@@ -50,7 +50,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
       target: widget.title,
       author: widget.author,
       reporter: currentUser.displayName!,
-      reason: selectedOption == "reportOther".tr() ? _otherReport.text : selectedOption!, 
+      reason: selectedOption == "reportOther" ? _otherReport.text : selectedOption!, 
       createdAt: DateTime.now(), 
       status: 0
     );
@@ -176,7 +176,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
                   decoration: InputDecoration(
                     hintText: "contentInput".tr(),
                     hintStyle: TextStyle(
-                      color: selectedOption == "reportOther".tr() 
+                      color: selectedOption == "reportOther"
                         ? theme.colorScheme.secondary 
                         : AppColors.grey,
                       fontSize: 14,
@@ -185,7 +185,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(
-                        color: selectedOption == "reportOther".tr()
+                        color: selectedOption == "reportOther"
                           ? AppColors.black 
                           : AppColors.grey
                       )

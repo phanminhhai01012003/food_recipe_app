@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/model/save_food_model.dart';
 import 'package:food_recipe_app/provider/save_state.dart';
@@ -39,7 +40,7 @@ class _SaveFoodState extends State<SaveFood> {
           ),
         ),
         title: Text(
-          "Đã lưu",
+          "saveFood".tr(),
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold
@@ -61,7 +62,7 @@ class _SaveFoodState extends State<SaveFood> {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    "Không có dữ liệu",
+                    "noData".tr(),
                     style: TextStyle(
                       color: theme.colorScheme.secondary,
                       fontSize: 14,
@@ -99,13 +100,13 @@ class _SaveFoodState extends State<SaveFood> {
   void onDelete(BuildContext context, SaveFoodModel model) {
     ShowYesnoDialog.checkDeviceDialog(
       context, 
-      title: "Xóa món ăn đã lưu", 
-      content: "Bạn có chắc chắn muốn xóa món ăn đã lưu không?", 
+      title: "deleteSaveTitle".tr(), 
+      content: "deleteSaveDesc".tr(), 
       onAcceptTap: () {
         context.loaderOverlay.show();
         context.read<SaveState>().toggle(model);
         context.loaderOverlay.hide();
-        Message.showScaffoldMessage(context, "Đã xóa", AppColors.green);
+        Message.showScaffoldMessage(context, "deleteSuccess".tr(), AppColors.green);
         Navigator.pop(context);
       }, 
       onCancelTap: () => Navigator.pop(context)

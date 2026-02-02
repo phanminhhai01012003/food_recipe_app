@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/list_constants.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/model/rating_model.dart';
 import 'package:food_recipe_app/views/main/sub_features/app_rating/rate_component.dart';
 import 'package:food_recipe_app/widget/load_data/load_data.dart';
@@ -19,11 +20,11 @@ class _FullRatingPageState extends State<FullRatingPage> {
   String? selectedFilterRate;
   Stream<List<RatingModel>> getRatingData(){
     switch(selectedFilterRate){
-      case "Phổ biến":
+      case "popular":
         return rateServices.getRating(context);
-      case "Mới nhất":
+      case "latest":
         return rateServices.getRatingByDate(context, true);
-      case "Cũ nhất":
+      case "oldest":
         return rateServices.getRatingByDate(context, false);
       default:
         return Stream.empty();
@@ -49,7 +50,7 @@ class _FullRatingPageState extends State<FullRatingPage> {
           ),
         ),
         title: Text(
-          "Đánh giá ứng dụng",
+          "rateApp".tr(),
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold
@@ -70,7 +71,7 @@ class _FullRatingPageState extends State<FullRatingPage> {
         child: Column(
           children: [
             Text(
-              "Lưu ý: Chỉ hiển thị ý kiến của khách hàng khi đánh giá trực tiếp trong app",
+              "rateAttention".tr(),
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w800,
@@ -89,7 +90,7 @@ class _FullRatingPageState extends State<FullRatingPage> {
               child: DropdownButton(
                 underline: SizedBox(),
                 isExpanded: true,
-                hint: Text("Lọc dữ liệu",
+                hint: Text("filterData".tr(),
                   style: TextStyle(
                     color: theme.colorScheme.secondary,
                     fontSize: 14,
@@ -99,7 +100,7 @@ class _FullRatingPageState extends State<FullRatingPage> {
                 items: filterRating.map((String item){
                   return DropdownMenuItem(
                     value: item,
-                    child: Text(item,
+                    child: Text(item.tr(),
                       style: TextStyle(
                         color: theme.colorScheme.secondary,
                         fontSize: 12,

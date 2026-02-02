@@ -88,14 +88,17 @@ class _SearchPageState extends State<SearchPage> {
                     fontSize: 12,
                     fontWeight: FontWeight.w400
                   ),
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _searchController.clear();
-                        searchQuery = "";
-                      });
-                    }, 
-                    icon: Icon(Icons.clear, size: 20, color: AppColors.grey)
+                  suffixIcon: Visibility(
+                    visible: _searchController.text.isNotEmpty,
+                    child: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          _searchController.clear();
+                          searchQuery = "";
+                        });
+                      }, 
+                      icon: Icon(Icons.clear, size: 20, color: AppColors.grey)
+                    ),
                   )
                 ),
                 onFieldSubmitted: (newValue) async{

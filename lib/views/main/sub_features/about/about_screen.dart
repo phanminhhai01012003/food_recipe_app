@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 
@@ -62,7 +63,7 @@ class _AboutScreenState extends State<AboutScreen> {
                     ),
                     child: Center(
                       child: Text(
-                        "Tổng quan",
+                        "overview".tr(),
                         style: TextStyle(
                           color: selectedIndex == 0 ? AppColors.white : theme.colorScheme.secondary,
                           fontSize: 14,
@@ -87,7 +88,7 @@ class _AboutScreenState extends State<AboutScreen> {
                     ),
                     child: Center(
                       child: Text(
-                        "Liên hệ",
+                        "contact".tr(),
                         style: TextStyle(
                           color: selectedIndex == 1 ? AppColors.white : theme.colorScheme.secondary,
                           fontSize: 14,

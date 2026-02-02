@@ -5,10 +5,12 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/constants/list_constants.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/convert.dart';
 import 'package:food_recipe_app/model/rating_model.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
+import 'package:food_recipe_app/widget/other/radio_selection.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 class RateScreen extends StatefulWidget {
@@ -48,13 +50,13 @@ class _RateScreenState extends State<RateScreen> {
     if (widget.rating == null) {
       await rateServices.addRating(context, rating).then((_){
         context.loaderOverlay.hide();
-        Message.showScaffoldMessage(context, "Cảm ơn bạn đã đánh giá", AppColors.green);
+        Message.showScaffoldMessage(context, "rateSuccess".tr(), AppColors.green);
         Navigator.pop(context);
       });
     } else {
       await rateServices.updateRating(context, rating).then((_){
         context.loaderOverlay.hide();
-        Message.showScaffoldMessage(context, "Cập nhật thành công", AppColors.green);
+        Message.showScaffoldMessage(context, "updateSuccess".tr(), AppColors.green);
         Navigator.pop(context);
       });
     }
@@ -79,7 +81,7 @@ class _RateScreenState extends State<RateScreen> {
           ),
         ),
         title: Text(
-          "Đánh giá ứng dụng",
+          "rateApp".tr(),
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold
@@ -92,7 +94,20 @@ class _RateScreenState extends State<RateScreen> {
           children: [
             Align(
               alignment: Alignment.centerLeft,
-              child: radio(context, rates.first),
+              child: RadioSelection(
+                title: rates.first.tr(), 
+                selectedOption: selectRatingMethod, 
+                onTap: () {
+                  setState(() {
+                    selectRatingMethod = rates.first;
+                  });
+                }, 
+                onChanged: (value) {
+                  setState(() {
+                    selectRatingMethod = value;
+                  });
+                }
+              ),
             ),
             SizedBox(height: 20),
             Visibility(
@@ -118,7 +133,7 @@ class _RateScreenState extends State<RateScreen> {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    "Đánh giá: $rate/5.0",
+                    "${"rate".tr()}: $rate/5.0",
                     style: TextStyle(
                       color: theme.colorScheme.secondary,
                       fontSize: 14,
@@ -145,7 +160,7 @@ class _RateScreenState extends State<RateScreen> {
                         borderRadius: BorderRadius.circular(12),
                         borderSide: BorderSide(color: theme.colorScheme.secondary)
                       ),
-                      hintText: "Nhận xét (Không bắt buộc)",
+                      hintText: "opinion".tr(),
                       hintStyle: TextStyle(
                         color: theme.colorScheme.secondary,
                         fontSize: 14,
@@ -164,7 +179,7 @@ class _RateScreenState extends State<RateScreen> {
                       ),
                       onPressed: onDirectRating, 
                       child: Text(
-                        "Xác nhận",
+                        "confirm".tr(),
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold
@@ -178,7 +193,20 @@ class _RateScreenState extends State<RateScreen> {
             SizedBox(height: 20),
             Align(
               alignment: Alignment.centerLeft,
-              child: radio(context, rates.last),
+              child: RadioSelection(
+                title: rates.last.tr(), 
+                selectedOption: selectRatingMethod, 
+                onTap: (){
+                  setState(() {
+                    selectRatingMethod = rates.last;
+                  });
+                }, 
+                onChanged: (value) {
+                  setState(() {
+                    selectRatingMethod = value;
+                  });
+                }
+              ),
             ),
             SizedBox(height: 20),
             Visibility(
@@ -193,7 +221,7 @@ class _RateScreenState extends State<RateScreen> {
                   ),
                   onPressed: onDirectRating, 
                   child: Text(
-                    "Đi tới ${Platform.isAndroid ? "Google Play" : "App Store"}",
+                    "${"go".tr()} ${Platform.isAndroid ? "Google Play" : "App Store"}",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold
@@ -205,35 +233,6 @@ class _RateScreenState extends State<RateScreen> {
           ],
         ),
       ),
-    );
-  }
-  Widget radio(BuildContext context, String title){
-    final theme = Theme.of(context);
-    return ListTile(
-      contentPadding: EdgeInsets.zero,
-      leading: Radio<String>(
-        activeColor: theme.colorScheme.secondary,
-        value: title,
-        groupValue: selectRatingMethod,
-        onChanged: (value) {
-          setState(() {
-            selectRatingMethod = value;
-          });
-        },
-      ),
-      title: Text(
-        title,
-        style: TextStyle(
-          color: theme.colorScheme.secondary,
-          fontSize: 12,
-          fontWeight: FontWeight.normal
-        ),
-      ),
-      onTap: () {
-        setState(() {
-          selectRatingMethod = title;
-        });
-      },
     );
   }
 }

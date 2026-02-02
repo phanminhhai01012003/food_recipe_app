@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/model/report_model.dart';
 import 'package:food_recipe_app/views/main/report/report_selection.dart';
@@ -20,13 +21,13 @@ class _MyReportPageState extends State<MyReportPage> {
   String renderStatus(int status){
     switch (status) {
       case 0:
-        return "Chờ duyệt";
+        return "pending".tr();
       case 1:
-        return "Đã đồng ý";
+        return "accept".tr();
       case 2:
-        return "Đã từ chối";
+        return "reject".tr();
       default:
-        return "Không xác định";
+        return "unknown".tr();
     }
   }
   Color renderColor(int status){
@@ -50,7 +51,7 @@ class _MyReportPageState extends State<MyReportPage> {
         backgroundColor: theme.appBarTheme.backgroundColor,
         foregroundColor: theme.appBarTheme.foregroundColor,
         centerTitle: true,
-        title: Text("Danh sách báo cáo/chặn",
+        title: Text("reportList".tr(),
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.bold
@@ -89,7 +90,7 @@ class _MyReportPageState extends State<MyReportPage> {
                     ),
                     child: Center(
                       child: Text(
-                        "Chờ duyệt",
+                        "pending".tr(),
                         style: TextStyle(
                           color: statusIndex == 0 ? AppColors.white : theme.colorScheme.secondary,
                           fontSize: 14,
@@ -114,7 +115,7 @@ class _MyReportPageState extends State<MyReportPage> {
                     ),
                     child: Center(
                       child: Text(
-                        "Đã duyệt",
+                        "accept".tr(),
                         style: TextStyle(
                           color: statusIndex == 1 ? AppColors.white : theme.colorScheme.secondary,
                           fontSize: 14,
@@ -139,7 +140,7 @@ class _MyReportPageState extends State<MyReportPage> {
                     ),
                     child: Center(
                       child: Text(
-                        "Từ chối",
+                        "reject".tr(),
                         style: TextStyle(
                           color: statusIndex == 2 ? AppColors.white : theme.colorScheme.secondary,
                           fontSize: 14,
@@ -180,7 +181,7 @@ class _MyReportPageState extends State<MyReportPage> {
                           children: [
                             Expanded(
                               child: Text(
-                                "Tiêu đề: ${reports[index].target}",
+                                "title".tr(reports[index].target),
                                 style: TextStyle(
                                   color: theme.colorScheme.secondary,
                                   fontSize: 16,
@@ -191,7 +192,7 @@ class _MyReportPageState extends State<MyReportPage> {
                             SizedBox(height: 5),
                             Expanded(
                               child: Text(
-                                "Nội dung: ${reports[index].reason}",
+                                "content".tr(reports[index].reason),
                                 style: TextStyle(
                                   color: theme.colorScheme.secondary,
                                   fontSize: 14,
@@ -204,7 +205,7 @@ class _MyReportPageState extends State<MyReportPage> {
                               TextSpan(
                                 children: [
                                   TextSpan(
-                                    text: "Trạng thái: ",
+                                    text: "status".tr(),
                                     style: TextStyle(
                                       color: theme.colorScheme.secondary,
                                       fontSize: 12,

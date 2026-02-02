@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 
@@ -22,22 +23,22 @@ class _MainPageState extends State<MainPage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             activeIcon: Icon(Icons.home),
-            label: "Trang chủ",
+            label: "home".tr(),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.category_rounded),
             activeIcon: Icon(Icons.category_rounded),
-            label: "Thể loại"
+            label: "categories".tr()
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.storage),
             activeIcon: Icon(Icons.storage),
-            label: "Lưu trữ"
+            label: "storage".tr()
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             activeIcon: Icon(Icons.settings),
-            label: "Cài đặt"
+            label: "settings".tr()
           )
         ],
         currentIndex: selectedIndex,
