@@ -43,11 +43,7 @@ class CommentModel {
       'createdAt': createdAt.toIso8601String(),
     };
   }
-  Map<String, dynamic> updateMap() {
-    return {
-      'content': content
-    };
-  }
+  Map<String, dynamic> updateMap() => {'content': content};
   CommentModel.empty(){
     commentId = "";
     userId = "";
