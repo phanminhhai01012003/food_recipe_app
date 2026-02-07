@@ -58,4 +58,13 @@ class CookbookModel {
     createdAt = DateTime.now();
     foodsList = [];
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CookbookModel &&
+          runtimeType == other.runtimeType &&
+          cookbookId == other.cookbookId;
+  @override
+  int get hashCode => cookbookId.hashCode;
 }

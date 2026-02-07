@@ -35,7 +35,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen>{
         padding: EdgeInsets.all(12),
         child: Column(
           children: [
-            ListView.builder(
+            ListView.separated(
+              separatorBuilder: (context, index) => SizedBox(height: 10),
               itemCount: subscriptionData.length,
               shrinkWrap: true,
               hitTestBehavior: HitTestBehavior.translucent,

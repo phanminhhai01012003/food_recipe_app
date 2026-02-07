@@ -6,7 +6,7 @@ import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/model/cookbook_model.dart';
 import 'package:food_recipe_app/provider/cookbook_state.dart';
-import 'package:food_recipe_app/views/main/cookbook/widget/cookbook_widget.dart';
+import 'package:food_recipe_app/views/main/cookbook/widget/cookbook_list_widget.dart';
 import 'package:provider/provider.dart';
 
 class CookbookScreen extends StatefulWidget {
@@ -51,6 +51,7 @@ class _CookbookScreenState extends State<CookbookScreen> {
           if (value.isEmpty) {
             return Center(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
                     Icons.error, 
@@ -70,14 +71,20 @@ class _CookbookScreenState extends State<CookbookScreen> {
               ),
             );
           }
-          return ListView.builder(
-            scrollDirection: Axis.vertical,
-            hitTestBehavior: HitTestBehavior.translucent,
-            clipBehavior: Clip.hardEdge,
-            shrinkWrap: true,
-            physics: ClampingScrollPhysics(),
-            itemCount: value.length,
-            itemBuilder: (context, index) => CookbookWidget(book: value[index])
+          return Expanded(
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.8,
+              ),
+              scrollDirection: Axis.vertical,
+              hitTestBehavior: HitTestBehavior.translucent,
+              clipBehavior: Clip.hardEdge,
+              shrinkWrap: true,
+              physics: ClampingScrollPhysics(),
+              itemCount: value.length,
+              itemBuilder: (context, index) => CookbookListWidget(cookbook: value[index])
+            ),
           );      
         },
       ),

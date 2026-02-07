@@ -138,7 +138,7 @@ class _EditUserState extends State<EditUser> {
                             }
                           },
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(50),
+                            borderRadius: BorderRadius.circular(100),
                             child: Image.file(
                               image!,
                               errorBuilder: (context, error, stackTrace) => Image.network(userDefaultImage),
@@ -158,7 +158,7 @@ class _EditUserState extends State<EditUser> {
                             }
                           },
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(50),
+                            borderRadius: BorderRadius.circular(100),
                             child: Image.network(
                               imageURL,
                               errorBuilder: (context, error, stackTrace) => Image.network(userDefaultImage),

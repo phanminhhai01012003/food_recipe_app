@@ -43,6 +43,7 @@ class _FoodListWithTagState extends State<FoodListWithTag> {
         ),
       ),
       body: SingleChildScrollView(
+        padding: EdgeInsets.all(12),
         child: StreamBuilder(
           stream: foodServices.getFoodByTag(context, widget.categories), 
           builder: (context, snapshot) {

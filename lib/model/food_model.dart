@@ -98,4 +98,12 @@ class FoodModel {
     createdAt = DateTime.now();
     likes = [];
   }
+  @override
+  bool operator ==(Object other) => 
+    identical(this, other) ||
+      other is FoodModel && 
+        runtimeType == other.runtimeType && 
+        foodId == other.foodId;
+  @override
+  int get hashCode => foodId.hashCode;
 }

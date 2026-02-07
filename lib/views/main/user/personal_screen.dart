@@ -66,31 +66,32 @@ class _PersonalScreenState extends State<PersonalScreen> {
                 }
               },
             ),
-            SizedBox(height: 20),
-            Divider(color: AppColors.grey, thickness: 1),
-            SizedBox(height: 20),
-            StreamBuilder(
-              stream: foodServices.getFoodByUser(context, widget.id), 
-              builder: (context, snapshot){
-                if (!snapshot.hasData || snapshot.hasError) {
-                  return Center(child: Icon(Icons.error, size: 100, color: AppColors.red));
-                } else if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator(color: AppColors.yellow));
-                } else {
-                  List<FoodModel> foodData = snapshot.data!;
-                  return GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.8
-                    ),
-                    scrollDirection: Axis.vertical,
-                    itemCount: foodData.length,
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) => FoodDisplayGrid(food: foodData[index])
-                  );
+            Expanded(
+              child: StreamBuilder(
+                stream: foodServices.getFoodByUser(context, widget.id), 
+                builder: (context, snapshot){
+                  if (!snapshot.hasData || snapshot.hasError) {
+                    return Center(child: Icon(Icons.error, size: 100, color: AppColors.red));
+                  } else if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator(color: AppColors.yellow));
+                  } else {
+                    List<FoodModel> foodData = snapshot.data!;
+                    return GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.8
+                      ),
+                      scrollDirection: Axis.vertical,
+                      itemCount: foodData.length,
+                      shrinkWrap: true,
+                      hitTestBehavior: HitTestBehavior.translucent,
+                      clipBehavior: Clip.hardEdge,
+                      physics: ClampingScrollPhysics(),
+                      itemBuilder: (context, index) => FoodDisplayGrid(food: foodData[index])
+                    );
+                  }
                 }
-              }
+              ),
             )
           ],
         ),

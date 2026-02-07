@@ -25,19 +25,18 @@ class _CookbookWidgetState extends State<CookbookWidget> {
           ),
         ),
         child: Container(
-          color: AppColors.black,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                widget.book.cookbookName,
-                style: TextStyle(
-                  color: AppColors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold
-                ),
-              )
-            ],
+          // ignore: deprecated_member_use
+          color: AppColors.black.withOpacity(0.5),
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Text(
+              widget.book.cookbookName,
+              style: TextStyle(
+                color: AppColors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.bold
+              ),
+            ),
           ),
         ),
       ),

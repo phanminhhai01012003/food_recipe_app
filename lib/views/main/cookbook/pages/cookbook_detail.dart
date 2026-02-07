@@ -60,8 +60,8 @@ class _CookbookDetailState extends State<CookbookDetail> {
                           color: AppColors.yellow
                         )
                       ),
-                      width: 50,
-                      height: 50,
+                      width: 100,
+                      height: 100,
                       errorWidget: (context, url, error) => Center(
                         child: Icon(
                           Icons.error,
@@ -73,26 +73,23 @@ class _CookbookDetailState extends State<CookbookDetail> {
                   ),
                   SizedBox(width: 8),
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         widget.cookbook.cookbookName,
-                        textAlign: TextAlign.start,
                         style: TextStyle(
                           color: theme.colorScheme.secondary,
-                          fontSize: 16,
+                          fontSize: 24,
                           fontWeight: FontWeight.bold
                         ),
                       ),
                       SizedBox(width: 5),
-                      Expanded(
-                        child: Text(
-                          widget.cookbook.description,
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                            color: theme.colorScheme.secondary,
-                            fontSize: 12,
-                            fontWeight: FontWeight.normal
-                          ),
+                      Text(
+                        widget.cookbook.description,
+                        style: TextStyle(
+                          color: theme.colorScheme.secondary,
+                          fontSize: 20,
+                          fontWeight: FontWeight.normal
                         ),
                       )
                     ],
@@ -113,33 +110,41 @@ class _CookbookDetailState extends State<CookbookDetail> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  MaterialButton(
-                    onPressed: () => Navigator.push(context, checkDeviceRoute(editCookbook(widget.cookbook))),
-                    color: AppColors.yellow,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33)),
-                    child: Text("editInformation".tr(),
-                      style: TextStyle(
-                        color: theme.colorScheme.primary,
-                        fontSize: 14,
-                        fontWeight: FontWeight.normal
+                  SizedBox(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    child: MaterialButton(
+                      onPressed: () => Navigator.push(context, checkDeviceRoute(editCookbook(widget.cookbook))),
+                      color: AppColors.yellow,
+                      textColor: AppColors.white,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33)),
+                      child: Text("editInformation".tr(),
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal
+                        ),
                       ),
                     ),
                   ),
-                  MaterialButton(
-                    onPressed: () => ShowYesnoDialog.checkDeviceDialog(
-                      context, 
-                      title: "cookbookDeleteTitle".tr(), 
-                      content: "cookbookDeleteDesc".tr(), 
-                      onAcceptTap: () => onDelete(widget.cookbook.cookbookId), 
-                      onCancelTap: () => Navigator.pop(context)
-                    ),
-                    color: AppColors.red,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33)),
-                    child: Text("cookbookDeleteTitle".tr(),
-                      style: TextStyle(
-                        color: theme.colorScheme.primary,
-                        fontSize: 14,
-                        fontWeight: FontWeight.normal
+                  SizedBox(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    child: MaterialButton(
+                      onPressed: () => ShowYesnoDialog.checkDeviceDialog(
+                        context, 
+                        title: "cookbookDeleteTitle".tr(), 
+                        content: "cookbookDeleteDesc".tr(), 
+                        onAcceptTap: () => onDelete(widget.cookbook.cookbookId), 
+                        onCancelTap: () => Navigator.pop(context)
+                      ),
+                      color: AppColors.red,
+                      textColor: AppColors.white,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33)),
+                      child: Text("cookbookDeleteTitle".tr(),
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal
+                        ),
                       ),
                     ),
                   )

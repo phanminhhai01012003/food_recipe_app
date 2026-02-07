@@ -166,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "latest".tr(),
+                            "mostRecent".tr(),
                             style: TextStyle(
                               color: theme.colorScheme.secondary,
                               fontSize: 14,

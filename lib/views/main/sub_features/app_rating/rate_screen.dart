@@ -111,7 +111,7 @@ class _RateScreenState extends State<RateScreen> {
             ),
             SizedBox(height: 20),
             Visibility(
-              visible: selectRatingMethod == rates.first,
+              visible: selectRatingMethod == rates.first.tr(),
               child: Column(
                 children: [
                   RatingBar.builder(
@@ -210,7 +210,7 @@ class _RateScreenState extends State<RateScreen> {
             ),
             SizedBox(height: 20),
             Visibility(
-              visible: selectRatingMethod == rates.last,
+              visible: selectRatingMethod == rates.last.tr(),
               child: SizedBox(
                 width: MediaQuery.of(context).size.width / 2,
                 height: 50,

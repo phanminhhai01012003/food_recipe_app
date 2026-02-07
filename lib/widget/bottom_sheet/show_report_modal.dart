@@ -38,7 +38,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
   void onReport() async{
     if (!agree) return;
     context.loaderOverlay.show();
-    if (selectedOption == "reportOther"){
+    if (selectedOption == "reportOther".tr()){
       if (_otherReport.text.isEmpty){
         Message.showToast("infoEmpty".tr());
         context.loaderOverlay.hide();
@@ -50,7 +50,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
       target: widget.title,
       author: widget.author,
       reporter: currentUser.displayName!,
-      reason: selectedOption == "reportOther" ? _otherReport.text : selectedOption!, 
+      reason: selectedOption == "reportOther".tr() ? _otherReport.text : selectedOption!, 
       createdAt: DateTime.now(), 
       status: 0
     );
@@ -64,23 +64,21 @@ class _ShowReportModalState extends State<ShowReportModal> {
       Navigator.pop(context);
     });
   }
+  List<String> get reports {
+    if (widget.title.contains("food".tr())){
+      return reportFoodList;
+    }
+    return reportCommentList;
+  } 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     if (widget.reports != null) {
-      if (widget.title.contains("food".tr())) {
-        if (selectedOption == reportFoodList.last) {
-          _otherReport.text = widget.reports!.reason;
-        } else {
-          selectedOption = widget.reports!.reason;
-        }
-      } else {
-        if (selectedOption == reportCommentList.last) {
-          _otherReport.text = widget.reports!.reason;
-        } else {
-          selectedOption = widget.reports!.reason;
-        }
+      if (selectedOption == reports.last.tr()){
+        _otherReport.text = widget.reports!.reason;
+      }else{
+        selectedOption = widget.reports!.reason;
       }
     }
   }
@@ -141,21 +139,13 @@ class _ShowReportModalState extends State<ShowReportModal> {
                 SizedBox(height: 10),
                 Column(
                   children: List.generate(
-                    widget.title.contains("food".tr()) 
-                      ? reportFoodList.length
-                      : reportCommentList.length, 
+                    reports.length,
                     (i) => RadioSelection(
-                      title: widget.title.contains("food".tr()) 
-                        ? reportFoodList[i]
-                        : reportCommentList[i], 
+                      title: reports[i].tr(), 
                       selectedOption: selectedOption, 
                       onTap: (){
                         setState(() {
-                          if (widget.title.contains("food".tr())) {
-                            selectedOption = reportFoodList[i];
-                          } else {
-                            selectedOption = reportCommentList[i];
-                          }
+                          selectedOption = reports[i];
                         });
                       }, 
                       onChanged: (value){
@@ -170,13 +160,11 @@ class _ShowReportModalState extends State<ShowReportModal> {
                 TextField(
                   maxLength: 500,
                   controller: _otherReport,
-                  enabled: widget.title.contains("food".tr()) 
-                    ? selectedOption == reportFoodList.last 
-                    : selectedOption == reportCommentList.last,
+                  enabled: selectedOption == reports.last.tr(),
                   decoration: InputDecoration(
                     hintText: "contentInput".tr(),
                     hintStyle: TextStyle(
-                      color: selectedOption == "reportOther"
+                      color: selectedOption == reports.last.tr()
                         ? theme.colorScheme.secondary 
                         : AppColors.grey,
                       fontSize: 14,
@@ -185,7 +173,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(
-                        color: selectedOption == "reportOther"
+                        color: selectedOption == reports.last.tr()
                           ? AppColors.black 
                           : AppColors.grey
                       )
@@ -198,6 +186,8 @@ class _ShowReportModalState extends State<ShowReportModal> {
                 Row(
                   children: [
                     Checkbox(
+                      checkColor: AppColors.white,
+                      activeColor: AppColors.green,
                       value: agree, 
                       onChanged: (value){
                         setState(() {

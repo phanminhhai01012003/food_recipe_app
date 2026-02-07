@@ -14,6 +14,9 @@ class LoadData extends StatelessWidget {
       child: isList ? ListView.builder(
         itemCount: 10,
         shrinkWrap: true,
+        physics: ClampingScrollPhysics(),
+        clipBehavior: Clip.hardEdge,
+        hitTestBehavior: HitTestBehavior.translucent,
         itemBuilder: (context, index) => loadingListCard
       ) : GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -22,6 +25,9 @@ class LoadData extends StatelessWidget {
         ),
         itemCount: 10,
         shrinkWrap: true,
+        physics: ClampingScrollPhysics(),
+        clipBehavior: Clip.hardEdge,
+        hitTestBehavior: HitTestBehavior.translucent,
         itemBuilder: (context, index) => loadingGridCard
       ),
     );

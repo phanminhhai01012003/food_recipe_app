@@ -30,16 +30,15 @@ class Benefit extends StatelessWidget {
 
   TableRow row(List<String> cells, bool isHeader){
     return TableRow(
-      children: cells.map((c) => Center(
-        child: Padding(
-          padding: EdgeInsets.all(12),
-          child: Text(c,
-            style: TextStyle(
-              color: color,
-              fontSize: isHeader ? 16 : 12,
-              fontWeight: isHeader ? FontWeight.bold : FontWeight.normal
-            )
-          ),
+      children: cells.map((c) => Padding(
+        padding: EdgeInsets.all(12),
+        child: Text(c,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: color,
+            fontSize: isHeader ? 16 : 12,
+            fontWeight: isHeader ? FontWeight.bold : FontWeight.normal
+          )
         ),
       )).toList()
     );

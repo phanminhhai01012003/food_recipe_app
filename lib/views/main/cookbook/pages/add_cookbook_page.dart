@@ -14,6 +14,7 @@ import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/provider/cookbook_state.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_image_picker.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
+import 'package:food_recipe_app/widget/load_data/load_data.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';
@@ -266,7 +267,7 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
                 if (!snapshot.hasData || snapshot.hasError){
                   return SizedBox.shrink();
                 } else if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator(color: AppColors.yellow));
+                  return LoadData(isList: true);
                 } else {
                   List<FoodModel> foodData = snapshot.data!;
                   return ListView.builder(

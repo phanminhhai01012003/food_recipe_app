@@ -187,7 +187,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                   ),
                   SizedBox(height: 20),
                   Text(
-                    "${"categories".tr()}: ${widget.food.tag}",
+                    "${"categories".tr()}: ${widget.food.tag.tr()}",
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,

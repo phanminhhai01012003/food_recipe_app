@@ -73,6 +73,7 @@ class _ChangeLanguageModalState extends State<ChangeLanguageModal> {
                 }, 
                 isSelected: value.isVietnamese
               ),
+              SizedBox(height: 20),
               selectLanguageTileButton(
                 context, 
                 langImage: enFlag, 

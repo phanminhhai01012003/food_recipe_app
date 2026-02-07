@@ -23,6 +23,13 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
   final _otherReport = TextEditingController();
   void onDeleteAccount() async{
     context.loaderOverlay.show();
+    if (selectedOption == "reportOther".tr()) {
+      if (_otherReport.text.isEmpty) {
+        Message.showToast("infoEmpty".tr());
+        context.loaderOverlay.hide();
+        return;
+      }
+    }
     await authServices.deleteAccount(context);
     await userServices.deleteUser(context, currentUser.uid);
     context.loaderOverlay.hide();
@@ -79,17 +86,17 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
             TextField(
               maxLength: 500,
               controller: _otherReport,
-              enabled: selectedOption == deleteUserList.last,
+              enabled: selectedOption == deleteUserList.last.tr(),
               decoration: InputDecoration(
                 hintText: "contentInput".tr(),
                 hintStyle: TextStyle(
-                  color: selectedOption == deleteUserList.last ? theme.colorScheme.secondary : AppColors.grey,
+                  color: selectedOption == deleteUserList.last.tr() ? theme.colorScheme.secondary : AppColors.grey,
                   fontSize: 14,
                   fontWeight: FontWeight.normal
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: selectedOption == deleteUserList.last ? theme.colorScheme.secondary : AppColors.grey)
+                  borderSide: BorderSide(color: selectedOption == deleteUserList.last.tr() ? theme.colorScheme.secondary : AppColors.grey)
                 ),
                 counterText: ""
               ),
@@ -181,7 +188,7 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
   void sendRequest() async{
     try {
       await delAccReqCollection(currentUser.uid).add({
-        'reason': selectedOption == deleteUserList.last ? _otherReport.text : selectedOption,
+        'reason': selectedOption == deleteUserList.last.tr() ? _otherReport.text : selectedOption,
         'status': 0
       });
     } catch (e) {

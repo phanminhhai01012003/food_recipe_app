@@ -52,7 +52,7 @@ class Contact extends StatelessWidget {
           Text("${"email".tr()}: phanminhai012003@gmail.com",
             style: TextStyle(
               color: theme.colorScheme.secondary,
-              fontSize: 20,
+              fontSize: 16,
               fontWeight: FontWeight.w300
             ),
           ),
@@ -60,7 +60,7 @@ class Contact extends StatelessWidget {
           Text("${"phone".tr()}: 0984238803",
             style: TextStyle(
               color: theme.colorScheme.secondary,
-              fontSize: 20,
+              fontSize: 16,
               fontWeight: FontWeight.w300
             ),
           ),
@@ -68,7 +68,7 @@ class Contact extends StatelessWidget {
           Text("${"name".tr()}: Phan Minh Hai",
             style: TextStyle(
               color: theme.colorScheme.secondary,
-              fontSize: 20,
+              fontSize: 16,
               fontWeight: FontWeight.w300
             ),
           ),

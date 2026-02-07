@@ -13,6 +13,7 @@ import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/provider/cookbook_state.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_image_picker.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
+import 'package:food_recipe_app/widget/load_data/load_data.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +40,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
     }
     setState(() {});
   }
-  void add() async{
+  void update() async{
     context.loaderOverlay.show();
     if (_titleController.text.isEmpty){
       Message.showToast("cookbookTitleRequired".tr());
@@ -86,7 +87,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          choices.isNotEmpty ? "updateCookbook".tr() : "selectedFood".tr(choices.length.toString()),
+          choices.isNotEmpty ? "selectedFood".tr(choices.length.toString()) : "updateCookbook".tr(),
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w700
@@ -228,7 +229,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
                 if (!snapshot.hasData || snapshot.hasError){
                   return SizedBox.shrink();
                 } else if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator(color: AppColors.yellow));
+                  return LoadData(isList: true);
                 } else {
                   List<FoodModel> foodData = snapshot.data!;
                   return ListView.builder(
@@ -281,10 +282,10 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.green,
-                  foregroundColor: theme.colorScheme.primary,
+                  foregroundColor: AppColors.white,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33))
                 ),
-                onPressed: add, 
+                onPressed: update, 
                 child: Text(
                   "update".tr(),
                   style: TextStyle(
