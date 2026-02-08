@@ -32,16 +32,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   HashSet<FoodModel> choices = HashSet();
-  void onMultiSelect(FoodModel food){
-    if (choices.contains(food)){
-      choices.remove(food);
-    } else{
-      choices.add(food);
-    }
-    setState(() {});
-  }
-  void update() async{
-    context.loaderOverlay.show();
+  void invalidInformation() {
     if (_titleController.text.isEmpty){
       Message.showToast("cookbookTitleRequired".tr());
       context.loaderOverlay.hide();
@@ -52,6 +43,18 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
       context.loaderOverlay.hide();
       return;
     }
+  }
+  void onMultiSelect(FoodModel food){
+    if (choices.contains(food)){
+      choices.remove(food);
+    } else{
+      choices.add(food);
+    }
+    setState(() {});
+  }
+  void update() async{
+    context.loaderOverlay.show();
+    invalidInformation();
     if (image != null) {
       imageURL = await imageServices.uploadImage(context, image!, cookbookFolder);
     }

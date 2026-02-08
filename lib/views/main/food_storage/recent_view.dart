@@ -54,6 +54,7 @@ class _RecentViewState extends State<RecentView> {
           if (value.isEmpty) {
             return Center(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
                     Icons.error, 
@@ -85,7 +86,7 @@ class _RecentViewState extends State<RecentView> {
               food: value[index].foods, 
               children: [
                 SlidableAction(
-                  onPressed: (context) => onDelete(context, value[index]),
+                  onPressed: (context) => onDelete(value[index]),
                   backgroundColor: AppColors.red,
                   foregroundColor: AppColors.white,
                   icon: Icons.delete,
@@ -97,7 +98,7 @@ class _RecentViewState extends State<RecentView> {
       ),
     );
   }
-  void onDelete(BuildContext context, RecentViewModel model) {
+  void onDelete(RecentViewModel model) {
     ShowYesnoDialog.checkDeviceDialog(
       context, 
       title: "deleteRecentTitle".tr(), 

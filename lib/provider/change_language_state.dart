@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:food_recipe_app/common/configure/logger.dart';
+import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ChangeLanguageState extends ChangeNotifier{
   String language_key = "language";
@@ -19,8 +19,7 @@ class ChangeLanguageState extends ChangeNotifier{
 
   void loadData() async{
     try { 
-      final pref = await SharedPreferences.getInstance();
-      final langKey = pref.getString(language_key) ?? "";
+      final langKey = await spServices.getStringValue(language_key) ?? "";
       _languageCode = langKey;
     } catch (e) {
       Message.showToast("shortError".tr());
@@ -31,8 +30,7 @@ class ChangeLanguageState extends ChangeNotifier{
 
   void saveData() async{
     try {
-      final pref = await SharedPreferences.getInstance();
-      await pref.setString(language_key, _languageCode);
+      await spServices.setStringValue(language_key, _languageCode);
     } catch (e) {
       Message.showToast("shortError".tr());
       Logger.log("Error: $e");

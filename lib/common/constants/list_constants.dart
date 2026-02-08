@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/configure/routes.dart';
+
 List<String> categoryList = [
   "tagBeef", 
   "tagChicken", 
@@ -48,4 +51,10 @@ List<String> filterRating = [
   "popular",
   "latest",
   "oldest"
+];
+List<Widget> pages = [
+  homeScreen, 
+  categoriesPage, 
+  foodStorageView, 
+  settings
 ];

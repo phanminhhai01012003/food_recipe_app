@@ -6,7 +6,6 @@ import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/widget/food_display_widget/food_display_list.dart';
 import 'package:food_recipe_app/widget/load_data/load_data.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -20,25 +19,22 @@ class _SearchPageState extends State<SearchPage> {
   final _searchController = TextEditingController();
   String? searchQuery;
   Future<void> saveSearchTerm(String term) async{
-    final prefs = await SharedPreferences.getInstance();
-    recentSearches = prefs.getStringList('recentSearches') ?? [];
+    recentSearches = await spServices.getStringListValue('recentSearches') ?? [];
     if (!recentSearches.contains(term)) {
       recentSearches.insert(0, term);
       if (recentSearches.length > 10) {
         recentSearches = recentSearches.sublist(0, 10);
       }
-      await prefs.setStringList('recentSearches', recentSearches);
+      await spServices.setStringListValue('recentSearches', recentSearches);
     }
   }
   Future<void> removeSearchTerm(String term) async{
-    final prefs = await SharedPreferences.getInstance();
-    recentSearches = prefs.getStringList('recentSearches') ?? [];
+    recentSearches = await spServices.getStringListValue('recentSearches') ?? [];
     recentSearches.remove(term);
-    await prefs.setStringList('recentSearches', recentSearches);
+    await spServices.setStringListValue('recentSearches', recentSearches);
   }
   Future<List<String>> loadRecentSearch() async{
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getStringList('recentSearches') ?? [];
+    return await spServices.getStringListValue('recentSearches') ?? [];
   }
   @override
   Widget build(BuildContext context) {

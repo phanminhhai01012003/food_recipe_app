@@ -71,20 +71,15 @@ class _CookbookScreenState extends State<CookbookScreen> {
               ),
             );
           }
-          return Expanded(
-            child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.8,
-              ),
-              scrollDirection: Axis.vertical,
-              hitTestBehavior: HitTestBehavior.translucent,
-              clipBehavior: Clip.hardEdge,
-              shrinkWrap: true,
-              physics: ClampingScrollPhysics(),
-              itemCount: value.length,
-              itemBuilder: (context, index) => CookbookListWidget(cookbook: value[index])
-            ),
+          return ListView.builder(
+            scrollDirection: Axis.vertical,
+            padding: EdgeInsets.all(16),
+            hitTestBehavior: HitTestBehavior.translucent,
+            clipBehavior: Clip.hardEdge,
+            shrinkWrap: true,
+            physics: ClampingScrollPhysics(),
+            itemCount: value.length,
+            itemBuilder: (context, index) => CookbookListWidget(cookbook: value[index])
           );      
         },
       ),

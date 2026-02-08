@@ -13,9 +13,9 @@ class Benefit extends StatelessWidget {
         color: color
       ),
       columnWidths: {
-        0: FractionColumnWidth(0.5),
-        1: FractionColumnWidth(0.25),
-        2: FractionColumnWidth(0.25),
+        0: FractionColumnWidth(0.4),
+        1: FractionColumnWidth(0.3),
+        2: FractionColumnWidth(0.3),
       },
       children: [
         row(["benefit".tr(), "free".tr(), "premiumPackage".tr()], true),

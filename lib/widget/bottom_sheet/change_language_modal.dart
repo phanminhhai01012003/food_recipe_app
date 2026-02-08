@@ -69,7 +69,6 @@ class _ChangeLanguageModalState extends State<ChangeLanguageModal> {
                 onChanged: () async{
                   await changeLocale(context, localeToString(Locale("vi")));
                   value.setVietnameseLanguage();
-                  Navigator.pop(context);
                 }, 
                 isSelected: value.isVietnamese
               ),
@@ -81,7 +80,6 @@ class _ChangeLanguageModalState extends State<ChangeLanguageModal> {
                 onChanged: () async{
                   await changeLocale(context, localeToString(Locale("en")));
                   value.setEnglishLanguage();
-                  Navigator.pop(context);
                 }, 
                 isSelected: value.isEnglish
               )

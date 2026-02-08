@@ -54,15 +54,21 @@ class ImageService extends ImageRepo{
       if(!hasAccess){
         await Gal.requestAccess();
       }
-      final tempDir = await getTemporaryDirectory();
+      final tempDir = await getApplicationDocumentsDirectory();
       final path = "${tempDir.path}/$imageUrl";
-      await dio.download(imageUrl, path);
+      await dio.download(imageUrl, path).then((value) => Logger.log({
+        "headers": value.headers,
+        "data": value.data,
+        "extra": value.extra,
+        "statusCode": value.statusCode,
+        "statusMessage": value.statusMessage
+      }));
       await Gal.putImage(path);
       Message.showScaffoldMessage(context, "downloadImageSuccess".tr(), AppColors.green);
       Navigator.pop(context);
     } catch (e) {
       Message.showScaffoldMessage(context, "downloadImageFail".tr(), AppColors.red);
-      Logger.log(e);
+      Logger.log("Error to download image: $e");
       rethrow;
     }
   }

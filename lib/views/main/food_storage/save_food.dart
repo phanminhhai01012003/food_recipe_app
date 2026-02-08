@@ -54,6 +54,7 @@ class _SaveFoodState extends State<SaveFood> {
           if (value.isEmpty) {
             return Center(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
                     Icons.error, 

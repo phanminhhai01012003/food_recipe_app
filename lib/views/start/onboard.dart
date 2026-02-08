@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_assets.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Onboard extends StatefulWidget {
   const Onboard({super.key});
@@ -88,8 +88,7 @@ class _OnboardState extends State<Onboard> with TickerProviderStateMixin{
   }
 
   void navigateToNewPage() async{
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('onboarding_seen', true);
+    await spServices.setBoolValue('onboarding_seen', true);
     Navigator.pushAndRemoveUntil(context, checkDeviceRoute(loginPage), (route) => false);
   }
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/configure/logger.dart';
+import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeState extends ChangeNotifier{
   String key = "theme_mode";
@@ -19,8 +19,7 @@ class ThemeState extends ChangeNotifier{
   
   void loadData() async{
     try {
-      final pref = await SharedPreferences.getInstance();
-      final themeIndex = pref.getInt(key) ?? 0;
+      final themeIndex = await spServices.getIntValue(key) ?? 0;
       theme = ThemeMode.values[themeIndex];
       notifyListeners();
     } catch (e) {
@@ -32,8 +31,7 @@ class ThemeState extends ChangeNotifier{
 
   void saveData() async{
     try {
-      final pref = await SharedPreferences.getInstance();
-      await pref.setInt(key, theme.index);
+      await spServices.setIntValue(key, theme.index);
     } catch (e) {
       Message.showToast("shortError".tr());
       Logger.log("Error: $e");

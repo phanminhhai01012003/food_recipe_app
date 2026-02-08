@@ -195,12 +195,14 @@ class _ShowReportModalState extends State<ShowReportModal> {
                         });
                       }
                     ),
-                    Text(
-                      "agreeForTrue".tr(),
-                      style: TextStyle(
-                        color: theme.colorScheme.secondary,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600
+                    Expanded(
+                      child: Text(
+                        "agreeForTrue".tr(),
+                        style: TextStyle(
+                          color: theme.colorScheme.secondary,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600
+                        ),
                       ),
                     ),
                   ],

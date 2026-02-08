@@ -16,7 +16,7 @@ class CookbookListWidget extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          color: theme.colorScheme.primary
+          color: theme.colorScheme.primary,
         ),
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         child: Row(

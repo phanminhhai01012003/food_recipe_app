@@ -61,6 +61,7 @@ class _CookbookSelectionState extends State<CookbookSelection> {
                 fontWeight: FontWeight.w900
               ),
             ),
+            SizedBox(height: 20),
             Selector<CookbookState, List<CookbookModel>>(
               selector: (context, state) => state.bookProducts,
               shouldRebuild: (previous, next) => true,
@@ -88,7 +89,7 @@ class _CookbookSelectionState extends State<CookbookSelection> {
                   );
                 }
                 return ListView.builder(
-                  scrollDirection: Axis.horizontal,
+                  scrollDirection: Axis.vertical,
                   hitTestBehavior: HitTestBehavior.translucent,
                   clipBehavior: Clip.hardEdge,
                   shrinkWrap: true,

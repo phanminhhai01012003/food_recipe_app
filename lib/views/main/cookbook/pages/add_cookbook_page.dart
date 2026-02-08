@@ -40,15 +40,7 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
     }
     setState(() {});
   }
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    _titleController.dispose();
-    _descriptionController.dispose();
-  } 
-  void add() async{
-    context.loaderOverlay.show();
+  void invalidInformation() {
     if (_titleController.text.isEmpty){
       Message.showToast("cookbookTitleRequired".tr());
       context.loaderOverlay.hide();
@@ -59,6 +51,17 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
       context.loaderOverlay.hide();
       return;
     }
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _titleController.dispose();
+    _descriptionController.dispose();
+  } 
+  void add() async{
+    context.loaderOverlay.show();
+    invalidInformation();
     if (image != null) {
       imageURL = await imageServices.uploadImage(context, image!, cookbookFolder);
     }

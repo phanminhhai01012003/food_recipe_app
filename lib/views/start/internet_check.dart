@@ -1,10 +1,10 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/widget/dialog/no_internet_dialog.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class InternetCheck extends StatefulWidget {
   const InternetCheck({super.key});
@@ -43,8 +43,7 @@ class _InternetCheckState extends State<InternetCheck> {
   bool get checkAuthentication => _auth != null;
 
   void _navigation() async{
-    final prefs = await SharedPreferences.getInstance();
-    final seen = prefs.getBool('onboarding_seen') ?? false;
+    final seen = await spServices.getBoolValue('onboarding_seen') ?? false;
     Navigator.pushAndRemoveUntil(
       context,
       checkDeviceRoute(seen ? (checkAuthentication ? mainPage : loginPage) : onboardScreen), 
