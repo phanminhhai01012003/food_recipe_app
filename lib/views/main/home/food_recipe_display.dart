@@ -4,7 +4,7 @@ import 'package:food_recipe_app/widget/food_display_widget/food_display_grid.dar
 import 'package:food_recipe_app/widget/load_data/load_data.dart';
 
 class FoodRecipeDisplay extends StatefulWidget {
-  final Stream stream;
+  final Stream<List<FoodModel>> stream;
   const FoodRecipeDisplay({super.key, required this.stream});
 
   @override
@@ -34,7 +34,7 @@ class _FoodRecipeDisplayState extends State<FoodRecipeDisplay> {
                 physics: ClampingScrollPhysics(),
                 hitTestBehavior: HitTestBehavior.translucent,
                 clipBehavior: Clip.hardEdge,
-                itemCount: (foods.length / 2).toInt(),
+                itemCount: foods.length ~/ 2,
                 itemBuilder: (context, index) => FoodDisplayGrid(food: foods[index]),
               ),
             );

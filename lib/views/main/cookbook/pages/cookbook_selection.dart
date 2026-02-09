@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -9,6 +8,7 @@ import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/provider/cookbook_state.dart';
 import 'package:food_recipe_app/views/main/cookbook/widget/cookbook_list.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
+import 'package:food_recipe_app/widget/other/no_data.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';
 
@@ -21,121 +21,102 @@ class CookbookSelection extends StatefulWidget {
 }
 
 class _CookbookSelectionState extends State<CookbookSelection> {
-  HashSet<CookbookModel> choices = HashSet();
   void onMultiSelect(CookbookModel cookbook){
-    if (choices.contains(cookbook)){
-      choices.remove(cookbook);
+    if (cookbook.foodsList.contains(widget.food)){
+      cookbook.foodsList.remove(widget.food);
     } else {
-      choices.add(cookbook);
+      cookbook.foodsList.add(widget.food);
     }
     setState(() {});
   }
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Scaffold(
-      backgroundColor: theme.colorScheme.primary,
-      appBar: AppBar(
-        backgroundColor: theme.colorScheme.primary,
-        foregroundColor: theme.colorScheme.secondary,
-        leading: Padding(
-          padding: EdgeInsets.all(8),
-          child: IconButton(
-            onPressed: () => Navigator.pop(context), 
-            icon: Icon(
-              Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios, 
-              size: 20
-            )
-          ),
-        ),
-      ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-        child: Column(
-          children: [
-            Text(
-              "addFoodToCookbook".tr(),
-              style: TextStyle(
-                color: theme.colorScheme.secondary,
-                fontSize: 20,
-                fontWeight: FontWeight.w900
-              ),
-            ),
-            SizedBox(height: 20),
-            Selector<CookbookState, List<CookbookModel>>(
-              selector: (context, state) => state.bookProducts,
-              shouldRebuild: (previous, next) => true,
-              builder: (context, value, child) {
-                if (value.isEmpty) {
-                  return Center(
-                    child: Column(
-                      children: [
-                        Icon(
-                          Icons.error, 
-                          size: 50, 
-                          color: AppColors.red
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          "noData".tr(),
-                          style: TextStyle(
-                            color: theme.colorScheme.secondary,
-                            fontSize: 14,
-                            fontWeight: FontWeight.normal
-                          ),
-                        )
-                      ],
-                    ),
-                  );
-                }
-                return ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  hitTestBehavior: HitTestBehavior.translucent,
-                  clipBehavior: Clip.hardEdge,
-                  shrinkWrap: true,
-                  physics: ClampingScrollPhysics(),
-                  itemCount: value.length,
-                  itemBuilder: (context, index) => GestureDetector(
-                    onTap: () => onMultiSelect(value[index]),
-                    child: CookbookList(
-                      cookbook: value[index],
-                      food: widget.food,
-                    )
-                  )
-                );      
-              },
-            ),
-            SizedBox(height: 20),
-            SizedBox(
-              height: 50,
-              width: MediaQuery.of(context).size.width / 2,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.green,
-                  foregroundColor: AppColors.white,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33))
-                ),
-                onPressed: () {
-                  context.loaderOverlay.show();
-                  for (var cookbook in choices) {
-                    context.read<CookbookState>().toggleFoodOnCookbook(cookbook, widget.food);
-                  }
-                  context.loaderOverlay.hide();
-                  Message.showScaffoldMessage(context, "addCookbookSuccess".tr(), AppColors.green);
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  "add".tr(),
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700
-                  ),
+    return Consumer<CookbookState>(
+      builder: (context, value, child) {
+        return Scaffold(
+          backgroundColor: theme.colorScheme.primary,
+          appBar: AppBar(
+            backgroundColor: theme.colorScheme.primary,
+            foregroundColor: theme.colorScheme.secondary,
+            leading: Padding(
+              padding: EdgeInsets.all(8),
+              child: IconButton(
+                onPressed: () => Navigator.pop(context), 
+                icon: Icon(
+                  Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios, 
+                  size: 20
                 )
               ),
-            )            
-          ],
-        ),
-      ),
+            ),
+          ),
+          body: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+            child: Column(
+              children: [
+                Text(
+                  "addFoodToCookbook".tr(),
+                  style: TextStyle(
+                    color: theme.colorScheme.secondary,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w900
+                  ),
+                ),
+                SizedBox(height: 20),
+                Builder(
+                  builder: (context) {
+                    if (value.bookProducts.isEmpty) {
+                      return NoData();
+                    }
+                    return ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      hitTestBehavior: HitTestBehavior.translucent,
+                      clipBehavior: Clip.hardEdge,
+                      shrinkWrap: true,
+                      physics: ClampingScrollPhysics(),
+                      itemCount: value.bookProducts.length,
+                      itemBuilder: (context, index) => GestureDetector(
+                        onTap: () => onMultiSelect(value.bookProducts[index]),
+                          child: CookbookList(
+                            cookbook: value.bookProducts[index],
+                            food: widget.food,
+                        )
+                      )
+                    );  
+                  },
+                ),
+                SizedBox(
+                  height: 50,
+                  width: MediaQuery.of(context).size.width / 2,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.green,
+                      foregroundColor: AppColors.white,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33))
+                    ),
+                    onPressed: () {
+                      context.loaderOverlay.show();
+                      for (var cookbook in value.bookProducts) {
+                        context.read<CookbookState>().toggleFoodOnCookbook(cookbook, widget.food);
+                      }
+                      context.loaderOverlay.hide();
+                      Message.showScaffoldMessage(context, "addCookbookSuccess".tr(), AppColors.green);
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      "add".tr(),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700
+                      ),
+                    )
+                  ),
+                )  
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

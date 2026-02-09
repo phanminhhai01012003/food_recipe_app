@@ -116,7 +116,7 @@ class _StorageViewState extends State<StorageView> {
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
                           physics: ClampingScrollPhysics(),
-                          itemCount: (data.length / 2).toInt(),
+                          itemCount: data.length ~/ 2,
                           itemBuilder: (context, index) => FoodDisplayGrid(food: data[index])
                         ),
                       );
@@ -166,7 +166,7 @@ class _StorageViewState extends State<StorageView> {
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
                         physics: ClampingScrollPhysics(),
-                        itemCount: (value.length / 2).toInt(),
+                        itemCount: value.length ~/ 2,
                         itemBuilder: (context, index) => FoodDisplayGrid(food: value[index].foods)
                       ),
                     );
@@ -215,7 +215,7 @@ class _StorageViewState extends State<StorageView> {
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
                         physics: ClampingScrollPhysics(),
-                        itemCount: (value.length / 2).toInt(),
+                        itemCount: value.length ~/ 2,
                         itemBuilder: (context, index) => FoodDisplayGrid(food: value[index].foods)
                       ),
                     );
@@ -266,7 +266,7 @@ class _StorageViewState extends State<StorageView> {
                         hitTestBehavior: HitTestBehavior.translucent,
                         clipBehavior: Clip.hardEdge,
                         physics: ClampingScrollPhysics(),
-                        itemCount: (value.length / 2).toInt(),
+                        itemCount: value.length ~/ 2,
                         itemBuilder: (context, index) => CookbookWidget(book: value[index])
                       ),
                     );

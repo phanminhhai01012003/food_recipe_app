@@ -8,6 +8,7 @@ import 'package:food_recipe_app/model/save_food_model.dart';
 import 'package:food_recipe_app/provider/save_state.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
+import 'package:food_recipe_app/widget/other/no_data.dart';
 import 'package:food_recipe_app/widget/other/slider.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';
@@ -52,27 +53,7 @@ class _SaveFoodState extends State<SaveFood> {
         shouldRebuild: (previous, next) => true,
         builder: (context, value, child) {
           if (value.isEmpty) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.error, 
-                    size: 50, 
-                    color: AppColors.red
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    "noData".tr(),
-                    style: TextStyle(
-                      color: theme.colorScheme.secondary,
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal
-                    ),
-                  )
-                ],
-              ),
-            );
+            return NoData();
           }
           return ListView.builder(
             padding: EdgeInsets.all(12),

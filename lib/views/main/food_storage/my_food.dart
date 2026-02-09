@@ -11,6 +11,7 @@ import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/widget/load_data/load_data.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
+import 'package:food_recipe_app/widget/other/no_data.dart';
 import 'package:food_recipe_app/widget/other/slider.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
@@ -61,15 +62,7 @@ class _MyFoodState extends State<MyFood> {
         stream: foodServices.getFoodByUser(context, currentUser.uid), 
         builder: (context, snapshot){
           if (!snapshot.hasData || snapshot.hasError) {
-            return Center(
-              child: Text("noData".tr(),
-                style: TextStyle(
-                  color: AppColors.black,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w800
-                ),
-              )
-            );
+            return NoData();
           } else if (snapshot.connectionState == ConnectionState.waiting) {
             return LoadData(isList: true);
           } else {
