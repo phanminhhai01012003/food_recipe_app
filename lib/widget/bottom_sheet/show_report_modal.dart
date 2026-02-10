@@ -67,8 +67,16 @@ class _ShowReportModalState extends State<ShowReportModal> {
   List<String> get reports {
     if (widget.title.contains("food".tr())){
       return reportFoodList;
+    } else if (widget.title.contains("user".tr())){
+      return reportUserList;
     }
     return reportCommentList;
+  }
+  String get reportTitleCase {
+    if (widget.title.contains("user".tr())) {
+      return "${"reportBlockForSomeone".tr()} ${widget.title} ${widget.author}";
+    }
+    return "${"reportBlockForSomeone".tr()} ${widget.title} ${"for".tr()} ${widget.author}";
   } 
   @override
   void initState() {
@@ -120,7 +128,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
             child: Column(
               children: [
                 Text(
-                  "${"reportBlockForSomeone".tr()} ${widget.title} ${"for".tr()} ${widget.author}",
+                  reportTitleCase,
                   style: TextStyle(
                     color: theme.colorScheme.secondary,
                     fontSize: 14,

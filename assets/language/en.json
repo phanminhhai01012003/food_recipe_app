@@ -276,5 +276,10 @@
 	"deleteOldAcc": "Your old account has been deleted. Please create a new account to continue using the app",
 	"createdBy": "Created by",
     "version": "Version:",
-    "contactInfo": "Contact information:"
+    "contactInfo": "Contact information:",
+	"doubt": "Suspect that account is a fake account",
+    "reportUserBehavior": "Offensive words or actions that insult one's honor or rights",
+    "reportUserInform": "Avatar or information containing sensitive or inappropriate content",
+    "reportUserPost": "Regularly posting irrelevant or unofficial information",
+	"user": "user"
 }

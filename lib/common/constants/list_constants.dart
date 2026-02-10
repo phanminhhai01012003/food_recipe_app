@@ -36,6 +36,13 @@ List<String> reportCommentList = [
   "reportCommentWithSecurity",
   "reportOther"
 ];
+List<String> reportUserList = [
+  "doubt",
+  "reportUserBehavior",
+  "reportUserInform",
+  "reportUserPost",
+  "reportOther"
+];
 List<String> deleteUserList = [
   "dontwanttouse",
   "leakData",

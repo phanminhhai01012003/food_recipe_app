@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
@@ -139,6 +140,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
           ),
         ),
       ),
+      onTap: () => Navigator.push(context, checkDeviceRoute(userInform(user: user))),
     );
   }
 }

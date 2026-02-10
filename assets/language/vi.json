@@ -276,5 +276,10 @@
     "deleteOldAcc": "Tài khoản cũ của bạn đã xóa. Hãy tạo tài khoản mới để tiếp tục sử dụng",
     "createdBy": "Được tạo bởi",
     "version": "Phiên bản:",
-    "contactInfo": "Thông tin liên hệ:"
+    "contactInfo": "Thông tin liên hệ:",
+    "doubt": "Nghi ngờ tài khoản đó là tài khoản mạo danh",
+    "reportUserBehavior": "Lời nói hoặc hành vi phản cảm, xúc phạm danh dự, quyền lợi của mình",
+    "reportUserInform": "Ảnh đại diện hoặc thông tin chứa yếu tố nhạy cảm, không phù hợp",
+    "reportUserPost": "Thường xuyên đăng tải thông tin không liên quan hoặc không chính thống",
+    "user": "người dùng"
 }

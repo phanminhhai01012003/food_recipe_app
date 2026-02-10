@@ -3,11 +3,13 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/model/user_model.dart';
 import 'package:food_recipe_app/views/main/sub_features/full_screen_image/show_image_sheet.dart';
+import 'package:food_recipe_app/widget/bottom_sheet/show_report_modal.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 
@@ -113,31 +115,34 @@ class _UserInformationState extends State<UserInformation> {
             component(context, "phone".tr(), widget.user.phone == "unknown" ? "unknown".tr() : widget.user.phone),
             divider(),
             component(context, "email".tr(), widget.user.email),
-            SizedBox(height: 50),
-            SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.yellow,
-                  foregroundColor: AppColors.white,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33))
-                ),
-                onPressed: () => Navigator.push(context, checkDeviceRoute(editUserPage(widget.user))), 
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.person_2, size: 20),
-                    SizedBox(width: 5),
-                    Text(
-                      "editUser".tr(),
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w800
+            SizedBox(height: 30),
+            Visibility(
+              visible: widget.user.userId == currentUser.uid,
+              child: SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.yellow,
+                    foregroundColor: AppColors.white,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33))
+                  ),
+                  onPressed: () => Navigator.push(context, checkDeviceRoute(editUserPage(widget.user))), 
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.person_2, size: 20),
+                      SizedBox(width: 5),
+                      Text(
+                        "editUser".tr(),
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w800
+                        ),
                       ),
-                    ),
-                  ],
-                )
+                    ],
+                  )
+                ),
               ),
             ),
             SizedBox(height: 10),
@@ -150,14 +155,22 @@ class _UserInformationState extends State<UserInformation> {
                   foregroundColor: AppColors.white,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33))
                 ),
-                onPressed: () => Navigator.push(context, checkDeviceRoute(deleteUser)), 
+                onPressed: () {
+                  if (widget.user.userId == currentUser.uid) {
+                    Navigator.push(context, checkDeviceRoute(deleteUser));
+                  }
+                  showReportModal(context, "user".tr(), widget.user.userName, null);
+                }, 
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.delete_forever, size: 20),
+                    Icon(
+                      widget.user.userId == currentUser.uid ? Icons.delete_forever : Icons.report, 
+                      size: 20
+                    ),
                     SizedBox(width: 5),
                     Text(
-                      "deleteAcc".tr(),
+                      widget.user.userId == currentUser.uid ? "deleteAcc".tr() : "report".tr(),
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w800
@@ -168,34 +181,37 @@ class _UserInformationState extends State<UserInformation> {
               ),
             ),
             SizedBox(height: 10),
-            SizedBox(
-              height: 50,
-              width: double.infinity,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.purple,
-                  foregroundColor: AppColors.white,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33))
-                ),
-                onPressed: () => ShowYesnoDialog.checkDeviceDialog(
-                  context, 
-                  title: "signOut".tr(), 
-                  content: "signOutDesc".tr(), 
-                  onAcceptTap: () => onLogOut(), 
-                  onCancelTap: () => Navigator.pop(context)
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.logout, size: 20),
-                    SizedBox(width: 5),
-                    Text("signOut".tr(),
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w900
+            Visibility(
+              visible: widget.user.userId == currentUser.uid,
+              child: SizedBox(
+                height: 50,
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.purple,
+                    foregroundColor: AppColors.white,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33))
+                  ),
+                  onPressed: () => ShowYesnoDialog.checkDeviceDialog(
+                    context, 
+                    title: "signOut".tr(), 
+                    content: "signOutDesc".tr(), 
+                    onAcceptTap: () => onLogOut(), 
+                    onCancelTap: () => Navigator.pop(context)
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.logout, size: 20),
+                      SizedBox(width: 5),
+                      Text("signOut".tr(),
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w900
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             )
