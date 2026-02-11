@@ -281,5 +281,9 @@
     "reportUserBehavior": "Lời nói hoặc hành vi phản cảm, xúc phạm danh dự, quyền lợi của mình",
     "reportUserInform": "Ảnh đại diện hoặc thông tin chứa yếu tố nhạy cảm, không phù hợp",
     "reportUserPost": "Thường xuyên đăng tải thông tin không liên quan hoặc không chính thống",
-    "user": "người dùng"
+    "user": "người dùng",
+    "messageInput": "Bạn muốn nói với tôi điều gì?",
+    "helpToMake": "Nguyên liệu và cách chế biến món ăn này",
+    "helloAI": "Xin chào! Tôi là FoodAI",
+    "helpYou": "Tôi có thể giúp gì cho bạn?"
 }

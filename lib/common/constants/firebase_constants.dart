@@ -20,6 +20,7 @@ final historyCollection = FirebaseFirestore.instance.collection("history");
 final bookCollection = FirebaseFirestore.instance.collection("cookbook");
 final reportCollection = FirebaseFirestore.instance.collection("report");
 final tagCollection = FirebaseFirestore.instance.collection("categories");
+final subCollection = FirebaseFirestore.instance.collection("subscription");
 final rateCollection = FirebaseFirestore.instance.collection("rating");
 CollectionReference<Map<String, dynamic>> delAccReqCollection(String userId) {
   return userCollection

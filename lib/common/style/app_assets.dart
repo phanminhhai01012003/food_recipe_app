@@ -9,6 +9,7 @@ String cookingImage = "$imagePath/cooking.png";
 String userDefaultImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ71Tc9Tk2q1eJUUlX1bXhWrc0-g8O9xnAplw&s";
 String enFlag = "$imagePath/en.png";
 String viFlag = "$imagePath/vi.png";
+String chatbotImages = "https://www.shutterstock.com/shutterstock/photos/2478937553/display_1500/stock-vector-chat-bot-icon-virtual-smart-assistant-bot-sign-design-robot-head-with-speech-bubble-in-circle-2478937553.jpg";
 
 //document
 String docPath = "assets/document";

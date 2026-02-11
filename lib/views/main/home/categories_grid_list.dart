@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
-
 import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/model/category_model.dart';
 
@@ -17,7 +16,7 @@ class _CategoriesGridListState extends State<CategoriesGridList> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: tagServices.getTags(context), 
+      stream: otherServices.getTags(context), 
       builder: (context, snapshot) {
         if (!snapshot.hasData || snapshot.hasError) {
           return Center(child: Icon(Icons.error, size: 100, color: AppColors.red));

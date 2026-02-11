@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
+import 'package:food_recipe_app/model/subscription_model.dart';
 
 class SubscriptionWidget extends StatefulWidget {
-  final Map<String, dynamic> sub;
+  final SubscriptionModel sub;
   const SubscriptionWidget({super.key, required this.sub});
 
   @override
@@ -28,7 +29,7 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: renderBgColor(widget.sub['time'].toString()),
+        color: renderBgColor(widget.sub.time),
         borderRadius: BorderRadius.circular(12)
       ),
       width: double.infinity,
@@ -41,7 +42,7 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                widget.sub['subscriptionName'].toString().tr(),
+                widget.sub.subscriptionName.tr(),
                 style: TextStyle(
                   color: AppColors.white,
                   fontSize: 16,
@@ -50,8 +51,8 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
               ),
               Text(
                 "${priceFormat(
-                  widget.sub['price'].toString(), 
-                  widget.sub['priceUnit'].toString())}/${widget.sub['time'].toString().tr()}",
+                  widget.sub.price.toString(), 
+                  widget.sub.priceUnit)}/${widget.sub.time.tr()}",
                 style: TextStyle(
                   color: AppColors.white,
                   fontSize: 14,

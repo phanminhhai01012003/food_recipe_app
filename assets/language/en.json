@@ -281,5 +281,9 @@
     "reportUserBehavior": "Offensive words or actions that insult one's honor or rights",
     "reportUserInform": "Avatar or information containing sensitive or inappropriate content",
     "reportUserPost": "Regularly posting irrelevant or unofficial information",
-	"user": "user"
+	"user": "user",
+	"messageInput": "What would you like to tell me?",
+	"helpToMake": "Ingredients and steps for making this dish",
+	"helloAI": "Hello! I'm FoodAI.",
+    "helpYou": "What can I help you?"
 }

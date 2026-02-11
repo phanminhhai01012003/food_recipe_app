@@ -59,11 +59,11 @@ class _MainPageState extends State<MainPage> {
       ),
       body: pages[selectedIndex],
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.push(context, checkDeviceRoute(addFood)),
+        onPressed: () => Navigator.push(context, checkDeviceRoute(AIpage)),
         shape: CircleBorder(),
         backgroundColor: AppColors.blue,
         foregroundColor: AppColors.white,
-        child: Icon(Icons.add, size: 25),
+        child: Icon(Icons.auto_awesome, size: 25),
       ),
     );
   }

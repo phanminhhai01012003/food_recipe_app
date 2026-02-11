@@ -1,8 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/data/dummy_data.dart';
+import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/model/subscription_model.dart';
 import 'package:food_recipe_app/views/main/subscription/benefit.dart';
 import 'package:food_recipe_app/views/main/subscription/subscription_widget.dart';
+import 'package:food_recipe_app/widget/load_data/load_data.dart';
+import 'package:food_recipe_app/widget/other/no_data.dart';
 
 class SubscriptionScreen extends StatefulWidget {
   const SubscriptionScreen({super.key});
@@ -35,14 +38,26 @@ class _SubscriptionScreenState extends State<SubscriptionScreen>{
         padding: EdgeInsets.all(12),
         child: Column(
           children: [
-            ListView.separated(
-              separatorBuilder: (context, index) => SizedBox(height: 10),
-              itemCount: subscriptionData.length,
-              shrinkWrap: true,
-              hitTestBehavior: HitTestBehavior.translucent,
-              clipBehavior: Clip.hardEdge,
-              physics: ClampingScrollPhysics(),
-              itemBuilder: (context, index) => SubscriptionWidget(sub: subscriptionData[index]),
+            StreamBuilder(
+              stream: otherServices.getSubscriptions(context), 
+              builder: (context, snapshot) {
+                if (!snapshot.hasData || snapshot.hasError) {
+                  return NoData();
+                } else if (snapshot.connectionState == ConnectionState.waiting) {
+                  return LoadData(isList: true);
+                } else {
+                  List<SubscriptionModel> data = snapshot.data!;
+                  return ListView.separated(
+                    separatorBuilder: (context, index) => SizedBox(height: 10),
+                    itemCount: data.length,
+                    shrinkWrap: true,
+                    hitTestBehavior: HitTestBehavior.translucent,
+                    clipBehavior: Clip.hardEdge,
+                    physics: ClampingScrollPhysics(),
+                    itemBuilder: (context, index) => SubscriptionWidget(sub: data[index]),
+                  );
+                }
+              },
             ),
             SizedBox(height: 20),
             Benefit(color: theme.colorScheme.secondary)

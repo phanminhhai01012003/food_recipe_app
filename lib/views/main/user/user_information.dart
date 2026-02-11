@@ -155,11 +155,12 @@ class _UserInformationState extends State<UserInformation> {
                   foregroundColor: AppColors.white,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33))
                 ),
-                onPressed: () {
+                onPressed: () async{
                   if (widget.user.userId == currentUser.uid) {
                     Navigator.push(context, checkDeviceRoute(deleteUser));
+                  } else {
+                    await showReportModal(context, "user".tr(), widget.user.userName, null);
                   }
-                  showReportModal(context, "user".tr(), widget.user.userName, null);
                 }, 
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

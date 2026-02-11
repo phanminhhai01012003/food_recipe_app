@@ -41,10 +41,8 @@ dependencies:
   fluttertoast: ^8.2.12
   percent_indicator: ^4.2.5
   flutter_translate: ^3.1.0
-  flutter_localization: ^0.3.2
   flutter_localizations: 
     sdk: flutter
-  intl: ^0.20.2
   firebase_core: ^4.0.0
   firebase_auth: ^6.0.1
   cloud_firestore: ^6.0.0
@@ -70,6 +68,12 @@ dependencies:
   dio: ^5.0.0      
   gal: ^2.0.0 
   path_provider: ^2.1.0
+  flutter_dotenv: ^6.0.0
+  chat_gpt_sdk: ^2.2.5
+  dash_chat_2: ^0.0.21
+
+dependency_overrides:
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:
@@ -117,6 +121,7 @@ flutter:
     - assets/document/Flutter.pdf
     - assets/language/en.json
     - assets/language/vi.json
+    - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

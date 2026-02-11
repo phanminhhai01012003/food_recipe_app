@@ -36,22 +36,3 @@ List<Map<String, dynamic>> foodData = [
     "likes": []
   }
 ];
-
-List<Map<String, dynamic>> subscriptionData = [
-  {
-    "subscriptionId": "12mpK190Ld22",
-    "subscriptionName": "monthly",
-    "price": 50000,
-    "priceUnit": "đ",
-    "offer": "",
-    "time": "onemonth"
-  },
-  {
-    "subscriptionId": "42lpX100vL23",
-    "subscriptionName": "yearly",
-    "price": 450000,
-    "priceUnit": "đ",
-    "offer": "",
-    "time": "oneyear"
-  }
-];

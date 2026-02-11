@@ -143,7 +143,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                 child: Column(
                   children: [
                     StreamBuilder(
-                      stream: tagServices.getTags(context), 
+                      stream: otherServices.getTags(context), 
                       builder: (context, snapshot) {
                         if (!snapshot.hasData || snapshot.hasError) {
                           return SizedBox.shrink();

@@ -162,6 +162,6 @@ class _CookbookDetailState extends State<CookbookDetail> {
     context.loaderOverlay.hide();
     Message.showScaffoldMessage(context, "deleteSuccess".tr(), AppColors.green);
     Navigator.pop(context);
-    await Future.delayed(Duration(seconds: 1), () => Navigator.pop(context));
+    await Future.delayed(Duration(seconds: 2), () => Navigator.pop(context));
   }
 }

@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:food_recipe_app/firebase/firebase_options.dart';
 import 'package:food_recipe_app/my_app.dart';
@@ -13,6 +14,7 @@ import 'package:food_recipe_app/services/notification/notification_service.dart'
 import 'package:provider/provider.dart';
 
 void main() async{
+  await dotenv.load(fileName: ".env");
   var delegate = await LocalizationDelegate.create(
     fallbackLocale: "vi", 
     supportedLocales: ["vi", "en"],

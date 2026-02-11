@@ -21,22 +21,25 @@ class CookbookListWidget extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         child: Row(
           children: [
-            CachedNetworkImage(
-              imageUrl: cookbook.cookbookImage,
-              width: 50,
-              height: 50,
-              fit: BoxFit.cover,
-              progressIndicatorBuilder: (context, url, progress) => Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.yellow,
-                  value: progress.progress,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: CachedNetworkImage(
+                imageUrl: cookbook.cookbookImage,
+                width: 50,
+                height: 50,
+                fit: BoxFit.cover,
+                progressIndicatorBuilder: (context, url, progress) => Center(
+                  child: CircularProgressIndicator(
+                    color: AppColors.yellow,
+                    value: progress.progress,
+                  ),
                 ),
-              ),
-              errorWidget: (context, url, error) => Center(
-                child: Icon(
-                  Icons.error,
-                  size: 20,
-                  color: AppColors.red,
+                errorWidget: (context, url, error) => Center(
+                  child: Icon(
+                    Icons.error,
+                    size: 20,
+                    color: AppColors.red,
+                  ),
                 ),
               ),
             ),
