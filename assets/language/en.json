@@ -285,5 +285,6 @@
 	"messageInput": "What would you like to tell me?",
 	"helpToMake": "Ingredients and steps for making this dish",
 	"helloAI": "Hello! I'm FoodAI.",
-    "helpYou": "What can I help you?"
+    "helpYou": "What can I help you?",
+	"storagePermissionDenied": "Access permission denied"
 }

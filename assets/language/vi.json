@@ -285,5 +285,6 @@
     "messageInput": "Bạn muốn nói với tôi điều gì?",
     "helpToMake": "Nguyên liệu và cách chế biến món ăn này",
     "helloAI": "Xin chào! Tôi là FoodAI",
-    "helpYou": "Tôi có thể giúp gì cho bạn?"
+    "helpYou": "Tôi có thể giúp gì cho bạn?",
+    "storagePermissionDenied": "Quyền truy cập bị từ chối"
 }

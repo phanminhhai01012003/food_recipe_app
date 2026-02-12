@@ -9,13 +9,19 @@ import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/model/comment_model.dart';
+import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/component/comment_selection.dart';
 
 class CommentWidget extends StatefulWidget {
-  final String id;
   final bool isReply;
   final CommentModel comment;
-  const CommentWidget({super.key, required this.comment, required this.id, required this.isReply});
+  final FoodModel food;
+  const CommentWidget({
+    super.key, 
+    required this.comment,  
+    required this.isReply,
+    required this.food
+  });
 
   @override
   State<CommentWidget> createState() => _CommentWidgetState();
@@ -29,8 +35,9 @@ class _CommentWidgetState extends State<CommentWidget> {
       title: "${currentUser.displayName} đã thích bình luận của bạn", 
       body: "Nhấn để xem", 
       from: currentUser.displayName!, 
-      to: widget.comment.userName, 
+      to: widget.food.userName, 
       type: "Thích bình luận",
+      mainData: widget.food.toMap(),
       extraData: widget.comment.toMap(), 
       isRead: false, 
       createdAt: DateTime.now()
@@ -72,7 +79,7 @@ class _CommentWidgetState extends State<CommentWidget> {
       surfaceTintColor: theme.colorScheme.primary,
       child: GestureDetector(
         onLongPress: () => widget.comment.userId == currentUser.uid 
-          ? CommentSelection.showSelectionWithCurrentUser(context, widget.comment, widget.id, widget.isReply)
+          ? CommentSelection.showSelectionWithCurrentUser(context, widget.comment, widget.food.foodId, widget.isReply)
           : CommentSelection.showGeneralSelection(context, widget.comment),
         child: Container(
           padding: EdgeInsets.all(12),
@@ -164,7 +171,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                           });
                           toggleComment(
                             isLikedComment: isLikedComment, 
-                            collection: commentCollection(widget.id), 
+                            collection: commentCollection(widget.food.foodId), 
                             id: widget.comment.commentId
                           );
                         },
@@ -181,7 +188,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                           fontSize: 12,
                           fontWeight: FontWeight.w300
                         ),
-                        recognizer: TapGestureRecognizer()..onTap = () => Navigator.push(context, checkDeviceRoute(replyPage(widget.comment, widget.id)))
+                        recognizer: TapGestureRecognizer()..onTap = () => Navigator.push(context, checkDeviceRoute(replyPage(widget.comment, widget.food)))
                       )
                     ]
                   )

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
+import 'package:food_recipe_app/widget/food_display_widget/food_display_grid.dart';
 import 'package:food_recipe_app/widget/food_display_widget/food_display_list.dart';
 import 'package:food_recipe_app/widget/load_data/load_data.dart';
 
@@ -15,6 +16,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  bool isGrid = false;
   List<String> recentSearches = [];
   final _searchController = TextEditingController();
   String? searchQuery;
@@ -54,6 +56,22 @@ class _SearchPageState extends State<SearchPage> {
             )
           ),
         ),
+        actions: [
+          Visibility(
+            visible: _searchController.text.isNotEmpty,
+            child: IconButton(
+              onPressed: () {
+                setState(() {
+                  isGrid = !isGrid;
+                });
+              },
+              icon: Icon(
+                isGrid ? Icons.grid_3x3 : Icons.list,
+                size: 20,
+              ),
+            ),
+          )
+        ],
       ),
       body: SafeArea(
         child: Padding(
@@ -162,6 +180,19 @@ class _SearchPageState extends State<SearchPage> {
                     var filterDoc = snapshot.data!.where((e){
                       return e.title.toLowerCase().contains(searchQuery!);
                     }).toList();
+                    if (isGrid) {
+                      return GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 0.8
+                        ),
+                        scrollDirection: Axis.vertical,
+                        itemCount: filterDoc.length,
+                        shrinkWrap: true,
+                        physics: ClampingScrollPhysics(),
+                        itemBuilder: (context, index) => FoodDisplayGrid(food: filterDoc[index])
+                      );
+                    }
                     return ListView.builder(
                       scrollDirection: Axis.vertical,
                       itemCount: filterDoc.length,

@@ -75,7 +75,8 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
       body: "Nhấn để xem", 
       from: currentUser.displayName!, 
       to: widget.food.userName,
-      extraData: widget.food.toMap(), 
+      mainData: widget.food.toMap(),
+      extraData: {},
       type: "Thích bài viết", 
       isRead: false, 
       createdAt: DateTime.now()

@@ -2,9 +2,12 @@ class NotificationModel {
   late String id;
   late String title;
   late String body;
+  late String? androidImageUrl;
+  late String? iosImageUrl;
   late String type;
   late String? from;
   late String? to;
+  late Map<String, dynamic>? mainData;
   late Map<String, dynamic>? extraData;
   late bool isRead;
   late DateTime createdAt;
@@ -13,9 +16,12 @@ class NotificationModel {
     required this.id,
     required this.title,
     required this.body,
+    this.androidImageUrl,
+    this.iosImageUrl,
     required this.type,
     this.from,
     this.to,
+    this.mainData,
     this.extraData,
     required this.isRead,
     required this.createdAt,
@@ -27,8 +33,11 @@ class NotificationModel {
       title: data['title'] ?? "",
       body: data['body'] ?? "",
       type: data['type'] ?? "",
+      androidImageUrl: data['androidImage'] ?? "",
+      iosImageUrl: data['iosImage'] ?? "",
       from: data['from'] ?? "",
       to: data['to'] ?? "",
+      mainData: data['mainData'] ?? {},
       extraData: data['extraData'] ?? {},
       isRead: data['isRead'] ?? false,
       createdAt: DateTime.tryParse(data['created_at'] ?? "") ?? DateTime.now(),
@@ -39,6 +48,8 @@ class NotificationModel {
     'id': id,
     'title': title,
     'body': body,
+    'androidImage': androidImageUrl,
+    'iosImage': iosImageUrl,
     'type': type,
     'isRead': isRead,
     'created_at': createdAt,
@@ -50,6 +61,7 @@ class NotificationModel {
     'type': type,
     'from': from,
     'to': to,
+    'mainData': mainData,
     'extraData': extraData,
     'isRead': isRead,
     'created_at': createdAt
@@ -58,9 +70,12 @@ class NotificationModel {
     id = "";
     title = "";
     body = "";
+    androidImageUrl = "";
+    iosImageUrl = "";
     type = "";
     from = "";
     to = "";
+    mainData = {};
     extraData = {};
     isRead = false;
     createdAt = DateTime.now();

@@ -52,7 +52,8 @@ class _CommentPageState extends State<CommentPage> {
       from: currentUser.displayName!,
       to: widget.food.userName,
       type: "Bình luận bài viết",
-      extraData: widget.food.toMap(),
+      mainData: widget.food.toMap(),
+      extraData: {},
       isRead: false,
       createdAt: DateTime.now()
     );
@@ -123,8 +124,8 @@ class _CommentPageState extends State<CommentPage> {
                 physics: ClampingScrollPhysics(),
                 itemBuilder: (context, index) => CommentWidget(
                   comment: comments[index], 
-                  id: widget.food.foodId,
                   isReply: false,
+                  food: widget.food,
                 ),
               );
             }

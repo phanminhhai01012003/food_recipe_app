@@ -52,10 +52,16 @@ class ImageService extends ImageRepo{
       final dio = Dio();
       final hasAccess = await Gal.hasAccess();
       if(!hasAccess){
-        await Gal.requestAccess();
+        await Gal.requestAccess().then((value){
+          if (!value) {
+            Message.showToast("storagePermissionDenied".tr());
+            return;
+          }
+        });
       }
       final tempDir = await getApplicationDocumentsDirectory();
-      final path = "${tempDir.path}/$imageUrl";
+      final fileName = Uri.parse(imageUrl).pathSegments.last;
+      final path = "${tempDir.path}/$fileName";
       await dio.download(imageUrl, path).then((value) => Logger.log({
         "headers": value.headers,
         "data": value.data,

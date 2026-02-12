@@ -8,7 +8,9 @@ class NotificationData {
   
   Future<void> pushNotification(NotificationModel model, bool isSpecificUser) async{
     try {
-      await notificationCollection.doc(model.id).set(isSpecificUser ? model.toSpecificUserMap() : model.toAllUserMap());
+      await notificationCollection
+        .doc(model.id)
+        .set(isSpecificUser ? model.toSpecificUserMap() : model.toAllUserMap());
     } catch (e) {
       Message.showToast("notifyError".tr());
       Logger.log(e);
@@ -68,6 +70,7 @@ class NotificationData {
     required String body,
     String? from,
     String? to,
+    Map<String, dynamic>? mainData,
     Map<String, dynamic>? extraData,
     required String type,
     required bool isRead,
@@ -80,6 +83,7 @@ class NotificationData {
       from: from,
       to: to,
       type: type,
+      mainData: mainData,
       extraData: extraData,
       isRead: isRead, 
       createdAt: createdAt

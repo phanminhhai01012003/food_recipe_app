@@ -62,11 +62,12 @@ class _PersonalScreenState extends State<PersonalScreen> {
                   return ListView.builder(
                     itemCount: userData.length,
                     shrinkWrap: true,
-                    itemBuilder: (context, index) => userInform(user: userData[index])
+                    itemBuilder: (context, index) => userInfo(user: userData[index])
                   );
                 }
               },
             ),
+            SizedBox(height: 20),
             Expanded(
               child: StreamBuilder(
                 stream: foodServices.getFoodByUser(context, widget.id), 
@@ -99,7 +100,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
       ),
     );
   }
-  Widget userInform({required UserModel user}){
+  Widget userInfo({required UserModel user}){
     return ListTile(
       tileColor: AppColors.green,
       textColor: AppColors.white,
@@ -140,7 +141,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
           ),
         ),
       ),
-      onTap: () => Navigator.push(context, checkDeviceRoute(userInform(user: user))),
+      onTap: () => Navigator.push(context, checkDeviceRoute(userInform(user))),
     );
   }
 }

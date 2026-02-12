@@ -7,12 +7,13 @@ import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/model/comment_model.dart';
+import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/component/comment_widget.dart';
 
 class ReplyCommentPage extends StatefulWidget {
   final CommentModel comment;
-  final String id;
-  const ReplyCommentPage({super.key, required this.comment, required this.id});
+  final FoodModel food;
+  const ReplyCommentPage({super.key, required this.comment, required this.food});
 
   @override
   State<ReplyCommentPage> createState() => _ReplyCommentPageState();
@@ -29,7 +30,8 @@ class _ReplyCommentPageState extends State<ReplyCommentPage> {
       from: currentUser.displayName!, 
       to: widget.comment.userName, 
       type: "Trả lời bình luận",
-      extraData: widget.comment.toMap(), 
+      mainData: widget.comment.toMap(),
+      extraData: widget.food.toMap(), 
       isRead: false, 
       createdAt: DateTime.now()
     );
@@ -45,7 +47,8 @@ class _ReplyCommentPageState extends State<ReplyCommentPage> {
       replies: [], 
       createdAt: DateTime.now()
     );
-    commentServices.addReplyComment(context, comment, widget.id);
+    commentServices.addReplyComment(context, comment, widget.food.foodId);
+    // pushReplyNotifications();
   }
   @override
   Widget build(BuildContext context) {
@@ -104,7 +107,7 @@ class _ReplyCommentPageState extends State<ReplyCommentPage> {
           physics: ClampingScrollPhysics(),
           itemBuilder: (context, index) => CommentWidget(
             comment: widget.comment.replies[index], 
-            id: widget.id,
+            food: widget.food,
             isReply: true,
           ),
         )

@@ -63,15 +63,24 @@ class NotificationService {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async{
       final title = message.notification?.title ?? "N/A";
       final body = message.notification?.body ?? "N/A";
-      await saveNotification(title, body);
+      final androidImage = message.notification?.android?.imageUrl ?? "N/A";
+      final iosImage = message.notification?.apple?.imageUrl ?? "N/A";
+      await saveNotification(title, body, androidImage, iosImage);
     });
     FirebaseMessaging.onMessageOpenedApp.listen(handleNotification);
   }
-  static Future<void> saveNotification(String title, String body) async {
+  static Future<void> saveNotification(
+    String title, 
+    String body,
+    String androidImage,
+    String iosImage
+  ) async {
     NotificationModel notify = NotificationModel(
       id: DateTime.now().millisecondsSinceEpoch.toString(), 
       title: title, 
-      body: body, 
+      body: body,
+      androidImageUrl: androidImage,
+      iosImageUrl: iosImage, 
       type: "Hệ thống", 
       isRead: false, 
       createdAt: DateTime.now()
@@ -89,16 +98,16 @@ class NotificationService {
       navigatorKey.currentState!.push(
         checkDeviceRoute(
           foodDetailPage(
-            FoodModel.fromMap(data['extraData']),
-            List<Map<String, dynamic>>.from(data['extraData']['likedList'])
+            FoodModel.fromMap(data['mainData']),
+            List<Map<String, dynamic>>.from(data['mainData']['likedList'])
           )
         )
       );
-    } else if (data['type'] == "Bình luận bài viết"){
+    } else if (data['type'] == "Bình luận bài viết" || data['type'] == "Thích bài viết"){
       navigatorKey.currentState!.push(
         checkDeviceRoute(
           commentPage(
-            FoodModel.fromMap(data['extraData'])
+            FoodModel.fromMap(data['mainData'])
           )
         )
       );
@@ -106,8 +115,8 @@ class NotificationService {
       navigatorKey.currentState!.push(
         checkDeviceRoute(
           replyPage(
-            CommentModel.fromMap(data['extraData']),
-            data['extraData']['foodId'].toString()
+            CommentModel.fromMap(data['mainData']),
+            FoodModel.fromMap(data['extraData'])
           )
         )
       );
@@ -138,7 +147,7 @@ class NotificationService {
       tz.TZDateTime.from(DateTime.now().add(Duration(seconds: 5)), tz.local), 
       notificationDetails, 
       uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime, 
-      androidScheduleMode: AndroidScheduleMode.exact
+      androidScheduleMode: AndroidScheduleMode.exact,
     );
   }
   static Future<void> saveToken(String token) async {
