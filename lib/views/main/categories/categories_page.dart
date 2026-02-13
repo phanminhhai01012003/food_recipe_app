@@ -55,7 +55,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                             "hello".tr(currentUser.displayName),
                             style: TextStyle(
                               color: AppColors.white,
-                              fontSize: 12,
+                              fontSize: 14,
                               fontWeight: FontWeight.w700
                             ),
                           ),
@@ -64,7 +64,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                             DateTime.now().ddmmyyyy,
                             style: TextStyle(
                               color: AppColors.white,
-                              fontSize: 12,
+                              fontSize: 14,
                               fontWeight: FontWeight.w500
                             ),
                           )
@@ -72,7 +72,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                       ),
                     ],
                   ),
-                   Row(
+                  Row(
                     children: [
                       IconButton(
                         onPressed: () => Navigator.push(context, checkDeviceRoute(subscriptionScreen)),

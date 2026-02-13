@@ -36,6 +36,13 @@ class _AIChatbotPageState extends State<AIChatbotPage> {
     firstName: "Food",
     lastName: "AI"
   );
+  String roleChat(Role role){
+    return switch(role) {
+      Role.user => "user",
+      Role.assistant => "assistant",
+      _ => ""
+    };
+  }
   List<ChatMessage> _messages = [];
   List<ChatUser> typingUsers = [];
   @override
@@ -143,14 +150,16 @@ class _AIChatbotPageState extends State<AIChatbotPage> {
       _messages.insert(0, m);
       typingUsers.add(_aiChat);
     });
-    List<Messages> _messHistory = _messages.reversed.map((m){
-      return Messages(
-        role: m.user == _currentUser ? Role.user : Role.assistant,
-        content: m.text
-      );
+    String role = m.user == _currentUser ? roleChat(Role.user) : roleChat(Role.assistant);
+    String content = m.text;
+    List<Map<String, dynamic>> _messHistory = _messages.reversed.map((m){
+      return {
+        "role": role,
+        "content": content
+      };
     }).toList();
     final request = ChatCompleteText(
-      model: Gpt432kChatModel(), 
+      model: Gpt40631ChatModel(), 
       messages: _messHistory,
       maxToken: 200
     );
