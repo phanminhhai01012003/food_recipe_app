@@ -9,6 +9,7 @@ import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/model/user_model.dart';
 import 'package:food_recipe_app/views/main/sub_features/full_screen_image/show_image_sheet.dart';
+import 'package:food_recipe_app/views/main/user/get_follow_data.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_report_modal.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
@@ -103,7 +104,9 @@ class _UserInformationState extends State<UserInformation> {
                 ),
               ),
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 20),
+            GetFollowData(user: widget.user),
+            SizedBox(height: 20),
             component(context, "id".tr(), widget.user.userId),
             divider(),
             component(context, "name".tr(), widget.user.userName),

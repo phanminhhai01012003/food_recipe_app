@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/services/authentication/auth_services.dart';
 import 'package:food_recipe_app/services/firestore/comment/comment_services.dart';
+import 'package:food_recipe_app/services/firestore/follow/follow_services.dart';
 import 'package:food_recipe_app/services/firestore/food_recipe/food_services.dart';
 import 'package:food_recipe_app/services/firestore/other_data/other_data_services.dart';
 import 'package:food_recipe_app/services/firestore/rate/rate_services.dart';
@@ -24,3 +25,4 @@ final reportServices = ReportServices();
 final rateServices = RateServices();
 final spServices = SharedPreferencesService();
 final otherServices = OtherDataServices();
+final followServices = FollowServices();

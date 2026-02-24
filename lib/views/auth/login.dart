@@ -4,6 +4,7 @@ import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_assets.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
+import 'package:food_recipe_app/model/follow_model.dart';
 import 'package:food_recipe_app/model/user_model.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -43,15 +44,21 @@ class _LoginState extends State<Login> {
       if (value != null){
         UserModel user = UserModel(
           userId: value.user!.uid, 
-          userName: value.user!.displayName!, 
-          avatar: value.user!.photoURL!, 
-          email: value.user!.email!, 
+          userName: value.user!.displayName ?? "", 
+          avatar: value.user!.photoURL ?? "", 
+          email: value.user!.email ?? "", 
           description: "",
           nickName: "",
-          phone: "",
+          phone: value.user!.phoneNumber ?? "",
           loginMethod: "Google"
         );
         await userServices.addUserWithThirdParty(context, user);
+        FollowModel follow = FollowModel(
+          followId: user.userId, 
+          followingUser: [], 
+          followedUser: []
+        );
+        await followServices.addFollowUsers(context, follow, user.userId);
         context.loaderOverlay.hide();
         Message.showScaffoldMessage(context, "signInSuccess".tr(), AppColors.green);
         Navigator.pushAndRemoveUntil(
@@ -68,15 +75,21 @@ class _LoginState extends State<Login> {
       if (value != null){
         UserModel user = UserModel(
           userId: value.user!.uid, 
-          userName: value.user!.displayName!, 
-          avatar: value.user!.photoURL!, 
-          email: value.user!.email!, 
+          userName: value.user!.displayName ?? "", 
+          avatar: value.user!.photoURL ?? "", 
+          email: value.user!.email ?? "", 
           description: "",
           nickName: "",
-          phone: "",
+          phone: value.user!.phoneNumber ?? "",
           loginMethod: "Facebook"
         );
         await userServices.addUserWithThirdParty(context, user);
+        FollowModel follow = FollowModel(
+          followId: user.userId, 
+          followingUser: [], 
+          followedUser: []
+        );
+        await followServices.addFollowUsers(context, follow, user.userId);
         context.loaderOverlay.hide();
         Message.showScaffoldMessage(context, "signInSuccess".tr(), AppColors.green);
         Navigator.pushAndRemoveUntil(

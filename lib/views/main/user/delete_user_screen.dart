@@ -32,6 +32,7 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
     }
     await authServices.deleteAccount(context);
     await userServices.deleteUser(context, currentUser.uid);
+    await followServices.removeFollowUsers(context, currentUser.uid);
     context.loaderOverlay.hide();
     Message.showScaffoldMessage(context, "deleteOldAcc".tr(), AppColors.green);
     Navigator.pushAndRemoveUntil(context, checkDeviceRoute(loginPage), (route) => false);

@@ -27,6 +27,11 @@ CollectionReference<Map<String, dynamic>> delAccReqCollection(String userId) {
     .doc(userId)
     .collection("delete_acc_request");
 }
+CollectionReference<Map<String, dynamic>> followCollection(String userId) {
+  return userCollection
+    .doc(userId)
+    .collection("follow_list"); 
+}
 
 //storage
 String foodFolder = "food_recipe";

@@ -286,5 +286,12 @@
 	"helpToMake": "Ingredients and steps for making this dish",
 	"helloAI": "Hello! I'm FoodAI.",
     "helpYou": "What can I help you?",
-	"storagePermissionDenied": "Access permission denied"
+	"storagePermissionDenied": "Access permission denied",
+	"followingUser": "Following",
+    "follow": "Follow",
+    "unfollow": "Unfollow",
+    "followedUser": "Followers",
+	"listOfFollowingUsers": "List of users you are following",
+    "listOfFollowedUsers": "List of users following you",
+	"likeList": "List of users who liked this post"
 }

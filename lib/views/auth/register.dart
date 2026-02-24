@@ -3,6 +3,7 @@ import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_assets.dart';
+import 'package:food_recipe_app/model/follow_model.dart';
 import 'package:food_recipe_app/model/user_model.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -49,6 +50,12 @@ class _RegisterState extends State<Register> {
             loginMethod: "Email and Password"
           );
           await userServices.addUserWithAccount(context, user);
+          FollowModel follow = FollowModel(
+            followId: user.userId, 
+            followingUser: [], 
+            followedUser: []
+          );
+          await followServices.addFollowUsers(context, follow, user.userId);
           context.loaderOverlay.hide();
           Message.showScaffoldMessage(context, "signUpSuccess".tr(), AppColors.green);
           Navigator.pushAndRemoveUntil(

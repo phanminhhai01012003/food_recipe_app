@@ -403,7 +403,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                             ),
                             GestureDetector(
                               onTap: () async{
-                                await showLikesListModal(context, fetchLikeList());
+                                await showLikesListModal(context, fetchLikeList(), widget.likedList.length);
                               },
                               child: Text(
                                 widget.likedList.length.toString(),

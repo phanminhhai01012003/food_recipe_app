@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 
-Future showLikesListModal(BuildContext context, Future<List<Map<String, dynamic>>> fetch) async{
+Future showLikesListModal(BuildContext context, Future<List<Map<String, dynamic>>> fetch, int likeLength) async{
   final theme = Theme.of(context);
   return await showModalBottomSheet(
     context: context,
@@ -10,13 +11,14 @@ Future showLikesListModal(BuildContext context, Future<List<Map<String, dynamic>
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
     // ignore: deprecated_member_use
     barrierColor: AppColors.black.withOpacity(0.75),
-    builder: (context) => LikeListModal(fetch: fetch)
+    builder: (context) => LikeListModal(fetch: fetch, likeLength: likeLength)
   );
 }
 
 class LikeListModal extends StatelessWidget {
   final Future<List<Map<String, dynamic>>> fetch;
-  const LikeListModal({super.key, required this.fetch});
+  final int likeLength;
+  const LikeListModal({super.key, required this.fetch, required this.likeLength});
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,14 @@ class LikeListModal extends StatelessWidget {
             decoration: ShapeDecoration(
               shape: StadiumBorder(),
               color: AppColors.grey
+            ),
+          ),
+          Text(
+            "${"likeList".tr()} ($likeLength)",
+            style: TextStyle(
+              color: theme.colorScheme.secondary,
+              fontSize: 16,
+              fontWeight: FontWeight.w800
             ),
           ),
           SizedBox(height: 20),
