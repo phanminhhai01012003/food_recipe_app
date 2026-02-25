@@ -14,14 +14,15 @@ class SaveState extends ChangeNotifier{
     initData();
   }
 
-  void toggle(SaveFoodModel data) async{
-    if (_foodProducts.contains(data)){
-      _foodProducts.remove(data);
-      await removeSaveData(data.saveId);
-    } else {
-      _foodProducts.add(data);
-      await addSaveData(data);
-    }
+  void toggleAdd(SaveFoodModel data) async{
+    _foodProducts.add(data);
+    await addSaveData(data);
+    notifyListeners();
+  }
+
+  void toggleRemove(SaveFoodModel data) async{
+    _foodProducts.removeWhere((item) => item.saveId == data.saveId);
+    await removeSaveData(data.saveId);
     notifyListeners();
   }
 

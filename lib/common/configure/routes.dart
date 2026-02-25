@@ -24,7 +24,6 @@ import 'package:food_recipe_app/views/main/food_details/user_interaction/resourc
 import 'package:food_recipe_app/views/main/food_storage/my_food.dart';
 import 'package:food_recipe_app/views/main/food_storage/recent_view.dart';
 import 'package:food_recipe_app/views/main/food_storage/save_food.dart';
-import 'package:food_recipe_app/views/main/food_storage/storage_mode_select.dart';
 import 'package:food_recipe_app/views/main/notification/notification_screen.dart';
 import 'package:food_recipe_app/views/main/report/my_report_page.dart';
 import 'package:food_recipe_app/views/main/settings/settings_screen.dart';
@@ -89,7 +88,6 @@ Widget get saveFoodScreen => SaveFood();
 Widget get recentScreen => RecentView();
 Widget listofFoodByTag(String categories) => FoodListWithTag(categories: categories);
 Widget listofFoodByDate(bool isDescending) => AllFoodByDate(isDescending: isDescending);
-Widget get storageMode => StorageModeSelect();
 Widget get deleteUser => DeleteUserScreen();
 Widget get cookbookPage => CookbookScreen();
 Widget cookbookSelection(FoodModel food) => CookbookSelection(food: food);

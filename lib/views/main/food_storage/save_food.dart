@@ -67,7 +67,7 @@ class _SaveFoodState extends State<SaveFood> {
               food: value[index].foods, 
               children: [
                 SlidableAction(
-                  onPressed: (context) => onDelete(context, value[index]),
+                  onPressed: (context) => onDelete(value[index]),
                   backgroundColor: AppColors.red,
                   foregroundColor: AppColors.white,
                   icon: Icons.delete,
@@ -79,14 +79,14 @@ class _SaveFoodState extends State<SaveFood> {
       ),
     );
   }
-  void onDelete(BuildContext context, SaveFoodModel model) {
+  void onDelete(SaveFoodModel model) {
     ShowYesnoDialog.checkDeviceDialog(
       context, 
       title: "deleteSaveTitle".tr(), 
       content: "deleteSaveDesc".tr(), 
       onAcceptTap: () {
         context.loaderOverlay.show();
-        context.read<SaveState>().toggle(model);
+        context.read<SaveState>().toggleRemove(model);
         context.loaderOverlay.hide();
         Message.showScaffoldMessage(context, "deleteSuccess".tr(), AppColors.green);
         Navigator.pop(context);

@@ -27,9 +27,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       case ModeSelection.appServices:
         Navigator.push(context, checkDeviceRoute(service));
         break;
-      case ModeSelection.storage:
-        Navigator.push(context, checkDeviceRoute(storageMode));
-        break;
       case ModeSelection.report:
         Navigator.push(context, checkDeviceRoute(reportPage));
         break;
@@ -53,8 +50,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
         return Icons.info;
       case ModeSelection.appServices:
         return Icons.room_service;
-      case ModeSelection.storage:
-        return Icons.storage;
       case ModeSelection.report:
         return Icons.report;
       case ModeSelection.changePassword:
@@ -73,8 +68,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
         return "about".tr();
       case ModeSelection.appServices:
         return "appServices".tr();
-      case ModeSelection.storage:
-        return "storage".tr();
       case ModeSelection.report:
         return "reportList".tr();
       case ModeSelection.changePassword:
@@ -133,11 +126,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   onTap: () => onChooseMode(ModeSelection.appServices), 
                   icon: getIcon(ModeSelection.appServices), 
                   title: renderTitle(ModeSelection.appServices)
-                ),
-                Selection(
-                  onTap: () => onChooseMode(ModeSelection.storage), 
-                  icon: getIcon(ModeSelection.storage), 
-                  title: renderTitle(ModeSelection.storage)
                 ),
                 Selection(
                   onTap: () => onChooseMode(ModeSelection.report), 

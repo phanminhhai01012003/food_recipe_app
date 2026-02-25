@@ -106,7 +106,6 @@ class _UserInformationState extends State<UserInformation> {
             ),
             SizedBox(height: 20),
             GetFollowData(user: widget.user),
-            SizedBox(height: 20),
             component(context, "id".tr(), widget.user.userId),
             divider(),
             component(context, "name".tr(), widget.user.userName),

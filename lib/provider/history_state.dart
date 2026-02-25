@@ -16,14 +16,15 @@ class HistoryState extends ChangeNotifier{
 
   bool isExist(RecentViewModel data) => _viewProducts.contains(data);
 
-  void toggle(RecentViewModel data) async{
-    if (_viewProducts.contains(data)){
-      _viewProducts.remove(data);
-      await removeRecentView(data.viewId);
-    } else {
-      _viewProducts.add(data);
-      await addRecentView(data);
-    }
+  void toggleAdd(RecentViewModel data) async{
+    _viewProducts.add(data);
+    await addRecentView(data);
+    notifyListeners();
+  }
+
+  void toggleRemove(RecentViewModel data) async{
+    _viewProducts.removeWhere((item) => item.viewId == data.viewId);
+    await removeRecentView(data.viewId);
     notifyListeners();
   }
 

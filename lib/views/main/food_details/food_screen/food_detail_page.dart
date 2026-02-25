@@ -39,6 +39,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
     // TODO: implement initState
     super.initState();
     isLikedPost = widget.likedList.any((likes) => likes['id'] == currentUser.uid);
+    
   }
   void toggleLikePost(){
     setState(() {
@@ -416,10 +417,16 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                           ],
                         ),
                         IconButton(
-                          onPressed: () => context.read<SaveState>().toggle(save),
+                          onPressed: () {
+                            if (context.read<SaveState>().isExist(save)){
+                              context.read<SaveState>().toggleRemove(save);
+                            } else {
+                              context.read<SaveState>().toggleAdd(save);
+                            }
+                          },
                           icon: Icon(
-                            context.read<SaveState>().isExist(save) ? Icons.bookmark : Icons.bookmark_border,
-                            color: context.read<SaveState>().isExist(save) ? AppColors.yellow : AppColors.grey,
+                            context.watch<SaveState>().isExist(save) ? Icons.bookmark : Icons.bookmark_border,
+                            color: context.watch<SaveState>().isExist(save) ? AppColors.yellow : AppColors.grey,
                             size: 20,
                           )
                         ),

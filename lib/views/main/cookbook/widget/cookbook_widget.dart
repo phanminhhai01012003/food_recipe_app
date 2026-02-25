@@ -17,6 +17,8 @@ class _CookbookWidgetState extends State<CookbookWidget> {
     return GestureDetector(
       onTap: () => Navigator.push(context, checkDeviceRoute(cookbookDetail(widget.book))),
       child: Container(
+        height: 75,
+        width: 150,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           image: DecorationImage(

@@ -30,6 +30,8 @@ class _GetFollowDataState extends State<GetFollowData> {
           List<FollowModel> followData = snapshot.data!;
           return ListView.builder(
             itemCount: followData.length,
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               bool contains = followData[index].followingUser.contains(widget.user);
               return Column(

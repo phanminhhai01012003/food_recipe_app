@@ -58,7 +58,6 @@ class CookbookModel {
     createdAt = DateTime.now();
     foodsList = [];
   }
-
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||

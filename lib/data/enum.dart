@@ -7,7 +7,6 @@ enum StorageMode {
 enum ModeSelection {
   about,
   appServices,
-  storage,
   report,
   changePassword, 
   theme,

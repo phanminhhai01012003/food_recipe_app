@@ -33,4 +33,13 @@ class SaveFoodModel {
     isSaved = false;
     foods = FoodModel.empty();
   }
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is SaveFoodModel
+      && runtimeType == other.runtimeType
+      && other.saveId == saveId;
+  }
+  @override
+  int get hashCode => saveId.hashCode;
 }
