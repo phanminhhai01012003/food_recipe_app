@@ -36,9 +36,9 @@ class _MainPageState extends State<MainPage> {
             label: "storage".tr()
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            activeIcon: Icon(Icons.settings),
-            label: "settings".tr()
+            icon: Icon(Icons.person),
+            activeIcon: Icon(Icons.person),
+            label: "profile".tr()
           )
         ],
         currentIndex: selectedIndex,

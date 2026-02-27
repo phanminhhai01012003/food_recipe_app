@@ -15,4 +15,4 @@ String chatbotImages = "https://www.shutterstock.com/shutterstock/photos/2478937
 String docPath = "assets/document";
 String overviewPDFFile = "$docPath/document.pdf";
 String rulesPDFFile = "$docPath/pairpro.pdf";
-String instructionPDFFile = "$docPath/Flutter.pdf";
+String privacypolicyPDFFile = "$docPath/privacypolicy.pdf";

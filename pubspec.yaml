@@ -118,7 +118,7 @@ flutter:
     - assets/images/cooking.png
     - assets/document/document.pdf
     - assets/document/pairpro.pdf
-    - assets/document/Flutter.pdf
+    - assets/document/privacypolicy.pdf
     - assets/language/en.json
     - assets/language/vi.json
     - .env

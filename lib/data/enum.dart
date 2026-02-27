@@ -5,11 +5,14 @@ enum StorageMode {
   cookbook
 }
 enum ModeSelection {
-  about,
-  appServices,
   report,
   changePassword, 
-  theme,
   rating,
+  settings
+}
+enum SettingsMode {
+  about,
+  appServices,
+  theme,
   language
 }

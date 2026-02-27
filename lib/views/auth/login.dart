@@ -34,6 +34,10 @@ class _LoginState extends State<Login> {
             checkDeviceRoute(mainPage), 
             (route) => false
           );
+        } else {
+          Message.showScaffoldMessage(context, "signInFail".tr(), AppColors.red);
+          context.loaderOverlay.hide();
+          return;
         }
       });
     }
@@ -66,6 +70,10 @@ class _LoginState extends State<Login> {
           checkDeviceRoute(mainPage), 
           (route) => false
         );
+      } else {
+        Message.showScaffoldMessage(context, "googleSignInFail".tr(), AppColors.red);
+        context.loaderOverlay.hide();
+        return;
       }
     });
   }
@@ -97,6 +105,10 @@ class _LoginState extends State<Login> {
           checkDeviceRoute(mainPage), 
           (route) => false
         );
+      } else {
+        Message.showScaffoldMessage(context, "facebookSignInFail".tr(), AppColors.red);
+        context.loaderOverlay.hide();
+        return;
       }
     });
   }

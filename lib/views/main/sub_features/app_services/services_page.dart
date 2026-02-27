@@ -22,7 +22,7 @@ class _ServicesPageState extends State<ServicesPage> {
       backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
         centerTitle: true,
-        title: Text("termOfServices".tr(),
+        title: Text("services".tr(),
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.normal
@@ -56,17 +56,17 @@ class _ServicesPageState extends State<ServicesPage> {
                   },
                   child: Container(
                     height: 50,
-                    width: MediaQuery.of(context).size.width / 3,
+                    width: MediaQuery.of(context).size.width * 0.4,
                     decoration: BoxDecoration(
                       color: selectedIndex == 0 ? AppColors.green : theme.colorScheme.primary,
                       borderRadius: BorderRadius.circular(33),
                     ),
                     child: Center(
                       child: Text(
-                        "rules".tr(),
+                        "termOfServices".tr(),
                         style: TextStyle(
                           color: selectedIndex == 0 ? AppColors.white : theme.colorScheme.secondary,
-                          fontSize: 14,
+                          fontSize: 12,
                           fontWeight: FontWeight.w700
                         ),
                       ),
@@ -81,17 +81,17 @@ class _ServicesPageState extends State<ServicesPage> {
                   },
                   child: Container(
                     height: 50,
-                    width: MediaQuery.of(context).size.width / 3,
+                    width: MediaQuery.of(context).size.width * 0.4,
                     decoration: BoxDecoration(
                       color: selectedIndex == 1 ? AppColors.green : theme.colorScheme.primary,
                       borderRadius: BorderRadius.circular(33),
                     ),
                     child: Center(
                       child: Text(
-                        "instruction".tr(),
+                        "privacy".tr(),
                         style: TextStyle(
                           color: selectedIndex == 1 ? AppColors.white : theme.colorScheme.secondary,
-                          fontSize: 14,
+                          fontSize: 12,
                           fontWeight: FontWeight.w700
                         ),
                       ),

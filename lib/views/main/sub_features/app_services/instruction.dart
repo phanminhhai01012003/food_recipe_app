@@ -15,7 +15,7 @@ class _InstructionState extends State<Instruction> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _pdfControllerPinch = PdfControllerPinch(document: PdfDocument.openAsset(instructionPDFFile));
+    _pdfControllerPinch = PdfControllerPinch(document: PdfDocument.openAsset(privacypolicyPDFFile));
   }
   @override
   Widget build(BuildContext context) {

@@ -63,6 +63,10 @@ class _RegisterState extends State<Register> {
             checkDeviceRoute(mainPage), 
             (route) => false
           );
+        } else {
+          Message.showScaffoldMessage(context, "signUpFail".tr(), AppColors.red);
+          context.loaderOverlay.hide();
+          return;
         }
       });
     }

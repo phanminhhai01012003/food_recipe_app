@@ -9,7 +9,6 @@ import 'package:food_recipe_app/data/enum.dart';
 import 'package:food_recipe_app/model/user_model.dart';
 import 'package:food_recipe_app/views/main/settings/selection.dart';
 import 'package:food_recipe_app/views/main/settings/user_widget.dart';
-import 'package:food_recipe_app/widget/bottom_sheet/change_language_modal.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -21,63 +20,42 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   void onChooseMode(ModeSelection mode) async{
     switch(mode){
-      case ModeSelection.about:
-        Navigator.push(context, checkDeviceRoute(about));
-        break;
-      case ModeSelection.appServices:
-        Navigator.push(context, checkDeviceRoute(service));
-        break;
       case ModeSelection.report:
         Navigator.push(context, checkDeviceRoute(reportPage));
         break;
       case ModeSelection.changePassword:
         Navigator.push(context, checkDeviceRoute(changePasswordPage));
         break;
-      case ModeSelection.theme:
-        Navigator.push(context, checkDeviceRoute(changeThemeScreen));
-        break;
       case ModeSelection.rating:
         Navigator.push(context, checkDeviceRoute(fullRatingPage));
         break;
-      case ModeSelection.language:
-        await changeLanguageModal(context);
+      case ModeSelection.settings:
+        Navigator.push(context, checkDeviceRoute(settingsDetail));
         break;
     }
   }
   IconData getIcon(ModeSelection mode){
     switch (mode) {
-      case ModeSelection.about:
-        return Icons.info;
-      case ModeSelection.appServices:
-        return Icons.room_service;
       case ModeSelection.report:
         return Icons.report;
       case ModeSelection.changePassword:
         return Icons.lock;
-      case ModeSelection.theme:
-        return Icons.sunny;
       case ModeSelection.rating:
         return Icons.star;
-      case ModeSelection.language:
-        return Icons.language;
+      case ModeSelection.settings:
+        return Icons.settings;
     }
   }
   String renderTitle(ModeSelection mode){
     switch (mode) {
-      case ModeSelection.about:
-        return "about".tr();
-      case ModeSelection.appServices:
-        return "appServices".tr();
       case ModeSelection.report:
         return "reportList".tr();
       case ModeSelection.changePassword:
         return "changePassword".tr();
-      case ModeSelection.theme:
-        return "theme".tr();
       case ModeSelection.rating:
         return "rate".tr();
-      case ModeSelection.language:
-        return "lang".tr(); 
+      case ModeSelection.settings:
+        return "settings".tr(); 
     }
   }
   @override
@@ -118,16 +96,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               scrollDirection: Axis.vertical,
               children: [
                 Selection(
-                  onTap: () => onChooseMode(ModeSelection.about), 
-                  icon: getIcon(ModeSelection.about), 
-                  title: renderTitle(ModeSelection.about)
-                ),
-                Selection(
-                  onTap: () => onChooseMode(ModeSelection.appServices), 
-                  icon: getIcon(ModeSelection.appServices), 
-                  title: renderTitle(ModeSelection.appServices)
-                ),
-                Selection(
                   onTap: () => onChooseMode(ModeSelection.report), 
                   icon: getIcon(ModeSelection.report), 
                   title: renderTitle(ModeSelection.report)
@@ -138,19 +106,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   title: renderTitle(ModeSelection.changePassword)
                 ),
                 Selection(
-                  onTap: () => onChooseMode(ModeSelection.theme),
-                  icon: getIcon(ModeSelection.theme),
-                  title: renderTitle(ModeSelection.theme),
-                ),
-                Selection(
                   onTap: () => onChooseMode(ModeSelection.rating),
                   icon: getIcon(ModeSelection.rating),
                   title: renderTitle(ModeSelection.rating),
                 ),
                 Selection(
-                  onTap: () => onChooseMode(ModeSelection.language),
-                  icon: getIcon(ModeSelection.language),
-                  title: renderTitle(ModeSelection.language),
+                  onTap: () => onChooseMode(ModeSelection.settings),
+                  icon: getIcon(ModeSelection.settings),
+                  title: renderTitle(ModeSelection.settings),
                 ),
               ],
             ),
