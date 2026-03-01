@@ -4,11 +4,13 @@ class NotificationList extends StatefulWidget {
   final Widget imageWidget;
   final String title;
   final String date;
+  final bool isRead;
   const NotificationList({
     super.key, 
     required this.imageWidget, 
     required this.title, 
-    required this.date
+    required this.date,
+    required this.isRead
   });
 
   @override
@@ -36,7 +38,7 @@ class _NotificationListState extends State<NotificationList> {
                   style: TextStyle(
                     color: theme.colorScheme.secondary,
                     fontSize: 12,
-                    fontWeight: FontWeight.w800
+                    fontWeight: widget.isRead ? FontWeight.w800 : FontWeight.w400
                   ),
                 ),
               ),         
@@ -47,7 +49,7 @@ class _NotificationListState extends State<NotificationList> {
             style: TextStyle(
               color: theme.colorScheme.secondary,
               fontSize: 10,
-              fontWeight: FontWeight.w300
+              fontWeight: widget.isRead ? FontWeight.w800 : FontWeight.w400
             ),
           ),
         ],

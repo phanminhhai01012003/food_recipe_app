@@ -34,9 +34,7 @@ class _FoodDisplayListState extends State<FoodDisplayList> {
           widget.food.views++;
         });
         await foodCollection.doc(widget.food.foodId).update({'views': widget.food.views});
-        if (!context.read<HistoryState>().isExist(recents)){
-          context.read<HistoryState>().toggleAdd(recents);
-        }
+        context.read<HistoryState>().toggleAdd(recents);
         Navigator.push(
           context,
           checkDeviceRoute(

@@ -46,6 +46,9 @@ class NotificationService {
   static Future<void> initNotifications() async{
     tz.initializeTimeZones();
     await firebaseMessaging.requestPermission(
+      alert: true,
+      badge: true,
+      sound: true,
       provisional: true,
       announcement: true
     );

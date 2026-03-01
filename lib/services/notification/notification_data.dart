@@ -29,7 +29,7 @@ class NotificationData {
       rethrow;
     }
   }
-  Future<List<NotificationModel>> getSystemNotifications(){
+  Future<List<NotificationModel>> getAllNotifications(){
     try {
       return notificationCollection
         .get()
@@ -40,10 +40,10 @@ class NotificationData {
       rethrow;
     }
   }
-  Future<List<NotificationModel>> getSpecificUserNotifications(){
+  Future<List<NotificationModel>> getSpecificUserNotifications(String name){
     try {
       return notificationCollection
-        .where("to", isEqualTo: currentUser.displayName)
+        .where("to", isEqualTo: name)
         .get()
         .then((ss) => ss.docs.map((e) => NotificationModel.fromMap(e.data())).toList());
     } catch (e) {
@@ -52,10 +52,10 @@ class NotificationData {
       rethrow;
     }
   }
-  Future<List<NotificationModel>> getReadNotifications(bool isRead){
+  Future<List<NotificationModel>> getSystemNotifications(String type){
     try {
       return notificationCollection
-        .where("isRead", isEqualTo: isRead)
+        .where("type", isEqualTo: type)
         .get()
         .then((ss) => ss.docs.map((e) => NotificationModel.fromMap(e.data())).toList());
     } catch (e) {

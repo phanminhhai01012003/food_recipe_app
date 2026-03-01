@@ -14,8 +14,6 @@ class HistoryState extends ChangeNotifier{
     initData();
   }
 
-  bool isExist(RecentViewModel data) => _viewProducts.contains(data);
-
   void toggleAdd(RecentViewModel data) async{
     _viewProducts.add(data);
     await addRecentView(data);

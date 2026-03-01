@@ -31,9 +31,7 @@ class _FoodDisplayGridState extends State<FoodDisplayGrid> {
           viewedAt: DateTime.now(), 
           foods: widget.food
         );
-        if (!context.read<HistoryState>().isExist(recents)){
-          context.read<HistoryState>().toggleAdd(recents);
-        }
+        context.read<HistoryState>().toggleAdd(recents);
         setState(() {
           widget.food.views++;
         });

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/extension/datetime_extension.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_assets.dart';
@@ -44,17 +45,23 @@ class _NotificationScreenState extends State<NotificationScreen> {
           decoration: BoxDecoration(shape: BoxShape.circle),
           child: Image.asset(foodDesignImage, fit: BoxFit.cover),
         );
+      case "Theo dõi":
+        return NotificationImageWidget(
+          icon: Icons.face, 
+          fromUserAvatar: fromUserAvatar, 
+          color: AppColors.green
+        );
       default:
         return SizedBox();
     }
   }
   Future<List<NotificationModel>> getNotifications() {
     if (_btnIndex == 0){
-      return notificationData.getSystemNotifications();
+      return notificationData.getAllNotifications();
     } else if (_btnIndex == 1){
-      return notificationData.getReadNotifications(true);
+      return notificationData.getSystemNotifications("Hệ thống");
     } else {
-      return notificationData.getReadNotifications(false);
+      return notificationData.getSpecificUserNotifications(currentUser.displayName ?? "");
     }
   }
   @override
@@ -130,7 +137,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     ),
                     child: Center(
                       child: Text(
-                        "read".tr(),
+                        "fromSystem".tr(),
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -155,7 +162,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     ),
                     child: Center(
                       child: Text(
-                        "unread".tr(),
+                        "interaction".tr(),
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -189,10 +196,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     itemBuilder: (context, index) => NotificationList(
                       imageWidget: renderImageWidget(
                         notifications[index].type, 
-                        notifications[index].from!
+                        notifications[index].from!,
                       ), 
                       title: notifications[index].title, 
-                      date: notifications[index].createdAt.ddmmyyyy
+                      date: notifications[index].createdAt.ddmmyyyy,
+                      isRead: notifications[index].isRead,
                     ),
                   );
                 }

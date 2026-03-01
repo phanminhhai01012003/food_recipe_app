@@ -34,12 +34,13 @@ class FoodDetailPage extends StatefulWidget {
 
 class _FoodDetailPageState extends State<FoodDetailPage> {
   bool isLikedPost = false;
+  bool isSaved = false;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     isLikedPost = widget.likedList.any((likes) => likes['id'] == currentUser.uid);
-    
+    isSaved = context.read<SaveState>().foodProducts.any((e) => e.foods == widget.food);
   }
   void toggleLikePost(){
     setState(() {
@@ -418,15 +419,18 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                         ),
                         IconButton(
                           onPressed: () {
-                            if (context.read<SaveState>().isExist(save)){
-                              context.read<SaveState>().toggleRemove(save);
-                            } else {
+                            setState(() {
+                              isSaved = !isSaved;
+                            });
+                            if (isSaved){
                               context.read<SaveState>().toggleAdd(save);
+                            } else {
+                              context.read<SaveState>().toggleRemove(save);
                             }
                           },
                           icon: Icon(
-                            context.watch<SaveState>().isExist(save) ? Icons.bookmark : Icons.bookmark_border,
-                            color: context.watch<SaveState>().isExist(save) ? AppColors.yellow : AppColors.grey,
+                            isSaved ? Icons.bookmark : Icons.bookmark_border,
+                            color: isSaved ? AppColors.yellow : AppColors.grey,
                             size: 20,
                           )
                         ),

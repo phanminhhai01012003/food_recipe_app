@@ -26,8 +26,6 @@ class SaveState extends ChangeNotifier{
     notifyListeners();
   }
 
-  bool isExist(SaveFoodModel data) => _foodProducts.contains(data);
-
   Future<void> addSaveData(SaveFoodModel save) async{
     try {
       await saveCollection.doc(save.saveId).set(save.toMap());
