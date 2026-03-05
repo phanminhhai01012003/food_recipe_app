@@ -49,5 +49,9 @@
 	<string>Ứng dụng cần quyền lưu ảnh vào thư viện của bạn.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Ứng dụng cần quyền truy cập thư viện ảnh.</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+  		<string>fb</string>
+	</array>
 </dict>
 </plist>
