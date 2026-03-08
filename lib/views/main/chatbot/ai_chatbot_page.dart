@@ -27,8 +27,8 @@ class _AIChatbotPageState extends State<AIChatbotPage> {
   final _currentUser = ChatUser(
     id: currentUser.uid,
     profileImage: currentUser.photoURL,
-    firstName: currentUser.displayName!.split(" ").first,
-    lastName: currentUser.displayName!.split(" ").last
+    firstName: (currentUser.displayName ?? "").split(" ").first,
+    lastName: (currentUser.displayName ?? "").split(" ").last
   );
   final _aiChat = ChatUser(
     id: generateRandomString(10),

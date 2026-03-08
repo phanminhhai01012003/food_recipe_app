@@ -8,6 +8,7 @@ import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/model/comment_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
+import 'package:food_recipe_app/services/notification/notification_service.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/component/comment_widget.dart';
 
 class ReplyCommentPage extends StatefulWidget {
@@ -23,11 +24,16 @@ class _ReplyCommentPageState extends State<ReplyCommentPage> {
   final _commentController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   void pushReplyNotifications(){
+    NotificationService.showNotification(
+      title: widget.food.title, 
+      body: "${currentUser.displayName} đã trả lời bình luận của bạn", 
+      payload: widget.comment.avatar
+    );
     notificationData.pushInteractNotifications(
       id: DateTime.now().millisecondsSinceEpoch.toString(), 
-      title: "${currentUser.displayName} đã trả lời bình luận của bạn", 
-      body: "Nhấn để xem", 
-      from: currentUser.displayName!, 
+      title: widget.food.title, 
+      body: "${currentUser.displayName} đã trả lời bình luận của bạn", 
+      from: currentUser.displayName ?? "", 
       to: widget.comment.userName, 
       type: "Trả lời bình luận",
       mainData: widget.comment.toMap(),
@@ -40,8 +46,8 @@ class _ReplyCommentPageState extends State<ReplyCommentPage> {
     CommentModel comment = CommentModel(
       commentId: widget.comment.commentId, 
       userId: currentUser.uid, 
-      avatar: currentUser.photoURL!, 
-      userName: currentUser.displayName!, 
+      avatar: currentUser.photoURL ?? "", 
+      userName: currentUser.displayName ?? "", 
       content: _commentController.text, 
       likesList: [], 
       replies: [], 
@@ -79,7 +85,7 @@ class _ReplyCommentPageState extends State<ReplyCommentPage> {
       ),
       body: CommentBox(
         formKey: formKey,
-        userImage: CommentBox.commentImageParser(imageURLorPath: currentUser.photoURL!),
+        userImage: CommentBox.commentImageParser(imageURLorPath: currentUser.photoURL ?? ""),
         labelText: "writeComment".tr(),
         errorText: "commentInvalid".tr(),
         withBorder: true,

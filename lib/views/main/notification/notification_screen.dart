@@ -198,9 +198,15 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         notifications[index].type, 
                         notifications[index].from!,
                       ), 
-                      title: notifications[index].title, 
+                      title: notifications[index].title,
+                      body: notifications[index].body,
                       date: notifications[index].createdAt.ddmmyyyy,
                       isRead: notifications[index].isRead,
+                      type: notifications[index].type,
+                      androidImageUrl: notifications[index].androidImageUrl,
+                      iosImageUrl: notifications[index].iosImageUrl,
+                      mainData: notifications[index].mainData,
+                      extraData: notifications[index].extraData,
                     ),
                   );
                 }

@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(50),
                         child: CachedNetworkImage(
-                          imageUrl: currentUser.photoURL!,
+                          imageUrl: currentUser.photoURL ?? "",
                           progressIndicatorBuilder: (context, url, progress) => CircularProgressIndicator(value: progress.progress),
                           errorWidget: (context, url, error) => Image.asset(userDefaultImage),
                           fit: BoxFit.cover,
