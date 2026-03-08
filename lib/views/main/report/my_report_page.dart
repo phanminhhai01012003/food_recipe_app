@@ -154,7 +154,7 @@ class _MyReportPageState extends State<MyReportPage> {
             ),
             SizedBox(height: 20),
             StreamBuilder(
-              stream: reportServices.getReportList(context, currentUser.displayName!, statusIndex), 
+              stream: reportServices.getReportList(context, currentUser.displayName ?? "", statusIndex), 
               builder: (context, snapshot){
                 if (!snapshot.hasData || snapshot.hasError) {
                   return SizedBox();

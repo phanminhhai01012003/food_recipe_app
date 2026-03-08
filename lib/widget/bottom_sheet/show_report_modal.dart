@@ -49,7 +49,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
       reportId: generateRandomString(20), 
       target: widget.title,
       author: widget.author,
-      reporter: currentUser.displayName!,
+      reporter: currentUser.displayName ?? "",
       reason: selectedOption == "reportOther".tr() ? _otherReport.text : selectedOption!, 
       createdAt: DateTime.now(), 
       status: 0

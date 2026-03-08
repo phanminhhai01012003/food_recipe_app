@@ -13,6 +13,7 @@ import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/model/save_food_model.dart';
 import 'package:food_recipe_app/provider/save_state.dart';
+import 'package:food_recipe_app/services/notification/notification_service.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/resources/like_list_modal.dart';
 import 'package:food_recipe_app/views/main/sub_features/full_screen_image/show_image_sheet.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_report_modal.dart';
@@ -71,11 +72,16 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
     return likes;
   }
   void pushLikesNotifications(){
+    NotificationService.showNotification(
+      title: widget.food.title, 
+      body: "${currentUser.displayName} đã thích bài viết của bạn", 
+      payload: widget.food.avatar
+    );
     notificationData.pushInteractNotifications(
       id: DateTime.now().millisecondsSinceEpoch.toString(), 
-      title: "${currentUser.displayName} đã thích bài viết của bạn", 
-      body: "Nhấn để xem", 
-      from: currentUser.displayName!, 
+      title: widget.food.title, 
+      body: "${currentUser.displayName} đã thích bài viết của bạn", 
+      from: currentUser.displayName ?? "", 
       to: widget.food.userName,
       mainData: widget.food.toMap(),
       extraData: {},

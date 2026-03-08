@@ -40,8 +40,8 @@ class _RateScreenState extends State<RateScreen> {
     RatingModel rating = RatingModel(
       ratingId: widget.rating == null ? generateRandomString(20) : widget.rating!.ratingId, 
       userId: widget.rating == null ? currentUser.uid : widget.rating!.userId, 
-      avatar: widget.rating == null ? currentUser.photoURL! : widget.rating!.avatar, 
-      userName: widget.rating == null ? currentUser.displayName! : widget.rating!.userName, 
+      avatar: widget.rating == null ? (currentUser.photoURL ?? "") : widget.rating!.avatar, 
+      userName: widget.rating == null ? (currentUser.displayName ?? "") : widget.rating!.userName, 
       ratingStar: rate, 
       content: contentController.text, 
       createdAt: widget.rating == null ? DateTime.now() : widget.rating!.createdAt, 

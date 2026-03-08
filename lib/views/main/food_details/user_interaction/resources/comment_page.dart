@@ -9,6 +9,7 @@ import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/convert.dart';
 import 'package:food_recipe_app/model/comment_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
+import 'package:food_recipe_app/services/notification/notification_service.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/component/comment_widget.dart';
 import 'package:food_recipe_app/widget/load_data/load_data.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
@@ -32,8 +33,8 @@ class _CommentPageState extends State<CommentPage> {
     CommentModel comment = CommentModel(
       commentId: generateRandomString(23),
       userId: currentUser.uid,
-      avatar: currentUser.photoURL!, 
-      userName: currentUser.displayName!, 
+      avatar: currentUser.photoURL ?? "", 
+      userName: currentUser.displayName ?? "", 
       content: _commentController.text,
       likesList: [],
       replies: [],
@@ -45,11 +46,16 @@ class _CommentPageState extends State<CommentPage> {
     });
   }
   void pushCommentNotifications(){
+    NotificationService.showNotification(
+      title: widget.food.title, 
+      body: "${currentUser.displayName} đã bình luận bài viết của bạn", 
+      payload: widget.food.avatar
+    );
     notificationData.pushInteractNotifications(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
-      title: "${currentUser.displayName} đã thích bài viết của bạn",
-      body: "Nhấn để xem",
-      from: currentUser.displayName!,
+      title: widget.food.title,
+      body: "${currentUser.displayName} đã bình luận bài viết của bạn",
+      from: currentUser.displayName ?? "",
       to: widget.food.userName,
       type: "Bình luận bài viết",
       mainData: widget.food.toMap(),
@@ -81,7 +87,7 @@ class _CommentPageState extends State<CommentPage> {
       ),
       body: CommentBox(
         formKey: formKey,
-        userImage: CommentBox.commentImageParser(imageURLorPath: currentUser.photoURL!),
+        userImage: CommentBox.commentImageParser(imageURLorPath: currentUser.photoURL ?? ""),
         labelText: "writeComment".tr(),
         errorText: "commentInvalid".tr(),
         withBorder: true,

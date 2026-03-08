@@ -24,6 +24,7 @@ import 'package:food_recipe_app/views/main/food_details/user_interaction/resourc
 import 'package:food_recipe_app/views/main/food_storage/my_food.dart';
 import 'package:food_recipe_app/views/main/food_storage/recent_view.dart';
 import 'package:food_recipe_app/views/main/food_storage/save_food.dart';
+import 'package:food_recipe_app/views/main/notification/notification_inform.dart';
 import 'package:food_recipe_app/views/main/notification/notification_screen.dart';
 import 'package:food_recipe_app/views/main/report/my_report_page.dart';
 import 'package:food_recipe_app/views/main/settings/settings_detail_page.dart';
@@ -109,3 +110,9 @@ Widget get fullRatingPage => FullRatingPage();
 Widget fullScreenImage(String imageUrl) => FullScreenWidget(imageUrl: imageUrl);
 Widget get subscriptionScreen => SubscriptionScreen();
 Widget get AIpage => AIChatbotPage();
+Widget notificationInform(String title, String body, [String? androidImageUrl, String? iosImageUrl]) => NotificationInform(
+  title: title, 
+  body: body,
+  androidImageUrl: androidImageUrl,
+  iosImageUrl: iosImageUrl,
+);

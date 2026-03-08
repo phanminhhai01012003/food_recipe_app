@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:food_recipe_app/common/configure/logger.dart';
@@ -14,7 +16,7 @@ import 'package:timezone/data/latest_all.dart' as tz;
 class NotificationService {
   static final firebaseMessaging = FirebaseMessaging.instance;
   static final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-  static const androidInitSettings = AndroidInitializationSettings('assets/images/FoodDesign.png');
+  static const androidInitSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
   static const iosInitSettings = DarwinInitializationSettings(
     requestAlertPermission: true,
     requestBadgePermission: true,
@@ -55,7 +57,16 @@ class NotificationService {
     final fcmToken = await firebaseMessaging.getToken();
     saveToken(fcmToken!);
     Logger.log("Token: $fcmToken");
+    await initLocalNotifications();
     await initPushNotifications();
+  }
+  static Future<dynamic> initLocalNotifications() async{
+    await flutterLocalNotificationsPlugin.initialize(
+      initialSettings,
+      onDidReceiveNotificationResponse: (details) {
+        handleClickNotification(jsonDecode(details.payload!) as Map<String, dynamic>);
+      },
+    ).then((value) => Logger.log(value));
   }
   static Future<dynamic> initPushNotifications() async {
     await firebaseMessaging.setForegroundNotificationPresentationOptions(
@@ -64,14 +75,27 @@ class NotificationService {
       sound: true
     );
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async{
-      final title = message.notification?.title ?? "N/A";
-      final body = message.notification?.body ?? "N/A";
-      final androidImage = message.notification?.android?.imageUrl ?? "N/A";
-      final iosImage = message.notification?.apple?.imageUrl ?? "N/A";
-      await saveNotification(title, body, androidImage, iosImage);
+      if (message.notification != null) {
+        final title = message.notification?.title ?? "N/A";
+        final body = message.notification?.body ?? "N/A";
+        final payLoad = message.data;
+        final androidImage = message.notification?.android?.imageUrl ?? "N/A";
+        final iosImage = message.notification?.apple?.imageUrl ?? "N/A";
+        showNotification(title: title, body: body, payload: json.encode(payLoad));
+        await saveNotification(title, body, androidImage, iosImage);
+      }      
     });
-    FirebaseMessaging.onMessageOpenedApp.listen(handleNotification);
+    listenNotification();
   }
+  static Future listenNotification() async{
+    FirebaseMessaging.onMessageOpenedApp.listen(handleNotification);
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+    await firebaseMessaging.getInitialMessage().then((message){
+      if (message!.data.isNotEmpty){
+        handleNotification(message);
+      }
+    });
+  } 
   static Future<void> saveNotification(
     String title, 
     String body,
@@ -106,7 +130,7 @@ class NotificationService {
           )
         )
       );
-    } else if (data['type'] == "Bình luận bài viết" || data['type'] == "Thích bài viết"){
+    } else if (data['type'] == "Bình luận bài viết" || data['type'] == "Thích bình luận"){
       navigatorKey.currentState!.push(
         checkDeviceRoute(
           commentPage(
@@ -158,6 +182,17 @@ class NotificationService {
       await userCollection.doc(currentUser.uid).update({"token": token});
     } catch (e) {
       Logger.log("Error to save token: $e");
+      rethrow;
+    }
+  }
+  @pragma('vm:entry-point')
+  static Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async{
+    try{
+      Logger.log("Handling a background message ${message.messageId}");
+      Logger.log("Message data: ${message.data}");
+      handleNotification(message);
+    }catch(e){
+      Logger.log("Error to handle: $e");
       rethrow;
     }
   }
