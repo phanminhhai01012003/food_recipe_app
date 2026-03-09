@@ -122,31 +122,11 @@ class NotificationService {
     if (data['type'] == "Hệ thống"){
       navigatorKey.currentState!.push(checkDeviceRoute(notification));
     } else if (data['type'] == "Thích bài viết"){
-      navigatorKey.currentState!.push(
-        checkDeviceRoute(
-          foodDetailPage(
-            FoodModel.fromMap(data['mainData']),
-            List<Map<String, dynamic>>.from(data['mainData']['likedList'])
-          )
-        )
-      );
+      navigatorKey.currentState!.push(checkDeviceRoute(foodDetailPage(FoodModel.fromMap(data['mainData']))));
     } else if (data['type'] == "Bình luận bài viết" || data['type'] == "Thích bình luận"){
-      navigatorKey.currentState!.push(
-        checkDeviceRoute(
-          commentPage(
-            FoodModel.fromMap(data['mainData'])
-          )
-        )
-      );
+      navigatorKey.currentState!.push(checkDeviceRoute(commentPage(FoodModel.fromMap(data['mainData']))));
     } else {
-      navigatorKey.currentState!.push(
-        checkDeviceRoute(
-          replyPage(
-            CommentModel.fromMap(data['mainData']),
-            FoodModel.fromMap(data['extraData'])
-          )
-        )
-      );
+      navigatorKey.currentState!.push(checkDeviceRoute(replyPage(CommentModel.fromMap(data['mainData']),FoodModel.fromMap(data['extraData']))));
     }
   }
   static void showNotification({

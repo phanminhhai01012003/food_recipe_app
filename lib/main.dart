@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:food_recipe_app/common/constants/list_constants.dart';
 import 'package:food_recipe_app/firebase/firebase_options.dart';
 import 'package:food_recipe_app/my_app.dart';
 import 'package:food_recipe_app/provider/change_language_state.dart';
@@ -23,7 +24,7 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await NotificationService.initNotifications();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  SystemChrome.setPreferredOrientations(orientations);
   runApp(
     LocalizedApp(
       delegate,

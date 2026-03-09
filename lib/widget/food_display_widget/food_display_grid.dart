@@ -36,15 +36,7 @@ class _FoodDisplayGridState extends State<FoodDisplayGrid> {
           widget.food.views++;
         });
         await foodCollection.doc(widget.food.foodId).update({'views': widget.food.views});
-        Navigator.push(
-          context,
-          checkDeviceRoute(
-            foodDetailPage(
-              widget.food, 
-              List<Map<String, dynamic>>.from(widget.food.likes)
-            )
-          )
-        );
+        Navigator.push(context, checkDeviceRoute(foodDetailPage(widget.food)));
       },
       child: Container(
         width: 160,

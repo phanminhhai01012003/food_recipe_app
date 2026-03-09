@@ -7,6 +7,7 @@ class UserModel {
   late String email;
   late String phone;
   late String loginMethod;
+  late String? token;
   UserModel({
     required this.userId,
     required this.userName,
@@ -15,7 +16,8 @@ class UserModel {
     required this.email,
     required this.description,
     required this.phone,
-    required this.loginMethod
+    required this.loginMethod,
+    this.token
   });
   factory UserModel.fromMap(Map<String, dynamic> data){
     return UserModel(
@@ -27,6 +29,7 @@ class UserModel {
       email: data['email'] ?? "",
       phone: data['phone'] ?? "",
       loginMethod: data['loginMethod'] ?? "",
+      token: data['token'] ?? ""
     );
   }
   Map<String, dynamic> toMap() => {
@@ -37,7 +40,7 @@ class UserModel {
     "nickName": nickName,
     "email": email,
     "phone": phone,
-    "loginMethod": loginMethod
+    "loginMethod": loginMethod,
   };
   Map<String, dynamic> updateMap() => {
     "username": userName,
@@ -55,5 +58,6 @@ class UserModel {
     email = "";
     phone = "";
     loginMethod = "";
+    token = "";
   }
 }

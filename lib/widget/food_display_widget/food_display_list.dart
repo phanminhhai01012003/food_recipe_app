@@ -35,15 +35,7 @@ class _FoodDisplayListState extends State<FoodDisplayList> {
         });
         await foodCollection.doc(widget.food.foodId).update({'views': widget.food.views});
         context.read<HistoryState>().toggleAdd(recents);
-        Navigator.push(
-          context,
-          checkDeviceRoute(
-            foodDetailPage(
-              widget.food, 
-              List<Map<String, dynamic>>.from(widget.food.likes)
-            )
-          )
-        );
+        Navigator.push(context, checkDeviceRoute(foodDetailPage(widget.food)));
       },
       child: Container(
         width: double.infinity,

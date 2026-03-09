@@ -22,12 +22,7 @@ import 'package:share_plus/share_plus.dart';
 
 class FoodDetailPage extends StatefulWidget {
   final FoodModel food;
-  final List<Map<String, dynamic>> likedList;
-  const FoodDetailPage({
-    super.key, 
-    required this.food,
-    required this.likedList
-  });
+  const FoodDetailPage({super.key, required this.food});
 
   @override
   State<FoodDetailPage> createState() => _FoodDetailPageState();
@@ -40,7 +35,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    isLikedPost = widget.likedList.any((likes) => likes['id'] == currentUser.uid);
+    isLikedPost = widget.food.likes.any((likes) => likes['id'] == currentUser.uid);
     isSaved = context.read<SaveState>().foodProducts.any((e) => e.foods == widget.food);
   }
   void toggleLikePost(){
@@ -411,10 +406,10 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                             ),
                             GestureDetector(
                               onTap: () async{
-                                await showLikesListModal(context, fetchLikeList(), widget.likedList.length);
+                                await showLikesListModal(context, fetchLikeList(), widget.food.likes.length);
                               },
                               child: Text(
-                                widget.likedList.length.toString(),
+                                widget.food.likes.length.toString(),
                                 style: TextStyle(
                                   color: theme.colorScheme.secondary,
                                   fontSize: 16

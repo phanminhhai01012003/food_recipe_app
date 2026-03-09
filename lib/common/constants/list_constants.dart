@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 
 List<String> categoryList = [
@@ -64,4 +65,10 @@ List<Widget> pages = [
   categoriesPage, 
   foodStorageView, 
   settings
+];
+List<DeviceOrientation> orientations = [
+  DeviceOrientation.portraitUp,
+  DeviceOrientation.portraitDown,
+  DeviceOrientation.landscapeLeft,
+  DeviceOrientation.landscapeRight
 ];

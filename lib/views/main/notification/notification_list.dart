@@ -36,40 +36,16 @@ class _NotificationListState extends State<NotificationList> {
   void onClickNotification(String type){
     switch(type){
       case "Thích bài viết":
-        Navigator.push(
-          context, 
-          checkDeviceRoute(
-            foodDetailPage(
-              FoodModel.fromMap(widget.mainData ?? {}), 
-              List<Map<String, dynamic>>.from(widget.mainData!['likedList'])
-            )
-          )
-        );
+        Navigator.push(context, checkDeviceRoute(foodDetailPage(FoodModel.fromMap(widget.mainData ?? {}))));
         break;
       case "Bình luận bài viết" || "Thích bình luận":
-        Navigator.push(
-          context, 
-          checkDeviceRoute(
-            commentPage(
-              FoodModel.fromMap(widget.mainData ?? {})
-            )
-          )
-        );
+        Navigator.push(context, checkDeviceRoute(commentPage(FoodModel.fromMap(widget.mainData ?? {}))));
         break;
       case "Trả lời bình luận":
-        Navigator.push(
-          context, 
-          checkDeviceRoute(
-            replyPage(
-              CommentModel.fromMap(widget.mainData ?? {}), 
-              FoodModel.fromMap(widget.extraData ?? {})
-            )
-          )
-        );
+        Navigator.push(context, checkDeviceRoute(replyPage(CommentModel.fromMap(widget.mainData ?? {}), FoodModel.fromMap(widget.extraData ?? {}))));
         break;
-      default:
-        Navigator.push(
-          context, 
+      case "Hệ thống":
+        Navigator.push(context, 
           checkDeviceRoute(
             notificationInform(
               widget.title, 
