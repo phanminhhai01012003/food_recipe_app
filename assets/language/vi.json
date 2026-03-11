@@ -274,6 +274,7 @@
     "deleteUserReason": "Hãy cho chúng tôi biết lý do bạn muốn xóa tài khoản cá nhân của mình (Trong trường hợp bạn muốn gửi yêu cầu duyệt đến quản trị viên)",
     "deleteUserConfirm": "Xác nhận xóa",
     "deleteUserDesc": "Bạn có cảm thấy ổn khi xóa tài khoản chứ? Mọi dữ liệu sẽ mất hoàn toàn nếu bạn thực hiện",
+    "passwordConfirmBeforeDeleting": "Nhập mật khẩu của bạn để xác nhận xóa",
     "deleteOldAcc": "Tài khoản cũ của bạn đã xóa. Hãy tạo tài khoản mới để tiếp tục sử dụng",
     "createdBy": "Được tạo bởi",
     "version": "Phiên bản:",

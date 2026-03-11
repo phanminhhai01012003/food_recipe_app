@@ -8,7 +8,7 @@ import 'package:food_recipe_app/common/configure/convert.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_assets.dart';
-import 'package:food_recipe_app/common/style/app_colors.dart';
+import 'package:food_recipe_app/views/main/chatbot/chat_body.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_image_picker.dart';
 
 class AIChatbotPage extends StatefulWidget {
@@ -84,64 +84,12 @@ class _AIChatbotPageState extends State<AIChatbotPage> {
           ),
         ),
       ),
-      body: DashChat(
-        currentUser: _currentUser,
-        typingUsers: typingUsers,
-        messageOptions: MessageOptions(
-          currentUserContainerColor: AppColors.green,
-          timeFontSize: 12,
-          timeTextColor: AppColors.grey,
-          currentUserTextColor: AppColors.white,
-          containerColor: AppColors.grey,
-          textColor: AppColors.black
-        ),
-        inputOptions: InputOptions(
-          inputTextStyle: TextStyle(
-            color: theme.colorScheme.secondary,
-            fontSize: 14,
-            fontWeight: FontWeight.w700
-          ),
-          leading: [
-            IconButton(
-              onPressed: () => chatMediaResponse(),
-              icon: Icon(
-                Icons.image,
-                color: theme.colorScheme.secondary,
-              ),
-            )
-          ],
-          cursorStyle: CursorStyle(
-            color: AppColors.blue,
-            width: 2.5
-          ),
-          sendButtonBuilder: (send) {
-            return IconButton(
-              onPressed: send,
-              icon: Icon(
-                Icons.send,
-                color: theme.colorScheme.secondary,
-              ),
-            );
-          },
-          inputDecoration: InputDecoration(
-            hintText: "messageInput".tr(),
-            hintStyle: TextStyle(
-              color: theme.colorScheme.secondary,
-              fontSize: 14,
-              fontWeight: FontWeight.w700
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: theme.colorScheme.secondary)
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: AppColors.green)
-            )
-          )
-        ), 
-        onSend: (m) => chatResponse(m),
-        messages: _messages,
+      body: ChatBody(
+        chatCurrentUser: _currentUser,
+        typingUsers: typingUsers, 
+        messages: _messages, 
+        onPressed: () => chatMediaResponse(), 
+        onSend: (m) => chatResponse(m)
       ),
     );
   }

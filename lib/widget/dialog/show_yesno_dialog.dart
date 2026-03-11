@@ -6,7 +6,7 @@ import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 
 class ShowYesnoDialog {
-  static void showMaterialDialog(
+  static void materialDialog(
     BuildContext context, {
     required String title,
     required String content,
@@ -62,7 +62,7 @@ class ShowYesnoDialog {
       )
     );
   }
-  static void showCupertinoDialog(
+  static void cupertinoDialog(
     BuildContext context, {
     required String title,
     required String content,
@@ -70,7 +70,7 @@ class ShowYesnoDialog {
     required VoidCallback onCancelTap
   }){
     final theme = Theme.of(context);
-    showDialog(
+    showCupertinoDialog(
       context: context, 
       builder: (context) => CupertinoAlertDialog(
         title: Text(title,
@@ -109,7 +109,7 @@ class ShowYesnoDialog {
             ),
           )
         ],
-      )
+      ),
     );
   }
   static void checkDeviceDialog(
@@ -119,13 +119,13 @@ class ShowYesnoDialog {
     required VoidCallback onAcceptTap,
     required VoidCallback onCancelTap 
   }) {
-    Platform.isAndroid ? showMaterialDialog(
+    Platform.isAndroid ? materialDialog(
       context, 
       title: title, 
       content: content, 
       onAcceptTap: onAcceptTap, 
       onCancelTap: onCancelTap
-    ) : showCupertinoDialog(
+    ) : cupertinoDialog(
       context, 
       title: title, 
       content: content, 

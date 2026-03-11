@@ -274,6 +274,7 @@
     "deleteUserReason": "Please let us know the reason you want to delete your personal account (In case you want to submit a request for approval to the administrator)",
     "deleteUserConfirm": "Confirm deletion",
     "deleteUserDesc": "Are you sure you want to delete your account? All data will be permanently lost if you proceed",
+	"passwordConfirmBeforeDeleting": "Please enter your password to confirm deletion",
 	"deleteOldAcc": "Your old account has been deleted. Please create a new account to continue using the app",
 	"createdBy": "Created by",
     "version": "Version:",

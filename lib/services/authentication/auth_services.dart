@@ -77,9 +77,7 @@ class AuthServices extends AuthRepo{
   Future<UserCredential?> loginWithFacebook(BuildContext context) async{
     // TODO: implement loginWithFacebook
     try {
-      final result = await FacebookAuth.instance.login(
-        permissions: ['email', 'public_profile'],
-      );
+      final result = await FacebookAuth.instance.login(permissions: ['email', 'public_profile']);
       if (result.status == LoginStatus.success) {
         final credential = FacebookAuthProvider.credential(result.accessToken!.tokenString);
         return await auth.signInWithCredential(credential);
@@ -139,7 +137,13 @@ class AuthServices extends AuthRepo{
   Future<void> deleteAccount(BuildContext context) async{
     // TODO: implement deleteUser
     try {
-      await auth.currentUser!.delete();
+      User? user = auth.currentUser;
+      if (user != null) {
+        user.delete();
+      } else {
+        Message.showScaffoldMessage(context, "unknown".tr(), AppColors.red);
+        return;
+      }
     } catch (e) {
       Message.showScaffoldMessage(context, "longError".tr(), AppColors.red);
       Logger.log(e);

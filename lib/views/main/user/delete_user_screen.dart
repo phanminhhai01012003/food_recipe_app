@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/constants/list_constants.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/logger.dart';
-import 'package:food_recipe_app/common/configure/routes.dart';
+import 'package:food_recipe_app/views/main/delete_account/confirm_password_dialog.dart';
+import 'package:food_recipe_app/views/main/delete_account/del_acc_using_third_party.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:food_recipe_app/widget/other/radio_selection.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 class DeleteUserScreen extends StatefulWidget {
-  const DeleteUserScreen({super.key});
+  final String loginMethod;
+  const DeleteUserScreen({super.key, required this.loginMethod});
 
   @override
   State<DeleteUserScreen> createState() => _DeleteUserScreenState();
@@ -20,22 +21,24 @@ class DeleteUserScreen extends StatefulWidget {
 
 class _DeleteUserScreenState extends State<DeleteUserScreen> {
   String? selectedOption;
+  bool isObscured = true;
   final _otherReport = TextEditingController();
   void onDeleteAccount() async{
-    context.loaderOverlay.show();
-    if (selectedOption == "reportOther".tr()) {
-      if (_otherReport.text.isEmpty) {
-        Message.showToast("infoEmpty".tr());
-        context.loaderOverlay.hide();
-        return;
-      }
+    if (widget.loginMethod == "Google"){
+      await delAccUsingGoogle(context);
+    } else if (widget.loginMethod == "Facebook") {
+      await delAccUsingFacebook(context);
+    } else {
+      confirmPasswordDialog(
+        context, 
+        isObscured, 
+        (){
+          setState(() {
+            isObscured = !isObscured;
+          });
+        }
+      );
     }
-    await authServices.deleteAccount(context);
-    await userServices.deleteUser(context, currentUser.uid);
-    await followServices.removeFollowUsers(context, currentUser.uid);
-    context.loaderOverlay.hide();
-    Message.showScaffoldMessage(context, "deleteOldAcc".tr(), AppColors.green);
-    Navigator.pushAndRemoveUntil(context, checkDeviceRoute(loginPage), (route) => false);
   }
   @override
   Widget build(BuildContext context) {

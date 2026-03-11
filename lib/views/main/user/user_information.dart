@@ -159,7 +159,7 @@ class _UserInformationState extends State<UserInformation> {
                 ),
                 onPressed: () async{
                   if (widget.user.userId == currentUser.uid) {
-                    Navigator.push(context, checkDeviceRoute(deleteUser));
+                    Navigator.push(context, checkDeviceRoute(deleteUser(widget.user.loginMethod)));
                   } else {
                     await showReportModal(context, "user".tr(), widget.user.userName, null);
                   }
