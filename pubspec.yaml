@@ -63,6 +63,8 @@ dependencies:
   pdfx: ^2.9.0
   smooth_page_indicator: ^1.2.1
   firebase_messaging: ^16.0.0
+  video_player: ^2.9.0
+  chewie: ^1.8.5
   flutter_local_notifications: ^18.0.0
   firebase_storage: ^13.0.0
   flutter_rating_bar: ^4.0.1

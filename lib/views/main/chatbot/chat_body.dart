@@ -25,6 +25,7 @@ class ChatBody extends StatelessWidget {
       currentUser: chatCurrentUser, 
       onSend: onSend, 
       messages: messages,
+      typingUsers: typingUsers,
       messageOptions: MessageOptions(
         currentUserContainerColor: AppColors.green,
         timeFontSize: 12,

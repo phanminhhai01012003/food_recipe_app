@@ -71,7 +71,47 @@ class ShowImagePicker extends StatelessWidget {
                 Navigator.pop(context, imagePicked);
               }
             },
-            child: Text("gallery".tr(),
+            child: Text("imgGallery".tr(),
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w800
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33)),
+              backgroundColor: AppColors.yellow,
+              foregroundColor: AppColors.white
+            ),
+            onPressed: () async{
+              final videoPicked = await imageServices.pickVideo(context, true);
+              if (videoPicked != null) {
+                Navigator.pop(context, videoPicked);
+              }
+            },
+            child: Text("video".tr(),
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w800
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33)),
+              backgroundColor: AppColors.yellow,
+              foregroundColor: AppColors.white
+            ),
+            onPressed: () async{
+              final videoPicked = await imageServices.pickVideo(context, false);
+              if (videoPicked != null) {
+                Navigator.pop(context, videoPicked);
+              }
+            },
+            child: Text("videoGallery".tr(),
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w800

@@ -24,8 +24,8 @@ class AddFoodScreen extends StatefulWidget {
 }
 
 class _AddFoodScreenState extends State<AddFoodScreen> {
-  File? image;
-  String imageURL = "";
+  File? file;
+  String fileUrl = "";
   String? selectCategory;
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
@@ -58,12 +58,12 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
   void onAddFood() async{
     context.loaderOverlay.show();
     invalidInformation();
-    if (image != null) {
-      imageURL = await imageServices.uploadImage(context, image!, foodFolder);
+    if (file != null) {
+      fileUrl = await imageServices.uploadImage(context, file!, foodFolder);
     }
     FoodModel food = FoodModel(
       foodId: generateRandomString(25), 
-      image: image == null && imageURL.isEmpty ? foodDefaultImage : imageURL, 
+      image: file == null && fileUrl.isEmpty ? foodDefaultImage : fileUrl, 
       title: titleController.text, 
       description: descriptionController.text, 
       userId: currentUser.uid, 
@@ -140,13 +140,13 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: image == null && imageURL.isEmpty
+              child: file == null && fileUrl.isEmpty
               ? InkWell(
                 onTap: () async{
                   final imagePicked = await showImagePickerModal(context);
                   if (imagePicked != null){
                     setState(() {
-                      image = imagePicked;
+                      file = imagePicked;
                     });
                   }
                 },
@@ -166,17 +166,17 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     ),
                 ),
               )
-              : image != null ? InkWell(
+              : file != null ? InkWell(
                 onTap: () async{
                   final imagePicked = await showImagePickerModal(context);
                   if (imagePicked != null){
                     setState(() {
-                      image = imagePicked;
+                      file = imagePicked;
                     });
                   }
                 },
                 child: Image.file(
-                  image!,
+                  file!,
                   height: 200,
                   width: double.infinity,
                   fit: BoxFit.cover,
@@ -187,12 +187,12 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                   final imagePicked = await showImagePickerModal(context);
                   if (imagePicked != null){
                     setState(() {
-                      image = imagePicked;
+                      file = imagePicked;
                     });
                   }
                 },
                 child: Image.network(
-                  imageURL,
+                  fileUrl,
                   height: 200,
                   width: double.infinity,
                   fit: BoxFit.cover,

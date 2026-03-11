@@ -25,8 +25,8 @@ class EditFoodScreen extends StatefulWidget {
 }
 
 class _EditFoodScreenState extends State<EditFoodScreen> {
-  File? image;
-  String imageURL = "";
+  File? file;
+  String fileUrl = "";
   String? selectCategory;
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
@@ -38,7 +38,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    imageURL = widget.food.image;
+    fileUrl = widget.food.image;
     titleController.text = widget.food.title;
     descriptionController.text = widget.food.description;
     selectCategory = widget.food.tag;
@@ -72,12 +72,12 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
   void onUpdateFood() async{
     context.loaderOverlay.show();
     invalidInformation();
-    if (image != null) {
-      imageURL = await imageServices.uploadImage(context, image!, foodFolder);
+    if (file != null) {
+      fileUrl = await imageServices.uploadImage(context, file!, foodFolder);
     }
     FoodModel food = FoodModel(
       foodId: widget.food.foodId, 
-      image: image == null && imageURL.isEmpty ? foodDefaultImage : imageURL, 
+      image: file == null && fileUrl.isEmpty ? foodDefaultImage : fileUrl, 
       title: titleController.text, 
       description: descriptionController.text, 
       userId: widget.food.userId, 
@@ -153,10 +153,10 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            image != null ? InkWell(
+            file != null ? InkWell(
               onTap: () => showImagePickerModal(context),
               child: Image.file(
-                image!,
+                file!,
                 errorBuilder: (context, error, stackTrace) => Image.network(foodDefaultImage),
                 height: 200,
                 width: double.infinity,
@@ -165,7 +165,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
             ) : InkWell(
               onTap: () => showImagePickerModal(context),
               child: Image.network(
-                imageURL,
+                fileUrl,
                 errorBuilder: (context, error, stackTrace) => Image.network(foodDefaultImage),
                 height: 200,
                 width: double.infinity,

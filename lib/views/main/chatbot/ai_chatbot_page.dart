@@ -139,6 +139,11 @@ class _AIChatbotPageState extends State<AIChatbotPage> {
             url: file.path, 
             fileName: "", 
             type: MediaType.image
+          ),
+          ChatMedia(
+            url: file.path, 
+            fileName: "", 
+            type: MediaType.video
           )
         ]
       );

@@ -29,6 +29,21 @@ class ImageService extends ImageRepo{
   }
 
   @override
+  Future<File?> pickVideo(BuildContext context, bool isVideo) async{
+    // TODO: implement pickVideo
+    try {
+      final picker = ImagePicker();
+      final imagePicker = await picker.pickVideo(source: isVideo ? ImageSource.camera : ImageSource.gallery);
+      if (imagePicker == null) return null;
+      return File(imagePicker.path);
+    } catch (e){
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
+      Logger.log(e);
+      rethrow;
+    }
+  }
+
+  @override
   Future<String> uploadImage(BuildContext context, File? image, String folder) async{
     // TODO: implement uploadImage
     try {
@@ -62,7 +77,15 @@ class ImageService extends ImageRepo{
       final tempDir = await getApplicationDocumentsDirectory();
       final fileName = Uri.parse(imageUrl).pathSegments.last;
       final path = "${tempDir.path}/$fileName";
-      await dio.download(imageUrl, path).then((value) => Logger.log({
+      await dio.download(
+        imageUrl, 
+        path,
+        onReceiveProgress: (count, total) {
+          if (total != -1){
+            Message.showToast("${(count / total * 100).toStringAsFixed(0)}%");
+          }
+        },
+      ).then((value) => Logger.log({
         "headers": value.headers,
         "data": value.data,
         "extra": value.extra,
@@ -70,6 +93,48 @@ class ImageService extends ImageRepo{
         "statusMessage": value.statusMessage
       }));
       await Gal.putImage(path);
+      Message.showScaffoldMessage(context, "downloadImageSuccess".tr(), AppColors.green);
+      Navigator.pop(context);
+    } catch (e) {
+      Message.showScaffoldMessage(context, "downloadImageFail".tr(), AppColors.red);
+      Logger.log("Error to download image: $e");
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> downloadVideo(BuildContext context, String videoUrl) async{
+    // TODO: implement downloadVideo
+    try {
+      final dio = Dio();
+      final hasAccess = await Gal.hasAccess();
+      if(!hasAccess){
+        await Gal.requestAccess().then((value){
+          if (!value) {
+            Message.showToast("storagePermissionDenied".tr());
+            return;
+          }
+        });
+      }
+      final tempDir = await getApplicationDocumentsDirectory();
+      final fileName = Uri.parse(videoUrl).pathSegments.last;
+      final path = "${tempDir.path}/$fileName";
+      await dio.download(
+        videoUrl, 
+        path,
+        onReceiveProgress: (count, total) {
+          if (total != -1){
+            Message.showToast("${(count / total * 100).toStringAsFixed(0)}%");
+          }
+        },
+      ).then((value) => Logger.log({
+        "headers": value.headers,
+        "data": value.data,
+        "extra": value.extra,
+        "statusCode": value.statusCode,
+        "statusMessage": value.statusMessage
+      }));
+      await Gal.putVideo(path);
       Message.showScaffoldMessage(context, "downloadImageSuccess".tr(), AppColors.green);
       Navigator.pop(context);
     } catch (e) {

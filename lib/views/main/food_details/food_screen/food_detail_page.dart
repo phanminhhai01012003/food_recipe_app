@@ -1,10 +1,12 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chewie/chewie.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
+import 'package:food_recipe_app/common/constants/list_constants.dart';
 import 'package:food_recipe_app/common/extension/datetime_extension.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
@@ -19,6 +21,7 @@ import 'package:food_recipe_app/views/main/sub_features/full_screen_image/show_i
 import 'package:food_recipe_app/widget/bottom_sheet/show_report_modal.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:video_player/video_player.dart';
 
 class FoodDetailPage extends StatefulWidget {
   final FoodModel food;
@@ -31,12 +34,15 @@ class FoodDetailPage extends StatefulWidget {
 class _FoodDetailPageState extends State<FoodDetailPage> {
   bool isLikedPost = false;
   bool isSaved = false;
+  late VideoPlayerController _playerController;
+  ChewieController? _chewieController;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     isLikedPost = widget.food.likes.any((likes) => likes['id'] == currentUser.uid);
     isSaved = context.read<SaveState>().foodProducts.any((e) => e.foods == widget.food);
+    initVideo();
   }
   void toggleLikePost(){
     setState(() {
@@ -60,6 +66,17 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
         }])
       });
     }
+  }
+  Future<void> initVideo() async{
+    _playerController = VideoPlayerController.networkUrl(Uri.parse(widget.food.image));
+    await _playerController.initialize();
+    _chewieController = ChewieController(
+      videoPlayerController: _playerController,
+      deviceOrientationsAfterFullScreen: orientations,
+      deviceOrientationsOnEnterFullScreen: orientations,
+      aspectRatio: _playerController.value.aspectRatio
+    );
+    setState(() {});
   }
   Future<List<Map<String, dynamic>>> fetchLikeList() async{
     final doc = await foodCollection.doc(widget.food.foodId).get();
@@ -93,6 +110,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
       isSaved: true, 
       foods: widget.food
     );
+    bool isImage = widget.food.image.contains("jpg") || widget.food.image.contains("jpeg") || widget.food.image.contains("png");
     final theme = Theme.of(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -105,14 +123,25 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                   onTap: () async => await showImageChoiceBottomSheet(context, widget.food.image),
                   child: Hero(
                     tag: widget.food.image,
-                    child: Container(
-                      height: MediaQuery.of(context).size.height * 0.5,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(widget.food.image),
-                          fit: BoxFit.cover
-                        )
-                      ),
+                    child: Builder(
+                      builder: (context) {
+                        if (isImage) {
+                          return Container(
+                            height: MediaQuery.of(context).size.height * 0.5,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: NetworkImage(widget.food.image),
+                                fit: BoxFit.cover
+                              )
+                            ),
+                          );
+                        } else {
+                          if (_chewieController != null && _chewieController!.videoPlayerController.value.isInitialized) {
+                            return Chewie(controller: _chewieController!);
+                          }                          
+                          return CircularProgressIndicator(color: AppColors.yellow);
+                        }
+                      },
                     ),
                   ),
                 ),

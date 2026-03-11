@@ -21,8 +21,8 @@ class EditUser extends StatefulWidget {
 
 class _EditUserState extends State<EditUser> {
   final formKey = GlobalKey<FormState>();
-  File? image;
-  String imageURL = "";
+  File? file;
+  String fileUrl = "";
   final nameController = TextEditingController();
   final descriptionController = TextEditingController();
   final phoneController = TextEditingController();
@@ -31,7 +31,7 @@ class _EditUserState extends State<EditUser> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    imageURL = widget.user.avatar;
+    fileUrl = widget.user.avatar;
     nameController.text = widget.user.userName;
     descriptionController.text = widget.user.description;
     phoneController.text = widget.user.phone == "unknown" ? "" : widget.user.phone;
@@ -47,17 +47,17 @@ class _EditUserState extends State<EditUser> {
         return;
       }
       formKey.currentState!.save();
-      if (image != null) {
-        imageURL = await imageServices.uploadImage(
+      if (file != null) {
+        fileUrl = await imageServices.uploadImage(
           context,
-          image!,
+          file!,
           avatarFolder,
         );
       }
       UserModel user = UserModel(
         userId: widget.user.userId,
         userName: nameController.text,
-        avatar: image == null && imageURL.isEmpty ? userDefaultImage : imageURL,
+        avatar: file == null && fileUrl.isEmpty ? userDefaultImage : fileUrl,
         email: widget.user.email,
         description: descriptionController.text,
         nickName: nickNameController.text,
@@ -66,7 +66,7 @@ class _EditUserState extends State<EditUser> {
       );
       await currentUser.updateProfile(
         displayName: nameController.text,
-        photoURL: image == null && imageURL.isEmpty ? userDefaultImage : imageURL,
+        photoURL: file == null && fileUrl.isEmpty ? userDefaultImage : fileUrl,
       );
       await userServices.updateUser(context, user).then((_) {
         context.loaderOverlay.hide();
@@ -127,20 +127,20 @@ class _EditUserState extends State<EditUser> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
-                child: image != null
+                child: file != null
                         ? InkWell(
                           onTap: () async {
                             final imagePicked = await showImagePickerModal(context);
                             if (imagePicked != null) {
                               setState(() {
-                                image = imagePicked;
+                                file = imagePicked;
                               });
                             }
                           },
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(100),
                             child: Image.file(
-                              image!,
+                              file!,
                               errorBuilder: (context, error, stackTrace) => Image.network(userDefaultImage),
                               height: 200,
                               width: 200,
@@ -153,14 +153,14 @@ class _EditUserState extends State<EditUser> {
                             final imagePicked = await showImagePickerModal(context);
                             if (imagePicked != null) {
                               setState(() {
-                                image = imagePicked;
+                                file = imagePicked;
                               });
                             }
                           },
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(100),
                             child: Image.network(
-                              imageURL,
+                              fileUrl,
                               errorBuilder: (context, error, stackTrace) => Image.network(userDefaultImage),
                               height: 200,
                               width: 200,
