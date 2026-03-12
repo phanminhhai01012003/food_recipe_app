@@ -128,7 +128,7 @@ class _AIChatbotPageState extends State<AIChatbotPage> {
     });
   }
   Future chatMediaResponse() async {
-    final file = await showImagePickerModal(context);
+    final file = await showImagePickerModal(context, true);
     if (file != null) {
       ChatMessage message = ChatMessage(
         user: _currentUser, 

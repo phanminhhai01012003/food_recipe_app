@@ -143,7 +143,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
               child: file == null && fileUrl.isEmpty
               ? InkWell(
                 onTap: () async{
-                  final imagePicked = await showImagePickerModal(context);
+                  final imagePicked = await showImagePickerModal(context, true);
                   if (imagePicked != null){
                     setState(() {
                       file = imagePicked;
@@ -168,7 +168,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
               )
               : file != null ? InkWell(
                 onTap: () async{
-                  final imagePicked = await showImagePickerModal(context);
+                  final imagePicked = await showImagePickerModal(context, true);
                   if (imagePicked != null){
                     setState(() {
                       file = imagePicked;
@@ -184,7 +184,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 ),
               ) : InkWell(
                 onTap: () async{
-                  final imagePicked = await showImagePickerModal(context);
+                  final imagePicked = await showImagePickerModal(context, true);
                   if (imagePicked != null){
                     setState(() {
                       file = imagePicked;

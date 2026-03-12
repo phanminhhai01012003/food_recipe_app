@@ -5,17 +5,18 @@ import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 
-Future<File?> showImagePickerModal(BuildContext context) async{
+Future<File?> showImagePickerModal(BuildContext context, bool canShowFullImage) async{
   return await showModalBottomSheet(
     context: context,
     // ignore: deprecated_member_use
     barrierColor: AppColors.black.withOpacity(0.5),
-    builder: (context) => ShowImagePicker()
+    builder: (context) => ShowImagePicker(canShowFullImage: canShowFullImage)
   );
 }
 
 class ShowImagePicker extends StatelessWidget {
-  const ShowImagePicker({super.key});
+  final bool canShowFullImage;
+  const ShowImagePicker({super.key, required this.canShowFullImage});
 
   @override
   Widget build(BuildContext context) {
@@ -79,42 +80,48 @@ class ShowImagePicker extends StatelessWidget {
             ),
           ),
           SizedBox(height: 10),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33)),
-              backgroundColor: AppColors.yellow,
-              foregroundColor: AppColors.white
-            ),
-            onPressed: () async{
-              final videoPicked = await imageServices.pickVideo(context, true);
-              if (videoPicked != null) {
-                Navigator.pop(context, videoPicked);
-              }
-            },
-            child: Text("video".tr(),
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w800
+          Visibility(
+            visible: canShowFullImage,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33)),
+                backgroundColor: AppColors.yellow,
+                foregroundColor: AppColors.white
+              ),
+              onPressed: () async{
+                final videoPicked = await imageServices.pickVideo(context, true);
+                if (videoPicked != null) {
+                  Navigator.pop(context, videoPicked);
+                }
+              },
+              child: Text("video".tr(),
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w800
+                ),
               ),
             ),
           ),
           SizedBox(height: 10),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33)),
-              backgroundColor: AppColors.yellow,
-              foregroundColor: AppColors.white
-            ),
-            onPressed: () async{
-              final videoPicked = await imageServices.pickVideo(context, false);
-              if (videoPicked != null) {
-                Navigator.pop(context, videoPicked);
-              }
-            },
-            child: Text("videoGallery".tr(),
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w800
+          Visibility(
+            visible: canShowFullImage,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33)),
+                backgroundColor: AppColors.yellow,
+                foregroundColor: AppColors.white
+              ),
+              onPressed: () async{
+                final videoPicked = await imageServices.pickVideo(context, false);
+                if (videoPicked != null) {
+                  Navigator.pop(context, videoPicked);
+                }
+              },
+              child: Text("videoGallery".tr(),
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w800
+                ),
               ),
             ),
           )

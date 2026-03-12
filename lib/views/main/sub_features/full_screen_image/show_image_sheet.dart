@@ -4,22 +4,23 @@ import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 
-Future<void> showImageChoiceBottomSheet(BuildContext context, String imageUrl) async{
+Future<void> showImageChoiceBottomSheet(BuildContext context, String fileUrl) async{
   return await showModalBottomSheet(
     context: context, 
     // ignore: deprecated_member_use
     barrierColor: AppColors.black.withOpacity(0.25),
-    builder: (context) => ShowImageSheet(imageUrl: imageUrl)
+    builder: (context) => ShowImageSheet(fileUrl: fileUrl)
   );
 }
 
 class ShowImageSheet extends StatelessWidget {
-  final String imageUrl;
-  const ShowImageSheet({super.key, required this.imageUrl});
+  final String fileUrl;
+  const ShowImageSheet({super.key, required this.fileUrl});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    bool isImage = fileUrl.contains("jpg") || fileUrl.contains("jpeg") || fileUrl.contains("png");
     return Container(
       padding: EdgeInsets.only(bottom: 15, left: 20, right: 20),
       decoration: BoxDecoration(
@@ -46,7 +47,8 @@ class ShowImageSheet extends StatelessWidget {
               foregroundColor: AppColors.white
             ),
             onPressed: () async{
-              Navigator.push(context, checkDeviceRoute(fullScreenImage(imageUrl)));
+              if (!isImage) return;
+              Navigator.push(context, checkDeviceRoute(fullScreenImage(fileUrl)));
               await Future.delayed(Duration(seconds: 2), () => Navigator.pop(context));
             },
             child: Text("viewImage".tr(),
@@ -63,7 +65,12 @@ class ShowImageSheet extends StatelessWidget {
               backgroundColor: AppColors.yellow,
               foregroundColor: AppColors.white
             ),
-            onPressed: () => imageServices.downloadImage(context, imageUrl),
+            onPressed: () {
+              if (isImage) {
+                imageServices.downloadImage(context, fileUrl);
+              }
+              imageServices.downloadVideo(context, fileUrl);
+            },
             child: Text("downloadImage".tr(),
               style: TextStyle(
                 fontSize: 14,

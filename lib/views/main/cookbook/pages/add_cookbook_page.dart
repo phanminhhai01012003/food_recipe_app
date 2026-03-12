@@ -27,8 +27,8 @@ class AddCookbookPage extends StatefulWidget {
 }
 
 class _AddCookbookPageState extends State<AddCookbookPage> {
-  File? image;
-  String imageURL = "";
+  File? file;
+  String fileUrl = "";
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   HashSet<FoodModel> choices = HashSet();
@@ -62,12 +62,12 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
   void add() async{
     context.loaderOverlay.show();
     invalidInformation();
-    if (image != null) {
-      imageURL = await imageServices.uploadImage(context, image!, cookbookFolder);
+    if (file != null) {
+      fileUrl = await imageServices.uploadImage(context, file!, cookbookFolder);
     }
     CookbookModel cookbook = CookbookModel(
       cookbookId: generateRandomString(22), 
-      cookbookImage: image == null && imageURL.isEmpty ? foodDefaultImage : imageURL, 
+      cookbookImage: file == null && fileUrl.isEmpty ? foodDefaultImage : fileUrl, 
       cookbookName: _titleController.text, 
       description: _descriptionController.text, 
       userId: currentUser.uid, 
@@ -130,13 +130,13 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: image == null && imageURL.isEmpty
+              child: file == null && fileUrl.isEmpty
               ? InkWell(
                 onTap: () async{
-                  final imagePicked = await showImagePickerModal(context);
+                  final imagePicked = await showImagePickerModal(context, false);
                   if (imagePicked != null){
                     setState(() {
-                      image = imagePicked;
+                      file = imagePicked;
                     });
                   }
                 },
@@ -156,17 +156,17 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
                     ),
                 ),
               )
-              : image != null ? InkWell(
+              : file != null ? InkWell(
                 onTap: () async{
-                  final imagePicked = await showImagePickerModal(context);
+                  final imagePicked = await showImagePickerModal(context, false);
                   if (imagePicked != null){
                     setState(() {
-                      image = imagePicked;
+                      file = imagePicked;
                     });
                   }
                 },
                 child: ClipRRect(
-                  child: Image.file(image!,
+                  child: Image.file(file!,
                     height: 200,
                     width: double.infinity,
                     fit: BoxFit.cover,
@@ -174,15 +174,15 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
                 ),
               ) : InkWell(
                 onTap: () async{
-                  final imagePicked = await showImagePickerModal(context);
+                  final imagePicked = await showImagePickerModal(context, false);
                   if (imagePicked != null){
                     setState(() {
-                      image = imagePicked;
+                      file = imagePicked;
                     });
                   }
                 },
                 child: ClipRRect(
-                  child: Image.network(imageURL,
+                  child: Image.network(fileUrl,
                     height: 200,
                     width: double.infinity,
                     fit: BoxFit.cover,

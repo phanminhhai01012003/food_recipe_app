@@ -103,6 +103,13 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
     );
   }
   @override
+  void dispose() {
+    // TODO: implement dispose
+    _playerController.dispose();
+    _chewieController!.dispose();
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
     SaveFoodModel save = SaveFoodModel(
       saveId: generateRandomString(24), 

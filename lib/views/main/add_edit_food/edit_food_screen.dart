@@ -154,7 +154,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             file != null ? InkWell(
-              onTap: () => showImagePickerModal(context),
+              onTap: () => showImagePickerModal(context, true),
               child: Image.file(
                 file!,
                 errorBuilder: (context, error, stackTrace) => Image.network(foodDefaultImage),
@@ -163,7 +163,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                 fit: BoxFit.cover,
               ),
             ) : InkWell(
-              onTap: () => showImagePickerModal(context),
+              onTap: () => showImagePickerModal(context, true),
               child: Image.network(
                 fileUrl,
                 errorBuilder: (context, error, stackTrace) => Image.network(foodDefaultImage),

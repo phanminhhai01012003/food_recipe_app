@@ -27,8 +27,8 @@ class EditCookbookPage extends StatefulWidget {
 }
 
 class _EditCookbookPageState extends State<EditCookbookPage> {
-  File? image;
-  String imageURL = "";
+  File? file;
+  String fileUrl = "";
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   HashSet<FoodModel> choices = HashSet();
@@ -55,12 +55,12 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
   void update() async{
     context.loaderOverlay.show();
     invalidInformation();
-    if (image != null) {
-      imageURL = await imageServices.uploadImage(context, image!, cookbookFolder);
+    if (file != null) {
+      fileUrl = await imageServices.uploadImage(context, file!, cookbookFolder);
     }
     CookbookModel cookbook = CookbookModel(
       cookbookId: widget.cookbook.cookbookId, 
-      cookbookImage: image == null && imageURL.isEmpty ? foodDesignImage : imageURL, 
+      cookbookImage: file == null && fileUrl.isEmpty ? foodDesignImage : fileUrl, 
       cookbookName: _titleController.text, 
       description: _descriptionController.text, 
       userId: widget.cookbook.userId, 
@@ -77,7 +77,7 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    imageURL = widget.cookbook.cookbookImage;
+    fileUrl = widget.cookbook.cookbookImage;
     _titleController.text = widget.cookbook.cookbookName;
     _descriptionController.text = widget.cookbook.description;
     choices = HashSet<FoodModel>.from(widget.cookbook.foodsList);
@@ -132,19 +132,29 @@ class _EditCookbookPageState extends State<EditCookbookPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: image != null ? InkWell(
-                onTap: () => showImagePickerModal(context),
+              child: file != null ? InkWell(
+                onTap: () async{
+                  final filePicked = await showImagePickerModal(context, false);
+                  if (filePicked != null) {
+                    file = filePicked;
+                  } 
+                },
                 child: ClipRRect(
-                  child: Image.file(image!,
+                  child: Image.file(file!,
                     height: 200,
                     width: double.infinity,
                     fit: BoxFit.cover,
                   ),
                 ),
               ) : InkWell(
-                onTap: () => showImagePickerModal(context),
+                onTap: () async{
+                  final filePicked = await showImagePickerModal(context, false);
+                  if (filePicked != null) {
+                    file = filePicked;
+                  } 
+                },
                 child: ClipRRect(
-                  child: Image.network(imageURL,
+                  child: Image.network(fileUrl,
                     height: 200,
                     width: double.infinity,
                     fit: BoxFit.cover,
