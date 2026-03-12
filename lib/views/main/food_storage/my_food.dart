@@ -25,11 +25,13 @@ class MyFood extends StatefulWidget {
 class _MyFoodState extends State<MyFood> {
   void onDelete(String id) async{
     context.loaderOverlay.show();
-    await foodServices.deleteFood(context, id).then((_){
-      context.loaderOverlay.hide();
-      Message.showScaffoldMessage(context, "deleteSuccess".tr(), AppColors.green);
-      Navigator.pop(context);
-    });
+    await commentServices.deleteAllComment(context, id).then((_) async{
+      await foodServices.deleteFood(context, id).then((_){
+        context.loaderOverlay.hide();
+        Message.showScaffoldMessage(context, "deleteSuccess".tr(), AppColors.green);
+        Navigator.pop(context);
+      });
+    }); 
   }
   @override
   Widget build(BuildContext context) {

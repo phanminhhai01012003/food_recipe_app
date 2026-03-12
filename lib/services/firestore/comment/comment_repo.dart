@@ -9,4 +9,5 @@ abstract class CommentRepo {
   Future<void> updateReplyComment(BuildContext context, CommentModel comment, String foodId);
   Future<void> deleteReplyComment(BuildContext context, CommentModel comment, String foodId);
   Stream<List<CommentModel>> getComment(BuildContext context, String foodId);
+  Future<void> deleteAllComment(BuildContext context, String foodId);
 }

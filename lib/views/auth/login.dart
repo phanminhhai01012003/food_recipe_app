@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
@@ -41,6 +43,41 @@ class _LoginState extends State<Login> {
         }
       });
     }
+  }
+  void handleWithApple() async{
+    context.loaderOverlay.show();
+    await authServices.loginWithApple(context).then((value) async{
+      if (value != null){
+        UserModel user = UserModel(
+          userId: value.user!.uid, 
+          userName: value.user!.displayName ?? "", 
+          avatar: value.user!.photoURL ?? "", 
+          email: value.user!.email ?? "", 
+          description: "",
+          nickName: "",
+          phone: value.user!.phoneNumber ?? "",
+          loginMethod: "Apple"
+        );
+        await userServices.addUserWithThirdParty(context, user);
+        FollowModel follow = FollowModel(
+          followId: user.userId, 
+          followingUser: [], 
+          followedUser: []
+        );
+        await followServices.addFollowUsers(context, follow, user.userId);
+        context.loaderOverlay.hide();
+        Message.showScaffoldMessage(context, "signInSuccess".tr(), AppColors.green);
+        Navigator.pushAndRemoveUntil(
+          context, 
+          checkDeviceRoute(mainPage), 
+          (route) => false
+        );
+      } else {
+        Message.showScaffoldMessage(context, "appleSignInFail".tr(), AppColors.red);
+        context.loaderOverlay.hide();
+        return;
+      }
+    });
   }
   void handleWithGoogle() async{
     context.loaderOverlay.show();
@@ -342,6 +379,20 @@ class _LoginState extends State<Login> {
                             height: 50,
                             width: 50,
                           ),
+                        ),
+                      ),
+                      Visibility(
+                        visible: Platform.isIOS,
+                        child: GestureDetector(
+                          onTap: handleWithApple,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+                            child: Image.asset(fbImage,
+                              fit: BoxFit.cover,
+                              height: 50,
+                              width: 50,
+                            ),
+                          )
                         ),
                       )
                     ],

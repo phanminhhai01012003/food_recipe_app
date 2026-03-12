@@ -48,6 +48,7 @@
     "signOutDesc": "Bạn có chắc chắn muốn đăng xuất khỏi hệ thống không?",
     "facebookSignInFail": "Lỗi đăng nhập Facebook",
     "googleSignInFail": "Lỗi đăng nhập Google",
+    "appleSignInFail": "Lỗi đăng nhập Apple",
     "shortError": "Đã xảy ra lỗi",
     "notifyError": "Lỗi đẩy thông báo",
     "longError": "Đã xảy ra lỗi trong quá trình thực hiện",

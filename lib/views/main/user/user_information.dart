@@ -1,11 +1,9 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
-import 'package:food_recipe_app/common/constants/list_constants.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
@@ -15,7 +13,6 @@ import 'package:food_recipe_app/views/main/user/get_follow_data.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_report_modal.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
-import 'package:video_player/video_player.dart';
 
 class UserInformation extends StatefulWidget {
   final UserModel user;
@@ -26,25 +23,6 @@ class UserInformation extends StatefulWidget {
 }
 
 class _UserInformationState extends State<UserInformation> {
-  late VideoPlayerController _playerController;
-  ChewieController? _chewieController;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    initVideo();
-  }
-  Future<void> initVideo() async{
-    _playerController = VideoPlayerController.networkUrl(Uri.parse(widget.user.avatar));
-    await _playerController.initialize();
-    _chewieController = ChewieController(
-      videoPlayerController: _playerController,
-      deviceOrientationsAfterFullScreen: orientations,
-      deviceOrientationsOnEnterFullScreen: orientations,
-      aspectRatio: _playerController.value.aspectRatio
-    );
-    setState(() {});
-  }
   void onLogOut() async{
     if (widget.user.loginMethod == "Google") {
       await authServices.logOutFromGoogle(context).then((_){
@@ -78,7 +56,6 @@ class _UserInformationState extends State<UserInformation> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    bool isImage = widget.user.avatar.contains("jpg") || widget.user.avatar.contains("jpeg") || widget.user.avatar.contains("png");
     return Scaffold(
       backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
@@ -111,30 +88,19 @@ class _UserInformationState extends State<UserInformation> {
               onTap: () async => await showImageChoiceBottomSheet(context, widget.user.avatar),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(50),
-                child: Builder(
-                  builder: (context) {
-                    if (isImage) {
-                      return CachedNetworkImage(
-                        imageUrl: widget.user.avatar,
-                        progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator(value: progress.progress)),
-                        width: 100,
-                        height: 100,
-                        fit: BoxFit.cover,
-                        errorWidget: (context, url, error) => Center(
-                          child: Icon(
-                            Icons.error,
-                            size: 30,
-                            color: AppColors.grey,
-                          ),
-                        ),
-                      );
-                    } else {
-                      if (_chewieController != null && _chewieController!.videoPlayerController.value.isInitialized) {
-                        return Chewie(controller: _chewieController!);
-                      }
-                      return CircularProgressIndicator(color: AppColors.yellow);
-                    }
-                  },
+                child: CachedNetworkImage(
+                  imageUrl: widget.user.avatar,
+                  progressIndicatorBuilder: (context, url, progress) => Center(child: CircularProgressIndicator(value: progress.progress)),
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
+                  errorWidget: (context, url, error) => Center(
+                    child: Icon(
+                      Icons.error,
+                      size: 30,
+                      color: AppColors.grey,
+                    ),
+                  ),
                 ),
               ),
             ),
