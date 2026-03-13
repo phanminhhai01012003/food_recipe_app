@@ -28,6 +28,8 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
       await delAccUsingGoogle(context);
     } else if (widget.loginMethod == "Facebook") {
       await delAccUsingFacebook(context);
+    } else if (widget.loginMethod == "Apple") {
+      await delAccUsingApple(context);
     } else {
       confirmPasswordDialog(
         context, 

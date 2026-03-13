@@ -68,3 +68,22 @@ Future<void> delAccUsingFacebook(BuildContext context) async{
     return;
   }
 }
+
+Future<void> delAccUsingApple(BuildContext context) async{
+  context.loaderOverlay.show();
+  try {
+    await Future.wait([
+      followServices.removeFollowUsers(context, currentUser.uid),
+      userServices.deleteUser(context, currentUser.uid),
+      authServices.deleteAccount(context)
+    ]);
+    context.loaderOverlay.hide();
+    Message.showScaffoldMessage(context, "deleteOldAcc".tr(), AppColors.green);
+    Navigator.pushAndRemoveUntil(context, checkDeviceRoute(loginPage), (route) => false);
+  } catch (e) {
+    Message.showScaffoldMessage(context, "longError".tr(), AppColors.red);
+    Logger.log(e);
+    context.loaderOverlay.hide();
+    return;
+  }
+}

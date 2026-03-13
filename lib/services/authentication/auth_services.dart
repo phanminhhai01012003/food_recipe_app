@@ -74,6 +74,21 @@ class AuthServices extends AuthRepo{
   }
 
   @override
+  Future<UserCredential?> loginWithApple(BuildContext context) async{
+    // TODO: implement loginWithApple
+    try {
+      AppleAuthProvider appleAuthProvider = AppleAuthProvider();
+      appleAuthProvider.addScope('email');
+      appleAuthProvider.addScope('name');
+      return auth.signInWithProvider(appleAuthProvider);
+    } catch (e) {
+      Message.showScaffoldMessage(context, "appleSignInFail".tr(), AppColors.red);
+      Logger.log(e);
+      return null;
+    }
+  }
+
+  @override
   Future<UserCredential?> loginWithFacebook(BuildContext context) async{
     // TODO: implement loginWithFacebook
     try {

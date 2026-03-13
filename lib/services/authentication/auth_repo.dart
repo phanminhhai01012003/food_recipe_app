@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 abstract class AuthRepo {
   Future<User?> loginWithAccount(BuildContext context, String email, String password);
   Future<User?> registerWithAccount(BuildContext context, String avatar, String name, String email, String password);
+  Future<UserCredential?> loginWithApple(BuildContext context);
   Future<UserCredential?> loginWithGoogle(BuildContext context);
   Future<UserCredential?> loginWithFacebook(BuildContext context);
   Future<void> logOutFromAccount(BuildContext context);

@@ -48,6 +48,7 @@
 	"signOutDesc": "Are you sure you want to sign out of the system?",
 	"facebookSignInFail": "Facebook login error",
 	"googleSignInFail": "Google login error",
+	"appleSignInFail": "Apple login error",
 	"shortError": "An error occurred",
 	"notifyError": "Notification error",
 	"longError": "An error occurred during the process",

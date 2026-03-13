@@ -118,5 +118,22 @@ class CommentServices extends CommentRepo{
       rethrow;
     }
   }
+
+  @override
+  Future<void> deleteAllComment(BuildContext context, String foodId) async{
+    // TODO: implement deleteAllComment
+    try {
+      final document = await commentCollection(foodId).get();
+      final batch = FirebaseFirestore.instance.batch();
+      for(var data in document.docs){
+        batch.delete(data.reference);
+      }
+      await batch.commit();
+    } catch (e) {
+      Message.showScaffoldMessage(context, "shortError".tr(), AppColors.red);
+      Logger.log(e);
+      rethrow;
+    }
+  }
   
 }
