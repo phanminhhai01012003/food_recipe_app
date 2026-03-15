@@ -21,7 +21,9 @@ class LoadData extends StatelessWidget {
       ) : GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 0.8
+          childAspectRatio: 0.8,
+          mainAxisSpacing: 8,
+          crossAxisSpacing: 8
         ),
         itemCount: 10,
         shrinkWrap: true,

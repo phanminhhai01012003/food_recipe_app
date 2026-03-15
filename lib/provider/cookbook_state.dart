@@ -92,4 +92,15 @@ class CookbookState extends ChangeNotifier{
       rethrow;
     }
   }
+
+  Future<List<CookbookModel>> getDataFromId(String id) async{
+    try {
+      final snapshot = await bookCollection.where("userId", isEqualTo: id).get();
+      return snapshot.docs.map((doc) => CookbookModel.fromMap(doc.data())).toList();
+    } catch (e) {
+      Message.showToast("shortError".tr());
+      Logger.log(e);
+      rethrow;
+    }
+  }
 }

@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/data/dummy_data.dart';
-import 'package:food_recipe_app/model/mock_case.dart';
+import 'package:food_recipe_app/data/mock_case.dart';
 import 'package:food_recipe_app/widget/dialog/mock_picker.dart';
 import 'package:http/http.dart';
 

@@ -298,5 +298,6 @@
     "followedUser": "Followers",
 	"listOfFollowingUsers": "List of users you are following",
     "listOfFollowedUsers": "List of users following you",
-	"likeList": "List of users who liked this post"
+	"likeList": "List of users who liked this post",
+	"foodRecipe": "Food recipes"
 }

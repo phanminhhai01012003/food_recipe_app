@@ -16,6 +16,7 @@ class InternetCheck extends StatefulWidget {
 class _InternetCheckState extends State<InternetCheck> {
   bool checking = true;
   final _auth = FirebaseAuth.instance.currentUser;
+  Connectivity connectivity = Connectivity();
   @override
   void initState() {
     // TODO: implement initState
@@ -27,7 +28,7 @@ class _InternetCheckState extends State<InternetCheck> {
     setState(() {
       checking = true;
     });
-    final connectivityResult = await Connectivity().checkConnectivity();
+    final connectivityResult = await connectivity.checkConnectivity();
     if (connectivityResult == ConnectivityResult.none) {
       showNoInternetDialog(context, 
         onPressed: () {

@@ -5,7 +5,7 @@ import 'package:food_recipe_app/model/subscription_model.dart';
 import 'package:food_recipe_app/views/main/subscription/benefit.dart';
 import 'package:food_recipe_app/views/main/subscription/subscription_widget.dart';
 import 'package:food_recipe_app/widget/load_data/load_data.dart';
-import 'package:food_recipe_app/widget/other/no_data.dart';
+import 'package:food_recipe_app/widget/load_data/no_data.dart';
 
 class SubscriptionScreen extends StatefulWidget {
   const SubscriptionScreen({super.key});

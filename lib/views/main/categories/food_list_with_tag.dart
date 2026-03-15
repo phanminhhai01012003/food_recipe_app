@@ -61,7 +61,9 @@ class _FoodListWithTagState extends State<FoodListWithTag> {
                 clipBehavior: Clip.hardEdge,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 0.8
+                  childAspectRatio: 0.8,
+                  mainAxisSpacing: 8,
+                  crossAxisSpacing: 8
                 ),
                 itemCount: foodList.length, 
                 itemBuilder: (context, index) => FoodDisplayGrid(food: foodList[index])

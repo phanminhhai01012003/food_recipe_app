@@ -8,7 +8,7 @@ import 'package:food_recipe_app/model/save_food_model.dart';
 import 'package:food_recipe_app/provider/save_state.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
-import 'package:food_recipe_app/widget/other/no_data.dart';
+import 'package:food_recipe_app/widget/load_data/no_data.dart';
 import 'package:food_recipe_app/widget/other/slider.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';

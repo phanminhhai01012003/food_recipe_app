@@ -6,9 +6,13 @@ import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
+import 'package:food_recipe_app/model/cookbook_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/model/user_model.dart';
+import 'package:food_recipe_app/provider/cookbook_state.dart';
+import 'package:food_recipe_app/views/main/cookbook/widget/cookbook_widget.dart';
 import 'package:food_recipe_app/widget/food_display_widget/food_display_grid.dart';
+import 'package:provider/provider.dart';
 
 class PersonalScreen extends StatefulWidget {
   final String id;
@@ -18,7 +22,18 @@ class PersonalScreen extends StatefulWidget {
   State<PersonalScreen> createState() => _PersonalScreenState();
 }
 
-class _PersonalScreenState extends State<PersonalScreen> {
+class _PersonalScreenState extends State<PersonalScreen> with TickerProviderStateMixin{
+  late TabController _tabController;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _tabController = TabController(
+      initialIndex: 0,
+      length: 2, 
+      vsync: this
+    );
+  }
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -67,32 +82,87 @@ class _PersonalScreenState extends State<PersonalScreen> {
                 }
               },
             ),
-            SizedBox(height: 20),
+            TabBar(
+              controller: _tabController,
+              unselectedLabelColor: theme.colorScheme.secondary,
+              labelColor: AppColors.green,
+              dividerColor: theme.colorScheme.secondary,
+              indicatorColor: AppColors.green,
+              padding: EdgeInsets.all(12),
+              tabs: [
+                Text(
+                  "foodRecipe".tr(),
+                  style: TextStyle(fontSize: 14),
+                ),
+                Text(
+                  "cookbook".tr(),
+                  style: TextStyle(fontSize: 14),
+                )
+              ]
+            ),
             Expanded(
-              child: StreamBuilder(
-                stream: foodServices.getFoodByUser(context, widget.id), 
-                builder: (context, snapshot){
-                  if (!snapshot.hasData || snapshot.hasError) {
-                    return Center(child: Icon(Icons.error, size: 100, color: AppColors.red));
-                  } else if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator(color: AppColors.yellow));
-                  } else {
-                    List<FoodModel> foodData = snapshot.data!;
-                    return GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 0.8
-                      ),
-                      scrollDirection: Axis.vertical,
-                      itemCount: foodData.length,
-                      shrinkWrap: true,
-                      hitTestBehavior: HitTestBehavior.translucent,
-                      clipBehavior: Clip.hardEdge,
-                      physics: ClampingScrollPhysics(),
-                      itemBuilder: (context, index) => FoodDisplayGrid(food: foodData[index])
-                    );
-                  }
-                }
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  StreamBuilder(
+                    stream: foodServices.getFoodByUser(context, widget.id), 
+                    builder: (context, snapshot){
+                      if (!snapshot.hasData || snapshot.hasError) {
+                        return Center(child: Icon(Icons.error, size: 100, color: AppColors.red));
+                      } else if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(child: CircularProgressIndicator(color: AppColors.yellow));
+                      } else {
+                        List<FoodModel> foodData = snapshot.data!;
+                        return GridView.builder(
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 0.8,
+                            mainAxisSpacing: 8,
+                            crossAxisSpacing: 8
+                          ),
+                          scrollDirection: Axis.vertical,
+                          itemCount: foodData.length,
+                          shrinkWrap: true,
+                          hitTestBehavior: HitTestBehavior.translucent,
+                          clipBehavior: Clip.hardEdge,
+                          physics: ClampingScrollPhysics(),
+                          itemBuilder: (context, index) => FoodDisplayGrid(food: foodData[index])
+                        );
+                      }
+                    }
+                  ),
+                  Consumer<CookbookState>(
+                    builder: (context, value, child) {
+                      return FutureBuilder(
+                        future: value.getDataFromId(widget.id), 
+                        builder: (context, snapshot){
+                          if (!snapshot.hasData || snapshot.hasError) {
+                            return Center(child: Icon(Icons.error, size: 100, color: AppColors.red));
+                          } else if (snapshot.connectionState == ConnectionState.waiting) {
+                            return Center(child: CircularProgressIndicator(color: AppColors.yellow));
+                          } else {
+                            List<CookbookModel> cookbookData = snapshot.data!;
+                            return GridView.builder(
+                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                childAspectRatio: 0.8,
+                                crossAxisSpacing: 3,
+                                mainAxisSpacing: 3
+                              ),
+                              scrollDirection: Axis.vertical,
+                              itemCount: cookbookData.length,
+                              shrinkWrap: true,
+                              hitTestBehavior: HitTestBehavior.translucent,
+                              clipBehavior: Clip.hardEdge,
+                              physics: ClampingScrollPhysics(),
+                              itemBuilder: (context, index) => CookbookWidget(book: cookbookData[index])
+                            );
+                          }
+                        }
+                      );
+                    },
+                  )
+                ] 
               ),
             )
           ],

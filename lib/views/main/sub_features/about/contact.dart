@@ -51,7 +51,7 @@ class Contact extends StatelessWidget {
               fontWeight: FontWeight.w900
             ),
           ),
-          SizedBox(height: 50),
+          SizedBox(height: 20),
           Text(
             "${"createdBy".tr()} Phan Minh Hai",
             style: TextStyle(

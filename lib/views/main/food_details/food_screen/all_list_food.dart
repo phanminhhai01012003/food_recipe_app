@@ -60,7 +60,9 @@ class _AllListFoodState extends State<AllListFood> {
                 physics: ClampingScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 0.8
+                  childAspectRatio: 0.8,
+                  crossAxisSpacing: 3,
+                  mainAxisSpacing: 3
                 ),
                 itemCount: foodList.length, 
                 itemBuilder: (context, index) => FoodDisplayGrid(food: foodList[index])

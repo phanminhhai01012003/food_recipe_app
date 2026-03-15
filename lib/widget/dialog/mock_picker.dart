@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
-import 'package:food_recipe_app/model/mock_case.dart';
+import 'package:food_recipe_app/data/mock_case.dart';
 
 class MockPicker extends StatelessWidget {
   final List<MockCase> mock;

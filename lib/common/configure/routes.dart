@@ -45,7 +45,7 @@ import 'package:food_recipe_app/views/main/sub_features/app_rating/rate_screen.d
 import 'package:food_recipe_app/views/main/sub_features/app_services/instruction.dart';
 import 'package:food_recipe_app/views/main/sub_features/app_services/rules.dart';
 import 'package:food_recipe_app/views/main/sub_features/app_services/services_page.dart';
-import 'package:food_recipe_app/views/main/sub_features/full_screen_image/full_screen_widget.dart';
+import 'package:food_recipe_app/widget/full_screen_image/full_screen_widget.dart';
 import 'package:food_recipe_app/views/main/sub_features/theme/change_theme_screen.dart';
 import 'package:food_recipe_app/views/main/subscription/subscription_screen.dart';
 import 'package:food_recipe_app/views/main/user/delete_user_screen.dart';

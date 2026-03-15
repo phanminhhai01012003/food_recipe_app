@@ -17,7 +17,7 @@ import 'package:food_recipe_app/model/save_food_model.dart';
 import 'package:food_recipe_app/provider/save_state.dart';
 import 'package:food_recipe_app/services/notification/notification_service.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/resources/like_list_modal.dart';
-import 'package:food_recipe_app/views/main/sub_features/full_screen_image/show_image_sheet.dart';
+import 'package:food_recipe_app/widget/full_screen_image/show_image_sheet.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_report_modal.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
