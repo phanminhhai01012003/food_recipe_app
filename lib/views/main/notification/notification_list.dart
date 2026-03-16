@@ -44,7 +44,7 @@ class _NotificationListState extends State<NotificationList> {
       case "Trả lời bình luận":
         Navigator.push(context, checkDeviceRoute(replyPage(CommentModel.fromMap(widget.mainData ?? {}), FoodModel.fromMap(widget.extraData ?? {}))));
         break;
-      case "Hệ thống":
+      case "Hệ thống" || "Cảnh cáo vi phạm":
         Navigator.push(context, 
           checkDeviceRoute(
             notificationInform(

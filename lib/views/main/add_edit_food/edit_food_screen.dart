@@ -15,6 +15,7 @@ import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_image_picker.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:video_player/video_player.dart';
 
 class EditFoodScreen extends StatefulWidget {
   final FoodModel food;
@@ -25,6 +26,7 @@ class EditFoodScreen extends StatefulWidget {
 }
 
 class _EditFoodScreenState extends State<EditFoodScreen> {
+  VideoPlayerController? _playerController;
   File? file;
   String fileUrl = "";
   String? selectCategory;
@@ -107,10 +109,13 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
     dietController.dispose();
     ingredientController.forEach((controller) => controller.dispose());
     stepController.forEach((controller) => controller.dispose());
+    _playerController!.dispose();
   }
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    bool isImageFile = file.toString().contains("png") || file.toString().contains("jpg") || file.toString().contains("jpeg");
+    bool isImageUrl = fileUrl.contains("png") || fileUrl.contains("jpg") || fileUrl.contains("jpeg");
     return Scaffold(
       backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
@@ -154,22 +159,66 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             file != null ? InkWell(
-              onTap: () => showImagePickerModal(context, true),
-              child: Image.file(
+              onTap: () async{
+                final filePicked = await showImagePickerModal(context, true);
+                if (filePicked != null) {
+                  bool isImagePicked = filePicked.toString().contains("jpg") || filePicked.toString().contains("jpeg") || filePicked.toString().contains("png");
+                  if (isImagePicked) {
+                    setState(() {
+                      file = filePicked;
+                      _playerController = null;
+                    });
+                  } else {
+                    _playerController = VideoPlayerController.file(filePicked)..initialize().then((_){
+                      setState(() {
+                        file = filePicked;
+                        _playerController!.play();
+                        _playerController!.setLooping(true);
+                      });
+                    });
+                  }
+                }
+              },
+              child: isImageFile ? Image.file(
                 file!,
                 errorBuilder: (context, error, stackTrace) => Image.network(foodDefaultImage),
                 height: 200,
                 width: double.infinity,
                 fit: BoxFit.cover,
+              ) : AspectRatio(
+                aspectRatio: _playerController!.value.aspectRatio,
+                child: VideoPlayer(_playerController!),
               ),
             ) : InkWell(
-              onTap: () => showImagePickerModal(context, true),
-              child: Image.network(
+              onTap: () async{
+                final filePicked = await showImagePickerModal(context, true);
+                if (filePicked != null) {
+                  bool isImagePicked = filePicked.toString().contains("jpg") || filePicked.toString().contains("jpeg") || filePicked.toString().contains("png");
+                  if (isImagePicked) {
+                    setState(() {
+                      file = filePicked;
+                      _playerController = null;
+                    });
+                  } else {
+                    _playerController = VideoPlayerController.file(filePicked)..initialize().then((_){
+                      setState(() {
+                        file = filePicked;
+                        _playerController!.play();
+                        _playerController!.setLooping(true);
+                      });
+                    });
+                  }
+                }
+              },
+              child: isImageUrl ? Image.network(
                 fileUrl,
                 errorBuilder: (context, error, stackTrace) => Image.network(foodDefaultImage),
                 height: 200,
                 width: double.infinity,
                 fit: BoxFit.cover,
+              ) : AspectRatio(
+                aspectRatio: _playerController!.value.aspectRatio,
+                child: VideoPlayer(_playerController!),
               ),
             ),
             SizedBox(height: 20),

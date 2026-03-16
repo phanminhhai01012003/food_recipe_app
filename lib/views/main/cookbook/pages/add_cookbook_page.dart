@@ -133,35 +133,35 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
               child: file == null && fileUrl.isEmpty
               ? InkWell(
                 onTap: () async{
-                  final imagePicked = await showImagePickerModal(context, false);
-                  if (imagePicked != null){
+                  final filePicked = await showImagePickerModal(context, false);
+                  if (filePicked != null){
                     setState(() {
-                      file = imagePicked;
+                      file = filePicked;
                     });
                   }
                 },
                 child: Container(
-                    height: 200,
-                    width: 200,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      border: Border.all(color: Colors.black)
+                  height: 200,
+                  width: 200,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    border: Border.all(color: Colors.black)
+                  ),
+                  child: Center(
+                    child: Icon(
+                      Icons.add_a_photo,
+                      size: 50,
+                      color: theme.colorScheme.secondary,
                     ),
-                    child: Center(
-                      child: Icon(
-                        Icons.add_a_photo,
-                        size: 50,
-                        color: theme.colorScheme.secondary,
-                      ),
-                    ),
+                  ),
                 ),
               )
               : file != null ? InkWell(
                 onTap: () async{
-                  final imagePicked = await showImagePickerModal(context, false);
-                  if (imagePicked != null){
+                  final filePicked = await showImagePickerModal(context, false);
+                  if (filePicked != null){
                     setState(() {
-                      file = imagePicked;
+                      file = filePicked;
                     });
                   }
                 },
@@ -174,10 +174,10 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
                 ),
               ) : InkWell(
                 onTap: () async{
-                  final imagePicked = await showImagePickerModal(context, false);
-                  if (imagePicked != null){
+                  final filePicked = await showImagePickerModal(context, false);
+                  if (filePicked != null){
                     setState(() {
-                      file = imagePicked;
+                      file = filePicked;
                     });
                   }
                 },

@@ -118,7 +118,7 @@ class _AIChatbotPageState extends State<AIChatbotPage> {
           _messages.insert(0, ChatMessage(
             user: _aiChat, 
             createdAt: DateTime.now(),
-            text: e.message!.content
+            text: e.message!.content,
           ));
         });
       }
@@ -138,12 +138,14 @@ class _AIChatbotPageState extends State<AIChatbotPage> {
           ChatMedia(
             url: file.path, 
             fileName: "", 
-            type: MediaType.image
+            type: MediaType.image,
+            uploadedDate: DateTime.now()
           ),
           ChatMedia(
             url: file.path, 
             fileName: "", 
-            type: MediaType.video
+            type: MediaType.video,
+            uploadedDate: DateTime.now()
           )
         ]
       );

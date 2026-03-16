@@ -4,8 +4,7 @@ import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/model/notification_model.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 
-class NotificationData {
-  
+class NotificationData {  
   Future<void> pushNotification(NotificationModel model, bool isSpecificUser) async{
     try {
       await notificationCollection
@@ -23,17 +22,6 @@ class NotificationData {
         'isRead': true,
         'readAt': DateTime.now()
       });
-    } catch (e) {
-      Message.showToast("shortError".tr());
-      Logger.log(e);
-      rethrow;
-    }
-  }
-  Future<List<NotificationModel>> getAllNotifications(){
-    try {
-      return notificationCollection
-        .get()
-        .then((ss) => ss.docs.map((e) => NotificationModel.fromMap(e.data())).toList());
     } catch (e) {
       Message.showToast("shortError".tr());
       Logger.log(e);

@@ -108,7 +108,7 @@ class NotificationService {
       body: body,
       androidImageUrl: androidImage,
       iosImageUrl: iosImage, 
-      type: "Hệ thống", 
+      type: body.contains("vi phạm") ? "Cảnh cáo vi phạm" : "Hệ thống", 
       isRead: false, 
       createdAt: DateTime.now()
     );

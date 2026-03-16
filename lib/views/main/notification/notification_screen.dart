@@ -23,21 +23,19 @@ class _NotificationScreenState extends State<NotificationScreen> {
   int _btnIndex = 0;
   Widget renderImageWidget(String type, String fromUserAvatar){
     switch(type) {
-      case "Thích bài viết":
-      case "Thích bình luận":
+      case "Thích bài viết" || "Thích bình luận":
         return NotificationImageWidget(
           icon: Icons.thumb_up_rounded, 
           fromUserAvatar: fromUserAvatar, 
           color: AppColors.blue
         );
-      case "Bình luận bài viết":
-      case "Trả lời bình luận":
+      case "Bình luận bài viết" || "Trả lời bình luận":
         return NotificationImageWidget(
           icon: Icons.comment_sharp, 
           fromUserAvatar: fromUserAvatar, 
           color: AppColors.green
         );
-      case "Hệ thống":
+      case "Hệ thống" || "Cảnh cáo vi phạm":
         return Container(
           width: 35,
           height: 35,
@@ -56,13 +54,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
     }
   }
   Future<List<NotificationModel>> getNotifications() {
-    if (_btnIndex == 0){
-      return notificationData.getAllNotifications();
-    } else if (_btnIndex == 1){
+    if (_btnIndex == 0) {
       return notificationData.getSystemNotifications("Hệ thống");
-    } else {
-      return notificationData.getSpecificUserNotifications(currentUser.displayName ?? "");
     }
+    return notificationData.getSpecificUserNotifications(currentUser.displayName ?? "");
   }
   @override
   Widget build(BuildContext context) {
@@ -112,7 +107,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     ),
                     child: Center(
                       child: Text(
-                        "all".tr(),
+                        "fromSystem".tr(),
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -137,36 +132,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     ),
                     child: Center(
                       child: Text(
-                        "fromSystem".tr(),
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: _btnIndex == 1 ? AppColors.white : theme.colorScheme.secondary,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: (){
-                    setState(() {
-                      _btnIndex = 2;
-                    });
-                  },
-                  child: Container(
-                    height: 50,
-                    width: MediaQuery.of(context).size.width * 0.25,
-                    decoration: BoxDecoration(
-                      color: _btnIndex == 2 ? AppColors.green : theme.colorScheme.primary,
-                      borderRadius: BorderRadius.circular(18),
-                    ),
-                    child: Center(
-                      child: Text(
                         "interaction".tr(),
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
-                          color: _btnIndex == 2 ? AppColors.white : theme.colorScheme.secondary,
+                          color: _btnIndex == 1 ? AppColors.white : theme.colorScheme.secondary,
                         ),
                       ),
                     ),

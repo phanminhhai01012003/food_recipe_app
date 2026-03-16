@@ -130,10 +130,10 @@ class _EditUserState extends State<EditUser> {
                 child: file != null
                         ? InkWell(
                           onTap: () async {
-                            final imagePicked = await showImagePickerModal(context, false);
-                            if (imagePicked != null) {
+                            final filePicked = await showImagePickerModal(context, false);
+                            if (filePicked != null) {
                               setState(() {
-                                file = imagePicked;
+                                file = filePicked;
                               });
                             }
                           },
@@ -150,10 +150,10 @@ class _EditUserState extends State<EditUser> {
                         )
                         : InkWell(
                           onTap: () async {
-                            final imagePicked = await showImagePickerModal(context, false);
-                            if (imagePicked != null) {
+                            final filePicked = await showImagePickerModal(context, false);
+                            if (filePicked != null) {
                               setState(() {
-                                file = imagePicked;
+                                file = filePicked;
                               });
                             }
                           },
