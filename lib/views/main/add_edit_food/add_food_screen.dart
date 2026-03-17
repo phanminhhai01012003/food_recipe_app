@@ -270,7 +270,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(color: AppColors.green)
                 ),
-                border: OutlineInputBorder(
+                enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(color: theme.colorScheme.secondary)
                 ),
@@ -303,7 +303,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(color: AppColors.green)
                 ),
-                border: OutlineInputBorder(
+                enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(color: theme.colorScheme.secondary)
                 ),
@@ -395,7 +395,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(color: AppColors.green)
                           ),
-                          border: OutlineInputBorder(
+                          enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(color: theme.colorScheme.secondary)
                           ),
@@ -493,7 +493,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(color: AppColors.green)
                     ),
-                    border: OutlineInputBorder(
+                    enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(color: theme.colorScheme.secondary)
                     ),
@@ -586,7 +586,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(color: AppColors.green)
                     ),
-                    border: OutlineInputBorder(
+                    enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(color: theme.colorScheme.secondary)
                     ),

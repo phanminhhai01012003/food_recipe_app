@@ -62,7 +62,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   fontWeight: FontWeight.w700
                 ),
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(
+                  enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide(color: AppColors.black)
                   ),

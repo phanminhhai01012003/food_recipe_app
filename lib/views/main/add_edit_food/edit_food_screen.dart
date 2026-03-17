@@ -244,7 +244,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(color: AppColors.green)
                 ),
-                border: OutlineInputBorder(
+                enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(color: theme.colorScheme.secondary)
                 ),
@@ -277,7 +277,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(color: AppColors.green)
                 ),
-                border: OutlineInputBorder(
+                enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(color: theme.colorScheme.secondary)
                 ),
@@ -369,7 +369,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(color: AppColors.green)
                           ),
-                          border: OutlineInputBorder(
+                          enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(color: theme.colorScheme.secondary)
                           ),
@@ -467,7 +467,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(color: AppColors.green)
                     ),
-                    border: OutlineInputBorder(
+                    enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(color: theme.colorScheme.secondary)
                     ),
@@ -560,7 +560,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(color: AppColors.green)
                     ),
-                    border: OutlineInputBorder(
+                    enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(color: theme.colorScheme.secondary)
                     ),

@@ -182,7 +182,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(
                         color: selectedOption == reports.last.tr()
-                          ? AppColors.black 
+                          ? theme.colorScheme.secondary
                           : AppColors.grey
                       )
                     ),

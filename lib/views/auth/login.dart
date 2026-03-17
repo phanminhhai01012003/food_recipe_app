@@ -190,7 +190,7 @@ class _LoginState extends State<Login> {
                     keyboardType: TextInputType.emailAddress,
                     cursorColor: AppColors.blue,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                         borderSide: BorderSide(color: AppColors.black)
                       ),
@@ -241,7 +241,7 @@ class _LoginState extends State<Login> {
                     ),
                     cursorColor: AppColors.blue,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                         borderSide: BorderSide(color: AppColors.black)
                       ),

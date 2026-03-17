@@ -213,7 +213,7 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(color: AppColors.green)
                 ),
-                border: OutlineInputBorder(
+                enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(color: theme.colorScheme.secondary)
                 ),
@@ -245,7 +245,7 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(color: AppColors.green)
                 ),
-                border: OutlineInputBorder(
+                enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(color: theme.colorScheme.secondary)
                 ),

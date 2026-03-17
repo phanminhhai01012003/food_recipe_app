@@ -299,5 +299,13 @@
     "listOfFollowingUsers": "Danh sách người dùng bạn theo dõi",
     "listOfFollowedUsers": "Danh sách người dùng theo dõi bạn",
     "likeList": "Danh sách người thích bài viết này",
-    "foodRecipe": "Công thức nấu ăn"
+    "foodRecipe": "Công thức nấu ăn",
+    "stats": "Thống kê tổng hợp",
+    "localStats": "Thống kê sơ bộ",
+    "foodAmount": "Số lượng món ăn đã đăng tải",
+    "saveAmount": "Số lượng món ăn đã lưu",
+    "recentAmount": "Số lượng món ăn đã xem",
+    "commentCount": "Số lượt bình luận",
+    "numberOfLikes": "Số lượt thích",
+    "foodViewCount": "Số lượt xem"
 }

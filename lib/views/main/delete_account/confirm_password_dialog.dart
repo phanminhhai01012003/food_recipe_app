@@ -158,7 +158,7 @@ void confirmIOS(BuildContext context, bool isObscured, VoidCallback onClick){
             ),
             cursorColor: AppColors.blue,
             decoration: InputDecoration(
-              border: OutlineInputBorder(
+              enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide(color: theme.colorScheme.secondary)
               ),

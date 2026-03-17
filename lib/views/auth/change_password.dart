@@ -77,7 +77,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                       obscureText: isObscured1,
                       cursorColor: AppColors.blue,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(
+                        enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(color: theme.colorScheme.secondary)
                         ),
@@ -147,7 +147,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                         fontWeight: FontWeight.w700
                       ),
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(
+                        enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(color: theme.colorScheme.secondary)
                         ),
@@ -212,7 +212,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                       obscureText: isObscured3,
                       cursorColor: AppColors.blue,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(
+                        enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(color: theme.colorScheme.secondary)
                         ),

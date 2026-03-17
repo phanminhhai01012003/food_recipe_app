@@ -82,7 +82,7 @@ class _SearchPageState extends State<SearchPage> {
                 controller: _searchController,
                 cursorColor: AppColors.blue,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(
+                  enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(33),
                     borderSide: BorderSide(color: theme.colorScheme.secondary)
                   ),
