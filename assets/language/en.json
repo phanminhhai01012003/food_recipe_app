@@ -298,6 +298,16 @@
     "followedUser": "Followers",
 	"listOfFollowingUsers": "List of users you are following",
     "listOfFollowedUsers": "List of users following you",
+	"followedAmount": "Number of user follow you",
+    "followingAmount": "Number of user you follow",
 	"likeList": "List of users who liked this post",
-	"foodRecipe": "Food recipes"
+	"foodRecipe": "Food recipes",
+	"stats": "General statistics",
+	"localStats": "Preliminary statistics",
+	"foodAmount": "Number of posted foods",
+    "saveAmount": "Number of saved foods",
+    "recentAmount": "Number of viewed foods",
+    "commentCount": "Number of comments",
+    "numberOfLikes": "Number of likes",
+    "foodViewCount": "Number of views"
 }

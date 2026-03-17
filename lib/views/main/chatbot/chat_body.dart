@@ -69,7 +69,7 @@ class ChatBody extends StatelessWidget {
             fontSize: 14,
             fontWeight: FontWeight.w700
           ),
-          border: OutlineInputBorder(
+          enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide(color: theme.colorScheme.secondary)
           ),

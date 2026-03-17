@@ -119,7 +119,7 @@ class _RegisterState extends State<Register> {
                       ),
                       cursorColor: AppColors.blue,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(
+                        enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(color: AppColors.black)
                         ),
@@ -165,7 +165,7 @@ class _RegisterState extends State<Register> {
                       ),
                       cursorColor: AppColors.blue,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(
+                        enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(color: AppColors.black)
                         ),
@@ -211,7 +211,7 @@ class _RegisterState extends State<Register> {
                       ),
                       cursorColor: AppColors.blue,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(
+                        enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(color: AppColors.black)
                         ),
@@ -257,7 +257,7 @@ class _RegisterState extends State<Register> {
                       obscureText: isObscured1,
                       cursorColor: AppColors.blue,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(
+                        enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(color: AppColors.black)
                         ),
@@ -309,7 +309,7 @@ class _RegisterState extends State<Register> {
                       cursorColor: AppColors.blue,
                       obscureText: isObscured2,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(
+                        enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(color: AppColors.black)
                         ),

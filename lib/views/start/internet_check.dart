@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +31,7 @@ class _InternetCheckState extends State<InternetCheck> {
       checking = true;
     });
     final connectivityResult = await connectivity.checkConnectivity();
-    if (connectivityResult == ConnectivityResult.none) {
+    if (connectivityResult.contains(ConnectivityResult.none)) {
       showNoInternetDialog(context, 
         onPressed: () {
           Navigator.pop(context);

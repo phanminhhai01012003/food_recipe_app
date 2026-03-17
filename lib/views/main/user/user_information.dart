@@ -78,6 +78,15 @@ class _UserInformationState extends State<UserInformation> {
             fontWeight: FontWeight.bold
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () => Navigator.push(context, checkDeviceRoute(stats)),
+            icon: Icon(
+              Icons.bar_chart_rounded,
+              size: 20,
+            ),
+          )
+        ],
         centerTitle: true,
       ),
       body: SingleChildScrollView(

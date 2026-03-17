@@ -189,7 +189,7 @@ class _EditUserState extends State<EditUser> {
                 ),
                 cursorColor: AppColors.blue,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(
+                  enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide(color: theme.colorScheme.secondary),
                   ),
@@ -247,7 +247,7 @@ class _EditUserState extends State<EditUser> {
                 ),
                 cursorColor: AppColors.blue,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(
+                  enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide(color: theme.colorScheme.secondary),
                   ),
@@ -309,7 +309,7 @@ class _EditUserState extends State<EditUser> {
                 cursorColor: AppColors.blue,
                 decoration: InputDecoration(
                   counterText: "",
-                  border: OutlineInputBorder(
+                  enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide(color: theme.colorScheme.secondary),
                   ),
@@ -358,7 +358,7 @@ class _EditUserState extends State<EditUser> {
                 ),
                 cursorColor: AppColors.blue,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(
+                  enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide(color: theme.colorScheme.secondary),
                   ),
