@@ -17,7 +17,7 @@ import 'package:provider/provider.dart';
 
 void main() async{
   await dotenv.load(fileName: ".env");
-  var delegate = await BasicConfig.setupLanguage();
+  var delegate = await setupLanguage();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await NotificationService.initNotifications();

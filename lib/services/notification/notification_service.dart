@@ -53,12 +53,18 @@ class NotificationService {
       sound: true,
       provisional: true,
       announcement: true
-    );
-    final fcmToken = await firebaseMessaging.getToken();
-    saveToken(fcmToken!);
-    Logger.log("Token: $fcmToken");
-    await initLocalNotifications();
-    await initPushNotifications();
+    ).then((value) async{
+      final fcmToken = await firebaseMessaging.getToken();
+      saveTokenToLocal(fcmToken ?? "");
+      Logger.log("Token: $fcmToken");
+      if (value.authorizationStatus == AuthorizationStatus.authorized) {
+        Logger.log("Permission granted");
+        await initLocalNotifications();
+        await initPushNotifications();
+      } else {
+        Logger.log("Permission denied");
+      }
+    });
   }
   static Future<dynamic> initLocalNotifications() async{
     await flutterLocalNotificationsPlugin.initialize(
@@ -157,7 +163,15 @@ class NotificationService {
       androidScheduleMode: AndroidScheduleMode.exact,
     );
   }
-  static Future<void> saveToken(String token) async {
+  static Future<void> saveTokenToLocal(String token) async{
+    try {
+      await spServices.setStringValue("token", token);
+    } catch (e) {
+      Logger.log("Error to save token: $e");
+      rethrow;
+    }
+  }
+  static Future<void> saveTokenToFirestore(String token) async {
     try {
       await userCollection.doc(currentUser.uid).update({"token": token});
     } catch (e) {

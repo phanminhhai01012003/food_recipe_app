@@ -41,6 +41,7 @@ class UserModel {
     "email": email,
     "phone": phone,
     "loginMethod": loginMethod,
+    "token": token
   };
   Map<String, dynamic> updateMap() => {
     "username": userName,

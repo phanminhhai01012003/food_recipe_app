@@ -107,7 +107,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     ),
                     child: Center(
                       child: Text(
-                        "fromSystem".tr(),
+                        "newsOrEvents".tr(),
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -132,7 +132,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     ),
                     child: Center(
                       child: Text(
-                        "interaction".tr(),
+                        "interactionOrViolation".tr(),
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,

@@ -8,6 +8,7 @@ import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/model/follow_model.dart';
 import 'package:food_recipe_app/model/user_model.dart';
+import 'package:food_recipe_app/services/notification/notification_service.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
@@ -27,7 +28,9 @@ class _LoginState extends State<Login> {
     context.loaderOverlay.show();
     if (formKey.currentState!.validate()){
       formKey.currentState!.save();
-      await authServices.loginWithAccount(context, emailController.text, passwordController.text).then((value) {
+      await authServices.loginWithAccount(context, emailController.text, passwordController.text).then((value) async{
+        final token = await spServices.getStringValue("token");
+        await NotificationService.saveTokenToFirestore(token ?? "");
         if (value != null){
           context.loaderOverlay.hide();
           Message.showScaffoldMessage(context, "signInSuccess".tr(), AppColors.green);
@@ -47,6 +50,7 @@ class _LoginState extends State<Login> {
   void handleWithApple() async{
     context.loaderOverlay.show();
     await authServices.loginWithApple(context).then((value) async{
+      final token = await spServices.getStringValue("token");
       if (value != null){
         UserModel user = UserModel(
           userId: value.user!.uid, 
@@ -56,7 +60,8 @@ class _LoginState extends State<Login> {
           description: "",
           nickName: "",
           phone: value.user!.phoneNumber ?? "",
-          loginMethod: "Apple"
+          loginMethod: "Apple",
+          token: token ?? ""
         );
         await userServices.addUserWithThirdParty(context, user);
         FollowModel follow = FollowModel(
@@ -82,6 +87,7 @@ class _LoginState extends State<Login> {
   void handleWithGoogle() async{
     context.loaderOverlay.show();
     await authServices.loginWithGoogle(context).then((value) async{
+      final token = await spServices.getStringValue("token");
       if (value != null){
         UserModel user = UserModel(
           userId: value.user!.uid, 
@@ -91,7 +97,8 @@ class _LoginState extends State<Login> {
           description: "",
           nickName: "",
           phone: value.user!.phoneNumber ?? "",
-          loginMethod: "Google"
+          loginMethod: "Google",
+          token: token ?? "",
         );
         await userServices.addUserWithThirdParty(context, user);
         FollowModel follow = FollowModel(
@@ -117,6 +124,7 @@ class _LoginState extends State<Login> {
   void handleWithFacebook() async{
     context.loaderOverlay.show();
     await authServices.loginWithFacebook(context).then((value) async{
+      final token = await spServices.getStringValue("token");
       if (value != null){
         UserModel user = UserModel(
           userId: value.user!.uid, 
@@ -126,7 +134,8 @@ class _LoginState extends State<Login> {
           description: "",
           nickName: "",
           phone: value.user!.phoneNumber ?? "",
-          loginMethod: "Facebook"
+          loginMethod: "Facebook",
+          token: token ?? ""
         );
         await userServices.addUserWithThirdParty(context, user);
         FollowModel follow = FollowModel(

@@ -37,7 +37,9 @@ class _RegisterState extends State<Register> {
         userDefaultImage, 
         nameController.text, 
         emailController.text, 
-        passwordController.text).then((value) async{
+        passwordController.text
+      ).then((value) async{
+        final token = await spServices.getStringValue("token");
         if (value != null) {
           UserModel user = UserModel(
             userId: value.uid, 
@@ -47,7 +49,8 @@ class _RegisterState extends State<Register> {
             nickName: "",
             description: "",
             phone: phoneController.text.isEmpty ? "unknown" : phoneController.text,
-            loginMethod: "Email and Password"
+            loginMethod: "Email and Password",
+            token: token ?? ""
           );
           await userServices.addUserWithAccount(context, user);
           FollowModel follow = FollowModel(
