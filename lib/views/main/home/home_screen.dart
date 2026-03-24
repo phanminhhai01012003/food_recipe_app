@@ -143,7 +143,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     children: [
                       Text(
-                        "today".tr(),                      
+                        "today".tr(),
+                        textAlign: TextAlign.center,                
                         style: TextStyle(
                           color: theme.colorScheme.secondary,
                           fontSize: 16,
@@ -153,6 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(height: 5),
                       Text(
                         "discoverFood".tr(),
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           color: theme.colorScheme.secondary,
                           fontSize: 12,

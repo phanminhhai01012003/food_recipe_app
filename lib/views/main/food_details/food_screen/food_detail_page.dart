@@ -121,6 +121,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
     final theme = Theme.of(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      backgroundColor: theme.colorScheme.primary,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -197,7 +198,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
             SizedBox(height: 5),
@@ -213,10 +214,22 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
             ),
             SizedBox(height: 10),
             Padding(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Visibility(
+                    visible: widget.food.isAI,
+                    child: Text(
+                      "fileByAI".tr(),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                        color: theme.colorScheme.secondary
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
                   Text(
                     widget.food.title,
                     style: TextStyle(
@@ -382,7 +395,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                       );
                     },
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 10),
                   Text(
                     "steps2".tr(),
                     style: TextStyle(
@@ -424,7 +437,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                       );
                     },
                   ),
-                  SizedBox(height: 30),
+                  SizedBox(height: 20),
                   Padding(
                     padding: EdgeInsets.all(12),
                     child: Row(

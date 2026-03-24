@@ -14,6 +14,7 @@ import 'package:food_recipe_app/widget/bottom_sheet/show_time_picker.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_image_picker.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
+import 'package:food_recipe_app/widget/other/toggle_switch.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:video_player/video_player.dart';
 
@@ -36,6 +37,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
   Duration _duration = Duration.zero;
   List<TextEditingController> ingredientController = [TextEditingController()];
   List<TextEditingController> stepController = [TextEditingController()];
+  bool isAI = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -48,6 +50,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
     _duration = convertStrToDur(widget.food.duration);
     ingredientController = widget.food.ingredients.map((e) => TextEditingController(text: e)).toList();
     stepController = widget.food.steps.map((e) => TextEditingController(text: e)).toList();
+    isAI = widget.food.isAI;
   }
   void invalidInformation(){
     if (titleController.text.isEmpty) {
@@ -91,6 +94,7 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
       ingredients: ingredientController.map((e) => e.text).toList(), 
       steps: stepController.map((e) => e.text).toList(), 
       views: widget.food.views,
+      isAI: isAI,
       createdAt: widget.food.createdAt, 
       likes: widget.food.likes
     );
@@ -223,6 +227,28 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
                 aspectRatio: _playerController!.value.aspectRatio,
                 child: VideoPlayer(_playerController!),
               ),
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Ảnh/Video do AI tạo ra",
+                  style: TextStyle(
+                    color: theme.colorScheme.secondary,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w900
+                  ),
+                ),
+                ToggleSwitch.toggleDependsOnDevice(
+                  isAI, 
+                  (value) {
+                    setState(() {
+                      isAI = value;
+                    });
+                  }
+                )
+              ],
             ),
             SizedBox(height: 20),
             Text("foodTitle".tr(),

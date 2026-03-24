@@ -125,7 +125,7 @@ class NotificationService {
     handleClickNotification(message.data);
   }
   static void handleClickNotification(Map<String, dynamic> data){
-    if (data['type'] == "Hệ thống"){
+    if (data['type'] == "Hệ thống" || data['type'] == "Cảnh cáo vi phạm"){
       navigatorKey.currentState!.push(checkDeviceRoute(notification));
     } else if (data['type'] == "Thích bài viết"){
       navigatorKey.currentState!.push(checkDeviceRoute(foodDetailPage(FoodModel.fromMap(data['mainData']))));

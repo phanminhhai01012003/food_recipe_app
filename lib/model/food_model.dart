@@ -11,6 +11,7 @@ class FoodModel {
   late String duration;
   late List<String> ingredients;
   late List<String> steps;
+  late bool isAI;
   late int views;
   late DateTime createdAt;
   late List<Map<String, dynamic>> likes;
@@ -27,6 +28,7 @@ class FoodModel {
     required this.duration,
     required this.ingredients,
     required this.steps,
+    required this.isAI,
     required this.views,
     required this.createdAt,
     required this.likes
@@ -45,6 +47,7 @@ class FoodModel {
       duration: data['duration'] ?? "",
       ingredients: List<String>.from(data['ingredients'] ?? []),
       steps: List<String>.from(data['steps'] ?? []),
+      isAI: data['isAI'] ?? false,
       views: data['views'] ?? 0,
       createdAt: DateTime.tryParse(data['createdAt'] ?? "") ?? DateTime.now(),
       likes: List<Map<String, dynamic>>.from(data['likes'] ?? []),
@@ -64,6 +67,7 @@ class FoodModel {
       'duration': duration,
       'ingredients': ingredients,
       'steps': steps,
+      'isAI': isAI,
       'views': views,
       'createdAt': createdAt.toIso8601String(),
       'likes': likes,
@@ -79,6 +83,7 @@ class FoodModel {
       'duration': duration,
       'ingredients': ingredients,
       'steps': steps,
+      'isAI': isAI,
     };
   }
   FoodModel.empty(){
@@ -95,6 +100,7 @@ class FoodModel {
     ingredients = [];
     steps = [];
     views = 0;
+    isAI = false;
     createdAt = DateTime.now();
     likes = [];
   }

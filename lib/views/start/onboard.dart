@@ -265,7 +265,9 @@ class _OnboardState extends State<Onboard> with TickerProviderStateMixin{
                 }
               ),
               SizedBox(height: 20),
-              Text(title,
+              Text(
+                title,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   color: AppColors.white,
                   fontSize: 14,
@@ -273,7 +275,9 @@ class _OnboardState extends State<Onboard> with TickerProviderStateMixin{
                 ),
               ),
               SizedBox(height: 11),
-              Text(desc,
+              Text(
+                desc,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   color: AppColors.white,
                   fontSize: 12,
