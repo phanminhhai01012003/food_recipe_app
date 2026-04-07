@@ -5,6 +5,7 @@ import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_assets.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
+import 'package:food_recipe_app/widget/bottom_sheet/change_language_modal.dart';
 
 class Onboard extends StatefulWidget {
   const Onboard({super.key});
@@ -114,17 +115,27 @@ class _OnboardState extends State<Onboard> with TickerProviderStateMixin{
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Align(
-                  alignment: Alignment.topRight,
-                  child: TextButton(
-                    onPressed: navigateToNewPage, 
-                    child: Text("skip".tr(), 
-                      style: TextStyle(
-                        color: AppColors.white, 
-                        fontSize: 16
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      onPressed: () async => await changeLanguageModal(context), 
+                      icon: Icon(
+                        Icons.language,
+                        size: 20,
+                        color: AppColors.white,
+                      )
+                    ),
+                    TextButton(
+                      onPressed: navigateToNewPage, 
+                      child: Text("skip".tr(), 
+                        style: TextStyle(
+                          color: AppColors.white, 
+                          fontSize: 16
+                        )
                       )
                     )
-                  ),
+                  ],
                 ),
                 Expanded(
                   child: PageView(
