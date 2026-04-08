@@ -11,6 +11,11 @@ String generateRandomString(int length){
   );
 }
 
+int generateRandomNumber(int max){
+  final rand = Random();
+  return rand.nextInt(max);
+}
+
 Duration convertStrToDur(String time) {
   try {
     List<String> split = time.split(":");

@@ -9,7 +9,6 @@ import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/convert.dart';
 import 'package:food_recipe_app/model/comment_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
-import 'package:food_recipe_app/services/notification/notification_service.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/component/comment_widget.dart';
 import 'package:food_recipe_app/widget/load_data/load_data.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
@@ -23,6 +22,7 @@ class CommentPage extends StatefulWidget {
 }
 
 class _CommentPageState extends State<CommentPage> {
+  List<dynamic> userNotificationList = [];
   final _commentController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   Future<int> get getCommentCount async{
@@ -46,17 +46,13 @@ class _CommentPageState extends State<CommentPage> {
     });
   }
   void pushCommentNotifications(){
-    NotificationService.showNotification(
-      title: widget.food.title, 
-      body: "${currentUser.displayName} đã bình luận bài viết của bạn", 
-      payload: widget.food.avatar
-    );
+    userNotificationList.add(widget.food.userName);
     notificationData.pushInteractNotifications(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       title: widget.food.title,
       body: "${currentUser.displayName} đã bình luận bài viết của bạn",
       from: currentUser.displayName ?? "",
-      to: widget.food.userName,
+      to: userNotificationList,
       type: "Bình luận bài viết",
       mainData: widget.food.toMap(),
       extraData: {},

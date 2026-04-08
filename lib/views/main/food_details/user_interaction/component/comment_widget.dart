@@ -10,7 +10,6 @@ import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/model/comment_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
-import 'package:food_recipe_app/services/notification/notification_service.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/component/comment_selection.dart';
 
 class CommentWidget extends StatefulWidget {
@@ -30,18 +29,15 @@ class CommentWidget extends StatefulWidget {
 
 class _CommentWidgetState extends State<CommentWidget> {
   bool isLikedComment = false;
+  List<dynamic> userNotificationList = [];
   void pushLikeCommentNotification() async{
-    NotificationService.showNotification(
-      title: widget.food.title, 
-      body: "${currentUser.displayName} đã thích bình luận của bạn", 
-      payload: widget.comment.avatar
-    );
+    userNotificationList.add(widget.food.userName);
     notificationData.pushInteractNotifications(
       id: DateTime.now().millisecondsSinceEpoch.toString(), 
       title: widget.food.title, 
       body: "${currentUser.displayName} đã thích bình luận của bạn", 
       from: currentUser.displayName ?? "", 
-      to: widget.food.userName, 
+      to: userNotificationList, 
       type: "Thích bình luận", 
       mainData: widget.food.toMap(),
       extraData: widget.comment.toMap(), 

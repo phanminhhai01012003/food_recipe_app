@@ -22,8 +22,9 @@ class AuthServices extends AuthRepo{
     try {
       User? user = auth.currentUser;
       AuthCredential credential = EmailAuthProvider.credential(email: email, password: oldPassword);
-      await user?.reauthenticateWithCredential(credential);
-      await user?.updatePassword(newPassword);
+      await user?.reauthenticateWithCredential(credential).then((value) async{
+        await value.user?.updatePassword(newPassword);
+      });
     } catch (e) {
       Message.showScaffoldMessage(context, "changePasswordFail".tr(), AppColors.red);
       Logger.log(e);

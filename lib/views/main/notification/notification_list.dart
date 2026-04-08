@@ -1,31 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
+import 'package:food_recipe_app/common/constants/class_defined.dart';
+import 'package:food_recipe_app/common/extension/datetime_extension.dart';
 import 'package:food_recipe_app/model/comment_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
+import 'package:food_recipe_app/model/notification_model.dart';
 
 class NotificationList extends StatefulWidget {
   final Widget imageWidget;
-  final String title;
-  final String body;
-  final String date;
-  final bool isRead;
-  final String type;
-  final String? androidImageUrl;
-  final String? iosImageUrl;
-  final Map<String, dynamic>? mainData;
-  final Map<String, dynamic>? extraData;
+  final NotificationModel notifications;
   const NotificationList({
     super.key, 
     required this.imageWidget, 
-    required this.title,
-    required this.body, 
-    required this.date,
-    required this.isRead,
-    required this.type,
-    this.androidImageUrl,
-    this.iosImageUrl,
-    this.mainData,
-    this.extraData
+    required this.notifications
   });
 
   @override
@@ -34,24 +21,25 @@ class NotificationList extends StatefulWidget {
 
 class _NotificationListState extends State<NotificationList> {
   void onClickNotification(String type){
+    notificationData.updateReadNotifications(widget.notifications.id);
     switch(type){
       case "Thích bài viết":
-        Navigator.push(context, checkDeviceRoute(foodDetailPage(FoodModel.fromMap(widget.mainData ?? {}))));
+        Navigator.push(context, checkDeviceRoute(foodDetailPage(FoodModel.fromMap(widget.notifications.mainData ?? {}))));
         break;
       case "Bình luận bài viết" || "Thích bình luận":
-        Navigator.push(context, checkDeviceRoute(commentPage(FoodModel.fromMap(widget.mainData ?? {}))));
+        Navigator.push(context, checkDeviceRoute(commentPage(FoodModel.fromMap(widget.notifications.mainData ?? {}))));
         break;
       case "Trả lời bình luận":
-        Navigator.push(context, checkDeviceRoute(replyPage(CommentModel.fromMap(widget.mainData ?? {}), FoodModel.fromMap(widget.extraData ?? {}))));
+        Navigator.push(context, checkDeviceRoute(replyPage(CommentModel.fromMap(widget.notifications.mainData ?? {}), FoodModel.fromMap(widget.notifications.extraData ?? {}))));
         break;
       case "Hệ thống" || "Cảnh cáo vi phạm":
         Navigator.push(context, 
           checkDeviceRoute(
             notificationInform(
-              widget.title, 
-              widget.body, 
-              widget.androidImageUrl, 
-              widget.iosImageUrl
+              widget.notifications.title, 
+              widget.notifications.body, 
+              widget.notifications.androidImageUrl, 
+              widget.notifications.iosImageUrl
             )
           )
         );
@@ -62,7 +50,7 @@ class _NotificationListState extends State<NotificationList> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return GestureDetector(
-      onTap: () => onClickNotification(widget.type),
+      onTap: () => onClickNotification(widget.notifications.type),
       child: Container(
         color: theme.colorScheme.primary,
         child: Row(
@@ -74,24 +62,24 @@ class _NotificationListState extends State<NotificationList> {
                 SizedBox(width: 5),
                 Expanded(
                   child: Text(
-                    widget.title,
+                    widget.notifications.title,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: theme.colorScheme.secondary,
                       fontSize: 12,
-                      fontWeight: widget.isRead ? FontWeight.w800 : FontWeight.w400
+                      fontWeight: widget.notifications.isRead ? FontWeight.w800 : FontWeight.w400
                     ),
                   ),
                 ),         
               ],
             ),
             Text(
-              widget.date,
+              widget.notifications.createdAt.ddmmyyyy,
               style: TextStyle(
                 color: theme.colorScheme.secondary,
                 fontSize: 10,
-                fontWeight: widget.isRead ? FontWeight.w800 : FontWeight.w400
+                fontWeight: widget.notifications.isRead ? FontWeight.w800 : FontWeight.w400
               ),
             ),
           ],

@@ -27,11 +27,11 @@ void main() async{
       delegate,
       MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (_) => SaveState()),
-          ChangeNotifierProvider(create: (_) => HistoryState()),
-          ChangeNotifierProvider(create: (_) => CookbookState()),
-          ChangeNotifierProvider(create: (_) => ThemeState()),
-          ChangeNotifierProvider(create: (_) => ChangeLanguageState())
+          ChangeNotifierProvider(create: (context) => SaveState()),
+          ChangeNotifierProvider(create: (context) => HistoryState()),
+          ChangeNotifierProvider(create: (context) => CookbookState()),
+          ChangeNotifierProvider(create: (context) => ThemeState()),
+          ChangeNotifierProvider(create: (context) => ChangeLanguageState())
         ],
         child: MyApp()
       ),

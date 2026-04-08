@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:food_recipe_app/common/configure/convert.dart';
 import 'package:food_recipe_app/common/configure/logger.dart';
 import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
@@ -72,7 +73,14 @@ class NotificationService {
       onDidReceiveNotificationResponse: (details) {
         handleClickNotification(jsonDecode(details.payload!) as Map<String, dynamic>);
       },
-    ).then((value) => Logger.log(value));
+    ).then((value) {
+      bool isResponse = value ?? false;
+      if(isResponse){
+        Logger.log("Successful");
+      }else{
+        Logger.log("Failed");
+      }
+    });
   }
   static Future<dynamic> initPushNotifications() async {
     await firebaseMessaging.setForegroundNotificationPresentationOptions(
@@ -132,7 +140,7 @@ class NotificationService {
     } else if (data['type'] == "Bình luận bài viết" || data['type'] == "Thích bình luận"){
       navigatorKey.currentState!.push(checkDeviceRoute(commentPage(FoodModel.fromMap(data['mainData']))));
     } else {
-      navigatorKey.currentState!.push(checkDeviceRoute(replyPage(CommentModel.fromMap(data['mainData']),FoodModel.fromMap(data['extraData']))));
+      navigatorKey.currentState!.push(checkDeviceRoute(replyPage(CommentModel.fromMap(data['mainData']), FoodModel.fromMap(data['extraData']))));
     }
   }
   static void showNotification({
@@ -141,7 +149,7 @@ class NotificationService {
     required String payload
   }) {
     flutterLocalNotificationsPlugin.show(
-      0, 
+      generateRandomNumber(100000000), 
       title, 
       body, 
       notificationDetails,

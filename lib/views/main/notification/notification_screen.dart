@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
-import 'package:food_recipe_app/common/extension/datetime_extension.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_assets.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
@@ -168,15 +167,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         notifications[index].type, 
                         notifications[index].from!,
                       ), 
-                      title: notifications[index].title,
-                      body: notifications[index].body,
-                      date: notifications[index].createdAt.ddmmyyyy,
-                      isRead: notifications[index].isRead,
-                      type: notifications[index].type,
-                      androidImageUrl: notifications[index].androidImageUrl,
-                      iosImageUrl: notifications[index].iosImageUrl,
-                      mainData: notifications[index].mainData,
-                      extraData: notifications[index].extraData,
+                      notifications: notifications[index],
                     ),
                   );
                 }

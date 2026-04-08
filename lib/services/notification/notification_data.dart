@@ -31,7 +31,7 @@ class NotificationData {
   Future<List<NotificationModel>> getSpecificUserNotifications(String name){
     try {
       return notificationCollection
-        .where("to", isEqualTo: name)
+        .where("to", arrayContains: name)
         .get()
         .then((ss) => ss.docs.map((e) => NotificationModel.fromMap(e.data())).toList());
     } catch (e) {
@@ -57,7 +57,7 @@ class NotificationData {
     required String title,
     required String body,
     String? from,
-    String? to,
+    List<dynamic>? to,
     Map<String, dynamic>? mainData,
     Map<String, dynamic>? extraData,
     required String type,

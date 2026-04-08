@@ -8,7 +8,6 @@ import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/model/comment_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
-import 'package:food_recipe_app/services/notification/notification_service.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/component/comment_widget.dart';
 
 class ReplyCommentPage extends StatefulWidget {
@@ -21,20 +20,17 @@ class ReplyCommentPage extends StatefulWidget {
 }
 
 class _ReplyCommentPageState extends State<ReplyCommentPage> {
+  List<dynamic> userNotificationList = [];
   final _commentController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   void pushReplyNotifications(){
-    NotificationService.showNotification(
-      title: widget.food.title, 
-      body: "${currentUser.displayName} đã trả lời bình luận của bạn", 
-      payload: widget.comment.avatar
-    );
+    userNotificationList.add(widget.comment.userName);
     notificationData.pushInteractNotifications(
       id: DateTime.now().millisecondsSinceEpoch.toString(), 
       title: widget.food.title, 
       body: "${currentUser.displayName} đã trả lời bình luận của bạn", 
       from: currentUser.displayName ?? "", 
-      to: widget.comment.userName, 
+      to: userNotificationList, 
       type: "Trả lời bình luận",
       mainData: widget.comment.toMap(),
       extraData: widget.food.toMap(), 

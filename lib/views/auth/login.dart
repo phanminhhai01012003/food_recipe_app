@@ -9,6 +9,7 @@ import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/model/follow_model.dart';
 import 'package:food_recipe_app/model/user_model.dart';
 import 'package:food_recipe_app/services/notification/notification_service.dart';
+import 'package:food_recipe_app/widget/bottom_sheet/change_language_modal.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
@@ -405,6 +406,18 @@ class _LoginState extends State<Login> {
                         ),
                       )
                     ],
+                  ),
+                  SizedBox(height: 20),
+                  TextButton(
+                    onPressed: () async => await changeLanguageModal(context), 
+                    child: Text(
+                      "lang".tr(),
+                      style: TextStyle(
+                        color: AppColors.black,
+                        fontSize: 12,
+                        fontWeight: FontWeight.normal
+                      ),
+                    )
                   )
                 ],
               ),

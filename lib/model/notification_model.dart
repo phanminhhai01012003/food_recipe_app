@@ -6,7 +6,7 @@ class NotificationModel {
   late String? iosImageUrl;
   late String type;
   late String? from;
-  late String? to;
+  late List<dynamic>? to;
   late Map<String, dynamic>? mainData;
   late Map<String, dynamic>? extraData;
   late bool isRead;
@@ -36,7 +36,7 @@ class NotificationModel {
       androidImageUrl: data['androidImage'] ?? "",
       iosImageUrl: data['iosImage'] ?? "",
       from: data['from'] ?? "",
-      to: data['to'] ?? "",
+      to: List.from(data['to'] ?? []),
       mainData: data['mainData'] ?? {},
       extraData: data['extraData'] ?? {},
       isRead: data['isRead'] ?? false,
@@ -74,7 +74,7 @@ class NotificationModel {
     iosImageUrl = "";
     type = "";
     from = "";
-    to = "";
+    to = [];
     mainData = {};
     extraData = {};
     isRead = false;
