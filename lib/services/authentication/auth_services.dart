@@ -114,7 +114,8 @@ class AuthServices extends AuthRepo{
   Future<UserCredential?> loginWithGoogle(BuildContext context) async{
     // TODO: implement loginWithGoogle
     try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final google = GoogleSignIn();
+      final GoogleSignInAccount? googleUser = await google.signIn();
       final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
       final credential = GoogleAuthProvider.credential(
         idToken: googleAuth?.idToken,
@@ -186,8 +187,9 @@ class AuthServices extends AuthRepo{
   Future<void> logOutFromGoogle(BuildContext context) async{
     // TODO: implement logOutFromGoogle
     try {
+      final google = GoogleSignIn();
       await Future.wait([
-        GoogleSignIn().signOut(),
+        google.signOut().then((value) => value!.clearAuthCache()),
         auth.signOut()
       ]);
     } catch (e) {

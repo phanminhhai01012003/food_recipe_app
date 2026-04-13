@@ -70,7 +70,8 @@ class ImageService extends ImageRepo{
         await Gal.requestAccess().then((value){
           if (!value) {
             Message.showToast("storagePermissionDenied".tr());
-            return;
+          } else {
+            Message.showToast("storagePermissionSuccess".tr());
           }
         });
       }
@@ -112,7 +113,8 @@ class ImageService extends ImageRepo{
         await Gal.requestAccess().then((value){
           if (!value) {
             Message.showToast("storagePermissionDenied".tr());
-            return;
+          } else {
+            Message.showToast("storagePermissionSuccess".tr());
           }
         });
       }

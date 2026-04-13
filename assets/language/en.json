@@ -292,6 +292,7 @@
 	"helloAI": "Hello! I'm FoodAI.",
     "helpYou": "What can I help you?",
 	"storagePermissionDenied": "Access permission denied",
+	"storagePermissionSuccess": "Access permission granted",
 	"followingUser": "Following",
     "follow": "Follow",
     "unfollow": "Unfollow",
