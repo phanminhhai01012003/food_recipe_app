@@ -22,6 +22,7 @@ class _ChangePasswordState extends State<ChangePassword> {
   final formKey = GlobalKey<FormState>();
   void handle() async{
     context.loaderOverlay.show();
+    await Future.delayed(Duration(seconds: 2));
     if (formKey.currentState!.validate()){
       if (newpasswordController.text != confirmController.text){
         context.loaderOverlay.hide();

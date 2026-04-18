@@ -40,6 +40,7 @@ class _EditUserState extends State<EditUser> {
 
   void update() async {
     context.loaderOverlay.show();
+    await Future.delayed(Duration(seconds: 2));
     if (formKey.currentState!.validate()) {
       if (nickNameController.text == nameController.text) {
         context.loaderOverlay.hide();

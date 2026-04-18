@@ -61,6 +61,7 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
   } 
   void add() async{
     context.loaderOverlay.show();
+    await Future.delayed(Duration(seconds: 2));
     invalidInformation();
     if (file != null) {
       fileUrl = await imageServices.uploadImage(context, file!, cookbookFolder);

@@ -27,6 +27,7 @@ class _LoginState extends State<Login> {
   bool isObscured = true;
   void handleAccount() async{
     context.loaderOverlay.show();
+    await Future.delayed(Duration(seconds: 2));
     if (formKey.currentState!.validate()){
       formKey.currentState!.save();
       await authServices.loginWithAccount(context, emailController.text, passwordController.text).then((value) async{

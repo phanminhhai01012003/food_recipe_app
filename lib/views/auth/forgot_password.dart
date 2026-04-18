@@ -17,6 +17,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   final formKey = GlobalKey<FormState>();
   void handle() async{
     context.loaderOverlay.show();
+    await Future.delayed(Duration(seconds: 2));
     await authServices.forgotPassword(context, emailController.text);
     emailController.clear();
     context.loaderOverlay.hide();

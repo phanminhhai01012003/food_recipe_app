@@ -26,6 +26,7 @@ class _RegisterState extends State<Register> {
   final formKey = GlobalKey<FormState>();
   void handle() async{
     context.loaderOverlay.show();
+    await Future.delayed(Duration(seconds: 2));
     if (formKey.currentState!.validate()) {
       if (passwordController.text != confirmController.text) {
         context.loaderOverlay.hide();

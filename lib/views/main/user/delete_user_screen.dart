@@ -146,6 +146,7 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
                 ),
                 onPressed: () async{
                   context.loaderOverlay.show();
+                  await Future.delayed(Duration(seconds: 2));
                   if (selectedOption == deleteUserList.last) {
                     if (_otherReport.text.isEmpty){
                       Message.showToast("infoEmpty".tr());

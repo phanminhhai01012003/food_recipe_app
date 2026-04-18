@@ -84,8 +84,9 @@ class _SaveFoodState extends State<SaveFood> {
       context, 
       title: "deleteSaveTitle".tr(), 
       content: "deleteSaveDesc".tr(), 
-      onAcceptTap: () {
+      onAcceptTap: () async{
         context.loaderOverlay.show();
+        await Future.delayed(Duration(seconds: 2));
         context.read<SaveState>().toggleRemove(model);
         context.loaderOverlay.hide();
         Message.showScaffoldMessage(context, "deleteSuccess".tr(), AppColors.green);

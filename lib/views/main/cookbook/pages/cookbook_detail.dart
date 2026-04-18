@@ -158,6 +158,7 @@ class _CookbookDetailState extends State<CookbookDetail> {
   }
   void onDelete(String id) async{
     context.loaderOverlay.show();
+    await Future.delayed(Duration(seconds: 2));
     context.read<CookbookState>().removeCookbook(id);
     context.loaderOverlay.hide();
     Message.showScaffoldMessage(context, "deleteSuccess".tr(), AppColors.green);

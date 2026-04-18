@@ -230,6 +230,7 @@ void confirmIOS(BuildContext context, bool isObscured, VoidCallback onClick){
 
 Future<void> onDeleteAccountDirectly(BuildContext context, String email, String password) async{
   context.loaderOverlay.show();
+  await Future.delayed(Duration(seconds: 2));
   try {    
     AuthCredential credential = EmailAuthProvider.credential(
       email: email, 

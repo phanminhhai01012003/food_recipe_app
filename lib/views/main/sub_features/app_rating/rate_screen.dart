@@ -37,6 +37,7 @@ class _RateScreenState extends State<RateScreen> {
   }
   void onDirectRating() async{
     context.loaderOverlay.show();
+    await Future.delayed(Duration(seconds: 2));
     RatingModel rating = RatingModel(
       ratingId: widget.rating == null ? generateRandomString(20) : widget.rating!.ratingId, 
       userId: widget.rating == null ? currentUser.uid : widget.rating!.userId, 

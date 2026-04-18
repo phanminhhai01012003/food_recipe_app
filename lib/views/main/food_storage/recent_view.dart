@@ -84,8 +84,9 @@ class _RecentViewState extends State<RecentView> {
       context, 
       title: "deleteRecentTitle".tr(), 
       content: "deleteRecentDesc".tr(), 
-      onAcceptTap: () {
+      onAcceptTap: () async{
         context.loaderOverlay.show();
+        await Future.delayed(Duration(seconds: 2));
         context.read<HistoryState>().toggleRemove(model);
         context.loaderOverlay.hide();
         Message.showScaffoldMessage(context, "deleteSuccess".tr(), AppColors.green);

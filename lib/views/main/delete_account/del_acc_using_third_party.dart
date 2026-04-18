@@ -13,6 +13,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 
 Future<void> delAccUsingGoogle(BuildContext context) async{
   context.loaderOverlay.show();
+  await Future.delayed(Duration(seconds: 2));
   try {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
@@ -40,6 +41,7 @@ Future<void> delAccUsingGoogle(BuildContext context) async{
 
 Future<void> delAccUsingFacebook(BuildContext context) async{
   context.loaderOverlay.show();
+  await Future.delayed(Duration(seconds: 2));
   try {
     final result = await FacebookAuth.instance.login(permissions: ['email', 'public_profile']);
     if (result.status == LoginStatus.success){
@@ -71,6 +73,7 @@ Future<void> delAccUsingFacebook(BuildContext context) async{
 
 Future<void> delAccUsingApple(BuildContext context) async{
   context.loaderOverlay.show();
+  await Future.delayed(Duration(seconds: 2));
   try {
     await Future.wait([
       followServices.removeFollowUsers(context, currentUser.uid),

@@ -94,8 +94,9 @@ class _CookbookSelectionState extends State<CookbookSelection> {
                       foregroundColor: AppColors.white,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33))
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       context.loaderOverlay.show();
+                      await Future.delayed(Duration(seconds: 2));
                       for (var cookbook in value.bookProducts) {
                         context.read<CookbookState>().toggleFoodOnCookbook(cookbook, widget.food);
                       }

@@ -38,6 +38,7 @@ class _ShowReportModalState extends State<ShowReportModal> {
   void onReport() async{
     if (!agree) return;
     context.loaderOverlay.show();
+    await Future.delayed(Duration(seconds: 2));
     if (selectedOption == "reportOther".tr()){
       if (_otherReport.text.isEmpty){
         Message.showToast("infoEmpty".tr());

@@ -29,6 +29,7 @@ class ReportSelection extends StatefulWidget {
 class _ReportSelectionState extends State<ReportSelection> {
   void onDelete(String id) async{
     context.loaderOverlay.show();
+    await Future.delayed(Duration(seconds: 2));
     await reportServices.deleteReport(context, id).then((_){
       context.loaderOverlay.hide();
       Message.showScaffoldMessage(context, "deleteSuccess".tr(), AppColors.green);
