@@ -1,8 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
+import 'package:food_recipe_app/views/main/statistics/pages/general_statistics.dart';
+import 'package:food_recipe_app/views/main/statistics/pages/preliminary_statistics.dart';
 
 class StatsScreen extends StatefulWidget {
   const StatsScreen({super.key});
@@ -75,8 +76,8 @@ class _StatsScreenState extends State<StatsScreen> with TickerProviderStateMixin
               child: TabBarView(
                 controller: _tabController,
                 children: [
-                  generalStats,
-                  preliminary
+                  GeneralStatistics(),
+                  PreliminaryStatistics()
                 ],
               ),
             ),

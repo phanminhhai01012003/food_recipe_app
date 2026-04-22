@@ -29,8 +29,6 @@ import 'package:food_recipe_app/views/main/notification/notification_screen.dart
 import 'package:food_recipe_app/views/main/report/my_report_page.dart';
 import 'package:food_recipe_app/views/main/settings/settings_detail_page.dart';
 import 'package:food_recipe_app/views/main/settings/settings_screen.dart';
-import 'package:food_recipe_app/views/main/statistics/pages/general_statistics.dart';
-import 'package:food_recipe_app/views/main/statistics/pages/preliminary_statistics.dart';
 import 'package:food_recipe_app/views/main/statistics/pages/stats_screen.dart';
 import 'package:food_recipe_app/views/main/sub_features/about/about_screen.dart';
 import 'package:food_recipe_app/views/main/add_edit_food/add_food_screen.dart';
@@ -120,5 +118,3 @@ Widget notificationInform(String title, String body, [String? androidImageUrl, S
   iosImageUrl: iosImageUrl,
 );
 Widget get stats => StatsScreen();
-Widget get generalStats => GeneralStatistics();
-Widget get preliminary => PreliminaryStatistics();
