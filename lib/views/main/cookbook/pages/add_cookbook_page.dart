@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
@@ -12,6 +13,7 @@ import 'package:food_recipe_app/common/configure/convert.dart';
 import 'package:food_recipe_app/model/cookbook_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/provider/cookbook_state.dart';
+import 'package:food_recipe_app/views/main/add_edit_food/widget/file_chosen_widget.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_image_picker.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:food_recipe_app/widget/load_data/load_data.dart';
@@ -125,70 +127,28 @@ class _AddCookbookPageState extends State<AddCookbookPage> {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.push(context, checkDeviceRoute(AIpage)),
+        shape: CircleBorder(),
+        backgroundColor: AppColors.green,
+        foregroundColor: AppColors.white,
+        child: Icon(Icons.auto_awesome, size: 25),
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: file == null && fileUrl.isEmpty
-              ? InkWell(
-                onTap: () async{
+              child: FileChosenWidget(
+                file: file, 
+                fileUrl: fileUrl,
+                onTap: () async {
                   final filePicked = await showImagePickerModal(context, false);
-                  if (filePicked != null){
-                    setState(() {
-                      file = filePicked;
-                    });
+                  if (filePicked != null) {
+                    file = filePicked;
                   }
                 },
-                child: Container(
-                  height: 200,
-                  width: 200,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    border: Border.all(color: Colors.black)
-                  ),
-                  child: Center(
-                    child: Icon(
-                      Icons.add_a_photo,
-                      size: 50,
-                      color: theme.colorScheme.secondary,
-                    ),
-                  ),
-                ),
-              )
-              : file != null ? InkWell(
-                onTap: () async{
-                  final filePicked = await showImagePickerModal(context, false);
-                  if (filePicked != null){
-                    setState(() {
-                      file = filePicked;
-                    });
-                  }
-                },
-                child: ClipRRect(
-                  child: Image.file(file!,
-                    height: 200,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ) : InkWell(
-                onTap: () async{
-                  final filePicked = await showImagePickerModal(context, false);
-                  if (filePicked != null){
-                    setState(() {
-                      file = filePicked;
-                    });
-                  }
-                },
-                child: ClipRRect(
-                  child: Image.network(fileUrl,
-                    height: 200,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
-                ),
               ),
             ),
             SizedBox(height: 20),

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/common/configure/routes.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/constants/list_constants.dart';
@@ -10,6 +11,7 @@ import 'package:food_recipe_app/common/style/app_assets.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/configure/convert.dart';
 import 'package:food_recipe_app/model/food_model.dart';
+import 'package:food_recipe_app/views/main/add_edit_food/widget/edit_file_chosen.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_time_picker.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_image_picker.dart';
@@ -122,8 +124,6 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    bool isImageFile = file.toString().contains("png") || file.toString().contains("jpg") || file.toString().contains("jpeg");
-    bool isImageUrl = fileUrl.contains("png") || fileUrl.contains("jpg") || fileUrl.contains("jpeg");
     return Scaffold(
       backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
@@ -161,72 +161,43 @@ class _EditFoodScreenState extends State<EditFoodScreen> {
           )
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.push(context, checkDeviceRoute(AIpage)),
+        shape: CircleBorder(),
+        backgroundColor: AppColors.blue,
+        foregroundColor: AppColors.white,
+        child: Icon(Icons.auto_awesome, size: 25),
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            file != null ? InkWell(
-              onTap: () async{
-                final filePicked = await showImagePickerModal(context, true);
-                if (filePicked != null) {
-                  bool isImagePicked = filePicked.toString().contains("jpg") || filePicked.toString().contains("jpeg") || filePicked.toString().contains("png");
-                  if (isImagePicked) {
-                    setState(() {
-                      file = filePicked;
-                      _playerController = null;
-                    });
-                  } else {
-                    _playerController = VideoPlayerController.file(filePicked)..initialize().then((_){
+            Center(
+              child: EditFileChosen(
+                controller: _playerController, 
+                file: file, 
+                fileUrl: fileUrl, 
+                onTap: () async {
+                  final filePicked = await showImagePickerModal(context, true);
+                  if (filePicked != null) {
+                    bool isImagePicked = filePicked.toString().contains("jpg") || filePicked.toString().contains("jpeg") || filePicked.toString().contains("png");
+                    if (isImagePicked) {
                       setState(() {
                         file = filePicked;
-                        _playerController!.play();
-                        _playerController!.setLooping(true);
+                        _playerController = null;
                       });
-                    });
+                    } else {
+                      _playerController = VideoPlayerController.file(filePicked)..initialize().then((_){
+                        setState(() {
+                          file = filePicked;
+                          _playerController!.play();
+                          _playerController!.setLooping(true);
+                        });
+                      });
+                    }
                   }
                 }
-              },
-              child: isImageFile ? Image.file(
-                file!,
-                errorBuilder: (context, error, stackTrace) => Image.network(foodDefaultImage),
-                height: 200,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ) : AspectRatio(
-                aspectRatio: _playerController!.value.aspectRatio,
-                child: VideoPlayer(_playerController!),
-              ),
-            ) : InkWell(
-              onTap: () async{
-                final filePicked = await showImagePickerModal(context, true);
-                if (filePicked != null) {
-                  bool isImagePicked = filePicked.toString().contains("jpg") || filePicked.toString().contains("jpeg") || filePicked.toString().contains("png");
-                  if (isImagePicked) {
-                    setState(() {
-                      file = filePicked;
-                      _playerController = null;
-                    });
-                  } else {
-                    _playerController = VideoPlayerController.file(filePicked)..initialize().then((_){
-                      setState(() {
-                        file = filePicked;
-                        _playerController!.play();
-                        _playerController!.setLooping(true);
-                      });
-                    });
-                  }
-                }
-              },
-              child: isImageUrl ? Image.network(
-                fileUrl,
-                errorBuilder: (context, error, stackTrace) => Image.network(foodDefaultImage),
-                height: 200,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ) : AspectRatio(
-                aspectRatio: _playerController!.value.aspectRatio,
-                child: VideoPlayer(_playerController!),
               ),
             ),
             SizedBox(height: 20),

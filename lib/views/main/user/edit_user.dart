@@ -7,6 +7,7 @@ import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_assets.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/model/user_model.dart';
+import 'package:food_recipe_app/views/main/user/circle_image_chosen.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_image_picker.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -128,47 +129,18 @@ class _EditUserState extends State<EditUser> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
-                child: file != null
-                        ? InkWell(
-                          onTap: () async {
-                            final filePicked = await showImagePickerModal(context, false);
-                            if (filePicked != null) {
-                              setState(() {
-                                file = filePicked;
-                              });
-                            }
-                          },
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(100),
-                            child: Image.file(
-                              file!,
-                              errorBuilder: (context, error, stackTrace) => Image.network(userDefaultImage),
-                              height: 200,
-                              width: 200,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        )
-                        : InkWell(
-                          onTap: () async {
-                            final filePicked = await showImagePickerModal(context, false);
-                            if (filePicked != null) {
-                              setState(() {
-                                file = filePicked;
-                              });
-                            }
-                          },
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(100),
-                            child: Image.network(
-                              fileUrl,
-                              errorBuilder: (context, error, stackTrace) => Image.network(userDefaultImage),
-                              height: 200,
-                              width: 200,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
+                child: CircleImageChosen(
+                  file: file, 
+                  fileUrl: fileUrl,
+                  onTap: () async {
+                    final filePicked = await showImagePickerModal(context, false);
+                    if (filePicked != null) {
+                      setState(() {
+                        file = filePicked;
+                      });
+                    }
+                  },
+                ),
               ),
               SizedBox(height: 20),
               Text(
