@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/common/configure/routes.dart';
+import 'package:food_recipe_app/common/utils/routes.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/data/enum.dart';
 import 'package:food_recipe_app/views/main/settings/selection.dart';

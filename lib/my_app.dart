@@ -4,7 +4,7 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/style/app_themes.dart';
-import 'package:food_recipe_app/common/configure/routes.dart';
+import 'package:food_recipe_app/common/utils/routes.dart';
 import 'package:food_recipe_app/provider/theme_state.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';

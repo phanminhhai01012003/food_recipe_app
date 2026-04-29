@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:food_recipe_app/common/configure/routes.dart';
+import 'package:food_recipe_app/common/utils/routes.dart';
 
 List<String> categoryList = [
   "tagBeef", 

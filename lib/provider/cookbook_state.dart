@@ -6,7 +6,7 @@ import 'package:food_recipe_app/model/cookbook_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 
-import '../common/configure/logger.dart';
+import '../common/utils/logger.dart';
 
 class CookbookState extends ChangeNotifier{
   List<CookbookModel> _bookProducts = [];

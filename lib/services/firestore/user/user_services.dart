@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
-import 'package:food_recipe_app/common/configure/logger.dart';
+import 'package:food_recipe_app/common/utils/logger.dart';
 import 'package:food_recipe_app/model/user_model.dart';
 import 'package:food_recipe_app/services/firestore/user/user_repo.dart';
 import '../../../widget/other/message.dart';

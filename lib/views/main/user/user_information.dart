@@ -6,7 +6,7 @@ import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
-import 'package:food_recipe_app/common/configure/routes.dart';
+import 'package:food_recipe_app/common/utils/routes.dart';
 import 'package:food_recipe_app/model/user_model.dart';
 import 'package:food_recipe_app/widget/full_screen_image/show_image_sheet.dart';
 import 'package:food_recipe_app/views/main/user/get_follow_data.dart';

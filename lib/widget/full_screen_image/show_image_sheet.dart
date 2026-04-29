@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
-import 'package:food_recipe_app/common/configure/routes.dart';
+import 'package:food_recipe_app/common/utils/routes.dart';
 
 Future<void> showImageChoiceBottomSheet(BuildContext context, String fileUrl) async{
   return await showModalBottomSheet(

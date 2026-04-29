@@ -1,4 +1,4 @@
-import 'package:food_recipe_app/common/configure/logger.dart';
+import 'package:food_recipe_app/common/utils/logger.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/services/shared/shared_preferences_repo.dart';
 import 'package:food_recipe_app/widget/other/message.dart';

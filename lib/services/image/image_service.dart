@@ -5,7 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
-import 'package:food_recipe_app/common/configure/logger.dart';
+import 'package:food_recipe_app/common/utils/logger.dart';
 import 'package:food_recipe_app/services/image/image_repo.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:gal/gal.dart';

@@ -7,7 +7,7 @@ import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_assets.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 
-import 'package:food_recipe_app/common/configure/routes.dart';
+import 'package:food_recipe_app/common/utils/routes.dart';
 import 'package:food_recipe_app/views/main/home/animation_slider.dart';
 import 'package:food_recipe_app/views/main/home/categories_grid_list.dart';
 import 'package:food_recipe_app/views/main/home/food_recipe_display.dart';

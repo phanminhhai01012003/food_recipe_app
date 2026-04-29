@@ -4,7 +4,7 @@ import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/model/recent_view_model.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 
-import '../common/configure/logger.dart';
+import '../common/utils/logger.dart';
 
 class HistoryState extends ChangeNotifier{
   List<RecentViewModel> _viewProducts = [];

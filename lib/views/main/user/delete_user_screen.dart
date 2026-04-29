@@ -3,7 +3,7 @@ import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/constants/list_constants.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
-import 'package:food_recipe_app/common/configure/logger.dart';
+import 'package:food_recipe_app/common/utils/logger.dart';
 import 'package:food_recipe_app/views/main/delete_account/confirm_password_dialog.dart';
 import 'package:food_recipe_app/views/main/delete_account/del_acc_using_third_party.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';

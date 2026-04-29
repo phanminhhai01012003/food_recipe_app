@@ -4,7 +4,7 @@ import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:food_recipe_app/common/configure/convert.dart';
+import 'package:food_recipe_app/common/utils/convert.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_assets.dart';
@@ -21,7 +21,10 @@ class AIChatbotPage extends StatefulWidget {
 class _AIChatbotPageState extends State<AIChatbotPage> {
   final openAI = OpenAI.instance.build(
     token: dotenv.env['CHAT_GPT_API_KEY'],
-    baseOption: HttpSetup(receiveTimeout: Duration(seconds: 5)),
+    baseOption: HttpSetup(
+      receiveTimeout: Duration(seconds: 5),
+      connectTimeout: Duration(seconds: 5)
+    ),
     enableLog: true
   );
   final _currentUser = ChatUser(
@@ -107,7 +110,7 @@ class _AIChatbotPageState extends State<AIChatbotPage> {
       };
     }).toList();
     final request = ChatCompleteText(
-      model: Gpt40631ChatModel(), 
+      model: Gpt4VisionPreviewChatModel(), 
       messages: _messHistory,
       maxToken: 200
     );

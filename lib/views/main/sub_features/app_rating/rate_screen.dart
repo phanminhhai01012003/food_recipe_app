@@ -7,7 +7,7 @@ import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/constants/list_constants.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
-import 'package:food_recipe_app/common/configure/convert.dart';
+import 'package:food_recipe_app/common/utils/convert.dart';
 import 'package:food_recipe_app/model/rating_model.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:food_recipe_app/widget/other/radio_selection.dart';
