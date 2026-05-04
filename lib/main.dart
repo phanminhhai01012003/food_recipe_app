@@ -9,6 +9,7 @@ import 'package:food_recipe_app/firebase/firebase_options.dart';
 import 'package:food_recipe_app/my_app.dart';
 import 'package:food_recipe_app/provider/change_language_state.dart';
 import 'package:food_recipe_app/provider/cookbook_state.dart';
+import 'package:food_recipe_app/provider/fridge_state.dart';
 import 'package:food_recipe_app/provider/history_state.dart';
 import 'package:food_recipe_app/provider/save_state.dart';
 import 'package:food_recipe_app/provider/theme_state.dart';
@@ -31,7 +32,8 @@ void main() async{
           ChangeNotifierProvider(create: (context) => HistoryState()),
           ChangeNotifierProvider(create: (context) => CookbookState()),
           ChangeNotifierProvider(create: (context) => ThemeState()),
-          ChangeNotifierProvider(create: (context) => ChangeLanguageState())
+          ChangeNotifierProvider(create: (context) => ChangeLanguageState()),
+          ChangeNotifierProvider(create: (context) => FridgeState())
         ],
         child: MyApp()
       ),

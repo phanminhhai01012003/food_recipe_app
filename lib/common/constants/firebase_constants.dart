@@ -8,6 +8,7 @@ final currentUser = auth.currentUser!;
 //firestore
 final userCollection = FirebaseFirestore.instance.collection("users");
 final foodCollection = FirebaseFirestore.instance.collection("food_recipe");
+final fridgeCollection = FirebaseFirestore.instance.collection("smartFridge");
 CollectionReference<Map<String, dynamic>> commentCollection(String foodId){
   return FirebaseFirestore.instance
     .collection("food_recipe")
@@ -37,3 +38,4 @@ CollectionReference<Map<String, dynamic>> followCollection(String userId) {
 String foodFolder = "food_recipe";
 String avatarFolder = "user_avatar";
 String cookbookFolder = "cookbook";
+String ingredientFolder = "ingredient";

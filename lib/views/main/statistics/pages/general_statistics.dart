@@ -115,7 +115,7 @@ class _GeneralStatisticsState extends State<GeneralStatistics> {
                 title: "saveAmount".tr(), 
                 data: Selector<SaveState, List<SaveFoodModel>>(
                   selector: (context, state) => state.foodProducts,
-                  shouldRebuild: (previous, next) => true,
+                  shouldRebuild: (previous, next) => previous != next,
                   builder: (context, value, child) {
                     return Text(
                       value.length.toString(),
@@ -138,7 +138,7 @@ class _GeneralStatisticsState extends State<GeneralStatistics> {
                 title: "recentAmount".tr(), 
                 data: Selector<HistoryState, List<RecentViewModel>>(
                   selector: (context, state) => state.viewProducts,
-                  shouldRebuild: (previous, next) => true,
+                  shouldRebuild: (previous, next) => previous != next,
                   builder: (context, value, child) {
                     return Text(
                       value.length.toString(),

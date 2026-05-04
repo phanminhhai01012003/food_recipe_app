@@ -25,6 +25,13 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
     }
     return priceUnit + price.priceFormat;
   }
+  String description(String time) {
+    return switch(time) {
+      "onemonth" => "oneMonthDesc".tr(),
+      "oneyear" => "oneYearDesc".tr(),
+      _ => ""
+    };
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -56,6 +63,14 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
                 style: TextStyle(
                   color: AppColors.white,
                   fontSize: 14,
+                  fontWeight: FontWeight.w500
+                ),
+              ),
+              Text(
+                description(widget.sub.time),
+                style: TextStyle(
+                  color: AppColors.white,
+                  fontSize: 12,
                   fontWeight: FontWeight.w500
                 ),
               )

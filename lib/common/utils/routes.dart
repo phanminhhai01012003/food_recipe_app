@@ -24,6 +24,7 @@ import 'package:food_recipe_app/views/main/food_details/user_interaction/resourc
 import 'package:food_recipe_app/views/main/food_storage/my_food.dart';
 import 'package:food_recipe_app/views/main/food_storage/recent_view.dart';
 import 'package:food_recipe_app/views/main/food_storage/save_food.dart';
+import 'package:food_recipe_app/views/main/food_storage/smart_fridge_view.dart';
 import 'package:food_recipe_app/views/main/notification/notification_inform.dart';
 import 'package:food_recipe_app/views/main/notification/notification_screen.dart';
 import 'package:food_recipe_app/views/main/report/my_report_page.dart';
@@ -118,3 +119,4 @@ Widget notificationInform(String title, String body, [String? androidImageUrl, S
   iosImageUrl: iosImageUrl,
 );
 Widget get stats => StatsScreen();
+Widget get smartFridgeView => SmartFridgeView();

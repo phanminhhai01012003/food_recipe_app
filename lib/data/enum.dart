@@ -2,7 +2,8 @@ enum StorageMode {
   myFood, 
   saveFood, 
   recentView, 
-  cookbook
+  cookbook,
+  fridge
 }
 enum ModeSelection {
   report,

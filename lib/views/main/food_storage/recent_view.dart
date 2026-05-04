@@ -50,7 +50,7 @@ class _RecentViewState extends State<RecentView> {
       ),
       body: Selector<HistoryState, List<RecentViewModel>>(
         selector: (context, state) => state.viewProducts,
-        shouldRebuild: (previous, next) => true,
+        shouldRebuild: (previous, next) => previous != next,
         builder: (context, value, child) {
           if (value.isEmpty) {
             return NoData();

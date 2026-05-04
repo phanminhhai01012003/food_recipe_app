@@ -47,7 +47,7 @@ class _CookbookScreenState extends State<CookbookScreen> {
       ),
       body: Selector<CookbookState, List<CookbookModel>>(
         selector: (context, state) => state.bookProducts,
-        shouldRebuild: (previous, next) => true,
+        shouldRebuild: (previous, next) => previous != next,
         builder: (context, value, child) {
           if (value.isEmpty) {
             return NoData();

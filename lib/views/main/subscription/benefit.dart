@@ -20,10 +20,10 @@ class Benefit extends StatelessWidget {
       children: [
         row(["benefit".tr(), "free".tr(), "premiumPackage".tr()], true),
         row(["removeAd".tr(), "no".tr(), "yes".tr()], false),
-        row(["foodCount".tr(), "1000 ${"food".tr()}", "unlimited".tr()], false),
-        row(["recommendedFood".tr(), "random".tr(), "preferences".tr()], false),
-        row(["searchFilter".tr(), "normal".tr(), "advanced".tr()], false),
-        row(["cookbookCount".tr(), "100 ${"books".tr()}", "unlimited".tr()], false),
+        row(["premiumFood".tr(), "no".tr(), "yes".tr()], false),
+        row(["foodCount".tr(), "1000", "unlimited".tr()], false),        
+        row(["cookbookCount".tr(), "500", "unlimited".tr()], false),
+        row(["ingredientCount".tr(), "100", "unlimited".tr()], false),
       ],
     );
   }

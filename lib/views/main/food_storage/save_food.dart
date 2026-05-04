@@ -50,7 +50,7 @@ class _SaveFoodState extends State<SaveFood> {
       ),
       body: Selector<SaveState, List<SaveFoodModel>>(
         selector: (context, state) => state.foodProducts,
-        shouldRebuild: (previous, next) => true,
+        shouldRebuild: (previous, next) => previous != next,
         builder: (context, value, child) {
           if (value.isEmpty) {
             return NoData();

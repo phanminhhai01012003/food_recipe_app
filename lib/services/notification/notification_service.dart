@@ -96,7 +96,7 @@ class NotificationService {
         final androidImage = message.notification?.android?.imageUrl ?? "N/A";
         final iosImage = message.notification?.apple?.imageUrl ?? "N/A";
         showNotification(title: title, body: body, payload: json.encode(payLoad));
-        await saveNotification(title, body, androidImage, iosImage);
+        await saveNotification(title, body, androidImage, iosImage, payLoad);
       }      
     });
     listenNotification();
@@ -114,14 +114,16 @@ class NotificationService {
     String title, 
     String body,
     String androidImage,
-    String iosImage
+    String iosImage,
+    Map<String, dynamic> mainData
   ) async {
     NotificationModel notify = NotificationModel(
       id: DateTime.now().millisecondsSinceEpoch.toString(), 
       title: title, 
       body: body,
       androidImageUrl: androidImage,
-      iosImageUrl: iosImage, 
+      iosImageUrl: iosImage,
+      mainData: mainData, 
       type: body.contains("vi phạm") ? "Cảnh cáo vi phạm" : "Hệ thống", 
       isRead: false, 
       createdAt: DateTime.now()

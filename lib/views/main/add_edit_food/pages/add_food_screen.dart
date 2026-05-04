@@ -507,7 +507,27 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                       ingredientController.add(TextEditingController());
                     });
                   }, 
-                  child: Text("add".tr(),
+                  child: Text("addManual".tr(),
+                    style: TextStyle(fontSize: 16),
+                  )
+                ),
+              ),
+            ),
+            SizedBox(height: 10),
+            Center(
+              child: SizedBox(
+                width: 150,
+                height: 50,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.green,
+                    foregroundColor: AppColors.white,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))
+                  ),
+                  onPressed: () {
+                    
+                  }, 
+                  child: Text("addFromFridge".tr(),
                     style: TextStyle(fontSize: 16),
                   )
                 ),

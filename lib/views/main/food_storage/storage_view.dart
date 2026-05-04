@@ -7,13 +7,16 @@ import 'package:food_recipe_app/common/utils/routes.dart';
 import 'package:food_recipe_app/data/enum.dart';
 import 'package:food_recipe_app/model/cookbook_model.dart';
 import 'package:food_recipe_app/model/food_model.dart';
+import 'package:food_recipe_app/model/ingredient_model.dart';
 import 'package:food_recipe_app/model/recent_view_model.dart';
 import 'package:food_recipe_app/model/save_food_model.dart';
 import 'package:food_recipe_app/model/user_model.dart';
 import 'package:food_recipe_app/provider/cookbook_state.dart';
+import 'package:food_recipe_app/provider/fridge_state.dart';
 import 'package:food_recipe_app/provider/history_state.dart';
 import 'package:food_recipe_app/provider/save_state.dart';
 import 'package:food_recipe_app/views/main/cookbook/widget/cookbook_widget.dart';
+import 'package:food_recipe_app/views/main/refrigerator/widgets/product_grid.dart';
 import 'package:food_recipe_app/views/main/settings/user_widget.dart';
 import 'package:food_recipe_app/widget/food_display_widget/food_display_grid.dart';
 import 'package:provider/provider.dart';
@@ -39,6 +42,9 @@ class _StorageViewState extends State<StorageView> {
         break;
       case StorageMode.cookbook:
         Navigator.push(context, checkDeviceRoute(cookbookPage));
+        break;
+      case StorageMode.fridge:
+        Navigator.push(context, checkDeviceRoute(smartFridgeView));
         break;
     }
   }
@@ -154,7 +160,7 @@ class _StorageViewState extends State<StorageView> {
                 alignment: AlignmentDirectional.centerStart,
                 child: Selector<SaveState, List<SaveFoodModel>>(
                   selector: (context, state) => state.foodProducts,
-                  shouldRebuild: (previous, next) => true,
+                  shouldRebuild: (previous, next) => previous != next,
                   builder: (context, value, child) {
                     if (value.isEmpty) {
                       return SizedBox.shrink();
@@ -203,7 +209,7 @@ class _StorageViewState extends State<StorageView> {
                 alignment: AlignmentDirectional.centerStart,
                 child: Selector<HistoryState, List<RecentViewModel>>(
                   selector: (context, state) => state.viewProducts,
-                  shouldRebuild: (previous, next) => true,
+                  shouldRebuild: (previous, next) => previous != next,
                   builder: (context, value, child) {
                     if (value.isEmpty) {
                       return SizedBox.shrink();
@@ -252,7 +258,7 @@ class _StorageViewState extends State<StorageView> {
                 alignment: AlignmentDirectional.centerStart,
                 child: Selector<CookbookState, List<CookbookModel>>(
                   selector: (context, state) => state.bookProducts,
-                  shouldRebuild: (previous, next) => true,
+                  shouldRebuild: (previous, next) => previous != next,
                   builder: (context, value, child) {
                     if (value.isEmpty) {
                       return SizedBox.shrink();
@@ -268,6 +274,55 @@ class _StorageViewState extends State<StorageView> {
                         physics: ClampingScrollPhysics(),
                         itemCount: value.length ~/ 2,
                         itemBuilder: (context, index) => CookbookWidget(book: value[index])
+                      ),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "smartFridge".tr(),
+                    style: TextStyle(
+                      color: theme.colorScheme.secondary,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () => onNavigation(StorageMode.fridge), 
+                    child: Text(
+                      "viewAll".tr(),
+                      style: TextStyle(
+                        color: AppColors.blue,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500
+                      ),
+                    )
+                  )
+                ],
+              ),
+              SizedBox(height: 10),
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: Selector<FridgeState, List<IngredientModel>>(
+                  selector: (context, state) => state.fridge,
+                  shouldRebuild: (previous, next) => previous != next,
+                  builder: (context, value, child) {
+                    if (value.isEmpty) {
+                      return SizedBox.shrink();
+                    }
+                    return SizedBox(
+                      height: 222,
+                      child: ListView.builder(
+                        padding: EdgeInsets.all(12),
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        physics: ClampingScrollPhysics(),
+                        itemCount: value.length ~/ 2,
+                        itemBuilder: (context, index) => ProductGrid(ingredient: value[index])
                       ),
                     );
                   },
