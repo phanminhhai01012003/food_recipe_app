@@ -4,7 +4,7 @@ import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/utils/logger.dart';
-import 'package:food_recipe_app/model/comment_model.dart';
+import 'package:food_recipe_app/model/community/comment_model.dart';
 import 'package:food_recipe_app/services/firestore/comment/comment_repo.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 

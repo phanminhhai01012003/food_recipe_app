@@ -6,7 +6,7 @@ import 'package:food_recipe_app/common/style/app_colors.dart';
 
 import 'package:food_recipe_app/common/utils/routes.dart';
 import 'package:food_recipe_app/data/enum.dart';
-import 'package:food_recipe_app/model/user_model.dart';
+import 'package:food_recipe_app/model/app/user_model.dart';
 import 'package:food_recipe_app/views/main/settings/selection.dart';
 import 'package:food_recipe_app/views/main/settings/user_widget.dart';
 

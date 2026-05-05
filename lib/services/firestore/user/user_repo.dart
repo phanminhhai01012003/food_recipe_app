@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/model/user_model.dart';
+import 'package:food_recipe_app/model/app/user_model.dart';
 
 abstract class UserRepo {
   Future<void> addUserWithAccount(BuildContext context, UserModel user);

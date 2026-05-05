@@ -1,4 +1,4 @@
-import 'package:food_recipe_app/model/user_model.dart';
+import 'package:food_recipe_app/model/app/user_model.dart';
 
 class FollowModel {
   late String followId;

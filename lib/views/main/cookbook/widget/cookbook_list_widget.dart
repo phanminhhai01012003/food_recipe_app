@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/utils/routes.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
-import 'package:food_recipe_app/model/cookbook_model.dart';
+import 'package:food_recipe_app/model/food/cookbook_model.dart';
 
 class CookbookListWidget extends StatelessWidget {
   final CookbookModel cookbook;

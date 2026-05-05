@@ -6,7 +6,7 @@ import 'package:food_recipe_app/common/extension/datetime_extension.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/utils/routes.dart';
-import 'package:food_recipe_app/model/rating_model.dart';
+import 'package:food_recipe_app/model/community/rating_model.dart';
 import 'package:food_recipe_app/views/main/sub_features/app_rating/rating_selection.dart';
 
 class RateComponent extends StatefulWidget {

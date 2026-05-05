@@ -3,8 +3,8 @@ import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
-import 'package:food_recipe_app/model/follow_model.dart';
-import 'package:food_recipe_app/model/user_model.dart';
+import 'package:food_recipe_app/model/app/follow_model.dart';
+import 'package:food_recipe_app/model/app/user_model.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/follow_list_modal.dart';
 
 class GetFollowData extends StatefulWidget {

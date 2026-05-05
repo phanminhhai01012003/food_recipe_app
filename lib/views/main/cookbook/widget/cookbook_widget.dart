@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/utils/routes.dart';
-import 'package:food_recipe_app/model/cookbook_model.dart';
+import 'package:food_recipe_app/model/food/cookbook_model.dart';
 
 class CookbookWidget extends StatefulWidget {
   final CookbookModel book;

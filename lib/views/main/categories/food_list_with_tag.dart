@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
-import 'package:food_recipe_app/model/food_model.dart';
+import 'package:food_recipe_app/model/food/food_model.dart';
 import 'package:food_recipe_app/widget/food_display_widget/food_display_grid.dart';
 import 'package:food_recipe_app/widget/load_data/load_data.dart';
 

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/utils/routes.dart';
-import 'package:food_recipe_app/model/cookbook_model.dart';
+import 'package:food_recipe_app/model/food/cookbook_model.dart';
 import 'package:food_recipe_app/provider/cookbook_state.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:food_recipe_app/widget/food_display_widget/food_display_list.dart';

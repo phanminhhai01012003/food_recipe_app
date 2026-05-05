@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/model/follow_model.dart';
-import 'package:food_recipe_app/model/user_model.dart';
+import 'package:food_recipe_app/model/app/follow_model.dart';
+import 'package:food_recipe_app/model/app/user_model.dart';
 
 abstract class FollowRepo {
   Future<void> addFollowUsers(BuildContext context, FollowModel follow, String userId);

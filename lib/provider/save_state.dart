@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
-import 'package:food_recipe_app/model/save_food_model.dart';
+import 'package:food_recipe_app/model/personal/save_food_model.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 
 import '../common/utils/logger.dart';

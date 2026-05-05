@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/utils/routes.dart';
-import 'package:food_recipe_app/model/rating_model.dart';
+import 'package:food_recipe_app/model/community/rating_model.dart';
 import 'package:food_recipe_app/services/firestore/rate/rate_services.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_report_modal.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';

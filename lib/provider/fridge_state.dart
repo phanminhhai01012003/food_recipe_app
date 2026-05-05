@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/utils/logger.dart';
-import 'package:food_recipe_app/model/ingredient_model.dart';
+import 'package:food_recipe_app/model/food/ingredient_model.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 
 class FridgeState extends ChangeNotifier{

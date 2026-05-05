@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:food_recipe_app/model/rating_model.dart';
+import 'package:food_recipe_app/model/community/rating_model.dart';
 
 abstract class RateRepo {
   Future<void> addRating(BuildContext context, RatingModel rating);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
-import 'package:food_recipe_app/model/comment_model.dart';
+import 'package:food_recipe_app/model/community/comment_model.dart';
 import 'package:food_recipe_app/services/firestore/comment/comment_services.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/component/edit_comment_dialog.dart';
 import 'package:food_recipe_app/views/main/settings/selection.dart';

@@ -10,7 +10,7 @@ import 'package:food_recipe_app/common/style/app_assets.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/utils/convert.dart';
-import 'package:food_recipe_app/model/food_model.dart';
+import 'package:food_recipe_app/model/food/food_model.dart';
 import 'package:food_recipe_app/views/main/add_edit_food/widget/file_chosen_widget.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_time_picker.dart';
 import 'package:food_recipe_app/widget/other/message.dart';

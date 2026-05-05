@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
-import 'package:food_recipe_app/model/ingredient_model.dart';
+import 'package:food_recipe_app/model/food/ingredient_model.dart';
 import 'package:food_recipe_app/provider/fridge_state.dart';
 import 'package:food_recipe_app/views/main/refrigerator/widgets/product_list.dart';
 import 'package:food_recipe_app/widget/load_data/no_data.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/utils/routes.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
-import 'package:food_recipe_app/model/user_model.dart';
+import 'package:food_recipe_app/model/app/user_model.dart';
 
 Future followList(BuildContext context, List<UserModel> fList, String title) async{
   final theme = Theme.of(context);

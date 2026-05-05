@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
-import 'package:food_recipe_app/model/subscription_model.dart';
+import 'package:food_recipe_app/model/app/subscription_model.dart';
 
 class SubscriptionWidget extends StatefulWidget {
   final SubscriptionModel sub;

@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:food_recipe_app/model/food_model.dart';
+import 'package:food_recipe_app/model/food/food_model.dart';
 
 abstract class FoodRepo {
   Future<void> addFood(BuildContext context, FoodModel food);

@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:food_recipe_app/model/report_model.dart';
+import 'package:food_recipe_app/model/community/report_model.dart';
 
 abstract class ReportRepo {
   Future<void> addReport(BuildContext context, ReportModel report);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:food_recipe_app/model/food_model.dart';
+import 'package:food_recipe_app/model/food/food_model.dart';
 import 'package:food_recipe_app/widget/food_display_widget/food_display_list.dart';
 
 class SliderWidget extends StatelessWidget {

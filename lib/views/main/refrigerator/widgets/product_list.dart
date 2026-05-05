@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
-import 'package:food_recipe_app/model/ingredient_model.dart';
+import 'package:food_recipe_app/model/food/ingredient_model.dart';
 
 class ProductList extends StatefulWidget {
   final IngredientModel ingredient;

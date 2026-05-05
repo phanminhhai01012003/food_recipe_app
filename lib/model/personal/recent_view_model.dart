@@ -1,4 +1,4 @@
-import 'package:food_recipe_app/model/food_model.dart';
+import 'package:food_recipe_app/model/food/food_model.dart';
 
 class RecentViewModel {
   late String viewId;

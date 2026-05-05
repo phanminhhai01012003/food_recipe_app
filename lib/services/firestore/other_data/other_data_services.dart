@@ -3,8 +3,8 @@ import 'package:food_recipe_app/common/utils/logger.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
-import 'package:food_recipe_app/model/category_model.dart';
-import 'package:food_recipe_app/model/subscription_model.dart';
+import 'package:food_recipe_app/model/food/category_model.dart';
+import 'package:food_recipe_app/model/app/subscription_model.dart';
 import 'package:food_recipe_app/services/firestore/other_data/other_data_repo.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 

@@ -3,7 +3,7 @@ import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/utils/routes.dart';
-import 'package:food_recipe_app/model/category_model.dart';
+import 'package:food_recipe_app/model/food/category_model.dart';
 
 class CategoriesGridList extends StatefulWidget {
   const CategoriesGridList({super.key});

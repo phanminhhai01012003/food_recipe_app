@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/model/comment_model.dart';
+import 'package:food_recipe_app/model/community/comment_model.dart';
 
 abstract class CommentRepo {
   Future<void> addComment(BuildContext context, CommentModel comment, String foodId);

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/utils/routes.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/extension/datetime_extension.dart';
-import 'package:food_recipe_app/model/comment_model.dart';
-import 'package:food_recipe_app/model/food_model.dart';
-import 'package:food_recipe_app/model/notification_model.dart';
+import 'package:food_recipe_app/model/community/comment_model.dart';
+import 'package:food_recipe_app/model/food/food_model.dart';
+import 'package:food_recipe_app/model/app/notification_model.dart';
 
 class NotificationList extends StatefulWidget {
   final Widget imageWidget;

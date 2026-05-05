@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
-import 'package:food_recipe_app/model/cookbook_model.dart';
-import 'package:food_recipe_app/model/food_model.dart';
+import 'package:food_recipe_app/model/food/cookbook_model.dart';
+import 'package:food_recipe_app/model/food/food_model.dart';
 
 class CookbookList extends StatefulWidget {
   final CookbookModel cookbook;

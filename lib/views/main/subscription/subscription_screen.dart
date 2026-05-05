@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
-import 'package:food_recipe_app/model/subscription_model.dart';
+import 'package:food_recipe_app/model/app/subscription_model.dart';
 import 'package:food_recipe_app/views/main/subscription/benefit.dart';
 import 'package:food_recipe_app/views/main/subscription/subscription_widget.dart';
 import 'package:food_recipe_app/widget/load_data/load_data.dart';

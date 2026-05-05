@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/model/comment_model.dart';
-import 'package:food_recipe_app/model/cookbook_model.dart';
-import 'package:food_recipe_app/model/food_model.dart';
-import 'package:food_recipe_app/model/rating_model.dart';
-import 'package:food_recipe_app/model/user_model.dart';
+import 'package:food_recipe_app/model/community/comment_model.dart';
+import 'package:food_recipe_app/model/food/cookbook_model.dart';
+import 'package:food_recipe_app/model/food/food_model.dart';
+import 'package:food_recipe_app/model/community/rating_model.dart';
+import 'package:food_recipe_app/model/app/user_model.dart';
 import 'package:food_recipe_app/views/auth/change_password.dart';
 import 'package:food_recipe_app/views/auth/forgot_password.dart';
 import 'package:food_recipe_app/views/auth/login.dart';

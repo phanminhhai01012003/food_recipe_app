@@ -5,8 +5,8 @@ import 'package:food_recipe_app/common/style/app_assets.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/utils/convert.dart';
 import 'package:food_recipe_app/common/utils/routes.dart';
-import 'package:food_recipe_app/model/food_model.dart';
-import 'package:food_recipe_app/model/recent_view_model.dart';
+import 'package:food_recipe_app/model/food/food_model.dart';
+import 'package:food_recipe_app/model/personal/recent_view_model.dart';
 import 'package:food_recipe_app/provider/history_state.dart';
 import 'package:provider/provider.dart';
 

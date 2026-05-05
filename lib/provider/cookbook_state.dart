@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
-import 'package:food_recipe_app/model/cookbook_model.dart';
-import 'package:food_recipe_app/model/food_model.dart';
+import 'package:food_recipe_app/model/food/cookbook_model.dart';
+import 'package:food_recipe_app/model/food/food_model.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 
 import '../common/utils/logger.dart';

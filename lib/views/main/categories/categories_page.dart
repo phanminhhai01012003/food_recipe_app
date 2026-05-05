@@ -7,8 +7,8 @@ import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_assets.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/utils/routes.dart';
-import 'package:food_recipe_app/model/category_model.dart';
-import 'package:food_recipe_app/model/food_model.dart';
+import 'package:food_recipe_app/model/food/category_model.dart';
+import 'package:food_recipe_app/model/food/food_model.dart';
 import 'package:food_recipe_app/widget/food_display_widget/food_display_grid.dart';
 
 class CategoriesPage extends StatefulWidget {

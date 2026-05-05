@@ -8,7 +8,7 @@ import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_assets.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/utils/routes.dart';
-import 'package:food_recipe_app/model/ingredient_model.dart';
+import 'package:food_recipe_app/model/food/ingredient_model.dart';
 import 'package:food_recipe_app/provider/fridge_state.dart';
 import 'package:food_recipe_app/views/main/add_edit_food/widget/file_chosen_widget.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_image_picker.dart';

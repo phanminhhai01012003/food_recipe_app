@@ -5,7 +5,7 @@ import 'package:food_recipe_app/common/utils/routes.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/constants/list_constants.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
-import 'package:food_recipe_app/model/rating_model.dart';
+import 'package:food_recipe_app/model/community/rating_model.dart';
 import 'package:food_recipe_app/views/main/sub_features/app_rating/rate_component.dart';
 import 'package:food_recipe_app/widget/load_data/load_data.dart';
 
