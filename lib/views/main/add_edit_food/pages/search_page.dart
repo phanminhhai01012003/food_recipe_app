@@ -178,7 +178,7 @@ class _SearchPageState extends State<SearchPage> {
                     return Center(child: CircularProgressIndicator(color: AppColors.yellow));
                   } else {
                     var filterDoc = snapshot.data!.where((e){
-                      return e.title.toLowerCase().contains(searchQuery!);
+                      return e.title.toLowerCase().contains(searchQuery ?? "");
                     }).toList();
                     if (isGrid) {
                       return GridView.builder(

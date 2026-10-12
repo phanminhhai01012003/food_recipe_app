@@ -124,7 +124,14 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
             Stack(
               children: [
                 GestureDetector(
-                  onTap: () async => await showImageChoiceBottomSheet(context, widget.food.image),
+                  onLongPress: () async {
+                    if (isImage) return;
+                    await showImageChoiceBottomSheet(context, widget.food.image);
+                  },
+                  onTap: () async {
+                    if (!isImage) return;
+                    await showImageChoiceBottomSheet(context, widget.food.image);
+                  },
                   child: Hero(
                     tag: widget.food.image,
                     child: Builder(

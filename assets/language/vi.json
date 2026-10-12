@@ -314,6 +314,7 @@
     "smartFridge": "Tủ lạnh thông minh",
     "originalAmount": "Số lượng",
     "consumption": "Đã tiêu thụ",
+    "remain": "Còn lại",
     "expired": "Đã hết hạn",
     "canUse": "Có thể sử dụng",
     "mfg": "NSX",
@@ -325,5 +326,9 @@
     "ingredientName": "Tên nguyên liệu",
     "unit": "Đơn vị",
     "addIngredientSuccess": "Thêm nguyên liệu thành công",
-    "editIngredientSuccess": "Cập nhật nguyên liệu thành công"
+    "editIngredientSuccess": "Cập nhật nguyên liệu thành công",
+    "errorIngredient": "Không đủ số lượng nguyên liệu",
+    "expiredError": "Bạn không thể thêm sản phẩm này do đã hết hạn sử dụng",
+    "deleteIngredientTitle": "Xóa nguyên liệu",
+    "deleteIngredientDesc": "Chà, có phải nhà bạn đã hết nguyên liệu nên bạn muốn xóa phải không"
 }

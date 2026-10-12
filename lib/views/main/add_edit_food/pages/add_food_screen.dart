@@ -525,8 +525,14 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))
                   ),
                   onPressed: () {
-                    
-                  }, 
+                    Navigator.push(context, checkDeviceRoute(addIngredientFromFridgeView)).then((result){
+                      if (result != null) {
+                        (result as List<String>).forEach((ingredient) {
+                          ingredientController.add(TextEditingController(text: ingredient));
+                        });
+                      }
+                    });
+                  },
                   child: Text("addFromFridge".tr(),
                     style: TextStyle(fontSize: 16),
                   )
