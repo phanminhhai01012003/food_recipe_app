@@ -47,7 +47,7 @@ class _RegisterState extends State<Register> {
             userName: nameController.text, 
             avatar: userDefaultImage, 
             email: emailController.text, 
-            nickName: "",
+            nickName: nameController.text.toLowerCase().trim(),
             description: "",
             phone: phoneController.text.isEmpty ? "unknown" : phoneController.text,
             loginMethod: "Email and Password",
@@ -62,11 +62,7 @@ class _RegisterState extends State<Register> {
           await followServices.addFollowUsers(context, follow, user.userId);
           context.loaderOverlay.hide();
           Message.showScaffoldMessage(context, "signUpSuccess".tr(), AppColors.green);
-          Navigator.pushAndRemoveUntil(
-            context, 
-            checkDeviceRoute(mainPage), 
-            (route) => false
-          );
+          Navigator.pop(context);
         } else {
           Message.showScaffoldMessage(context, "signUpFail".tr(), AppColors.red);
           context.loaderOverlay.hide();

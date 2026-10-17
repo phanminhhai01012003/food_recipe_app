@@ -6,7 +6,6 @@ import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
-
 class ChangePassword extends StatefulWidget {
   const ChangePassword({super.key});
 
@@ -20,23 +19,25 @@ class _ChangePasswordState extends State<ChangePassword> {
   final newpasswordController = TextEditingController();
   final confirmController = TextEditingController();
   final formKey = GlobalKey<FormState>();
-  void handle() async{
+  void handle() async {
     context.loaderOverlay.show();
     await Future.delayed(Duration(seconds: 2));
-    if (formKey.currentState!.validate()){
-      if (newpasswordController.text != confirmController.text){
+    if (formKey.currentState!.validate()) {
+      if (newpasswordController.text != confirmController.text) {
         context.loaderOverlay.hide();
         Message.showToast("passwordInvalid2".tr());
         return;
       }
       formKey.currentState!.save();
-      await authServices.changePassword(context,
-        email: currentUser.email!,
-        oldPassword: oldPasswordController.text,
-        newPassword: newpasswordController.text
-      ).then((_){
+      await authServices
+          .changePassword(context,
+              email: currentUser.email!,
+              oldPassword: oldPasswordController.text,
+              newPassword: newpasswordController.text)
+          .then((_) {
         context.loaderOverlay.hide();
-        Message.showScaffoldMessage(context, "changePasswordSuccess".tr(), AppColors.green);
+        Message.showScaffoldMessage(
+            context, "changePasswordSuccess".tr(), AppColors.green);
         Navigator.pop(context);
       });
     }
@@ -46,242 +47,223 @@ class _ChangePasswordState extends State<ChangePassword> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: theme.colorScheme.primary,
-      appBar: AppBar(
-        backgroundColor: theme.appBarTheme.backgroundColor,
-        foregroundColor: theme.appBarTheme.foregroundColor,
-        title: Text("changePassword".tr(),
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w700
+        backgroundColor: theme.colorScheme.primary,
+        appBar: AppBar(
+          backgroundColor: theme.appBarTheme.backgroundColor,
+          foregroundColor: theme.appBarTheme.foregroundColor,
+          title: Text(
+            "changePassword".tr(),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
           ),
+          centerTitle: true,
         ),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 20),
-        child: Form(
-          key: formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-                    Text("oldPassword".tr(),
-                      style: TextStyle(
-                        color: theme.colorScheme.secondary,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    TextFormField(
-                      controller: oldPasswordController,
-                      obscureText: isObscured1,
-                      cursorColor: AppColors.blue,
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
+        body: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 20),
+          child: Form(
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "oldPassword".tr(),
+                  style: TextStyle(
+                      color: theme.colorScheme.secondary,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 10),
+                TextFormField(
+                  controller: oldPasswordController,
+                  obscureText: isObscured1,
+                  cursorColor: AppColors.blue,
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: theme.colorScheme.secondary)
-                        ),
-                        errorBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: theme.colorScheme.secondary)),
+                      errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: AppColors.red)
-                        ),
-                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: AppColors.red)),
+                      focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: AppColors.green)
-                        ),
-                        hintText: "oldPasswordInput".tr(),
-                        hintStyle: TextStyle(
+                          borderSide: BorderSide(color: AppColors.green)),
+                      hintText: "oldPasswordInput".tr(),
+                      hintStyle: TextStyle(
                           color: theme.colorScheme.secondary,
                           fontSize: 12,
-                          fontWeight: FontWeight.normal
-                        ),
-                        prefixIcon: Container(
+                          fontWeight: FontWeight.normal),
+                      prefixIcon: Container(
                           width: 20,
                           height: 20,
                           alignment: Alignment.center,
-                          child: Icon(Icons.lock, color: theme.colorScheme.secondary)
+                          child: Icon(Icons.lock,
+                              color: theme.colorScheme.secondary)),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          isObscured1 ? Icons.visibility : Icons.visibility_off,
+                          color: theme.colorScheme.secondary,
                         ),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            isObscured1 ? Icons.visibility : Icons.visibility_off,
-                            color: theme.colorScheme.secondary,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              isObscured1 = !isObscured1;
-                            });
-                          },
-                        )
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "passwordEmpty".tr();
-                        }
-                        if (value.length < 6) {
-                          return "passwordInvalid1".tr();
-                        }
-                        return null;
-                      },
-                      style: TextStyle(
-                        color: theme.colorScheme.secondary,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w700
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    Text("newPassword".tr(),
-                      style: TextStyle(
-                        color: theme.colorScheme.secondary,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    TextFormField(
-                      controller: newpasswordController,
-                      obscureText: isObscured2,
-                      cursorColor: AppColors.blue,
-                      style: TextStyle(
-                        color: theme.colorScheme.secondary,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w700
-                      ),
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
+                        onPressed: () {
+                          setState(() {
+                            isObscured1 = !isObscured1;
+                          });
+                        },
+                      )),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "passwordEmpty".tr();
+                    }
+                    if (value.length < 6) {
+                      return "passwordInvalid1".tr();
+                    }
+                    return null;
+                  },
+                  style: TextStyle(
+                      color: theme.colorScheme.secondary,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  "newPassword".tr(),
+                  style: TextStyle(
+                      color: theme.colorScheme.secondary,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 10),
+                TextFormField(
+                  controller: newpasswordController,
+                  obscureText: isObscured2,
+                  cursorColor: AppColors.blue,
+                  style: TextStyle(
+                      color: theme.colorScheme.secondary,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700),
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: theme.colorScheme.secondary)
-                        ),
-                        errorBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: theme.colorScheme.secondary)),
+                      errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: AppColors.red)
-                        ),
-                        hintText: "newPasswordInput".tr(),
-                        hintStyle: TextStyle(
+                          borderSide: BorderSide(color: AppColors.red)),
+                      hintText: "newPasswordInput".tr(),
+                      hintStyle: TextStyle(
                           color: theme.colorScheme.secondary,
                           fontSize: 12,
-                          fontWeight: FontWeight.normal
-                        ),
-                        focusedBorder: OutlineInputBorder(
+                          fontWeight: FontWeight.normal),
+                      focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: AppColors.green)
-                        ),
-                        prefixIcon: Container(
+                          borderSide: BorderSide(color: AppColors.green)),
+                      prefixIcon: Container(
                           width: 20,
                           height: 20,
                           alignment: Alignment.center,
-                          child: Icon(Icons.lock, color: theme.colorScheme.secondary)
+                          child: Icon(Icons.lock,
+                              color: theme.colorScheme.secondary)),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          isObscured2 ? Icons.visibility : Icons.visibility_off,
+                          color: theme.colorScheme.secondary,
                         ),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            isObscured2 ? Icons.visibility : Icons.visibility_off,
-                            color: theme.colorScheme.secondary,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              isObscured2 = !isObscured2;
-                            });
-                          },
-                        )
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "passwordEmpty".tr();
-                        }
-                        if (value.length < 6) {
-                          return "passwordInvalid1".tr();
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(height: 20),
-                    Text("confirmPassword".tr(),
-                      style: TextStyle(
-                        color: theme.colorScheme.secondary,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    TextFormField(
-                      controller: confirmController,
-                      style: TextStyle(
-                        color: theme.colorScheme.secondary,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w700
-                      ),
-                      obscureText: isObscured3,
-                      cursorColor: AppColors.blue,
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
+                        onPressed: () {
+                          setState(() {
+                            isObscured2 = !isObscured2;
+                          });
+                        },
+                      )),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "passwordEmpty".tr();
+                    }
+                    if (value.length < 6) {
+                      return "passwordInvalid1".tr();
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 20),
+                Text(
+                  "confirmPassword".tr(),
+                  style: TextStyle(
+                      color: theme.colorScheme.secondary,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 10),
+                TextFormField(
+                  controller: confirmController,
+                  style: TextStyle(
+                      color: theme.colorScheme.secondary,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700),
+                  obscureText: isObscured3,
+                  cursorColor: AppColors.blue,
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: theme.colorScheme.secondary)
-                        ),
-                        errorBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: theme.colorScheme.secondary)),
+                      errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: AppColors.red)
-                        ),
-                        hintText: "confirmPasswordInput".tr(),
-                        hintStyle: TextStyle(
+                          borderSide: BorderSide(color: AppColors.red)),
+                      hintText: "confirmPasswordInput".tr(),
+                      hintStyle: TextStyle(
                           color: theme.colorScheme.secondary,
                           fontSize: 12,
-                          fontWeight: FontWeight.normal
-                        ),
-                        focusedBorder: OutlineInputBorder(
+                          fontWeight: FontWeight.normal),
+                      focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: AppColors.green)
-                        ),
-                        prefixIcon: Container(
+                          borderSide: BorderSide(color: AppColors.green)),
+                      prefixIcon: Container(
                           width: 20,
                           height: 20,
                           alignment: Alignment.center,
-                          child: Icon(Icons.lock, color: theme.colorScheme.secondary)
+                          child: Icon(Icons.lock,
+                              color: theme.colorScheme.secondary)),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          isObscured3 ? Icons.visibility : Icons.visibility_off,
+                          color: theme.colorScheme.secondary,
                         ),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            isObscured3 ? Icons.visibility : Icons.visibility_off,
-                            color: theme.colorScheme.secondary,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              isObscured3 = !isObscured3;
-                            });
-                          },
-                        )
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "passwordEmpty".tr();
-                        }
-                        if (value.length < 6) {
-                          return "passwordInvalid1".tr();
-                        }
-                        return null;
-                      },
+                        onPressed: () {
+                          setState(() {
+                            isObscured3 = !isObscured3;
+                          });
+                        },
+                      )),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "passwordEmpty".tr();
+                    }
+                    if (value.length < 6) {
+                      return "passwordInvalid1".tr();
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 20),
+                SizedBox(
+                  height: 50,
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.green,
+                        foregroundColor: AppColors.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(33))),
+                    onPressed: handle,
+                    child: Text(
+                      "confirm".tr(),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
                     ),
-                    SizedBox(height: 20),
-                    SizedBox(
-                      height: 50,
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.green,
-                          foregroundColor: AppColors.white,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(33))
-                        ),
-                        onPressed: handle,
-                        child: Text("confirm".tr(), 
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700
-                          ),
-                        ),
-                      ),
-                    ),
-            ],
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      )
-    );
+        ));
   }
 }

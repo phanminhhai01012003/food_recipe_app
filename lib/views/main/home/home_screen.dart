@@ -164,6 +164,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(height: 20),
                       AnimationSlider(),
                       SizedBox(height: 20),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "popularCategories".tr(),
+                          style: TextStyle(
+                            color: theme.colorScheme.secondary,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      CategoriesGridList(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -244,20 +257,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       SizedBox(height: 10),
                       FoodRecipeDisplay(stream: foodServices.getFood(context)),
-                      SizedBox(height: 20),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "popularCategories".tr(),
-                          style: TextStyle(
-                            color: theme.colorScheme.secondary,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      CategoriesGridList()
                     ],
                   ),
                 ),

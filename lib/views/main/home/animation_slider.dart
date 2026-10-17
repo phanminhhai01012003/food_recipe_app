@@ -14,7 +14,11 @@ class AnimationSlider extends StatefulWidget {
 class _AnimationSliderState extends State<AnimationSlider> {
   int activeIndex = 0;
   final _controller = CarouselSliderController();
-  void animateToSlide(int i) => _controller.animateToPage(i);
+  void animateToSlide(int i) => _controller.animateToPage(
+    i,
+    duration: Duration(seconds: 2),
+    curve: Curves.easeInOut
+  );
   @override
   Widget build(BuildContext context) {
     return Column(

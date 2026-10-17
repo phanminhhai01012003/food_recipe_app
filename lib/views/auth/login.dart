@@ -60,7 +60,7 @@ class _LoginState extends State<Login> {
           avatar: value.user!.photoURL ?? "", 
           email: value.user!.email ?? "", 
           description: "",
-          nickName: "",
+          nickName: (value.user!.displayName ?? "").toLowerCase().trim(),
           phone: value.user!.phoneNumber ?? "",
           loginMethod: "Apple",
           token: token ?? ""
@@ -97,7 +97,7 @@ class _LoginState extends State<Login> {
           avatar: value.user!.photoURL ?? "", 
           email: value.user!.email ?? "", 
           description: "",
-          nickName: "",
+          nickName: (value.user!.displayName ?? "").toLowerCase().trim(),
           phone: value.user!.phoneNumber ?? "",
           loginMethod: "Google",
           token: token ?? "",
@@ -134,7 +134,7 @@ class _LoginState extends State<Login> {
           avatar: value.user!.photoURL ?? "", 
           email: value.user!.email ?? "", 
           description: "",
-          nickName: "",
+          nickName: (value.user!.displayName ?? "").toLowerCase().trim(),
           phone: value.user!.phoneNumber ?? "",
           loginMethod: "Facebook",
           token: token ?? ""
