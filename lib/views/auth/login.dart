@@ -398,7 +398,7 @@ class _LoginState extends State<Login> {
                           onTap: handleWithApple,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(50),
-                            child: Image.asset(fbImage,
+                            child: Image.asset(appleImage,
                               fit: BoxFit.cover,
                               height: 50,
                               width: 50,
@@ -409,16 +409,32 @@ class _LoginState extends State<Login> {
                     ],
                   ),
                   SizedBox(height: 20),
-                  TextButton(
-                    onPressed: () async => await changeLanguageModal(context), 
-                    child: Text(
-                      "lang".tr(),
-                      style: TextStyle(
-                        color: AppColors.black,
-                        fontSize: 12,
-                        fontWeight: FontWeight.normal
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                        onPressed: () async => await changeLanguageModal(context), 
+                        child: Text(
+                          "lang".tr(),
+                          style: TextStyle(
+                            color: AppColors.black,
+                            fontSize: 12,
+                            fontWeight: FontWeight.normal
+                          ),
+                        )
                       ),
-                    )
+                      TextButton(
+                        onPressed: () => Navigator.pop(context), 
+                        child: Text(
+                          "prev".tr(),
+                          style: TextStyle(
+                            color: AppColors.black,
+                            fontSize: 12,
+                            fontWeight: FontWeight.normal
+                          ),
+                        )
+                      ),
+                    ],
                   )
                 ],
               ),

@@ -7,8 +7,10 @@ import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/utils/routes.dart';
 import 'package:food_recipe_app/data/enum.dart';
 import 'package:food_recipe_app/model/app/user_model.dart';
-import 'package:food_recipe_app/views/main/settings/selection.dart';
-import 'package:food_recipe_app/views/main/settings/user_widget.dart';
+import 'package:food_recipe_app/views/main/settings/components/no_login_component.dart';
+import 'package:food_recipe_app/views/main/settings/components/selection.dart';
+import 'package:food_recipe_app/views/main/settings/components/user_widget.dart';
+import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -19,6 +21,9 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   void onChooseMode(ModeSelection mode) async{
+    if (auth.currentUser == null) {
+      showLoginRequiredDialog();
+    }
     switch(mode){
       case ModeSelection.report:
         Navigator.push(context, checkDeviceRoute(reportPage));
@@ -33,6 +38,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
         Navigator.push(context, checkDeviceRoute(settingsDetail));
         break;
     }
+  }
+  void showLoginRequiredDialog() {
+    ShowYesnoDialog.checkDeviceDialog(
+      context, 
+      title: "mustLoginTitle".tr(), 
+      content: "mustLoginContent".tr(), 
+      onAcceptTap: () async{
+        Navigator.pop(context);
+        await Future.delayed(Duration(seconds: 1), (){
+          Navigator.push(context, checkDeviceRoute(loginPage));
+        });
+      }, 
+      onCancelTap: () => Navigator.pop(context)
+    );
   }
   IconData getIcon(ModeSelection mode){
     switch (mode) {
@@ -68,7 +87,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            FutureBuilder(
+            auth.currentUser != null ? FutureBuilder(
               future: userServices.getUserById(context, currentUser.uid), 
               builder: (context, snapshot) {
                 if (!snapshot.hasData || snapshot.hasError) {
@@ -87,6 +106,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   );
                 }
               }
+            ) : NoLoginComponent(
+              onTap: () => Navigator.push(context, checkDeviceRoute(loginPage)),
             ),
             SizedBox(height: 30),
             Divider(height: 1, thickness: 1, color: AppColors.grey),

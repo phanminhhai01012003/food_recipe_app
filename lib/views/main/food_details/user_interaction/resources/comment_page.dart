@@ -7,9 +7,11 @@ import 'package:food_recipe_app/common/constants/firebase_constants.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
 import 'package:food_recipe_app/common/utils/convert.dart';
+import 'package:food_recipe_app/common/utils/routes.dart';
 import 'package:food_recipe_app/model/community/comment_model.dart';
 import 'package:food_recipe_app/model/food/food_model.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/component/comment_widget.dart';
+import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:food_recipe_app/widget/load_data/load_data.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 
@@ -30,6 +32,20 @@ class _CommentPageState extends State<CommentPage> {
     return snapshot.count!;
   }
   void onAddComment() async{
+    if (auth.currentUser == null) {
+      ShowYesnoDialog.checkDeviceDialog(
+        context, 
+        title: "mustLoginTitle".tr(), 
+        content: "mustLoginContent".tr(), 
+        onAcceptTap: () async{
+          Navigator.pop(context);
+          await Future.delayed(Duration(seconds: 1), (){
+            Navigator.push(context, checkDeviceRoute(loginPage));
+          });
+        }, 
+        onCancelTap: () => Navigator.pop(context)
+      );
+    }
     CommentModel comment = CommentModel(
       commentId: generateRandomString(23),
       userId: currentUser.uid,

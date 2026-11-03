@@ -17,7 +17,9 @@ import 'package:food_recipe_app/provider/history_state.dart';
 import 'package:food_recipe_app/provider/save_state.dart';
 import 'package:food_recipe_app/views/main/cookbook/widget/cookbook_widget.dart';
 import 'package:food_recipe_app/views/main/refrigerator/widgets/product_grid.dart';
-import 'package:food_recipe_app/views/main/settings/user_widget.dart';
+import 'package:food_recipe_app/views/main/settings/components/no_login_component.dart';
+import 'package:food_recipe_app/views/main/settings/components/user_widget.dart';
+import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:food_recipe_app/widget/food_display_widget/food_display_grid.dart';
 import 'package:provider/provider.dart';
 
@@ -48,6 +50,20 @@ class _StorageViewState extends State<StorageView> {
         break;
     }
   }
+  void showLoginRequiredDialog(){
+    ShowYesnoDialog.checkDeviceDialog(
+      context, 
+      title: "mustLoginTitle".tr(), 
+      content: "mustLoginContent".tr(), 
+      onAcceptTap: () async{
+        Navigator.pop(context);
+        await Future.delayed(Duration(seconds: 1), (){
+          Navigator.push(context, checkDeviceRoute(loginPage));
+        });
+      }, 
+      onCancelTap: () => Navigator.pop(context)
+    );
+  }
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -58,7 +74,7 @@ class _StorageViewState extends State<StorageView> {
           padding: EdgeInsets.all(16),
           child: Column(
             children: [
-              FutureBuilder(
+              auth.currentUser != null ? FutureBuilder(
                 future: userServices.getUserById(context, currentUser.uid), 
                 builder: (context, snapshot) {
                   if (!snapshot.hasData || snapshot.hasError) {
@@ -77,7 +93,7 @@ class _StorageViewState extends State<StorageView> {
                     );
                   }
                 },
-              ),
+              ) : NoLoginComponent(onTap: () => Navigator.push(context, checkDeviceRoute(loginPage))),
               SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -91,7 +107,7 @@ class _StorageViewState extends State<StorageView> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () => onNavigation(StorageMode.myFood), 
+                    onPressed: () => auth.currentUser == null ? showLoginRequiredDialog() : onNavigation(StorageMode.myFood), 
                     child: Text(
                       "viewAll".tr(),
                       style: TextStyle(
@@ -143,7 +159,7 @@ class _StorageViewState extends State<StorageView> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () => onNavigation(StorageMode.saveFood), 
+                    onPressed: () => auth.currentUser == null ? showLoginRequiredDialog() : onNavigation(StorageMode.saveFood), 
                     child: Text(
                       "viewAll".tr(),
                       style: TextStyle(
@@ -192,7 +208,7 @@ class _StorageViewState extends State<StorageView> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () => onNavigation(StorageMode.recentView), 
+                    onPressed: () => auth.currentUser == null ? showLoginRequiredDialog() : onNavigation(StorageMode.recentView), 
                     child: Text(
                       "viewAll".tr(),
                       style: TextStyle(
@@ -241,7 +257,7 @@ class _StorageViewState extends State<StorageView> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () => onNavigation(StorageMode.cookbook), 
+                    onPressed: () => auth.currentUser == null ? showLoginRequiredDialog() : onNavigation(StorageMode.cookbook), 
                     child: Text(
                       "viewAll".tr(),
                       style: TextStyle(

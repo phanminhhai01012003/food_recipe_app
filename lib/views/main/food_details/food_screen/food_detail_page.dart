@@ -16,6 +16,7 @@ import 'package:food_recipe_app/model/food/food_model.dart';
 import 'package:food_recipe_app/model/personal/save_food_model.dart';
 import 'package:food_recipe_app/provider/save_state.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/resources/like_list_modal.dart';
+import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:food_recipe_app/widget/full_screen_image/show_image_sheet.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_report_modal.dart';
 import 'package:provider/provider.dart';
@@ -43,6 +44,20 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
     isLikedPost = widget.food.likes.any((likes) => likes['id'] == currentUser.uid);
     isSaved = context.read<SaveState>().foodProducts.any((e) => e.foods == widget.food);
     initVideo();
+  }
+  void showLoginRequiredDialog() {
+    ShowYesnoDialog.checkDeviceDialog(
+      context, 
+      title: "mustLoginTitle".tr(), 
+      content: "mustLoginContent".tr(), 
+      onAcceptTap: () async{
+        Navigator.pop(context);
+        await Future.delayed(Duration(seconds: 1), (){
+          Navigator.push(context, checkDeviceRoute(loginPage));
+        });
+      }, 
+      onCancelTap: () => Navigator.pop(context)
+    );
   }
   void toggleLikePost(){
     setState(() {
@@ -242,12 +257,15 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                     ),
                   ),
                   SizedBox(height: 20),
-                  Text(
-                    "${"categories".tr()}: ${widget.food.tag.tr()}",
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                      color: theme.colorScheme.secondary
+                  GestureDetector(
+                    onTap:() => Navigator.push(context, checkDeviceRoute(listofFoodByTag(widget.food.tag))),  
+                    child: Text(
+                      "${"categories".tr()}: ${widget.food.tag.tr()}",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                        color: theme.colorScheme.secondary
+                      ),
                     ),
                   ),
                   SizedBox(height: 20),
@@ -472,6 +490,9 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                         ),
                         IconButton(
                           onPressed: () {
+                            if (auth.currentUser == null) {
+                              showLoginRequiredDialog();
+                            }
                             setState(() {
                               isSaved = !isSaved;
                             });
@@ -535,7 +556,11 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                         shape: StadiumBorder()
                       ),
                       onPressed: () {
-                        Navigator.push(context, checkDeviceRoute(cookbookSelection(widget.food)));
+                        if (auth.currentUser != null) {
+                          Navigator.push(context, checkDeviceRoute(cookbookSelection(widget.food)));
+                        } else {
+                          showLoginRequiredDialog();
+                        }
                       }, 
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,

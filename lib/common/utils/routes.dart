@@ -32,8 +32,8 @@ import 'package:food_recipe_app/views/main/refrigerator/src/add_from_fridge.dart
 import 'package:food_recipe_app/views/main/refrigerator/src/add_ingredients.dart';
 import 'package:food_recipe_app/views/main/refrigerator/src/edit_ingredients.dart';
 import 'package:food_recipe_app/views/main/report/my_report_page.dart';
-import 'package:food_recipe_app/views/main/settings/settings_detail_page.dart';
-import 'package:food_recipe_app/views/main/settings/settings_screen.dart';
+import 'package:food_recipe_app/views/main/settings/pages/settings_detail_page.dart';
+import 'package:food_recipe_app/views/main/settings/pages/settings_screen.dart';
 import 'package:food_recipe_app/views/main/statistics/pages/stats_screen.dart';
 import 'package:food_recipe_app/views/main/sub_features/about/about_screen.dart';
 import 'package:food_recipe_app/views/main/add_edit_food/pages/add_food_screen.dart';

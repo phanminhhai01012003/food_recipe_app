@@ -90,7 +90,7 @@ class _OnboardState extends State<Onboard> with TickerProviderStateMixin{
 
   void navigateToNewPage() async{
     await spServices.setBoolValue('onboarding_seen', true);
-    Navigator.pushAndRemoveUntil(context, checkDeviceRoute(loginPage), (route) => false);
+    Navigator.pushAndRemoveUntil(context, checkDeviceRoute(mainPage), (route) => false);
   }
 
   Gradient get getGradientColors {

@@ -177,9 +177,9 @@ class _SearchPageState extends State<SearchPage> {
                   } else if (snapshot.connectionState == ConnectionState.waiting) { 
                     return Center(child: CircularProgressIndicator(color: AppColors.yellow));
                   } else {
-                    var filterDoc = snapshot.data!.where((e){
-                      return e.title.toLowerCase().contains(searchQuery ?? "");
-                    }).toList();
+                    var filterDoc = snapshot.data!
+                      .where((e) => e.title.toLowerCase().contains(searchQuery ?? ""))
+                      .toList();
                     if (isGrid) {
                       return GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

@@ -4,7 +4,7 @@ import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/model/community/comment_model.dart';
 import 'package:food_recipe_app/services/firestore/comment/comment_services.dart';
 import 'package:food_recipe_app/views/main/food_details/user_interaction/component/edit_comment_dialog.dart';
-import 'package:food_recipe_app/views/main/settings/selection.dart';
+import 'package:food_recipe_app/views/main/settings/components/selection.dart';
 import 'package:food_recipe_app/widget/bottom_sheet/show_report_modal.dart';
 import 'package:food_recipe_app/widget/other/message.dart';
 import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
