@@ -99,6 +99,7 @@
     "ingredientsOrStepsInvalid": "Nguyên liệu hoặc cách làm không được để trống",
     "dietOrDurationInvalid": "Khẩu phần ăn uống hoặc thời gian thực hiện không hợp lệ",
     "search": "Tìm kiếm",
+    "searchRecent": "Tìm kiếm gần đây",
     "mostRecent": "Gần đây nhất",
     "earliest": "Sớm nhất",
     "popular": "Phổ biến",
@@ -333,5 +334,6 @@
     "errorIngredient": "Không đủ số lượng nguyên liệu",
     "expiredError": "Bạn không thể thêm sản phẩm này do đã hết hạn sử dụng",
     "deleteIngredientTitle": "Xóa nguyên liệu",
-    "deleteIngredientDesc": "Chà, có phải nhà bạn đã hết nguyên liệu nên bạn muốn xóa phải không"
+    "deleteIngredientDesc": "Chà, có phải nhà bạn đã hết nguyên liệu nên bạn muốn xóa phải không",
+    "mPage": "Màn hình chính"
 }

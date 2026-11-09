@@ -99,6 +99,7 @@
 	"ingredientsOrStepsInvalid": "Ingredients or steps cannot be empty",
 	"dietOrDurationInvalid": "Invalid serving or duration",
 	"search": "Search",
+	"searchRecent": "Recent searches",
 	"mostRecent": "Most recent",
 	"earliest": "Earliest",
 	"popular": "Popular",
@@ -333,5 +334,6 @@
 	"errorIngredient": "Not enough ingredient amount",
 	"expiredError": "You cannot add this product as it has expired",
 	"deleteIngredientTitle": "Delete ingredient",
-    "deleteIngredientDesc": "Well, is it that your house has run out of ingredients, so you want to delete it?"
+    "deleteIngredientDesc": "Well, is it that your house has run out of ingredients, so you want to delete it?",
+	"mPage": "Main page"
 }

@@ -189,7 +189,11 @@ class AuthServices extends AuthRepo{
     try {
       final google = GoogleSignIn();
       await Future.wait([
-        google.signOut().then((value) => value!.clearAuthCache()),
+        google.signOut().then((value) {
+          if (value != null) {
+            value.clearAuthCache();
+          }
+        }),
         auth.signOut()
       ]);
     } catch (e) {

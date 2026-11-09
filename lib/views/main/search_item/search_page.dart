@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/common/constants/class_defined.dart';
 import 'package:food_recipe_app/common/extension/string_extension.dart';
 import 'package:food_recipe_app/common/style/app_colors.dart';
+import 'package:food_recipe_app/views/main/search_item/recent_searches.dart';
+import 'package:food_recipe_app/widget/dialog/show_yesno_dialog.dart';
 import 'package:food_recipe_app/widget/food_display_widget/food_display_grid.dart';
 import 'package:food_recipe_app/widget/food_display_widget/food_display_list.dart';
 import 'package:food_recipe_app/widget/load_data/load_data.dart';
@@ -20,27 +22,10 @@ class _SearchPageState extends State<SearchPage> {
   List<String> recentSearches = [];
   final _searchController = TextEditingController();
   String? searchQuery;
-  Future<void> saveSearchTerm(String term) async{
-    recentSearches = await spServices.getStringListValue('recentSearches') ?? [];
-    if (!recentSearches.contains(term)) {
-      recentSearches.insert(0, term);
-      if (recentSearches.length > 10) {
-        recentSearches = recentSearches.sublist(0, 10);
-      }
-      await spServices.setStringListValue('recentSearches', recentSearches);
-    }
-  }
-  Future<void> removeSearchTerm(String term) async{
-    recentSearches = await spServices.getStringListValue('recentSearches') ?? [];
-    recentSearches.remove(term);
-    await spServices.setStringListValue('recentSearches', recentSearches);
-  }
-  Future<List<String>> loadRecentSearch() async{
-    return await spServices.getStringListValue('recentSearches') ?? [];
-  }
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final rSearch = RecentSearches(recentSearches: recentSearches);
     return Scaffold(
       backgroundColor: theme.colorScheme.primary,
       appBar: AppBar(
@@ -116,7 +101,7 @@ class _SearchPageState extends State<SearchPage> {
                   )
                 ),
                 onFieldSubmitted: (newValue) async{
-                  await saveSearchTerm(newValue);
+                  await rSearch.saveSearchTerm(newValue);
                   setState(() {
                     searchQuery = newValue;
                   });
@@ -128,8 +113,46 @@ class _SearchPageState extends State<SearchPage> {
                 }
               ),
               SizedBox(height: 20),
+              if (recentSearches.isEmpty) ...[
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "recentSearches".tr(),
+                        style: TextStyle(
+                          color: theme.colorScheme.secondary,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: (){
+                          ShowYesnoDialog.checkDeviceDialog(
+                            context, 
+                            title: "", 
+                            content: "", 
+                            onAcceptTap: () async{
+                              Navigator.pop(context);
+                              await Future.delayed(Duration(seconds: 1));
+                              rSearch.clearAllSearches();
+                            }, 
+                            onCancelTap: () => Navigator.pop(context)
+                          );
+                        }, 
+                        icon: Icon(
+                          Icons.delete,
+                          size: 15,
+                          color: theme.colorScheme.secondary,
+                        )
+                      )
+                    ],
+                  ),
+                ),
+              ],
               _searchController.text.isEmpty ? FutureBuilder(
-                future: loadRecentSearch(), 
+                future: rSearch.loadRecentSearch(), 
                 builder: (context, snapshot){
                   if (!snapshot.hasData || snapshot.hasError) {
                     return const SizedBox();
@@ -159,7 +182,7 @@ class _SearchPageState extends State<SearchPage> {
                           ),
                           trailing: IconButton(
                             onPressed: () async{
-                              await removeSearchTerm(recent[index]);
+                              await rSearch.removeSearchTerm(recent[index]);
                               setState((){});
                             },
                             icon: Icon(Icons.close, size: 20, color: AppColors.grey),
@@ -175,7 +198,7 @@ class _SearchPageState extends State<SearchPage> {
                   if (!snapshot.hasData || snapshot.hasError) {
                     return const SizedBox();
                   } else if (snapshot.connectionState == ConnectionState.waiting) { 
-                    return Center(child: CircularProgressIndicator(color: AppColors.yellow));
+                    return LoadData(isList: isGrid);
                   } else {
                     var filterDoc = snapshot.data!
                       .where((e) => e.title.toLowerCase().contains(searchQuery ?? ""))

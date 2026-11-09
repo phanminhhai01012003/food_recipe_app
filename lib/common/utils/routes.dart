@@ -11,7 +11,7 @@ import 'package:food_recipe_app/views/auth/change_password.dart';
 import 'package:food_recipe_app/views/auth/forgot_password.dart';
 import 'package:food_recipe_app/views/auth/login.dart';
 import 'package:food_recipe_app/views/auth/register.dart';
-import 'package:food_recipe_app/views/main/add_edit_food/pages/search_page.dart';
+import 'package:food_recipe_app/views/main/search_item/search_page.dart';
 import 'package:food_recipe_app/views/main/categories/food_list_with_tag.dart';
 import 'package:food_recipe_app/views/main/chatbot/ai_chatbot_page.dart';
 import 'package:food_recipe_app/views/main/cookbook/pages/add_cookbook_page.dart';

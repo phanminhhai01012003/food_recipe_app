@@ -424,9 +424,9 @@ class _LoginState extends State<Login> {
                         )
                       ),
                       TextButton(
-                        onPressed: () => Navigator.pop(context), 
+                        onPressed: () => Navigator.pushReplacement(context, checkDeviceRoute(mainPage)), 
                         child: Text(
-                          "prev".tr(),
+                          "mPage".tr(),
                           style: TextStyle(
                             color: AppColors.black,
                             fontSize: 12,
